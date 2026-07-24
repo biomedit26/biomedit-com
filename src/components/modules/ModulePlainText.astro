@@ -1,0 +1,45 @@
+---
+import ModuleSection from './ModuleSection.astro';
+
+interface Props {
+  heading: string;
+  paragraphs: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  label?: string;
+}
+const { heading, paragraphs, ctaLabel, ctaHref, label } = Astro.props;
+---
+<ModuleSection label={label}>
+  <div class="text-wrap">
+    <div class="text-col">
+      <h2>{heading}</h2>
+      {paragraphs.map((p) => <p set:html={p} />)}
+      {ctaLabel && ctaHref && (
+        <a class="cta" href={ctaHref}>
+          {ctaLabel}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      )}
+    </div>
+  </div>
+</ModuleSection>
+
+<style>
+  .text-wrap { padding: 5rem 0 6rem; }
+  .text-col { max-width: 640px; margin: 0 auto; text-align: center; }
+  .text-col h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .text-col p:last-of-type { margin-bottom: 2rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: var(--color-navy);
+    text-decoration: none; border-bottom: 1px solid var(--color-navy); padding-bottom: 0.25rem;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+
+  @media (max-width: 860px) {
+    .text-wrap { padding: 3.5rem 0 4.5rem; }
+  }
+</style>

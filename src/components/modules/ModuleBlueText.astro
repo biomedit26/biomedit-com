@@ -1,0 +1,54 @@
+---
+import ModuleSection from './ModuleSection.astro';
+import FullBleedBand from './FullBleedBand.astro';
+
+interface Props {
+  heading: string;
+  paragraphs?: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  // Optional second link, rendered alongside the first — e.g. the
+  // Pipeline page's "Explore Our Platform" / "Partner With Us" pair.
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  label?: string;
+}
+const { heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label } = Astro.props;
+---
+<ModuleSection label={label}>
+  <FullBleedBand background="var(--navy-deep-bg)">
+    <div class="text-col">
+      <h2>{heading}</h2>
+      {paragraphs.map((p) => <p set:html={p} />)}
+      {(ctaLabel && ctaHref) && (
+        <div class="ctas">
+          <a class="cta" href={ctaHref}>
+            {ctaLabel}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          {(secondaryCtaLabel && secondaryCtaHref) && (
+            <a class="cta" href={secondaryCtaHref}>
+              {secondaryCtaLabel}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </FullBleedBand>
+</ModuleSection>
+
+<style>
+  .text-col { max-width: 640px; margin: 0 auto; text-align: center; }
+  .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.78); margin: 0 0 1.5rem; }
+  .text-col p:last-of-type { margin-bottom: 2rem; }
+  .ctas { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #FFFFFF;
+    text-decoration: none; border-bottom: 1px solid #FFFFFF; padding-bottom: 0.25rem;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+</style>

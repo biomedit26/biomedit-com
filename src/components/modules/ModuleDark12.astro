@@ -1,0 +1,41 @@
+---
+import ModuleSection from './ModuleSection.astro';
+import FullBleedBand from './FullBleedBand.astro';
+
+interface Props {
+  heading: string;
+  paragraphs: string[];
+  image: { src: string; alt: string };
+  label?: string;
+}
+const { heading, paragraphs, image, label } = Astro.props;
+---
+<ModuleSection label={label}>
+  <FullBleedBand background="var(--cool-800)">
+    <div class="grid">
+      <div class="text-col">
+        <h2>{heading}</h2>
+        {paragraphs.map((p) => <p set:html={p} />)}
+      </div>
+      <div class="image-col">
+        <img src={image.src} alt={image.alt} />
+      </div>
+    </div>
+  </FullBleedBand>
+</ModuleSection>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0; }
+  .image-col img { display: block; width: 100%; height: auto; border-radius: 4px; }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

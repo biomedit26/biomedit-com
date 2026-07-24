@@ -1,0 +1,62 @@
+---
+import ModuleSection from './ModuleSection.astro';
+
+interface Props {
+  heading: string;
+  paragraphs: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  image: { src: string; alt: string };
+  label?: string;
+}
+const { heading, paragraphs, ctaLabel, ctaHref, image, label } = Astro.props;
+---
+<ModuleSection label={label}>
+  <div class="content-card">
+    <div class="text-col">
+      <h2>{heading}</h2>
+      {paragraphs.map((p) => <p set:html={p} />)}
+      {ctaLabel && ctaHref && (
+        <a class="cta" href={ctaHref}>
+          {ctaLabel}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      )}
+    </div>
+    <div class="image-col">
+      <img src={image.src} alt={image.alt} />
+    </div>
+  </div>
+</ModuleSection>
+
+<style>
+  .content-card {
+    background: var(--cool-800);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .text-col { padding: 4rem 48px; display: flex; flex-direction: column; justify-content: center; }
+  .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; }
+  .text-col p:last-of-type { margin-bottom: 2rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #FFFFFF;
+    text-decoration: none; border-bottom: 1px solid #FFFFFF; padding-bottom: 0.25rem;
+    align-self: flex-start;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+  .image-col { height: 100%; min-height: 420px; }
+  .image-col img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 860px) {
+    .content-card { grid-template-columns: 1fr; }
+    .image-col { min-height: 260px; order: -1; }
+    .text-col { padding: 2.5rem 28px; }
+  }
+</style>

@@ -1,310 +1,126 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import Module11 from '../components/modules/Module11.astro';
+import PipelineTracker from '../components/modules/PipelineTracker.astro';
+import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import Button from '../components/Button.astro';
+import CTALink from '../components/CTALink.astro';
+
+const stages = [
+  { eyebrow: 'Stage 1', label: 'Discovery / Design' },
+  { eyebrow: 'Stage 2', label: 'Candidate Optimization' },
+  { eyebrow: 'Stage 3', label: 'Proof of Concept' },
+  { eyebrow: 'Stage 4', label: 'Pivotal Studies' },
+  { eyebrow: 'Stage 5', label: 'Regulatory Approval / Launch Readiness' },
+  { eyebrow: 'Stage 6', label: 'Commercial' },
+];
+
+const candidates = [
+  { id: 'BE-117', category: 'green' as const, focus: 'AMR', stage: 1, description: "Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs." },
+  { id: 'BE-17', category: 'green' as const, focus: 'Metabolic Disease', stage: 1, description: "A next-generation approach to metabolic health, building on early signals from the platform's foundational research." },
+  { id: 'BE-07', category: 'teal' as const, focus: 'AMR', stage: 2, description: "Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control." },
+  { id: 'BE-102', category: 'navy' as const, focus: 'Metabolic Disease', stage: 2, description: 'Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.' },
+  { id: 'BE-106', category: 'navy' as const, focus: 'Gut Health', stage: 2, description: 'Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.' },
+  { id: 'BE-105', category: 'green' as const, focus: 'Methane Reduction', stage: 2, description: 'Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.' },
+  { id: 'BE-01', category: 'teal' as const, focus: 'Gut Health', stage: 4, description: 'Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.' },
+  { id: 'BE-101', category: 'teal' as const, focus: 'Pathogen Protection', stage: 4, description: "The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch." },
+  { id: 'BE-02', category: 'teal' as const, focus: 'Pathogen Protection', stage: 5, description: 'Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.' },
+];
 ---
-<SiteLayout title="Pipeline">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="wrap">
-      <p class="overline">Pipeline</p>
-      <h1>Making biology programmable for animal health.</h1>
-      <div class="hero-copy">
-        <p>We're innovators. We look for measurable gaps in animal health and build the programmable biologics to close them.</p>
-        <p>Every program starts with strain engineering, the foundation of our proprietary platform, and spans infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and we draw on our proprietary microbiome library to identify high-potential strains as starting points.</p>
-        <p>The result: novel veterinary biologics that address important animal health challenges in a safe, sustainable, and economically relevant manner — healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.</p>
-      </div>
-      <div class="hero-ctas">
-        <Button color="navy" variant="filled" href="/products/be-101">Explore BE-101</Button>
-        <Button color="navy" variant="outline" href="/science/our-platform">Explore Our Platform</Button>
-      </div>
+<FieldNotesLayout title="Pipeline" active="pipeline">
+  <Module11
+    variant="intro"
+    headingLevel="h1"
+    eyebrow="BiomEdit / Pipeline"
+    heading="Making biology programmable for animal health."
+    noDivider
+    paragraphs={[
+      "We&rsquo;re innovators. We look for measurable gaps in animal health and build the programmable biologics to close them.",
+      'Every program starts with strain engineering, the foundation of our proprietary platform, and spans infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and we draw on our proprietary microbiome library to identify high-potential strains as starting points.',
+      'The result: novel veterinary biologics that address important animal health challenges in a safe, sustainable and economically relevant manner &mdash; healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.',
+    ]}
+  >
+    <div class="header-ctas">
+      <Button color="navy" variant="filled" href="/pipeline">Explore BE-101</Button>
+      <CTALink href="#">Explore Our Platform</CTALink>
     </div>
+  </Module11>
+
+  <Module11
+    variant="intro"
+    eyebrow="Placeholder — pending sign-off"
+    heading="Our proof is in our execution."
+    paragraphs={['Our lead program, BE-101, has already shown what the BiomEdit platform can do. In controlled trials, engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain for broiler chickens, with mechanistic evidence behind the result, not just an observed outcome.']}
+  >
+    <CTALink href="#">Read the Research</CTALink>
+  </Module11>
+
+  <Module11 variant="intro" heading="Three focus areas. One BiomEdit platform.">
+    <p>Our programmable veterinary biologics platform spans infectious disease, sustainability, and chronic disease therapeutics. We engineer bacteria to:</p>
+    <ul>
+      <li>deliver nanobodies, peptides, or enzymes (like the strains behind BE-101), or</li>
+      <li>work together as a microbial consortium.</li>
+    </ul>
+    <p class="no-margin">One platform, built to pivot based on what we&rsquo;re solving for.</p>
+  </Module11>
+
+  <section class="tracker-section">
+    <PipelineTracker
+      stages={stages}
+      candidates={candidates}
+      footnote="Our programs address the needs of poultry, cattle, swine, dogs, and cats."
+    />
   </section>
 
-  <!-- ============ BACKED BY SCIENCE ============ -->
-  <!--
-    FLAGGED AS UNCERTAIN PER COPY DECK: "This section may not be needed. It is included
-    as a placeholder." Also requires Aaron's sign-off before publishing any efficacy
-    figures — keep strictly to the published, peer-reviewed result (Hall et al., 2026),
-    nothing from internal investor materials. Safe to delete this whole <section> if the
-    decision is to cut it.
-  -->
-  <section class="proof">
-    <div class="wrap">
-      <h2>Our proof is in our execution.</h2>
-      <p>Our lead program, BE-101, has already shown what the BiomEdit platform can do. In controlled trials, engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain for broiler chickens — with mechanistic evidence behind the result, not just an observed outcome.</p>
-      <Button color="navy" variant="outline" href="/science/patents-publications">Read the Research</Button>
-    </div>
-  </section>
-
-  <!-- ============ PIPELINE SNAPSHOT ============ -->
-  <section class="snapshot">
-    <div class="wrap">
-      <p class="overline">Pipeline Snapshot</p>
-      <h2>Three focus areas. One BiomEdit platform.</h2>
-      <div class="snapshot-intro">
-        <p>Our programmable veterinary biologics platform spans infectious disease, sustainability, and chronic disease therapeutics. We engineer bacteria to:</p>
+  <section class="spotlight-section">
+    <div class="spotlight">
+      <div class="spotlight-text">
+        <p class="eyebrow">Featured Program — Infectious Disease</p>
+        <h3>BE-101 (Optavant&trade;) is a series of firsts.</h3>
         <ul>
-          <li>deliver nanobodies, peptides, or enzymes (like the strains behind BE-101), or</li>
-          <li>work together as a microbial consortium.</li>
-        </ul>
-        <p>One platform, built to pivot based on what we're solving for.</p>
-      </div>
-
-      <!-- Both Sustainability color variants shown stacked, pending that decision -->
-      <div class="subsection">
-        <p class="sub-label">Sustainability shown in Ember Orange</p>
-        <div class="pipeline-example">
-          <input class="tab-input" type="radio" name="tabs-pt" id="pt-all" checked>
-          <input class="tab-input" type="radio" name="tabs-pt" id="pt-found">
-          <input class="tab-input" type="radio" name="tabs-pt" id="pt-invest">
-          <input class="tab-input" type="radio" name="tabs-pt" id="pt-break">
-          <div class="pipeline-header">
-            <div><svg class="pipeline-logo" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="pipeline-title">Our Pipeline</p></div>
-            <div class="pipeline-tabs">
-              <label class="pipeline-tab" for="pt-all">All</label>
-              <label class="pipeline-tab" for="pt-found">Infectious Disease</label>
-              <label class="pipeline-tab" for="pt-invest">Chronic Disease</label>
-              <label class="pipeline-tab" for="pt-break">Sustainability</label>
-            </div>
-          </div>
-          <div class="pipeline-columns">
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 1</p>
-              <p class="pipeline-stage-head">Discovery / Design</p>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-117</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-17</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>A next-generation approach to metabolic health, building on early signals from the platform's foundational research.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 2</p>
-              <p class="pipeline-stage-head">Candidate Optimization</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-07</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-102</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-106</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-105</span><span class="focus">Methane Reduction</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 3</p>
-              <p class="pipeline-stage-head">Proof of Concept</p>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 4</p>
-              <p class="pipeline-stage-head">Pivotal Studies</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-01</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-101</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch.</p><a href="/products/be-101" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 5</p>
-              <p class="pipeline-stage-head">Regulatory Approval / Launch Readiness</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-02</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 6</p>
-              <p class="pipeline-stage-head">Commercial</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <p class="sub-label">Sustainability shown in Green</p>
-        <div class="pipeline-example sustain-green">
-          <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-all" checked>
-          <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-found">
-          <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-invest">
-          <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-break">
-          <div class="pipeline-header">
-            <div><svg class="pipeline-logo" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="pipeline-title">Our Pipeline</p></div>
-            <div class="pipeline-tabs">
-              <label class="pipeline-tab" for="pt2-all">All</label>
-              <label class="pipeline-tab" for="pt2-found">Infectious Disease</label>
-              <label class="pipeline-tab" for="pt2-invest">Chronic Disease</label>
-              <label class="pipeline-tab" for="pt2-break">Sustainability</label>
-            </div>
-          </div>
-          <div class="pipeline-columns">
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 1</p>
-              <p class="pipeline-stage-head">Discovery / Design</p>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-117</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-17</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>A next-generation approach to metabolic health, building on early signals from the platform's foundational research.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 2</p>
-              <p class="pipeline-stage-head">Candidate Optimization</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-07</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-102</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-106</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-105</span><span class="focus">Methane Reduction</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 3</p>
-              <p class="pipeline-stage-head">Proof of Concept</p>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 4</p>
-              <p class="pipeline-stage-head">Pivotal Studies</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-01</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-              <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-101</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch.</p><a href="/products/be-101" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 5</p>
-              <p class="pipeline-stage-head">Regulatory Approval / Launch Readiness</p>
-              <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-02</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.</p><a href="/products" class="card-detail-link">Learn more &rarr;</a></div></details>
-            </div>
-            <div class="pipeline-col">
-              <p class="stage-eyebrow">Stage 6</p>
-              <p class="pipeline-stage-head">Commercial</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="species-callout">Our programs address the needs of poultry, cattle, swine, dogs, and cats.</p>
-    </div>
-  </section>
-
-  <!-- ============ BE-101 SPOTLIGHT ============ -->
-  <section class="spotlight">
-    <div class="wrap">
-      <div class="spotlight-card">
-        <p class="overline">BE-101 · Featured Program</p>
-        <h2>BE-101 (Optavant&trade;) is a series of firsts.</h2>
-        <ul class="firsts-list">
           <li>First programmable veterinary biologic to reach commercial launch (Q4 2026)</li>
-          <li>First engineered microbial therapeutic ever to achieve licensure:
-            <ul>
-              <li>in any species,</li>
-              <li>in any geography,</li>
-              <li>in any regulatory path.</li>
-            </ul>
-          </li>
+          <li>First engineered microbial therapeutic ever to achieve licensure &mdash; in any species, in any geography, in any regulatory path</li>
         </ul>
-        <Button color="navy" variant="filled" href="/products/be-101">Learn About BE-101</Button>
+        <CTALink href="#" tone="onDark">Learn About BE-101</CTALink>
       </div>
+      <img src="/images/samples/chickens.jpg" alt="Pastured poultry raised without systemic antibiotics" />
     </div>
   </section>
 
-  <!-- ============ CLOSING CTA BAR ============ -->
-  <section class="closing-cta">
-    <div class="wrap">
-      <h2>Interested in what's next for BiomEdit?</h2>
-      <div class="closing-ctas">
-        <Button color="navy" variant="filled" href="/science/our-platform">Explore Our Platform</Button>
-        <Button color="navy" variant="outline" href="/investors-partners#partner">Partner With Us</Button>
-      </div>
-    </div>
-  </section>
-
-</SiteLayout>
+  <ModuleBlueText
+    heading="Interested in what&rsquo;s next for BiomEdit?"
+    ctaLabel="Explore Our Platform"
+    ctaHref="/home"
+    secondaryCtaLabel="Partner With Us"
+    secondaryCtaHref="/investors-partners"
+  />
+</FieldNotesLayout>
 
 <style>
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
-  section { padding: 72px 0; border-bottom: 1px solid var(--border-color); }
+  .header-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 0.25rem; }
 
-  /* ---------- hero ---------- */
-  .hero { padding-top: 88px; }
-  .hero h1 { font-size: clamp(32px, 4.5vw, 51px); max-width: 780px; margin: 0 0 28px; }
-  .hero-copy { max-width: 680px; margin-bottom: 36px; }
-  .hero-copy p { margin-bottom: 16px; }
-  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .tracker-section { padding: 0 0 4rem; }
+  :global(.tracker-section p),
+  :global(.tracker-section ul) { font-size: 15px; line-height: 1.75; color: var(--text-primary); }
+  :global(.tracker-section ul) { padding-left: 20px; margin: 0 0 1rem; }
+  :global(.tracker-section .no-margin) { margin: 0; }
 
-  /* ---------- backed by science ---------- */
-  .proof { background: var(--bg-secondary); }
-  .proof h2 { font-size: 28px; margin-bottom: 16px; }
-  .proof p { max-width: 680px; margin-bottom: 24px; }
-
-  /* ---------- snapshot ---------- */
-  .snapshot h2 { font-size: 28px; margin: 8px 0 24px; }
-  .snapshot-intro { max-width: 680px; margin-bottom: 40px; }
-  .snapshot-intro ul { margin: 0 0 16px; padding-left: 20px; }
-  .snapshot-intro li { margin-bottom: 6px; }
-  .species-callout {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin: 32px 0 0;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-color);
+  .spotlight-section { padding: 0 0 4rem; }
+  .spotlight {
+    background: var(--cool-800);
+    border-radius: 6px;
+    padding: 2.5rem 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    align-items: center;
   }
+  .spotlight-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1rem; }
+  .spotlight-text h3 { font-size: var(--text-h4); margin: 0 0 1rem; color: #FFFFFF; line-height: 1.15; }
+  .spotlight-text ul { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; padding-left: 20px; }
+  .spotlight img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
 
-  /* ---------- BE-101 spotlight ---------- */
-  .spotlight { background: var(--bg-secondary); }
-  .spotlight-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 48px;
-    background: var(--bg-primary);
-  }
-  .spotlight-card h2 { font-size: 32px; margin: 8px 0 20px; max-width: 640px; }
-  .firsts-list { margin: 0 0 28px; padding-left: 20px; max-width: 640px; }
-  .firsts-list li { font-size: 16px; line-height: 1.6; margin-bottom: 8px; }
-  .firsts-list ul { margin-top: 8px; padding-left: 20px; }
-  .firsts-list ul li { font-size: 15px; }
-
-  /* ---------- closing CTA bar ---------- */
-  .closing-cta { border-bottom: none; text-align: center; }
-  .closing-cta h2 { font-size: 28px; margin: 0 0 24px; }
-  .closing-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-  @media (max-width: 900px) {
-    .wrap { padding: 0 24px; }
-    section { padding: 48px 0; }
-    .hero { padding-top: 56px; }
-    .spotlight-card { padding: 32px 24px; }
-  }
-
-  /* ---------- pipeline component (ported from styleguide) ---------- */
-  .subsection{margin-bottom:56px;}
-  .subsection:last-child{margin-bottom:0;}
-  .sub-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--color-teal);margin:0 0 6px;}
-  .pipeline-example{border:1px solid var(--border-color);border-radius:8px;overflow:hidden;background:var(--bg-secondary);}
-  .pipeline-header{padding:24px 24px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--bg-tertiary);}
-  .pipeline-title{font-weight:700;font-size:17px;margin:0;color:var(--text-primary);}
-  .pipeline-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-  .pipeline-logo{width:78px;height:17px;display:block;margin-bottom:12px;}
-  input.tab-input{display:none;}
-  .pipeline-tab{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;color:var(--text-secondary);background:var(--bg-secondary);border:1px solid var(--border-color);user-select:none;}
-  .pipeline-tab[for$="-found"]{color:var(--color-teal);border-color:var(--color-teal);}
-  .pipeline-tab[for$="-invest"]{color:var(--color-navy);border-color:var(--color-navy);}
-  .pipeline-tab[for$="-break"]{color:var(--color-orange);border-color:var(--color-orange);}
-  .pipeline-columns{display:flex;gap:1px;background:var(--border-color);overflow-x:auto;}
-  .pipeline-col{background:var(--bg-tertiary);padding:16px 14px;min-width:170px;flex:1 0 170px;display:flex;flex-direction:column;gap:8px;}
-  .stage-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);margin:0;}
-  .pipeline-stage-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;color:var(--text-secondary);margin:2px 0 4px;line-height:1.3;min-height:28px;}
-  .pipeline-card{background:var(--bg-secondary);border-radius:6px;border-left:3px solid transparent;overflow:hidden;}
-  .pipeline-card summary{list-style:none;cursor:pointer;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
-  .pipeline-card summary::-webkit-details-marker{display:none;}
-  .pipeline-card summary::marker{content:"";}
-  .card-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%;}
-  .card-main{display:flex;flex-direction:column;}
-  .pipeline-card .code{font-weight:700;font-size:13px;color:var(--text-primary);display:block;}
-  .pipeline-card .focus{font-size:11px;color:var(--text-tertiary);margin-top:2px;display:block;}
-  .pipeline-card .chevron{flex-shrink:0;margin-top:3px;color:var(--text-tertiary);transition:transform 0.18s ease;}
-  .pipeline-card[open] .chevron{transform:rotate(180deg);}
-  .card-detail{padding:0 12px 14px;}
-  .card-detail p{font-size:12px;line-height:1.6;color:var(--text-secondary);margin:0 0 8px;}
-  .card-detail-link{font-size:12px;font-weight:700;color:var(--text-primary);text-decoration:underline;text-underline-offset:2px;}
-  .cat-foundational{border-left-color:var(--color-teal);}
-  .cat-investigational{border-left-color:var(--color-navy);}
-  .cat-breakthrough{border-left-color:var(--color-orange);}
-  .pipeline-example:has(#pt-found:checked) .pipeline-card:not(.cat-foundational){display:none;}
-  .pipeline-example:has(#pt-invest:checked) .pipeline-card:not(.cat-investigational){display:none;}
-  .pipeline-example:has(#pt-break:checked) .pipeline-card:not(.cat-breakthrough){display:none;}
-  .pipeline-example:has(#pt-all:checked) label[for="pt-all"]{background:#000;color:#fff;border-color:#000;}
-  .pipeline-example:has(#pt-found:checked) label[for="pt-found"]{background:var(--color-teal);color:#fff;}
-  .pipeline-example:has(#pt-invest:checked) label[for="pt-invest"]{background:var(--color-navy);color:#fff;}
-  .pipeline-example:has(#pt-break:checked) label[for="pt-break"]{background:var(--color-orange);color:#fff;}
-  .sustain-green .cat-breakthrough{border-left-color:var(--color-green);}
-  .sustain-green .pipeline-tab[for$="-break"]{color:var(--color-green);border-color:var(--color-green);}
-  .pipeline-example:has(#pt2-found:checked) .pipeline-card:not(.cat-foundational){display:none;}
-  .pipeline-example:has(#pt2-invest:checked) .pipeline-card:not(.cat-investigational){display:none;}
-  .pipeline-example:has(#pt2-break:checked) .pipeline-card:not(.cat-breakthrough){display:none;}
-  .pipeline-example:has(#pt2-all:checked) label[for="pt2-all"]{background:#000;color:#fff;border-color:#000;}
-  .pipeline-example:has(#pt2-found:checked) label[for="pt2-found"]{background:var(--color-teal);color:#fff;}
-  .pipeline-example:has(#pt2-invest:checked) label[for="pt2-invest"]{background:var(--color-navy);color:#fff;}
-  .pipeline-example:has(#pt2-break:checked) label[for="pt2-break"]{background:var(--color-green);color:#fff;}
-
-  @media (max-width: 700px) {
-    .pipeline-header { padding: 20px; }
+  @media (max-width: 860px) {
+    .spotlight { grid-template-columns: 1fr; }
   }
 </style>

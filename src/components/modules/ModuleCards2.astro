@@ -1,0 +1,62 @@
+---
+import ModuleSection from './ModuleSection.astro';
+
+interface Card {
+  heading: string;
+  paragraphs: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+interface Props {
+  cardLeft: Card;
+  cardRight: Card;
+  label?: string;
+}
+const { cardLeft, cardRight, label } = Astro.props;
+const cards = [cardLeft, cardRight];
+---
+<ModuleSection label={label}>
+  <div class="grid">
+    {cards.map((card) => (
+      <div class="content-card">
+        <h2>{card.heading}</h2>
+        {card.paragraphs.map((p) => <p set:html={p} />)}
+        {card.ctaLabel && card.ctaHref && (
+          <a class="cta" href={card.ctaHref}>
+            {card.ctaLabel}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</ModuleSection>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+    padding: 0 0 6rem;
+  }
+  .content-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2.5rem 36px;
+  }
+  .content-card h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .content-card p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1.5rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: var(--color-navy);
+    text-decoration: none; border-bottom: 1px solid var(--color-navy); padding-bottom: 0.25rem;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

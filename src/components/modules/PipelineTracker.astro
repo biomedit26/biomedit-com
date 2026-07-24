@@ -1,0 +1,174 @@
+---
+// Usage:
+// <PipelineTracker stages={stages} candidates={candidates} footnote="..." />
+//
+// New pattern — no existing module matches this. 6-stage column header +
+// per-stage vertical stacks of collapsible candidate cards, with a
+// single-select category filter above. No JS: filtering is done with the
+// same radio-input + CSS :has() technique already used for the pipeline
+// filter tabs elsewhere in this codebase (see src/pages/pipeline.astro),
+// and expand/collapse uses native <details>/<summary> so multiple cards
+// can be open independently.
+
+interface Stage {
+  eyebrow: string;
+  label: string;
+}
+
+interface Candidate {
+  id: string;
+  category: 'teal' | 'navy' | 'green';
+  focus: string;
+  description: string;
+  stage: number; // 1-indexed, matches `stages` position
+}
+
+interface Props {
+  stages: Stage[];
+  candidates: Candidate[];
+  footnote?: string;
+  idPrefix?: string;
+}
+
+const { stages, candidates, footnote, idPrefix = 'pt' } = Astro.props;
+
+const categories = [
+  { key: 'teal', label: 'Infectious Disease', color: 'var(--color-teal)' },
+  { key: 'navy', label: 'Chronic Disease', color: 'var(--color-navy)' },
+  { key: 'green', label: 'Sustainability', color: 'var(--color-green)' },
+] as const;
+---
+<div class="pipeline-tracker">
+  <input type="radio" name={`${idPrefix}-filter`} id={`${idPrefix}-all`} class="filter-input" checked />
+  {categories.map((c) => (
+    <input type="radio" name={`${idPrefix}-filter`} id={`${idPrefix}-${c.key}`} class="filter-input" />
+  ))}
+
+  <div class="filters">
+    <label for={`${idPrefix}-all`} class="filter-chip">All</label>
+    {categories.map((c) => (
+      <label for={`${idPrefix}-${c.key}`} class="filter-chip">
+        <span class="dot" style={`background:${c.color};`}></span>
+        {c.label}
+      </label>
+    ))}
+  </div>
+
+  <div class="stage-header">
+    {stages.map((s) => (
+      <div class="stage-header-cell">
+        <p class="stage-eyebrow">{s.eyebrow}</p>
+        <p class="stage-label">{s.label}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="candidate-grid">
+    {stages.map((_, i) => (
+      <div class="stage-col">
+        {candidates.filter((c) => c.stage === i + 1).map((c) => (
+          <details class={`candidate-card cat-${c.category}`}>
+            <summary>
+              <span class="candidate-main">
+                <span class="code">{c.id}</span>
+                <span class="focus">{c.focus}</span>
+              </span>
+            </summary>
+            <p class="description">{c.description}</p>
+          </details>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  {footnote && <p class="footnote">{footnote}</p>}
+</div>
+
+<style>
+  .filter-input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .filters { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 0.5rem 14px;
+    border-radius: 999px;
+    border: 1px solid var(--cool-400);
+    background: transparent;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    user-select: none;
+  }
+  .filter-chip .dot { width: 10px; height: 10px; border-radius: 2px; display: block; flex-shrink: 0; }
+
+  .pipeline-tracker:has(.filter-input[id$="-all"]:checked) label[for$="-all"],
+  .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) label[for$="-teal"],
+  .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) label[for$="-navy"],
+  .pipeline-tracker:has(.filter-input[id$="-green"]:checked) label[for$="-green"] {
+    background: var(--cool-200);
+  }
+
+  .stage-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    background: var(--cool-100);
+    border-radius: 6px 6px 0 0;
+    padding: 1rem 16px;
+    margin-bottom: 1rem;
+  }
+  .stage-header-cell:not(:first-child) { border-left: 1px solid var(--cool-500); padding-left: 20px; }
+  .stage-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 0; }
+  .stage-label { font-size: 12px; font-weight: 700; color: var(--text-primary); line-height: 1.3; margin: 0.25rem 0 0; }
+
+  .candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cool-500);
+  }
+  .stage-col { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .candidate-card {
+    background: var(--cool-100);
+    border-radius: 6px;
+    border-left: 3px solid transparent;
+    overflow: hidden;
+  }
+  .candidate-card.cat-teal { border-left-color: var(--color-teal); }
+  .candidate-card.cat-navy { border-left-color: var(--color-navy); }
+  .candidate-card.cat-green { border-left-color: var(--color-green); }
+
+  .candidate-card summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.5rem 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .candidate-card summary::-webkit-details-marker { display: none; }
+  .candidate-card summary::marker { content: ''; }
+  .candidate-main { display: flex; flex-direction: column; }
+  .code { font-weight: 700; font-size: 13px; color: var(--text-primary); display: block; }
+  .focus { font-size: 11px; color: var(--text-tertiary); }
+  .description { font-size: 12px; line-height: 1.6; color: var(--text-primary); margin: 0; padding: 0 12px 1rem; }
+
+  .footnote { font-size: 14px; color: var(--text-tertiary); margin: 1.5rem 0 0; }
+
+  /* category filtering — hide cards outside the selected category */
+  .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) .candidate-card:not(.cat-teal) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) .candidate-card:not(.cat-navy) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-green"]:checked) .candidate-card:not(.cat-green) { display: none; }
+
+  @media (max-width: 960px) {
+    .stage-header, .candidate-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .stage-header-cell:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-500); padding-top: 1rem; }
+  }
+</style>

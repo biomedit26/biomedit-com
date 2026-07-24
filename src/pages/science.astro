@@ -1,10 +1,235 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import Module11 from '../components/modules/Module11.astro';
+import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
+import CTALink from '../components/CTALink.astro';
+
+const differentiators = [
+  {
+    title: 'Proprietary Strain Engineering',
+    description: 'BiomEdit selects, screens, and engineers beneficial bacterial strains to produce and deliver targeted therapeutic proteins directly in the gut &mdash; no systemic antibiotic required. The strain is the foundation of every product we build.',
+  },
+  {
+    title: 'AI/ML at Scale',
+    description: 'High-throughput sequencing paired with AI/ML lets us screen and engineer beneficial bacteria rapidly and at scale, accelerating candidate selection and reducing the time, cost, and animal burden from discovery to market.',
+  },
+  {
+    title: 'Programmable Architecture',
+    description: 'The same strain engineering platform can be adapted for multiple therapeutic payloads, targets, species, and disease areas, making every new product faster and more defensible than the last.',
+  },
+  {
+    title: 'Durable IP Across the Full Stack',
+    description: "Each product generates protected intellectual property across strain, delivery mechanism, indication, and process, compounding the platform's competitive advantage over time.",
+  },
+];
+
+const pillars = [
+  {
+    color: 'navy' as const,
+    heading: 'We Built It First',
+    paragraphs: [
+      "At BiomEdit, we're the first company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, built on our proprietary strain engineering platform. This is a milestone no other company has reached in any species, any geography, or any regulatory pathway.",
+      'BE-101, commercially known as Optavant&trade;, is proof that the engineered microbial therapeutics we build are real, licensed, and coming to market. Our expanding pipeline spans infectious disease, chronic disease, and sustainability challenges across poultry, livestock, and companion animals.',
+    ],
+  },
+  {
+    color: 'teal' as const,
+    heading: 'We Advance Using the Latest AI/ML Technology',
+    paragraphs: [
+      "Our AI/ML infrastructure works hand-in-hand with our strain engineering platform, accelerating candidate selection and reducing the time, cost, and animal burden of bringing precision biologics to market. We've built, and continue to advance, AI capabilities that move the industry from reactive trial-and-error approaches toward predictive, programmable animal health. This approach has been a critical factor in earning grant support, most notably from the Bezos Earth Fund and the Gates Foundation.",
+    ],
+  },
+  {
+    color: 'green' as const,
+    heading: 'We Are Powered by a Proprietary Gut Microbiome Library',
+    paragraphs: [
+      'Our proprietary strain library, built over years of sampling and characterization, gives BiomEdit access to novel strains and a deeper understanding of microbiome biology that others cannot easily replicate.',
+      'Developed specifically for animal health, it enables our team to screen, identify, and engineer high-potential microbial candidates from a foundation built for precision targeting, without systemic antibiotics &mdash; including some designed as antibiotic alternatives.',
+    ],
+  },
+];
 ---
-<SiteLayout title="Science">
-  <div style="max-width:900px;margin:0 auto;padding:80px 40px;">
-    <p class="overline">Coming soon</p>
-    <h1>Science</h1>
-    <p>Placeholder page — structure only. Content and graphics come next.</p>
-  </div>
-</SiteLayout>
+<FieldNotesLayout title="Science" active="science">
+  <Module11
+    variant="intro"
+    headingLevel="h1"
+    eyebrow="BiomEdit / Science"
+    heading="The BiomEdit platform is built for the next generation of animal health."
+    noDivider
+    paragraphs={['BiomEdit engineers beneficial bacteria strains to deliver targeted biological protection, creating precision solutions designed to prevent disease and improve animal health without systemic antibiotics.']}
+  />
+
+  <section class="diagram-section">
+    <div class="diagram-card">
+      <p class="diagram-caption">How engineered strains deliver nanobodies in the gut</p>
+      <div class="diagram-flow">
+        <div class="diagram-step">
+          <div class="diagram-icon" style="--icon-color:var(--color-navy);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="7" ry="5"/><path d="M12 7v10M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg>
+          </div>
+          <p class="step-label">Beneficial Strain</p>
+        </div>
+        <svg class="diagram-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div class="diagram-step">
+          <div class="diagram-icon" style="--icon-color:var(--color-teal);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M12 21v-6M9 9l-3-3M18 6l-3 3M9 15l-3 3M18 18l-3-3"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <p class="step-label">Engineered Payload</p>
+        </div>
+        <svg class="diagram-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div class="diagram-step">
+          <div class="diagram-icon" style="--icon-color:var(--color-green);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+          </div>
+          <p class="step-label">Gut Delivery</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pvb-definition section-divider">
+    <h2>Programmable Veterinary Biologics: our new platform</h2>
+    <div class="pvb-copy">
+      <p>Programmable Veterinary Biologics&trade; (PVB) is our platform-level term for living therapeutics built from engineered bacterial strains. Within that platform, pvAb&trade; (Probiotic Vectored Antibody) is our lead therapeutic class: strains engineered to produce and deliver nanobodies directly at the site of disease.</p>
+      <p>Strain engineering is the foundation of everything we build. Our proprietary process for selecting, screening, and engineering beneficial bacterial strains is what makes the platform programmable &mdash; the strain is the chassis, and what we engineer into it determines the therapeutic outcome.</p>
+      <p class="no-margin">Traditional probiotics are passive: they support gut health but carry no engineered payload. Vaccines depend on the host&rsquo;s own immune response and act systemically. BiomEdit engineers the strain itself to actively produce and deliver targeted nanobodies that neutralize specific disease drivers directly in the gut.</p>
+    </div>
+
+    <div class="diff-grid">
+      {differentiators.map((d, i) => (
+        <div class="diff-card">
+          <p class="diff-index">{`0${i + 1}`}</p>
+          <h3>{d.title}</h3>
+          <p set:html={d.description} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="pillars section-divider">
+    <h2>How it works: three pillars.</h2>
+    <div class="pillars-grid">
+      {pillars.map((pillar) => (
+        <div class="pillar">
+          <h3 style={`color:var(--color-${pillar.color});`}>{pillar.heading}</h3>
+          {pillar.paragraphs.map((p) => <p set:html={p} />)}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="platform-action section-divider">
+    <div class="platform-action-card">
+      <div class="platform-action-text">
+        <p class="eyebrow">Platform in Action</p>
+        <h3>Proof in the pipeline.</h3>
+        <p>BE-101, commercially known as Optavant&trade;, is the first Programmable Veterinary Biologic to receive conditional USDA licensure &mdash; developed to protect poultry from sub-clinical necrotic enteritis without relying on systemic antibiotics. It&rsquo;s proof that the platform works, not just in the lab, but at commercial scale.</p>
+        <div class="platform-action-ctas">
+          <CTALink href="/pipeline" tone="onDark">Explore the Pipeline</CTALink>
+          <CTALink href="#" tone="onDark">Read the Research</CTALink>
+        </div>
+      </div>
+      <img src="/images/samples/chickens.jpg" alt="Pastured poultry raised without systemic antibiotics" />
+    </div>
+  </section>
+
+  <ModuleBlueText
+    heading="See how the platform performs in the field."
+    ctaLabel="Explore the Pipeline"
+    ctaHref="/pipeline"
+    secondaryCtaLabel="Partner With Us"
+    secondaryCtaHref="/investors-partners"
+  />
+</FieldNotesLayout>
+
+<style>
+  .section-divider { border-top: 1px solid var(--cool-500); }
+
+  /* ---------- platform diagram ---------- */
+  .diagram-section { padding: 0.5rem 0 3.5rem; }
+  .diagram-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2.5rem 40px 2.75rem;
+  }
+  .diagram-caption {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin: 0 0 2rem;
+  }
+  .diagram-flow { display: flex; align-items: center; justify-content: center; gap: 28px; }
+  .diagram-step { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 160px; }
+  .diagram-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--icon-color) 12%, transparent);
+    color: var(--icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .diagram-icon svg { width: 30px; height: 30px; }
+  .step-label { font-size: 14px; font-weight: 700; color: var(--text-primary); text-align: center; margin: 0; }
+  .diagram-arrow { width: 20px; height: 20px; color: var(--cool-400); flex-shrink: 0; }
+
+  @media (max-width: 700px) {
+    .diagram-flow { flex-direction: column; gap: 1.5rem; }
+    .diagram-arrow { transform: rotate(90deg); }
+  }
+
+  /* ---------- PVB definition ---------- */
+  .pvb-definition { padding: 3.5rem 0 4rem; }
+  .pvb-definition h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; max-width: 760px; }
+  .pvb-copy { max-width: 720px; margin-bottom: 3rem; }
+  .pvb-copy p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.25rem; }
+  .pvb-copy .no-margin { margin: 0; }
+
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .diff-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2rem 28px;
+  }
+  .diff-index { font-size: 13px; font-weight: 700; color: var(--text-tertiary); margin: 0 0 0.75rem; }
+  .diff-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
+  .diff-card p:last-child { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0; }
+
+  /* ---------- three pillars ---------- */
+  .pillars { padding: 3.5rem 0 4rem; }
+  .pillars h2 { font-size: var(--text-h5); margin: 0 0 2.5rem; }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .pillar h3 { font-size: 17px; margin: 0 0 1rem; }
+  .pillar p { font-size: 14px; line-height: 1.7; color: var(--text-primary); margin: 0 0 1rem; }
+  .pillar p:last-child { margin-bottom: 0; }
+
+  /* ---------- platform in action ---------- */
+  .platform-action { padding: 3.5rem 0 4rem; }
+  .platform-action-card {
+    background: var(--cool-800);
+    border-radius: 6px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: stretch;
+  }
+  .platform-action-text { padding: 3rem 44px; display: flex; flex-direction: column; justify-content: center; }
+  .platform-action-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1rem; }
+  .platform-action-text h3 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1rem; }
+  .platform-action-text p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; }
+  .platform-action-ctas { display: flex; gap: 28px; flex-wrap: wrap; }
+  .platform-action-card img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; }
+
+  @media (max-width: 860px) {
+    .diff-grid, .pillars-grid { grid-template-columns: 1fr; }
+    .platform-action-card { grid-template-columns: 1fr; }
+    .platform-action-card img { min-height: 220px; order: -1; }
+    .platform-action-text { padding: 2.25rem 28px; }
+  }
+</style>

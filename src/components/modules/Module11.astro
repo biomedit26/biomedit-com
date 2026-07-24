@@ -1,0 +1,126 @@
+---
+import ModuleSection from './ModuleSection.astro';
+
+interface Props {
+  heading: string;
+  headingLevel?: 'h1' | 'h2';
+  paragraphs?: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: { src: string; alt: string };
+  label?: string;
+  // "intro" variant: 280px label/heading column + flexible body column,
+  // instead of the default 1fr/1fr text+image split. Used for page-header
+  // style blocks (e.g. Field Notes "Who we are", and reused as the page
+  // header on other Field Notes pages) — no image-col in this mode.
+  variant?: 'default' | 'intro';
+  eyebrow?: string;
+  // Faint background watermark spanning the whole intro block. Optional —
+  // omit if there's no matching artwork yet.
+  watermark?: { src: string; alt: string };
+  noDivider?: boolean;
+  dividerColor?: string;
+}
+const {
+  heading,
+  headingLevel = 'h2',
+  paragraphs = [],
+  ctaLabel,
+  ctaHref,
+  image,
+  label,
+  variant = 'default',
+  eyebrow,
+  watermark,
+  noDivider = false,
+  dividerColor,
+} = Astro.props;
+const Heading = headingLevel;
+---
+<ModuleSection label={label} noDivider={noDivider} dividerColor={dividerColor}>
+  {variant === 'intro' ? (
+    <div class="grid grid-intro">
+      {watermark && <img class="watermark" src={watermark.src} alt={watermark.alt} />}
+      <div class="label-col">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <Heading>{heading}</Heading>
+      </div>
+      <div class="body-col">
+        {paragraphs.map((p) => <p set:html={p} />)}
+        {ctaLabel && ctaHref && (
+          <a class="cta" href={ctaHref}>
+            {ctaLabel}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        )}
+        <slot />
+      </div>
+    </div>
+  ) : (
+    <div class="grid">
+      <div class="text-col">
+        <Heading>{heading}</Heading>
+        {paragraphs.map((p) => <p set:html={p} />)}
+        {ctaLabel && ctaHref && (
+          <a class="cta" href={ctaHref}>
+            {ctaLabel}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        )}
+        <slot />
+      </div>
+      {image && (
+        <div class="image-col">
+          <img src={image.src} alt={image.alt} />
+        </div>
+      )}
+    </div>
+  )}
+</ModuleSection>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    padding: 0 0 6rem;
+    position: relative;
+  }
+  .text-col h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: var(--color-navy);
+    text-decoration: none; border-bottom: 1px solid var(--color-navy); padding-bottom: 0.25rem;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+  .image-col img { display: block; width: 100%; height: auto; border-radius: 4px; }
+
+  .grid-intro {
+    grid-template-columns: 280px 1fr;
+    padding-bottom: 4rem;
+  }
+  .watermark {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .grid-intro .label-col, .grid-intro .body-col { position: relative; z-index: 1; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
+  .label-col h1, .label-col h2 { font-size: var(--text-h5); margin: 0; }
+  .body-col p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; max-width: 680px; }
+
+  @media (max-width: 860px) {
+    .grid, .grid-intro { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

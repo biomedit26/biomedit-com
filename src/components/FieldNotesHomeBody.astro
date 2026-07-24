@@ -1,0 +1,358 @@
+---
+// Shared "below the hero" content for both Field Notes homepage variants —
+// identical on Homepage and Homepage Alt per design_handoff_field_notes/README.md,
+// except the "Who we are" section's watermark/divider treatment, which
+// differs based on whether it's sitting directly under a full-bleed dark
+// hero (video variant, flowing-e watermark) or a light static one (alt
+// variant, cool-600 divider only — its hero already carries the watermark).
+//
+// Photos: the handoff references real BiomEdit photography
+// (pastured-poultry.jpg, lab-scientist-vertical.jpg, white-broiler-closeup.jpg)
+// that isn't in this repo. Standing in with the existing sample images
+// until the real assets are dropped in.
+
+import ModuleDarkText from './modules/ModuleDarkText.astro';
+import ModuleBlueText from './modules/ModuleBlueText.astro';
+import FloatingCard from './modules/FloatingCard.astro';
+import StatBlock from './StatBlock.astro';
+import CTALink from './CTALink.astro';
+import Badge from './Badge.astro';
+
+interface Props {
+  heroVariant: 'video' | 'alt';
+}
+const { heroVariant } = Astro.props;
+
+const pipelineRows = [
+  { category: 'Infectious Disease', codes: 'BE-118, BE-119' },
+  { category: 'Sustainability', codes: 'BE-017, BE-117' },
+  { category: 'Chronic Disease', codes: 'BE-105, BE-122' },
+];
+
+const stats = [
+  { value: '23', label: 'Doctoral degrees' },
+  { value: '73', label: 'Patents' },
+  { value: '450+', label: 'Peer-reviewed publications' },
+  { value: '200+', label: 'Years combined experience' },
+];
+
+const news = [
+  { tone: 'teal' as const, tag: 'Press', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
+  { tone: 'navy' as const, tag: 'Article', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
+  { tone: 'orange' as const, tag: 'Event', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
+];
+---
+<section class={`who-we-are ${heroVariant === 'video' ? 'no-divider' : ''}`}>
+  {heroVariant === 'video' && (
+    <img class="who-we-are-watermark" src="/images/flowing-e-background.svg" alt="" />
+  )}
+  <div class="who-we-are-grid">
+    <div class="who-we-are-text">
+      <p class="eyebrow">BiomEdit / Vol. 01</p>
+      <h2>Who we are</h2>
+      <p>At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. We build living therapeutics from the ground up &mdash; an experienced team of industry veterans researching and innovating the microbiome for over a decade.</p>
+      <CTALink href="#">Discover our science</CTALink>
+    </div>
+    <div class="who-we-are-image">
+      <img src="/images/woman-in-lab.jpg" alt="BiomEdit scientist working in the lab" />
+    </div>
+  </div>
+</section>
+
+<section class="how-we-build">
+  <div class="how-we-build-intro">
+    <div class="how-we-build-label">
+      <h2>How we build</h2>
+    </div>
+    <div class="how-we-build-body">
+      <p>BiomEdit is different from other animal health biotechnology companies. We have an experienced team of industry veterans and experts who have been researching and innovating the microbiome for decades. Our lab is centrally located at the Indiana Biosciences Research Institute, where we continue to build a first-of-its-kind platform for precision therapeutics with engineered beneficial bacteria strains to combat disease in animals.</p>
+      <p>We use synthetic biology, AI/ML, and large-scale strain libraries to reduce the need for antibiotics. Every day we push to solve the problems that matter most for animal health, food security, and a more sustainable world.</p>
+    </div>
+  </div>
+
+  <div class="how-we-build-grid">
+    <div class="build-card">
+      <div class="build-icon" style="--icon-color:var(--color-navy);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+      </div>
+      <h3>A Company of Firsts</h3>
+      <p>First company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, in any species, any geography, any regulatory pathway. BE-101/Optavant&trade; is proof it&rsquo;s real.</p>
+    </div>
+    <div class="build-card">
+      <div class="build-icon" style="--icon-color:var(--color-teal);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M9.5 10L6.5 7.3M14.5 10l3-2.7M9.5 14l-3 2.7M14.5 14l3 2.7"/></svg>
+      </div>
+      <h3>The Latest AI/ML Technology</h3>
+      <p>Our AI/ML infrastructure works hand-in-hand with our proprietary strain engineering platform, accelerating discovery and reducing time to market.</p>
+    </div>
+    <div class="build-card">
+      <div class="build-icon" style="--icon-color:var(--color-green);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg>
+      </div>
+      <h3>Our Proprietary Gut Microbiome Library</h3>
+      <p>A head start in discovery competitors can&rsquo;t replicate, built specifically for animal health.</p>
+    </div>
+  </div>
+
+  <div class="how-we-build-cta">
+    <CTALink href="/science">Explore Our Science</CTALink>
+  </div>
+</section>
+
+<div class={`pipeline-brief-wrap ${heroVariant === 'video' ? 'clears-watermark' : ''}`}>
+  <FloatingCard>
+    <div class="pipeline-brief-head">
+      <h2>From discovery to commercial launch</h2>
+      <CTALink href="/pipeline">View full pipeline</CTALink>
+    </div>
+
+    <div class="lead-program">
+      <div>
+        <p class="eyebrow">Lead Program — Infectious Disease</p>
+        <h3>BE-101 / Optavant&trade;</h3>
+        <p class="lead-p">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
+        <p class="lead-p">The first Programmable Veterinary Biologic to reach commercial launch, engineered to protect poultry from one of the industry's most costly diseases, necrotic enteritis, without systemic antibiotics.</p>
+        <CTALink href="/pipeline">Learn about BE-101</CTALink>
+      </div>
+      <img src="/images/boiler-hen-in-housing-single.jpg" alt="Pastured poultry raised without systemic antibiotics" />
+    </div>
+
+    <div class="pipeline-rows">
+      {pipelineRows.map((row) => (
+        <div class="pipeline-row">
+          <span class="row-category">{row.category}</span>
+          <span class="row-codes">{row.codes}</span>
+          <CTALink href="/pipeline">Details</CTALink>
+        </div>
+      ))}
+    </div>
+  </FloatingCard>
+</div>
+
+<ModuleDarkText
+  quote
+  noDivider
+  topDivider
+  paragraphs={['"One day there will be engineered microbial therapeutics in all species. BiomEdit is leading the way."']}
+  attribution="Aaron Schacht, CEO, BiomEdit"
+  photos={[
+    { src: '/images/woman-with-pig.jpg', alt: 'BiomEdit team member with a pig on the farm', ratio: '3/2' },
+    { src: '/images/engin-akyurt-GBszMrOChZ8-unsplash.jpg', alt: 'Close-up of livestock', ratio: '2/3' },
+  ]}
+/>
+
+<section class="investors-teaser">
+  <div class="investors-card">
+    <div class="investors-grid">
+      <div class="investors-label">
+        <h2>Backed by leaders in life sciences and animal health.</h2>
+      </div>
+      <div class="investors-body">
+        <p>BiomEdit is building the first Programmable Veterinary Biologics platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
+        <div class="logo-bar">
+          <span>Elanco</span>
+          <span>Ginkgo Bioworks</span>
+          <span>Anterra Capital</span>
+          <span>Bill &amp; Melinda Gates Foundation</span>
+          <span>Bezos Earth Fund</span>
+        </div>
+        <CTALink href="/investors-partners">Partner With Us</CTALink>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission">
+  <h2>Built by scientists. Run by experts who challenge the status quo.</h2>
+  <p>Two centuries of combined research experience, focused on one goal: engineering microbial therapeutics that change animal health for good.</p>
+</section>
+
+<section class="stats-section">
+  <StatBlock stats={stats} />
+</section>
+
+<section id="news" class="news-section">
+  <div class="news-head">
+    <h2>Latest from BiomEdit</h2>
+    <CTALink href="#">View all news</CTALink>
+  </div>
+  <div class="news-list">
+    {news.map((item) => (
+      <div class="news-row">
+        <Badge color={item.tone}>{item.tag}</Badge>
+        <span class="news-headline">{item.headline}</span>
+        <span class="news-date">{item.date}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<ModuleBlueText
+  heading="Passionate about creating therapeutics that put animal&rsquo;s health and wellbeing first? We want to hear from you."
+  ctaLabel="Connect With Us"
+  ctaHref="#"
+/>
+
+<style>
+  .who-we-are {
+    position: relative;
+    padding-top: 24px;
+    border-top: 1px solid var(--cool-500);
+  }
+  .who-we-are.no-divider { border-top: none; padding-top: 0; }
+  .who-we-are-watermark {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .who-we-are-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding-bottom: 4rem;
+  }
+
+  .how-we-build {
+    padding: 24px 0 4rem;
+    border-top: 1px solid var(--cool-500);
+  }
+  .how-we-build-intro {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    margin-bottom: 3rem;
+  }
+  .how-we-build-label h2 { font-size: var(--text-h5); margin: 0; }
+  .how-we-build-body p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1rem; max-width: 680px; }
+  .how-we-build-body p:last-child { margin-bottom: 0; }
+
+  .how-we-build-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 2.5rem; }
+  .build-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2.25rem 28px;
+    text-align: center;
+  }
+  .build-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--icon-color) 12%, transparent);
+    color: var(--icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+  .build-icon svg { width: 26px; height: 26px; }
+  .build-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
+  .build-card p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0; }
+
+  .how-we-build-cta { padding-top: 0.5rem; }
+
+  @media (max-width: 860px) {
+    .how-we-build-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .how-we-build-grid { grid-template-columns: 1fr; }
+  }
+
+  .investors-teaser {
+    padding: 24px 0 2rem;
+    border-top: 1px solid var(--cool-500);
+  }
+  .investors-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 3rem 40px;
+  }
+  .investors-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
+  .investors-label h2 { font-size: var(--text-h5); margin: 0; }
+  .investors-body p { font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1.75rem; max-width: 640px; }
+  .logo-bar { display: flex; flex-wrap: wrap; gap: 1.75rem 2.5rem; margin-bottom: 2rem; }
+  .logo-bar span { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+
+  @media (max-width: 860px) {
+    .investors-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  .who-we-are-text .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
+  .who-we-are-text h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .who-we-are-text p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .who-we-are-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
+
+  @media (max-width: 860px) {
+    .who-we-are-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .pipeline-brief-wrap { padding: 0 0 0.5rem; }
+  .pipeline-brief-wrap.clears-watermark { margin-top: 4rem; }
+  .pipeline-brief-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }
+  .pipeline-brief-head h2 { font-size: var(--text-h5); margin: 0; }
+
+  .lead-program {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--cool-400);
+    margin-bottom: 0.5rem;
+  }
+  .lead-program .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 1rem; }
+  .lead-program h3 { font-size: var(--text-h4); line-height: 1.15; margin: 0 0 1rem; }
+  .lead-p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1rem; }
+  .lead-p:last-of-type { margin-bottom: 1.5rem; }
+  .lead-program img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+  .pipeline-rows { display: flex; flex-direction: column; }
+  .pipeline-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--cool-400);
+  }
+  .pipeline-row:last-child { border-bottom: none; }
+  .row-category { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+  .row-codes { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+
+  .mission { text-align: center; padding: 1.5rem 40px 0; max-width: 680px; margin: 0 auto; }
+  .mission h2 { font-size: var(--text-h4); margin: 0 0 1.5rem; }
+  .mission p { font-size: 16px; color: var(--text-primary); line-height: 1.75; margin: 0; }
+
+  .stats-section { padding: 3.5rem 40px; border-bottom: 1px solid var(--cool-500); }
+
+  .news-section { padding: 3.5rem 40px 4rem; }
+  .news-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }
+  .news-head h2 { font-size: var(--text-h5); margin: 0; }
+  .news-list { display: flex; flex-direction: column; }
+  .news-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--cool-500);
+  }
+  .news-row:last-child { border-bottom: none; }
+  .news-headline { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .news-date { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; }
+
+  @media (max-width: 860px) {
+    .lead-program { grid-template-columns: 1fr; }
+    .pipeline-row, .news-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>

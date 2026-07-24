@@ -1,0 +1,50 @@
+---
+// Shared wrapper for every content module: the gray divider line, an
+// optional debug label under it, and the 16px gap before content
+// starts. Every module component below wraps its content in this.
+//
+// `label` is meant for the component-library reference page only —
+// leave it unset on real site pages so the label text doesn't render,
+// while the divider itself still shows.
+
+interface Props {
+  label?: string;
+  // Opt out of the default top divider entirely (e.g. a module sitting
+  // directly under a full-bleed hero, where the hero itself is the
+  // visual break).
+  noDivider?: boolean;
+  // Override the default cool-300 divider color.
+  dividerColor?: string;
+}
+const { label, noDivider = false, dividerColor } = Astro.props;
+---
+<section class={`module-section ${noDivider ? 'no-divider' : ''}`} style={dividerColor ? `--module-divider-color:${dividerColor};` : ''}>
+  {label && <p class="overline module-label">{label}</p>}
+  <div class="module-content">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .module-section {
+    padding-top: 1rem;
+    --module-divider-color: var(--cool-500);
+  }
+  .module-label {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--module-divider-color);
+  }
+  /* If there's no label, the divider still needs to sit above the
+     content with the same 16px gap. */
+  .module-section:has(> .module-content:first-child) {
+    border-top: 1px solid var(--module-divider-color);
+  }
+  .module-section:has(> .module-content:first-child) .module-content {
+    padding-top: 1rem;
+  }
+  .module-section.no-divider:has(> .module-content:first-child) {
+    border-top: none;
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+// BiomEdit homepage — video hero variant. Secondary alternative to the
+// primary homepage at /home — kept reachable at its own route for ongoing
+// comparison, but not linked from primary nav.
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
+---
+<FieldNotesLayout title="Home (Video Hero)" active="home">
+  <section class="hero">
+    <video
+      src="/images/The_Moment_Of_DNA_Strand_Destruction_preview_1140591-2.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      class="hero-video"
+    ></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Programmable Veterinary Biologics&trade;</p>
+      <h1>Engineering a new chapter in animal health.</h1>
+      <div class="read-more">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1C1F28" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+        </span>
+        <a href="#">Read more</a>
+      </div>
+    </div>
+  </section>
+
+  <FieldNotesHomeBody heroVariant="video" />
+</FieldNotesLayout>
+
+<style>
+  .hero {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+    background: var(--cool-900);
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(28,31,40,0.75) 0%, rgba(28,31,40,0.35) 55%, rgba(28,31,40,0.15) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .hero .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-teal-dark); margin: 0 0 1.5rem;
+  }
+  .hero h1 { font-size: var(--text-h2); line-height: 1.1; margin: 0 0 2rem; color: #FFFFFF; max-width: 760px; }
+  .read-more { display: flex; align-items: center; gap: 14px; }
+  .chip {
+    width: 30px; height: 30px; border-radius: 4px; background: var(--color-amber);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .read-more a { font-size: 15px; font-weight: 700; color: #FFFFFF; }
+  .read-more a:hover { opacity: 0.75; }
+
+  @media (max-width: 700px) {
+    .hero { height: auto; padding: 4.5rem 0; }
+    .hero-inner { position: relative; height: auto; }
+  }
+</style>

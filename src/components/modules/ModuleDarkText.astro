@@ -1,0 +1,120 @@
+---
+import ModuleSection from './ModuleSection.astro';
+import FullBleedBand from './FullBleedBand.astro';
+
+interface Photo {
+  src: string;
+  alt: string;
+  ratio: '2/3' | '3/2';
+}
+
+interface Props {
+  heading?: string;
+  paragraphs?: string[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  label?: string;
+  // "quote" variant: renders a single paragraph as a large Fraunces-italic
+  // pull quote instead of heading + body copy, and — when `photos` is
+  // given — sits it alongside up to two supporting photographs in a
+  // 3-column grid rather than the default centered single column.
+  quote?: boolean;
+  photos?: Photo[];
+  // Optional "— Name, Title, Company" line rendered under the pull quote.
+  attribution?: string;
+  noDivider?: boolean;
+  // Divider rule rendered inside the dark panel itself, above the content,
+  // rather than the ModuleSection divider that sits on the page background.
+  topDivider?: boolean;
+}
+const { heading, paragraphs = [], ctaLabel, ctaHref, label, quote = false, photos, attribution, noDivider = false, topDivider = false } = Astro.props;
+---
+<ModuleSection label={label} noDivider={noDivider}>
+  <FullBleedBand background="var(--cool-800)">
+    {topDivider && <div class="top-divider"></div>}
+    {quote && photos && photos.length > 0 ? (
+      <div class="quote-grid">
+        {photos.map((photo) => (
+          <img class="photo" src={photo.src} alt={photo.alt} style={`aspect-ratio:${photo.ratio};`} />
+        ))}
+        <div class="quote-col">
+          <p class="quote">{paragraphs[0]}</p>
+          {attribution && <cite class="quote-cite">{attribution}</cite>}
+        </div>
+      </div>
+    ) : (
+      <div class="text-col">
+        {quote ? (
+          <p class="quote">{paragraphs[0]}</p>
+        ) : (
+          <>
+            {heading && <h2>{heading}</h2>}
+            {paragraphs.map((p) => <p set:html={p} />)}
+          </>
+        )}
+        {ctaLabel && ctaHref && (
+          <a class="cta" href={ctaHref}>
+            {ctaLabel}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        )}
+      </div>
+    )}
+  </FullBleedBand>
+</ModuleSection>
+
+<style>
+  .text-col { max-width: 640px; margin: 0 auto; text-align: center; }
+  .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
+  .text-col p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; }
+  .text-col p:last-of-type { margin-bottom: 2rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #FFFFFF;
+    text-decoration: none; border-bottom: 1px solid #FFFFFF; padding-bottom: 0.25rem;
+  }
+  .cta:hover { opacity: 0.75; }
+  .cta svg { width: 14px; height: 14px; }
+
+  .quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.5;
+    color: #FFFFFF;
+    margin: 0;
+  }
+  .quote-cite {
+    display: block;
+    margin-top: 1.25rem;
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--cool-400);
+  }
+
+  .top-divider {
+    border-top: 1px solid var(--cool-600);
+    margin-bottom: 24px;
+  }
+
+  .quote-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .quote-col { display: flex; flex-direction: column; justify-content: center; }
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 860px) {
+    .quote-grid { grid-template-columns: 1fr; }
+  }
+</style>

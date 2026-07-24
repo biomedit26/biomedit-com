@@ -1,15 +1,61 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-
-// NOTE: This will eventually move to src/pages/index.astro and replace the
-// internal Starbriq dashboard, once the public site is ready to go live.
-// For now it lives at /home so the two don't collide — see the dashboard's
-// "Site in progress" link.
+// BiomEdit marketing homepage — built from the Field Notes concept
+// (design_handoff_field_notes/README.md), now the site's primary homepage.
+// Centered, static hero (no video), sitting over the flowing-E watermark
+// graphic at 60% opacity.
+//
+// Everything below the hero is identical to the video-hero variant at
+// /home-video — shared via FieldNotesHomeBody.
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
+import Button from '../components/Button.astro';
 ---
-<SiteLayout title="Home">
-  <div style="max-width:900px;margin:0 auto;padding:100px 40px;">
-    <p class="overline">BiomEdit</p>
-    <h1>Programmable biologics for animal health.</h1>
-    <p>Placeholder homepage — structure only. Real content and graphics come next.</p>
-  </div>
-</SiteLayout>
+<FieldNotesLayout title="Home" active="home">
+  <section class="hero">
+    <img class="hero-watermark" src="/images/flowing-e-background.svg" alt="" />
+    <div class="hero-inner">
+      <p class="eyebrow">Programmable Veterinary Biologics&trade;</p>
+      <h1>Engineering a new chapter in animal health.</h1>
+      <p class="lead">Our deep scientific, commercial, and regulatory expertise help solve unmet needs in animal health through our new biotechnology platform.</p>
+      <Button color="amber" variant="filled" shape="pill" href="#">
+        Read more
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </Button>
+    </div>
+  </section>
+
+  <FieldNotesHomeBody heroVariant="alt" />
+</FieldNotesLayout>
+
+<style>
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 6rem 0 6rem;
+    overflow: hidden;
+  }
+  .hero-watermark {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .hero .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin: 0 0 1.5rem;
+  }
+  .hero h1 { font-size: var(--text-h2); line-height: 1.1; margin: 0 0 1.5rem; }
+  .hero .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); margin: 0 0 2rem; }
+
+  @media (max-width: 700px) {
+    .hero { padding: 4.5rem 0 3.5rem; }
+  }
+</style>

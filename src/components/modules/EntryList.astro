@@ -1,0 +1,40 @@
+---
+// Usage:
+// <EntryList label="Key Awards & Honors" items={[{ title: '...', description: '...' }, ...]} />
+//
+// New pattern — title + description, repeated as a divided list within a
+// labeled column. First used for Investors' Awards & Grants section
+// (two of these side by side).
+
+interface Item {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  label: string;
+  items: Item[];
+}
+
+const { label, items } = Astro.props;
+---
+<div class="entry-list">
+  <h3 class="entry-list-label">{label}</h3>
+  <div class="entries">
+    {items.map((item) => (
+      <div class="entry">
+        <div class="entry-title">{item.title}</div>
+        <p class="entry-description">{item.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .entry-list-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
+  .entries { display: flex; flex-direction: column; }
+  .entry { padding: 1rem 0; border-bottom: 1px solid var(--cool-500); }
+  .entry:last-child { border-bottom: none; }
+  .entry-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .entry-description { font-size: 13px; line-height: 1.6; color: var(--text-primary); margin: 0; }
+</style>

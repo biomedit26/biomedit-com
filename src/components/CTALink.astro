@@ -1,0 +1,42 @@
+---
+// Usage:
+// <CTALink href="/science/our-platform">Explore Our Platform</CTALink>
+// <CTALink href="#" tone="onDark">Connect With Us</CTALink>
+//
+// Arrow-chip text link — the pattern already repeated inline as `.cta` inside
+// Module11 / Module21 / ModuleDarkText / ModuleBlueText. Extracted here as its
+// own component so it can be used directly on a page (not just inside a
+// module), per the Field Notes handoff.
+
+interface Props {
+  href: string;
+  tone?: 'default' | 'onDark';
+}
+
+const { href, tone = 'default' } = Astro.props;
+---
+<a href={href} class={`cta-link ${tone === 'onDark' ? 'is-on-dark' : ''}`}>
+  <slot />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+
+<style>
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-navy);
+    padding-bottom: 0.25rem;
+  }
+  .cta-link:hover { opacity: 0.75; }
+  .cta-link svg { width: 14px; height: 14px; }
+
+  .cta-link.is-on-dark {
+    color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+  }
+</style>

@@ -1,0 +1,162 @@
+---
+import '../styles/tokens.css';
+
+import Module12 from '../components/modules/Module12.astro';
+import Module21 from '../components/modules/Module21.astro';
+import Module11 from '../components/modules/Module11.astro';
+import ModuleCards2 from '../components/modules/ModuleCards2.astro';
+import ModuleDark12 from '../components/modules/ModuleDark12.astro';
+import ModuleDarkText from '../components/modules/ModuleDarkText.astro';
+import ModuleCardText from '../components/modules/ModuleCardText.astro';
+import ModulePlainText from '../components/modules/ModulePlainText.astro';
+import ModuleDarkCard21 from '../components/modules/ModuleDarkCard21.astro';
+import ModuleDarkCard11 from '../components/modules/ModuleDarkCard11.astro';
+import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
+
+// Sample copy and images — same "Who we are" placeholder content used
+// throughout development. Swap for real copy/images per concept when
+// dropping these into an actual homepage.
+const heading = 'Who we are';
+const fullParagraphs = [
+  'At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics<sup>&trade;</sup> platform. We living therapeutics built from engineered strains that help food producers and animal health professionals improve productivity, reduce dependence on antibiotics, and deliver better outcomes for the animals in their care.',
+  'Our deep scientific, commercial, and regulatory expertise help solve unmet needs in animal health through our new biotechnology platform.',
+];
+const shortParagraph = ['Our deep scientific, commercial, and regulatory expertise help solve unmet needs in animal health through our new biotechnology platform.'];
+const ctaLabel = 'Discover our Science';
+const ctaHref = '#';
+const labImage = { src: '/images/samples/lab-work.jpg', alt: 'BiomEdit lab and research work' };
+const chickensImage = { src: '/images/samples/chickens.jpg', alt: 'BiomEdit — chickens' };
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Modules · BiomEdit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-header">
+    <div class="page-header-row">
+      <p class="overline">Component library</p>
+      <h1>Content Modules</h1>
+      <p>Reusable content blocks for use across all three concept homepages. Each module is a real Astro component built on the shared design tokens (PT Sans, brand colors, cool neutral ramp) — drop any of them into a concept homepage with your own copy and images.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <Module12
+      label="Module — 1-2 (text + two images)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+      image1={chickensImage}
+      image2={labImage}
+    />
+
+    <Module21
+      label="Module — 2-1 (image + text)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+      image={labImage}
+    />
+
+    <Module11
+      label="Module — 1-1 (text + image, 50/50)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+      image={labImage}
+    />
+
+    <ModuleCards2
+      label="Module — cards-2 (two content cards, 50/50, no image)"
+      cardLeft={{ heading, paragraphs: fullParagraphs, ctaLabel, ctaHref }}
+      cardRight={{ heading, paragraphs: fullParagraphs, ctaLabel, ctaHref }}
+    />
+
+    <ModuleDark12
+      label="Module — dark-1-2 (full-bleed, text:image 1:2)"
+      heading={heading}
+      paragraphs={shortParagraph}
+      image={labImage}
+    />
+
+    <ModuleDarkText
+      label="Module — dark-text (full-bleed, text only, centered)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+    />
+
+    <ModuleCardText
+      label="Module — card-text (white card, text only, centered, contained)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+    />
+
+    <ModulePlainText
+      label="Module — plain-text (no card, text only, centered, on page background)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+    />
+
+    <ModuleDarkCard21
+      label="Module — dark-card-2-1 (dark card, text:image 2:1, image bleeds top/right/bottom)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+      image={chickensImage}
+    />
+
+    <ModuleDarkCard11
+      label="Module — dark-card-1-1 (dark card, 50/50, image bleeds top/right/bottom)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+      image={chickensImage}
+    />
+
+    <ModuleBlueText
+      label="Module — blue-text (full-bleed, deep blue, text only, centered)"
+      heading={heading}
+      paragraphs={fullParagraphs}
+      ctaLabel={ctaLabel}
+      ctaHref={ctaHref}
+    />
+  </div>
+
+  <footer>BiomEdit — Content Modules library. Real Astro components, ready to use in any concept homepage.</footer>
+</body>
+</html>
+
+<style>
+  .page-header { border-bottom: 1px solid var(--border-color); background: var(--bg-secondary); }
+  .page-header-row { max-width: 1200px; margin: 0 auto; padding: 2rem 40px; }
+  .page-header .overline { margin-bottom: 0.5rem; }
+  .page-header h1 { font-size: var(--text-h4); margin: 0 0 0.5rem; }
+  .page-header p { font-size: 14px; color: var(--text-secondary); margin: 0; max-width: 620px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  footer {
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 40px;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 12px;
+  }
+</style>

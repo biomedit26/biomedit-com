@@ -1,6 +1,6 @@
 /* ===================================================================
    BiomEdit design tokens
-   Source of truth: biomedit-styleguide-v1.html
+   Source of truth: biomedit-styleguide-v1.html / src/styles/tokens.css
    =================================================================== */
 
 :root {
@@ -10,6 +10,11 @@
   --color-orange: #DA6A2A;
   --color-green: #16A34A;
   --color-amber: #F59E0B;
+
+  /* deepened navy for large full-bleed fields (CTA bands, etc.) — flat
+     --color-navy over-saturates at that scale, so large fields use this
+     darker variant instead */
+  --navy-deep-bg: #262E62;
 
   /* brand colors — dark mode variants */
   --color-navy-dark: #5A94F2;
@@ -82,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.5em;
   line-height: 1.15;
 }
-h1 { font-size: var(--text-h2); } /* h1 uses H2 scale step by default — reserve --text-display for hero/marketing use */
+h1 { font-size: var(--text-h2); }
 h2 { font-size: var(--text-h3); }
 h3 { font-size: var(--text-h4); }
 h4 { font-size: var(--text-h5); }

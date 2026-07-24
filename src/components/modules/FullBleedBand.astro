@@ -1,0 +1,37 @@
+---
+// Shared wrapper for any module that needs to break out of the page's
+// max-width container and span the full viewport width with a solid
+// background color — used by ModuleDark12, ModuleDarkText, and
+// ModuleBlueText.
+
+interface Props {
+  background: string; // any CSS color value, e.g. "var(--cool-800)" or "var(--color-navy)"
+}
+const { background } = Astro.props;
+---
+<div class="full-bleed" style={`background: ${background};`}>
+  <div class="full-bleed-inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .full-bleed {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  .full-bleed-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 40px;
+  }
+  @media (max-width: 860px) {
+    .full-bleed-inner {
+      padding: 3.5rem 40px;
+    }
+  }
+</style>
