@@ -1,22 +1,25 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
-import Module11 from '../components/modules/Module11.astro';
+import FullBleedBand from '../components/modules/FullBleedBand.astro';
 import FactList from '../components/modules/FactList.astro';
 import EntryList from '../components/modules/EntryList.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
+import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import CTALink from '../components/CTALink.astro';
+import LogoPlaceholder from '../components/LogoPlaceholder.astro';
 
-const lockups = [
-  { label: 'Launch Partners', color: 'teal' as const, names: ['Elanco', 'Ginkgo Bioworks', 'Ferment'] },
-  { label: 'Investors', color: 'navy' as const, names: ['Anterra Capital', 'Viking', 'Nutreco NuFrontiers', 'AgriZero', 'BetAgro Ventures', 'Elevate Ventures'] },
-  { label: 'Partnerships & Grants', color: 'orange' as const, names: ['Nutreco', 'Bill &amp; Melinda Gates Foundation', 'Global Methane Hub', 'Bezos Earth Fund', 'USDA NIFA', 'NIH'] },
-];
+// Emphasis split: Investors get the full left column at a larger logo
+// scale; Partnerships & Grants and Launch Partners share the right column,
+// stacked and sized down to reflect a roughly 50/30/20 weighting overall.
+const investors = ['Anterra Capital', 'Viking', 'Nutreco NuFrontiers', 'AgriZero', 'BetAgro Ventures', 'Elevate Ventures'];
+const partnershipsGrants = ['Nutreco', 'Bill &amp; Melinda Gates Foundation', 'Global Methane Hub', 'Bezos Earth Fund', 'USDA NIFA', 'NIH'];
+const launchPartners = ['Elanco', 'Ginkgo Bioworks', 'Ferment'];
 
 const newCategoryFacts = [
-  { value: '1st', color: 'navy' as const, paragraph: 'BE-101 is the first engineered microbial therapeutic ever to achieve licensure, in any species, any geography, any regulatory pathway.' },
-  { value: 'Our Platform', color: 'teal' as const, valueSize: 'text' as const, paragraph: 'A programmable biologics platform built on strain engineering, AI/ML, and a proprietary microbiome library — not a single product.' },
-  { value: '2', color: 'orange' as const, paragraph: 'Foundational patents, announced April 21, 2026, protect the core delivery mechanism and the nanobody sequences behind BE-101. Our platform generates further IP across strain, delivery mechanism, indication, and process.' },
-  { value: '$5.5–6M', color: 'green' as const, valueSize: 'h5' as const, paragraph: 'In non-dilutive capital raised to date, supporting sustainability-focused work alongside the core pipeline.' },
+  { value: '1st', valueSize: 'h5' as const, paragraph: 'BE-101 is the first engineered microbial therapeutic ever to achieve licensure, in any species, any geography, any regulatory pathway.' },
+  { value: 'Our Platform', valueSize: 'h5' as const, paragraph: 'A programmable biologics platform built on strain engineering, AI/ML, and a proprietary microbiome library — not a single product.' },
+  { value: '2', valueSize: 'h5' as const, paragraph: 'Foundational patents, announced April 21, 2026, protect the core delivery mechanism and the nanobody sequences behind BE-101. Our platform generates further IP across strain, delivery mechanism, indication, and process.' },
+  { value: '$5.5–6M', valueSize: 'h5' as const, paragraph: 'In non-dilutive capital raised to date, supporting sustainability-focused work alongside the core pipeline.' },
 ];
 
 const awards = [
@@ -31,50 +34,91 @@ const grants = [
 ];
 ---
 <FieldNotesLayout title="Investors & Partners" active="investors">
-  <Module11
-    variant="intro"
-    headingLevel="h1"
-    eyebrow="BiomEdit / Investors"
-    heading="Backed by leaders in Agtech, lifesciences and sustainability."
-    paragraphs={['BiomEdit is pioneering programmable veterinary biologics, with investors and partners who understand what it takes to bring this category to market. Our first product is on track for commercial launch in Q4 2026, as we continue to build new solutions on our proprietary platform.']}
-    noDivider
-  />
+  <section class="hero-investors">
+    <FullBleedBand
+      background="var(--navy-deep-bg)"
+      image="/images/flowing-e-background.svg"
+      imageSize="240% auto"
+      imagePosition="80% 35%"
+      blendMode="overlay"
+    >
+      <p class="eyebrow">BiomEdit / Investors</p>
+      <h1>Backed by leaders in Agtech, lifesciences and sustainability.</h1>
+      <p class="lead">BiomEdit is pioneering programmable veterinary biologics, with investors and partners who understand what it takes to bring this category to market. Our first product is on track for commercial launch in Q4 2026, as we continue to build new solutions on our proprietary platform.</p>
+    </FullBleedBand>
+  </section>
 
-  <section class="lockups section-divider">
-    <div class="lockup-grid">
-      {lockups.map((col) => (
-        <div class="lockup-col">
-          <h3 style={`color:var(--color-${col.color});`}>{col.label}</h3>
-          <div class="lockup-names">
-            {col.names.map((name) => <div class="lockup-name" set:html={name} />)}
-          </div>
+  <section class="lockups">
+    <div class="lockups-top">
+      <div class="lockup-category is-lg">
+        <h3 style="color:var(--color-navy);">Investors</h3>
+        <div class="category-rule" style="background:var(--color-navy);"></div>
+        <div class="logo-row">
+          {investors.map((name) => (
+            <div class="logo-chip">
+              <LogoPlaceholder color="navy" size="lg" />
+              <span class="logo-name" set:html={name} />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
-    <p class="lockup-footnote">Placeholder — sourced from June 2026 Series C deck; swap in real logos</p>
+
+    <div class="lockups-bottom">
+      <div class="lockup-category is-md">
+        <h3 style="color:var(--color-orange);">Partnerships &amp; Grants</h3>
+        <div class="category-rule" style="background:var(--color-orange);"></div>
+        <div class="logo-row">
+          {partnershipsGrants.map((name) => (
+            <div class="logo-chip">
+              <LogoPlaceholder color="orange" size="md" />
+              <span class="logo-name" set:html={name} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="lockup-category is-sm">
+        <h3 style="color:var(--color-teal);">Launch Partners</h3>
+        <div class="category-rule" style="background:var(--color-teal);"></div>
+        <div class="logo-row">
+          {launchPartners.map((name) => (
+            <div class="logo-chip">
+              <LogoPlaceholder color="teal" size="sm" />
+              <span class="logo-name" set:html={name} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <p class="lockup-footnote">Placeholder logos — sourced from June 2026 Series C deck; swap in real marks</p>
   </section>
 
-  <section class="quote-section section-divider">
-    <p class="pull-quote">&ldquo;[Placeholder &mdash; investor quote to be sourced from Series C round]&rdquo;</p>
-  </section>
+  <ModulePlainText
+    quote
+    paragraphs={['&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;']}
+    attribution="Brett Wong, Partner, Anterra Capital"
+  />
 
   <section class="new-category section-divider">
     <div class="new-category-grid">
+      <img src="/images/drew-tGYrlchfObE-unsplash.jpg" alt="Gloved hand holding a petri dish of cultured strain in the lab" />
       <div>
         <h2>A new category, built for what&rsquo;s next in animal health.</h2>
-        <img src="/images/samples/lab-work.jpg" alt="BiomEdit scientist at work in the lab" />
+        <FactList items={newCategoryFacts} />
       </div>
-      <FactList items={newCategoryFacts} />
     </div>
   </section>
 
-  <section class="awards section-divider">
-    <h2>Recognized by the industry we&rsquo;re building for.</h2>
-    <div class="awards-grid">
-      <EntryList label="Key Awards & Honors" items={awards} />
-      <EntryList label="Major Grants & Funding Awards" items={grants} />
-    </div>
-    <div class="awards-cta"><CTALink href="#">Explore our platform</CTALink></div>
+  <section class="awards">
+    <FullBleedBand background="var(--cool-800)">
+      <h2>Recognized by the industry we&rsquo;re building for.</h2>
+      <div class="awards-grid">
+        <EntryList label="Key Awards & Honors" items={awards} tone="onDark" />
+        <EntryList label="Major Grants & Funding Awards" items={grants} tone="onDark" />
+      </div>
+      <div class="awards-cta"><CTALink href="#" tone="onDark">Explore our platform</CTALink></div>
+    </FullBleedBand>
   </section>
 
   <section class="partner-cta">
@@ -82,9 +126,9 @@ const grants = [
       <div>
         <h2>How we work with partners and investors.</h2>
         <p>BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.</p>
-        <CTALink href="#">Connect with us</CTALink>
+        <CTALink href="#">Let&rsquo;s meet</CTALink>
       </div>
-      <img src="/images/samples/chickens.jpg" alt="Broiler hen in housing" />
+      <img src="/images/investor-image.jpg" alt="Abstract illustration of interconnected growth and data" />
     </div>
   </section>
 
@@ -92,34 +136,50 @@ const grants = [
     heading="Passionate about creating therapeutics that put animal&rsquo;s health and wellbeing first? We want to hear from you."
     ctaLabel="Connect with us"
     ctaHref="#"
+    noDivider
   />
 </FieldNotesLayout>
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
-  .lockups { padding: 3rem 0; }
-  .lockup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-  .lockup-col { padding-right: 28px; border-right: 1px solid var(--cool-500); }
-  .lockup-col:last-child { border-right: none; padding-right: 0; }
-  .lockup-col:not(:first-child) { padding-left: 28px; }
-  .lockup-col h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 1.5rem; }
-  .lockup-names { display: flex; flex-direction: column; gap: 1rem; }
-  .lockup-name { font-size: 16px; font-weight: 700; color: var(--text-primary); }
-  .lockup-footnote { font-size: 11px; color: var(--text-tertiary); margin: 1.5rem 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
+  .hero-investors :global(.full-bleed-inner) { padding: 6rem 40px; }
+  .hero-investors .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--cool-400); margin: 0 0 1.5rem;
+  }
+  .hero-investors h1 { font-size: var(--text-h3); color: #FFFFFF; line-height: 1.1; margin: 0 0 1.5rem; max-width: 780px; }
+  .hero-investors .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.85); margin: 0; max-width: 620px; }
 
-  .quote-section { padding: 3rem 0; }
-  .pull-quote { font-family: 'Fraunces', serif; font-style: italic; font-size: 24px; line-height: 1.5; color: var(--color-navy); margin: 0; max-width: 720px; }
+  @media (max-width: 860px) {
+    .hero-investors :global(.full-bleed-inner) { padding: 3.5rem 40px; }
+  }
+
+  .lockups { padding: 3.5rem 0; }
+  .lockups-top { margin-bottom: 2.5rem; }
+  .lockups-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .lockups-top > .lockup-category, .lockups-bottom > .lockup-category { min-width: 0; }
+
+  .lockup-category h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.75rem; }
+  .category-rule { height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
+
+  .logo-row { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
+  .logo-chip { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; scroll-snap-align: start; }
+  .logo-chip .logo-name { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-align: center; max-width: 130px; }
+  .is-lg .logo-chip .logo-name { font-size: 13px; max-width: 152px; }
+  .is-sm .logo-chip .logo-name { font-size: 11px; max-width: 104px; }
+
+  .lockup-footnote { font-size: 11px; color: var(--text-tertiary); margin: 2rem 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
 
   .new-category { padding: 3.5rem 0; }
   .new-category-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; }
-  .new-category-grid h2 { font-size: var(--text-h5); margin: 0; }
-  .new-category-grid img { display: block; width: 100%; height: auto; border-radius: 6px; margin-top: 2rem; }
+  .new-category-grid h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
+  .new-category-grid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
 
-  .awards { padding: 3.5rem 0; }
-  .awards h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
-  .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
-  .awards-cta { padding-top: 2rem; }
+  .awards :global(.full-bleed-inner) { text-align: center; }
+  .awards h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 2.5rem; }
+  .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 760px; margin: 0 auto; text-align: left; }
+  .awards-cta { padding-top: 2.5rem; }
 
   .partner-cta { padding: 3.5rem 0 4rem; }
   .partner-cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
@@ -128,8 +188,7 @@ const grants = [
   .partner-cta-grid img { display: block; width: 100%; height: auto; border-radius: 6px; }
 
   @media (max-width: 860px) {
-    .lockup-grid, .new-category-grid, .awards-grid, .partner-cta-grid { grid-template-columns: 1fr; }
-    .lockup-col { border-right: none; padding: 0 !important; border-bottom: 1px solid var(--cool-500); padding-bottom: 1.5rem !important; margin-bottom: 1.5rem; }
-    .lockup-col:last-child { border-bottom: none; margin-bottom: 0; }
+    .lockups-bottom, .new-category-grid, .awards-grid, .partner-cta-grid { grid-template-columns: 1fr; }
+    .lockups-bottom { gap: 2.5rem; }
   }
 </style>

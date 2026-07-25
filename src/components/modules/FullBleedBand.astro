@@ -6,10 +6,22 @@
 
 interface Props {
   background: string; // any CSS color value, e.g. "var(--cool-800)" or "var(--color-navy)"
+  // Optional decorative background image, blended into `background` via
+  // background-blend-mode rather than layered on top — this tints a
+  // grayscale/white source graphic into the band's own color family
+  // instead of showing its original colors, so it reads as a subtle
+  // textural pattern rather than a separate image.
+  image?: string;
+  imageSize?: string; // e.g. "220% auto" to show a zoomed-in crop
+  imagePosition?: string;
+  blendMode?: string;
 }
-const { background } = Astro.props;
+const { background, image, imageSize = '220% auto', imagePosition = 'center', blendMode = 'overlay' } = Astro.props;
+const bandStyle = image
+  ? `background-color:${background};background-image:url(${image});background-size:${imageSize};background-position:${imagePosition};background-repeat:no-repeat;background-blend-mode:${blendMode};`
+  : `background:${background};`;
 ---
-<div class="full-bleed" style={`background: ${background};`}>
+<div class="full-bleed" style={bandStyle}>
   <div class="full-bleed-inner">
     <slot />
   </div>

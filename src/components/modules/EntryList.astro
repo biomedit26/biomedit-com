@@ -14,11 +14,12 @@ interface Item {
 interface Props {
   label: string;
   items: Item[];
+  tone?: 'default' | 'onDark';
 }
 
-const { label, items } = Astro.props;
+const { label, items, tone = 'default' } = Astro.props;
 ---
-<div class="entry-list">
+<div class={`entry-list ${tone === 'onDark' ? 'is-on-dark' : ''}`}>
   <h3 class="entry-list-label">{label}</h3>
   <div class="entries">
     {items.map((item) => (
@@ -37,4 +38,9 @@ const { label, items } = Astro.props;
   .entry:last-child { border-bottom: none; }
   .entry-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
   .entry-description { font-size: 13px; line-height: 1.6; color: var(--text-primary); margin: 0; }
+
+  .entry-list.is-on-dark .entry-list-label { color: var(--cool-400); }
+  .entry-list.is-on-dark .entry { border-bottom-color: var(--cool-600); }
+  .entry-list.is-on-dark .entry-title { color: #FFFFFF; }
+  .entry-list.is-on-dark .entry-description { color: var(--cool-300); }
 </style>
