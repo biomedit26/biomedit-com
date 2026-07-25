@@ -12,10 +12,11 @@ interface Props {
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
   label?: string;
+  noDivider?: boolean;
 }
-const { heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label } = Astro.props;
+const { heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label, noDivider = false } = Astro.props;
 ---
-<ModuleSection label={label}>
+<ModuleSection label={label} noDivider={noDivider}>
   <FullBleedBand background="var(--navy-deep-bg)">
     <div class="text-col">
       <h2>{heading}</h2>

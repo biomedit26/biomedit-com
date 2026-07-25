@@ -2,7 +2,10 @@
 import ModuleSection from './ModuleSection.astro';
 
 interface Card {
-  heading: string;
+  heading?: string;
+  // Large stat number (styled like StatBlock's stat-value) rendered beside
+  // the card's paragraph copy instead of a heading — e.g. a "$6B" figure.
+  value?: string;
   paragraphs: string[];
   ctaLabel?: string;
   ctaHref?: string;
@@ -11,16 +14,42 @@ interface Props {
   cardLeft: Card;
   cardRight: Card;
   label?: string;
+  // Sets card paragraph copy in the design system's "Lead" style (19px/500)
+  // instead of the default body-copy size — for cards carrying a single
+  // standalone statement rather than a heading + supporting paragraphs.
+  lead?: boolean;
+  noDivider?: boolean;
+  // Heading level for each card's title — use 'h3' when this module sits
+  // under its own section heading, to avoid stacking multiple h2s.
+  headingLevel?: 'h2' | 'h3';
+  // Skip the ModuleSection wrapper (divider + its ~2rem top padding)
+  // entirely — for when this module is nested inside another module's
+  // slot, which already provides the surrounding section context, so the
+  // cards can align to the top of that parent row instead of sitting
+  // below dead space.
+  bare?: boolean;
 }
-const { cardLeft, cardRight, label } = Astro.props;
+const { cardLeft, cardRight, label, lead = false, noDivider = false, headingLevel = 'h2', bare = false } = Astro.props;
+const CardHeading = headingLevel;
 const cards = [cardLeft, cardRight];
 ---
-<ModuleSection label={label}>
+<ModuleSection label={label} noDivider={noDivider} bare={bare}>
   <div class="grid">
     {cards.map((card) => (
       <div class="content-card">
-        <h2>{card.heading}</h2>
-        {card.paragraphs.map((p) => <p set:html={p} />)}
+        {card.value ? (
+          <div class="stat-row">
+            <span class="stat-value">{card.value}</span>
+            <div class="stat-copy">
+              {card.paragraphs.map((p) => <p class={lead ? 'lead' : ''} set:html={p} />)}
+            </div>
+          </div>
+        ) : (
+          <>
+            {card.heading && <CardHeading>{card.heading}</CardHeading>}
+            {card.paragraphs.map((p) => <p class={lead ? 'lead' : ''} set:html={p} />)}
+          </>
+        )}
         {card.ctaLabel && card.ctaHref && (
           <a class="cta" href={card.ctaHref}>
             {card.ctaLabel}
@@ -38,7 +67,7 @@ const cards = [cardLeft, cardRight];
     grid-template-columns: 1fr 1fr;
     gap: 32px;
     align-items: stretch;
-    padding: 0 0 6rem;
+    padding: 0 0 4rem;
   }
   .content-card {
     background: var(--bg-secondary);
@@ -46,8 +75,12 @@ const cards = [cardLeft, cardRight];
     border-radius: 6px;
     padding: 2.5rem 36px;
   }
-  .content-card h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .content-card h2, .content-card h3 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
   .content-card p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1.5rem; }
+  .content-card p.lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); }
+  .stat-row { display: flex; align-items: center; gap: 28px; }
+  .stat-row .stat-value { font-size: var(--text-h3); font-weight: 700; color: var(--text-primary); line-height: 1; flex-shrink: 0; }
+  .stat-row .stat-copy p { margin: 0; }
   .cta {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 14px; font-weight: 700; color: var(--color-navy);
@@ -58,5 +91,8 @@ const cards = [cardLeft, cardRight];
 
   @media (max-width: 860px) {
     .grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 500px) {
+    .stat-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
   }
 </style>

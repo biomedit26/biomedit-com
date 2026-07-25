@@ -38,14 +38,14 @@ const { heading, paragraphs = [], ctaLabel, ctaHref, label, quote = false, photo
           <img class="photo" src={photo.src} alt={photo.alt} style={`aspect-ratio:${photo.ratio};`} />
         ))}
         <div class="quote-col">
-          <p class="quote">{paragraphs[0]}</p>
+          <p class="quote" set:html={paragraphs[0]} />
           {attribution && <cite class="quote-cite">{attribution}</cite>}
         </div>
       </div>
     ) : (
       <div class="text-col">
         {quote ? (
-          <p class="quote">{paragraphs[0]}</p>
+          <p class="quote" set:html={paragraphs[0]} />
         ) : (
           <>
             {heading && <h2>{heading}</h2>}
@@ -76,7 +76,7 @@ const { heading, paragraphs = [], ctaLabel, ctaHref, label, quote = false, photo
   .cta:hover { opacity: 0.75; }
   .cta svg { width: 14px; height: 14px; }
 
-  .quote {
+  .text-col p.quote, .quote-col p.quote {
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 26px;

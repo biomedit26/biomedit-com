@@ -95,7 +95,12 @@ const year = new Date().getFullYear();
       color: var(--text-primary);
     }
     .main-nav nav li a:hover { color: var(--color-navy); }
-    .main-nav nav li a.active { color: var(--color-navy); }
+    .main-nav nav li a.active {
+      color: var(--color-navy);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 2px;
+    }
     .main-nav nav li span.disabled { color: var(--cool-400); cursor: not-allowed; }
 
     .nav-toggle-btn {
@@ -174,7 +179,7 @@ const year = new Date().getFullYear();
       gap: 16px;
       padding-top: 2rem;
     }
-    .footer-wordmark { font-size: 13px; font-weight: 700; color: var(--cool-900); }
+    .footer-wordmark { height: 18px; width: auto; display: block; }
     .footer-copyright { font-size: 13px; color: var(--cool-600); }
   </style>
 </head>
@@ -245,7 +250,7 @@ const year = new Date().getFullYear();
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <span class="footer-wordmark">BIOMEDIT</span>
+        <svg class="footer-wordmark" viewBox="0 0 164 40" aria-label="BiomEdit"><use href="#fn-biomedit-logo" xlink:href="#fn-biomedit-logo"></use></svg>
         <span class="footer-copyright">Copyright {year}</span>
       </div>
     </div>

@@ -16,7 +16,7 @@ interface Props {
 
 const { stats } = Astro.props;
 ---
-<div class="stat-block">
+<div class="stat-block" style={`--stat-count:${stats.length};`}>
   {stats.map((s) => (
     <div class="stat">
       <div class="stat-value">{s.value}</div>
@@ -28,7 +28,7 @@ const { stats } = Astro.props;
 <style>
   .stat-block {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--stat-count, 4), 1fr);
   }
   .stat {
     padding: 0 24px;

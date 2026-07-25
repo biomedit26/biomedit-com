@@ -2,97 +2,114 @@
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import Module11 from '../components/modules/Module11.astro';
 import Module21 from '../components/modules/Module21.astro';
+import ModuleDarkCard11 from '../components/modules/ModuleDarkCard11.astro';
+import ModuleCards2 from '../components/modules/ModuleCards2.astro';
+import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
+import FactList from '../components/modules/FactList.astro';
+import StatBlock from '../components/StatBlock.astro';
 import CTALink from '../components/CTALink.astro';
+
+const flockFacts = [
+  { value: 'Performance', color: 'navy' as const, valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
+  { value: 'Compliance', color: 'teal' as const, valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
+  { value: 'Mechanism', color: 'orange' as const, valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so birds spend less energy on immune response and more on growth." },
+  { value: 'Outcomes', color: 'green' as const, valueSize: 'text' as const, paragraph: 'Improved performance and healthier birds.' },
+];
 ---
 <FieldNotesLayout title="Products" active="products">
-  <Module11
-    variant="intro"
+  <!-- How BE-101 Works video (similar to the one on YouTube today) is a
+       Phase 2 addition to this section — not built yet. -->
+  <ModuleDarkCard11
     headingLevel="h1"
     eyebrow="BiomEdit / Products"
-    heading="The first of any kind."
+    heading="BE-101 / Optavant™ — The first of any kind."
     noDivider
     paragraphs={[
-      'BE-101 (Optavant&trade;) is the first engineered microbial therapeutic to achieve licensure, in any species, any geography, any regulatory pathway.',
-      "BE-101 is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry's most costly diseases, without systemic antibiotics.",
+      'BE-101 (Optavant&trade;) protects broilers from necrotic enteritis without systemic antibiotics. Now available to U.S. producers under USDA conditional license.',
+      'It is the first engineered microbial therapeutic to achieve licensure, in any species, any geography, any regulatory pathway.',
+      "BE-101 is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases, without systemic antibiotics. It&rsquo;s the first product from our Programmable Veterinary Biologics&trade; platform.",
     ]}
-  />
-
-  <section class="stat-callout section-divider">
-    <p class="stat-value">$6B</p>
-    <p class="stat-label">Estimated annual cost of necrotic enteritis to the poultry industry.</p>
-  </section>
-
-  <Module21
-    heading="How BE-101 works"
-    paragraphs={['The strain is engineered to produce and secrete nanobodies that neutralize the C. perfringens toxins responsible for necrotic enteritis, delivered directly in the gut.']}
     image={{ src: '/images/boiler-hen-in-housing-single.jpg', alt: 'Pastured poultry raised without systemic antibiotics' }}
   />
 
-  <section class="evidence section-divider">
-    <div class="evidence-card">
-      <div class="evidence-text">
-        <p class="eyebrow">The Evidence</p>
-        <p class="evidence-body">In a controlled 43-day trial, poultry treated with BE-101&rsquo;s engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain, with mechanistic evidence of reduced immune activation and oxidative stress.</p>
-        <blockquote class="pull-quote">
-          <p>&ldquo;This is an exciting chapter for BiomEdit. We are bringing a transformational poultry solution to U.S. broiler producers and pushing the frontiers of sustainable livestock production.&rdquo;</p>
-          <cite>Aaron Schacht, CEO, BiomEdit</cite>
-        </blockquote>
-        <CTALink href="#" tone="onDark">Read the Full Study</CTALink>
-      </div>
-      <div class="evidence-image">
-        <img src="/images/samples/lab-work.jpg" alt="BiomEdit scientist at work in the lab" />
-      </div>
-    </div>
+  <ModuleCards2
+    lead
+    noDivider
+    cardLeft={{ value: '$6B', paragraphs: ['Necrotic enteritis costs the poultry industry an estimated $6B annually.'] }}
+    cardRight={{ paragraphs: ['The strain is engineered to produce and secrete nanobodies that neutralize the C. perfringens toxins responsible for necrotic enteritis, delivered directly in the gut.'] }}
+  />
+
+  <section class="flock">
+    <h2>What it means for your flock</h2>
+    <FactList items={flockFacts} />
   </section>
+
+  <Module21
+    heading="How BE-101 fits your program"
+    paragraphs={[
+      'Two applications, and no daily protocol to manage.',
+      'BE-101 is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second application at 14 days maintains protection through the growth cycle &mdash; there&rsquo;s no continuous in-feed program to manage.',
+      'The colonized strain produces protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
+    ]}
+    image={{ src: '/images/gut-diagram-with-labels.png', alt: 'Diagram of the BE-101 mechanism in the gut' }}
+  />
+
+  <Module11
+    heading="The Evidence"
+    paragraphs={['In a controlled 43-day trial, poultry treated with BE-101&rsquo;s engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain, with mechanistic evidence of reduced immune activation and oxidative stress.']}
+    image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by BE-101' }}
+  >
+    <StatBlock
+      stats={[
+        { value: '+76g', label: 'Weight gain vs. antibiotic (p = 0.025)' },
+        { value: '+81g', label: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
+      ]}
+    />
+    <CTALink href="/science">Read the full study</CTALink>
+  </Module11>
+
+  <!-- NEW quote, sourced from Aaron's public remarks in BiomEdit's Series B
+       funding announcement (July 2025) &mdash; distinct from the homepage's
+       "engineered microbial therapeutics in all species" quote. Confirm with
+       Aaron that this remains accurate given where BE-101 has progressed
+       since the original announcement. -->
+  <ModulePlainText
+    quote
+    noDivider
+    paragraphs={['&ldquo;This is an exciting chapter for BiomEdit. We are bringing a transformational poultry solution to U.S. broiler producers and pushing the frontiers of sustainable livestock production.&rdquo;']}
+    attribution="Aaron Schacht, CEO, BiomEdit"
+  />
+
+  <Module11 variant="intro" heading="Other products in our pipeline">
+    <ModuleCards2
+      bare
+      headingLevel="h3"
+      cardLeft={{
+        heading: 'BE-105 | Obesity & Diabetes (Cats)',
+        paragraphs: ['Oral biologic for chronic weight management and metabolic health and first demonstration that microbial therapeutics can potentially deliver systemic peptide pharmacology.'],
+      }}
+      cardRight={{
+        heading: 'BE-122 | Inflammatory Bowel Disease (Dogs)',
+        paragraphs: ['Oral biologic for chronic gastrointestinal disease.'],
+      }}
+    />
+  </Module11>
 
   <ModuleBlueText
     heading="Curious what&rsquo;s next after BE-101?"
-    ctaLabel="Explore the Pipeline"
+    ctaLabel="View our full pipeline"
     ctaHref="/pipeline"
-    secondaryCtaLabel="Explore Our Science"
+    secondaryCtaLabel="Read the research"
     secondaryCtaHref="/science"
+    noDivider
   />
 </FieldNotesLayout>
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
-  /* ---------- stat callout ---------- */
-  .stat-callout { padding: 3rem 0; text-align: center; }
-  .stat-value { font-size: var(--text-h2); font-weight: 700; color: var(--color-amber); line-height: 1; margin: 0 0 1rem; }
-  .stat-label { font-size: 15px; color: var(--text-primary); margin: 0 auto; max-width: 420px; }
-
-  /* ---------- evidence / pull quote ---------- */
-  .evidence { padding: 0 0 4rem; }
-  .evidence-card {
-    background: var(--cool-800);
-    border-radius: 6px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-  }
-  .evidence-text { padding: 3.5rem 48px; display: flex; flex-direction: column; justify-content: center; }
-  .evidence-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1.25rem; }
-  .evidence-body { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 2rem; }
-  .pull-quote { margin: 0 0 2rem; padding: 0; border: none; }
-  .pull-quote p {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 1.45;
-    color: #FFFFFF;
-    margin: 0 0 1rem;
-  }
-  .pull-quote cite { font-size: 13px; font-style: normal; color: var(--cool-400); }
-  .evidence-image { height: 100%; min-height: 420px; }
-  .evidence-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-  @media (max-width: 860px) {
-    .evidence-card { grid-template-columns: 1fr; }
-    .evidence-image { min-height: 260px; order: -1; }
-    .evidence-text { padding: 2.5rem 28px; }
-  }
+  /* ---------- what it means for your flock ---------- */
+  .flock { padding: 1.5rem 0 3.5rem; }
+  .flock h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
 </style>

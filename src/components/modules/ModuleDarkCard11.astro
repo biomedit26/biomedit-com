@@ -3,18 +3,23 @@ import ModuleSection from './ModuleSection.astro';
 
 interface Props {
   heading: string;
+  headingLevel?: 'h1' | 'h2';
+  eyebrow?: string;
   paragraphs: string[];
   ctaLabel?: string;
   ctaHref?: string;
   image: { src: string; alt: string };
   label?: string;
+  noDivider?: boolean;
 }
-const { heading, paragraphs, ctaLabel, ctaHref, image, label } = Astro.props;
+const { heading, headingLevel = 'h2', eyebrow, paragraphs, ctaLabel, ctaHref, image, label, noDivider = false } = Astro.props;
+const Heading = headingLevel;
 ---
-<ModuleSection label={label}>
+<ModuleSection label={label} noDivider={noDivider}>
   <div class="content-card">
     <div class="text-col">
-      <h2>{heading}</h2>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <Heading>{heading}</Heading>
       {paragraphs.map((p) => <p set:html={p} />)}
       {ctaLabel && ctaHref && (
         <a class="cta" href={ctaHref}>
@@ -34,13 +39,14 @@ const { heading, paragraphs, ctaLabel, ctaHref, image, label } = Astro.props;
     background: var(--cool-800);
     border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
   }
   .text-col { padding: 4rem 48px; display: flex; flex-direction: column; justify-content: center; }
-  .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
+  .text-col .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-400); margin: 0 0 1rem; }
+  .text-col h1, .text-col h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.5rem; }
   .text-col p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; }
   .text-col p:last-of-type { margin-bottom: 2rem; }
   .cta {
