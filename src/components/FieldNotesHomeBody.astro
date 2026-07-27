@@ -41,6 +41,25 @@ const news = [
   { tone: 'navy' as const, tag: 'Article', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
   { tone: 'orange' as const, tag: 'Event', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
 ];
+
+// No real logo assets available yet — simulated full-color marks (distinct
+// icon shape + brand color per partner) standing in until real logos are
+// dropped in, same "placeholder, swap later" convention used on the
+// Investors & Partners page's lockup section.
+const partners = [
+  { name: 'Elanco', color: 'navy' as const, shape: 'circle' as const },
+  { name: 'Ginkgo Bioworks', color: 'teal' as const, shape: 'hexagon' as const },
+  { name: 'Anterra Capital', color: 'orange' as const, shape: 'diamond' as const },
+  { name: 'Bill & Melinda Gates Foundation', color: 'green' as const, shape: 'square' as const },
+  { name: 'Bezos Earth Fund', color: 'amber' as const, shape: 'triangle' as const },
+];
+const partnerMarks = {
+  circle: '<circle cx="12" cy="12" r="9"/>',
+  hexagon: '<path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z"/>',
+  diamond: '<path d="M12 2.5l9.5 9.5-9.5 9.5-9.5-9.5z"/>',
+  square: '<rect x="3.5" y="3.5" width="17" height="17" rx="3"/>',
+  triangle: '<path d="M12 3l9.5 17H2.5z"/>',
+};
 ---
 <section class={`who-we-are ${heroVariant === 'video' ? 'no-divider' : ''}`}>
   {heroVariant === 'video' && (
@@ -48,9 +67,7 @@ const news = [
   )}
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
-      <p class="eyebrow">BiomEdit / Vol. 01</p>
-      <h2>Who we are</h2>
-      <p>At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. We build living therapeutics from the ground up &mdash; an experienced team of industry veterans researching and innovating the microbiome for over a decade.</p>
+      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. We build living therapeutics from the ground up &mdash; an experienced team of industry veterans researching and innovating the microbiome for over a decade.</p>
       <CTALink href="#">Discover our science</CTALink>
     </div>
     <div class="who-we-are-image">
@@ -73,21 +90,21 @@ const news = [
   <div class="how-we-build-grid">
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-navy);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6.5 21l5.5-3 5.5 3-2-7.5"/></svg>
       </div>
       <h3>A Company of Firsts</h3>
       <p>First company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, in any species, any geography, any regulatory pathway. BE-101/Optavant&trade; is proof it&rsquo;s real.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-teal);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M9.5 10L6.5 7.3M14.5 10l3-2.7M9.5 14l-3 2.7M14.5 14l3 2.7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
       </div>
       <h3>The Latest AI/ML Technology</h3>
       <p>Our AI/ML infrastructure works hand-in-hand with our proprietary strain engineering platform, accelerating discovery and reducing time to market.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-green);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="6" rx="3"/><path d="M7 12H4M17 12h3M9 9V6M15 9V6M9 15v3M15 15v3"/></svg>
       </div>
       <h3>Our Proprietary Gut Microbiome Library</h3>
       <p>A head start in discovery competitors can&rsquo;t replicate, built specifically for animal health.</p>
@@ -110,9 +127,9 @@ const news = [
       <div>
         <p class="eyebrow">Lead Program — Infectious Disease</p>
         <h3>BE-101 / Optavant&trade;</h3>
-        <p class="lead-p">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
         <p class="lead-p">The first Programmable Veterinary Biologic to reach commercial launch, engineered to protect poultry from one of the industry's most costly diseases, necrotic enteritis, without systemic antibiotics.</p>
         <CTALink href="/pipeline">Learn about BE-101</CTALink>
+        <p class="lead-highlight">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
       </div>
       <img src="/images/boiler-hen-in-housing-single.jpg" alt="Pastured poultry raised without systemic antibiotics" />
     </div>
@@ -136,7 +153,7 @@ const news = [
   paragraphs={['"One day there will be engineered microbial therapeutics in all species. BiomEdit is leading the way."']}
   attribution="Aaron Schacht, CEO, BiomEdit"
   photos={[
-    { src: '/images/woman-with-pig.jpg', alt: 'BiomEdit team member with a pig on the farm', ratio: '3/2' },
+    { src: '/images/85gb-photo-9Ltj6ikhBPY-unsplash.jpg', alt: 'BiomEdit team member with a pig on the farm', ratio: '3/2' },
     { src: '/images/engin-akyurt-GBszMrOChZ8-unsplash.jpg', alt: 'Close-up of livestock', ratio: '2/3' },
   ]}
 />
@@ -149,12 +166,15 @@ const news = [
       </div>
       <div class="investors-body">
         <p>BiomEdit is building the first Programmable Veterinary Biologics platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
-        <div class="logo-bar">
-          <span>Elanco</span>
-          <span>Ginkgo Bioworks</span>
-          <span>Anterra Capital</span>
-          <span>Bill &amp; Melinda Gates Foundation</span>
-          <span>Bezos Earth Fund</span>
+        <div class="logo-marquee">
+          <div class="logo-track">
+            {[...partners, ...partners].map((p, i) => (
+              <span class={`logo-chip ${i >= partners.length ? 'is-duplicate' : ''}`} aria-hidden={i >= partners.length ? 'true' : undefined}>
+                <svg viewBox="0 0 24 24" fill={`var(--color-${p.color})`} set:html={partnerMarks[p.shape]} />
+                <span class="logo-chip-name">{p.name}</span>
+              </span>
+            ))}
+          </div>
         </div>
         <CTALink href="/investors-partners">Partner with us</CTALink>
       </div>
@@ -164,7 +184,7 @@ const news = [
 
 <section class="mission">
   <h2>Built by scientists. Run by experts who challenge the status quo.</h2>
-  <p>Two centuries of combined research experience, focused on one goal: engineering microbial therapeutics that change animal health for good.</p>
+  <p>Over two centuries of combined research experience, focused on one goal: engineering microbial therapeutics that change animal health for good.</p>
 </section>
 
 <section class="stats-section">
@@ -252,8 +272,8 @@ const news = [
     text-align: center;
   }
   .build-icon {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--icon-color) 12%, transparent);
     color: var(--icon-color);
@@ -262,7 +282,7 @@ const news = [
     justify-content: center;
     margin: 0 auto 1.25rem;
   }
-  .build-icon svg { width: 26px; height: 26px; }
+  .build-icon svg { width: 32px; height: 32px; }
   .build-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
   .build-card p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0; }
 
@@ -285,17 +305,38 @@ const news = [
   }
   .investors-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
   .investors-label h2 { font-size: var(--text-h5); margin: 0; }
+  .investors-body { min-width: 0; }
   .investors-body p { font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1.75rem; max-width: 640px; }
-  .logo-bar { display: flex; flex-wrap: wrap; gap: 1.75rem 2.5rem; margin-bottom: 2rem; }
-  .logo-bar span { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .logo-marquee {
+    margin-bottom: 2rem;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
+  }
+  .logo-track {
+    display: flex;
+    align-items: center;
+    gap: 2.75rem;
+    width: max-content;
+    animation: logo-scroll 26s linear infinite;
+  }
+  .logo-marquee:hover .logo-track { animation-play-state: paused; }
+  .logo-chip { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo-chip svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .logo-chip-name { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+  @keyframes logo-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-track { animation: none; }
+  }
 
   @media (max-width: 860px) {
     .investors-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   }
 
-  .who-we-are-text .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
-  .who-we-are-text h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
-  .who-we-are-text p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .who-we-are-text .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); margin: 0 0 1.5rem; }
   .who-we-are-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
 
   @media (max-width: 860px) {
@@ -315,10 +356,21 @@ const news = [
     border-bottom: 1px solid var(--cool-400);
     margin-bottom: 0.5rem;
   }
-  .lead-program .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 1rem; }
+  .lead-program .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 0.5rem; }
   .lead-program h3 { font-size: var(--text-h4); line-height: 1.15; margin: 0 0 1rem; }
   .lead-p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1rem; }
   .lead-p:last-of-type { margin-bottom: 1.5rem; }
+  .lead-highlight {
+    margin: 1.5rem 0 0;
+    padding: 1rem 1.25rem;
+    background: var(--bg-primary);
+    border-left: 3px solid var(--color-teal);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
   .lead-program img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
 
   .pipeline-rows { display: flex; flex-direction: column; }

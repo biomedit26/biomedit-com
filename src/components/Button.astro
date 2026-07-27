@@ -17,7 +17,7 @@ const colorVar = `var(--color-${color})`;
 ---
 <Tag
   href={href}
-  class={`btn btn-${variant} ${shape === 'pill' ? 'btn-pill' : ''}`}
+  class={`btn btn-${variant} btn-${color} ${shape === 'pill' ? 'btn-pill' : ''}`}
   style={
     variant === 'filled'
       ? `background:${colorVar};`
@@ -44,6 +44,11 @@ const colorVar = `var(--color-${color})`;
   .btn-filled {
     color: #fff;
     border: none;
+  }
+  /* White fails AA contrast on amber's light background (2.15:1) — dark
+     text is the only accessible option at this fill color. */
+  .btn-filled.btn-amber {
+    color: var(--text-primary);
   }
   .btn-outline {
     background: var(--bg-secondary);

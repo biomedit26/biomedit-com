@@ -16,7 +16,7 @@ interface Props {
 const { title, active } = Astro.props;
 
 const nav = [
-  { label: 'About', href: '/about', key: 'about', enabled: true },
+  { label: 'Company', href: '/about', key: 'about', enabled: true },
   { label: 'Science', href: '/science', key: 'science', enabled: true },
   { label: 'Pipeline', href: '/pipeline', key: 'pipeline', enabled: true },
   { label: 'Products', href: '/products', key: 'products', enabled: true },
@@ -90,7 +90,7 @@ const year = new Date().getFullYear();
     .logo svg { height: 40px; width: auto; display: block; }
     .main-nav nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
     .main-nav nav li a, .main-nav nav li span {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
     }
@@ -245,6 +245,7 @@ const year = new Date().getFullYear();
           <a href="/privacy-policy">Privacy Policy</a>
           <a href="/legal">Legal</a>
           <a href="/cookies">Cookies</a>
+          <a href="/faqs">FAQs</a>
         </div>
         <a href="https://www.linkedin.com/company/biomedit" target="_blank" rel="noopener">Follow on LinkedIn</a>
       </div>
