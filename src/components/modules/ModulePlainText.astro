@@ -13,16 +13,24 @@ interface Props {
   quote?: boolean;
   attribution?: string;
   noDivider?: boolean;
+  // 'serif' (default): Fraunces italic, matching the site's other pull-quotes.
+  // 'sans': PT Sans italic instead, for a lighter, less formal quote treatment.
+  quoteFont?: 'serif' | 'sans';
+  // Attribution byline size. 'sm' (default, 13px) or 'md' (14px).
+  attributionSize?: 'sm' | 'md';
 }
-const { heading, paragraphs, ctaLabel, ctaHref, label, quote = false, attribution, noDivider = false } = Astro.props;
+const {
+  heading, paragraphs, ctaLabel, ctaHref, label, quote = false, attribution, noDivider = false,
+  quoteFont = 'serif', attributionSize = 'sm',
+} = Astro.props;
 ---
 <ModuleSection label={label} noDivider={noDivider}>
   <div class="text-wrap">
     <div class="text-col">
       {quote ? (
         <>
-          <p class="quote" set:html={paragraphs[0]} />
-          {attribution && <cite class="quote-cite">{attribution}</cite>}
+          <p class={`quote ${quoteFont === 'sans' ? 'is-sans' : ''}`} set:html={paragraphs[0]} />
+          {attribution && <cite class={`quote-cite ${attributionSize === 'md' ? 'is-md' : ''} ${quoteFont === 'sans' ? 'is-sans' : ''}`}>{attribution}</cite>}
         </>
       ) : (
         <>
@@ -62,6 +70,11 @@ const { heading, paragraphs, ctaLabel, ctaHref, label, quote = false, attributio
     color: var(--color-navy);
     margin: 0;
   }
+  .text-col p.quote.is-sans {
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+  }
   .quote-cite {
     display: block;
     margin-top: 1.25rem;
@@ -71,6 +84,8 @@ const { heading, paragraphs, ctaLabel, ctaHref, label, quote = false, attributio
     letter-spacing: 0.02em;
     color: var(--text-tertiary);
   }
+  .quote-cite.is-md { font-size: 14px; }
+  .quote-cite.is-sans { font-weight: 400; }
 
   @media (max-width: 860px) {
     .text-wrap { padding: 1rem 0 4.5rem; }

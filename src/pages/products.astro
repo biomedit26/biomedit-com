@@ -39,13 +39,16 @@ const flockFacts = [
     cardRight={{ paragraphs: ['The strain is engineered to produce and secrete nanobodies that neutralize the C. perfringens toxins responsible for necrotic enteritis, delivered directly in the gut.'] }}
   />
 
-  <section class="flock">
-    <h2>What it means for your flock</h2>
+  <Module11
+    heading="What it means for your flock"
+    image={{ src: '/images/boiler-hen-in-housing-single.jpg', alt: 'Pastured poultry raised without systemic antibiotics' }}
+  >
     <FactList items={flockFacts} />
-  </section>
+  </Module11>
 
   <Module21
     heading="How BE-101 fits your program"
+    columns="1fr 2fr"
     paragraphs={[
       'Two applications, and no daily protocol to manage.',
       'BE-101 is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second application at 14 days maintains protection through the growth cycle &mdash; there&rsquo;s no continuous in-feed program to manage.',
@@ -78,6 +81,8 @@ const flockFacts = [
     noDivider
     paragraphs={['&ldquo;This is an exciting chapter for BiomEdit. We are bringing a transformational poultry solution to U.S. broiler producers and pushing the frontiers of sustainable livestock production.&rdquo;']}
     attribution="Aaron Schacht, CEO, BiomEdit"
+    quoteFont="sans"
+    attributionSize="md"
   />
 
   <Module11 variant="intro" heading="Other products in our pipeline">
@@ -102,18 +107,14 @@ const flockFacts = [
     secondaryCtaLabel="Read the research"
     secondaryCtaHref="/science"
     noDivider
-    image="/images/footer-cta-bg-3.jpg"
+    image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
     imagePosition="50% 50%"
     blendMode="overlay"
-    imageOpacity={0.7}
+    imageOpacity={0.45}
   />
 </FieldNotesLayout>
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
-
-  /* ---------- what it means for your flock ---------- */
-  .flock { padding: 1.5rem 0 3.5rem; }
-  .flock h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
 </style>

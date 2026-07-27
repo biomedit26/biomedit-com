@@ -106,7 +106,7 @@ const candidates = [
     layout="split"
   >
     <div class="header-ctas">
-      <Button color="navy" variant="filled" href="/pipeline">Explore BE-101</Button>
+      <Button color="amber" variant="filled" href="/pipeline">Explore BE-101</Button>
       <CTALink href="#" tone="onDark">Explore our platform</CTALink>
     </div>
   </IntroLead>
@@ -126,7 +126,7 @@ const candidates = [
             <p>First engineered microbial therapeutic ever to achieve licensure &mdash; in any species, in any geography, in any regulatory path</p>
           </div>
         </div>
-        <CTALink href="#" tone="onDark">Learn about BE-101</CTALink>
+        <CTALink href="#">Learn about BE-101</CTALink>
       </div>
       <img src="/images/samples/chickens.jpg" alt="Pastured poultry raised without systemic antibiotics" />
     </div>
@@ -157,11 +157,11 @@ const candidates = [
     secondaryCtaLabel="Partner with us"
     secondaryCtaHref="/investors-partners"
     noDivider
-    image="/images/footer-cta-bg-3.jpg"
+    image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
     imagePosition="50% 50%"
     blendMode="overlay"
-    imageOpacity={0.7}
+    imageOpacity={0.45}
   />
 </FieldNotesLayout>
 
@@ -172,9 +172,10 @@ const candidates = [
 
   .tracker-section { padding: 0 0 4rem; }
 
-  .spotlight-section { padding: 0 0 4rem; }
+  .spotlight-section { padding: 3.5rem 0 4rem; }
   .spotlight {
-    background: var(--cool-800);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     overflow: hidden;
     display: grid;
@@ -182,13 +183,13 @@ const candidates = [
     align-items: stretch;
   }
   .spotlight-text { padding: 2.5rem 40px; display: flex; flex-direction: column; justify-content: center; }
-  .spotlight-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1rem; }
-  .spotlight-text h3 { font-size: var(--text-h4); margin: 0 0 1rem; color: #FFFFFF; line-height: 1.15; }
+  .spotlight-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 1rem; }
+  .spotlight-text h3 { font-size: var(--text-h4); margin: 0 0 1rem; color: var(--text-primary); line-height: 1.15; }
   .spotlight-text h3 sup { font-size: 0.4em; }
   .spotlight-facts { display: flex; flex-direction: column; gap: 1rem; margin: 0 0 1.5rem; }
   .spotlight-fact { display: flex; align-items: flex-start; gap: 12px; }
-  .fact-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--color-teal-dark); }
-  .spotlight-fact p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0; }
+  .fact-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--color-teal); }
+  .spotlight-fact p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0; }
   .spotlight-text :global(.cta-link) { align-self: flex-start; }
   .spotlight img { display: block; width: 100%; height: 100%; object-fit: cover; }
 

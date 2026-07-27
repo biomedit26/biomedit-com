@@ -14,12 +14,17 @@ interface Item {
 interface Props {
   label: string;
   items: Item[];
-  tone?: 'default' | 'onDark';
+  // 'onDark': for cool-800/900 backgrounds. 'onMedium': for cool-400 —
+  // title/description already read fine at the default dark-text color, so
+  // this only darkens the tertiary label (and border) enough to stay AA
+  // compliant against a mid-tone background.
+  tone?: 'default' | 'onDark' | 'onMedium';
 }
 
 const { label, items, tone = 'default' } = Astro.props;
+const toneClass = tone === 'onDark' ? 'is-on-dark' : tone === 'onMedium' ? 'is-on-medium' : '';
 ---
-<div class={`entry-list ${tone === 'onDark' ? 'is-on-dark' : ''}`}>
+<div class={`entry-list ${toneClass}`}>
   <h3 class="entry-list-label">{label}</h3>
   <div class="entries">
     {items.map((item) => (
@@ -43,4 +48,7 @@ const { label, items, tone = 'default' } = Astro.props;
   .entry-list.is-on-dark .entry { border-bottom-color: var(--cool-600); }
   .entry-list.is-on-dark .entry-title { color: #FFFFFF; }
   .entry-list.is-on-dark .entry-description { color: var(--cool-300); }
+
+  .entry-list.is-on-medium .entry-list-label { color: var(--cool-800); }
+  .entry-list.is-on-medium .entry { border-bottom-color: var(--cool-600); }
 </style>

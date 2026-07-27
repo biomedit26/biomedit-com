@@ -20,6 +20,9 @@ interface Props {
   watermark?: { src: string; alt: string };
   noDivider?: boolean;
   dividerColor?: string;
+  // Grid column widths for the default (non-intro) layout, e.g. "2fr 1fr"
+  // to widen the text column. Defaults to an even 1fr/1fr split.
+  columns?: string;
 }
 const {
   heading,
@@ -34,6 +37,7 @@ const {
   watermark,
   noDivider = false,
   dividerColor,
+  columns = '1fr 1fr',
 } = Astro.props;
 const Heading = headingLevel;
 ---
@@ -57,7 +61,7 @@ const Heading = headingLevel;
       </div>
     </div>
   ) : (
-    <div class="grid">
+    <div class="grid" style={`grid-template-columns:${columns};`}>
       <div class="text-col">
         {eyebrow && <p class="eyebrow">{eyebrow}</p>}
         <Heading>{heading}</Heading>

@@ -92,6 +92,8 @@ const grants = [
     quote
     paragraphs={['&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;']}
     attribution="Brett Wong, Partner, Anterra Capital"
+    quoteFont="sans"
+    attributionSize="md"
   />
 
   <section class="new-category section-divider">
@@ -105,24 +107,21 @@ const grants = [
   </section>
 
   <section class="awards">
-    <FullBleedBand background="var(--cool-800)">
+    <FullBleedBand background="var(--cool-400)">
       <h2>Recognized by the industry we&rsquo;re building for.</h2>
       <div class="awards-grid">
-        <EntryList label="Key Awards & Honors" items={awards} tone="onDark" />
-        <EntryList label="Major Grants & Funding Awards" items={grants} tone="onDark" />
+        <EntryList label="Key Awards & Honors" items={awards} tone="onMedium" />
+        <EntryList label="Major Grants & Funding Awards" items={grants} tone="onMedium" />
       </div>
-      <div class="awards-cta"><CTALink href="#" tone="onDark">Explore our platform</CTALink></div>
+      <div class="awards-cta"><CTALink href="#">Explore our platform</CTALink></div>
     </FullBleedBand>
   </section>
 
   <section class="partner-cta">
-    <div class="partner-cta-grid">
-      <div>
-        <h2>How we work with partners and investors.</h2>
-        <p>BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.</p>
-        <CTALink href="#">Let&rsquo;s meet</CTALink>
-      </div>
-      <img src="/images/investor-image.jpg" alt="Abstract illustration of interconnected growth and data" />
+    <div class="partner-cta-text">
+      <h2>How we work with partners and investors.</h2>
+      <p>BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.</p>
+      <CTALink href="#">Let&rsquo;s meet</CTALink>
     </div>
   </section>
 
@@ -131,11 +130,11 @@ const grants = [
     ctaLabel="Connect with us"
     ctaHref="#"
     noDivider
-    image="/images/footer-cta-bg-3.jpg"
+    image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
     imagePosition="50% 50%"
     blendMode="overlay"
-    imageOpacity={0.7}
+    imageOpacity={0.45}
   />
 </FieldNotesLayout>
 
@@ -164,18 +163,17 @@ const grants = [
   .new-category-grid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
 
   .awards :global(.full-bleed-inner) { text-align: center; }
-  .awards h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 2.5rem; }
+  .awards h2 { font-size: var(--text-h5); color: var(--text-primary); margin: 0 0 2.5rem; }
   .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 760px; margin: 0 auto; text-align: left; }
   .awards-cta { padding-top: 2.5rem; }
 
   .partner-cta { padding: 3.5rem 0 4rem; }
-  .partner-cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
-  .partner-cta-grid h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
-  .partner-cta-grid p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
-  .partner-cta-grid img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .partner-cta-text { max-width: 640px; margin: 0 auto; text-align: center; }
+  .partner-cta-text h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .partner-cta-text p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
 
   @media (max-width: 860px) {
-    .lockups-bottom, .new-category-grid, .awards-grid, .partner-cta-grid { grid-template-columns: 1fr; }
+    .lockups-bottom, .new-category-grid, .awards-grid { grid-template-columns: 1fr; }
     .lockups-bottom { gap: 2.5rem; }
   }
 </style>

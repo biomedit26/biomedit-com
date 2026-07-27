@@ -29,17 +29,17 @@ const values = [
 ];
 
 const milestones = [
-  { value: 'Apr 2022', valueSize: 'text' as const, paragraph: 'BiomEdit established as an independent company in Fishers, Indiana.' },
-  { value: 'Dec 2022', valueSize: 'text' as const, paragraph: 'S&P Global Animal Health names BiomEdit Best Start-Up in Animal Health.' },
-  { value: 'Jan 2023', valueSize: 'text' as const, paragraph: '$37M Series A financing closed.' },
-  { value: 'Feb 2023', valueSize: 'text' as const, paragraph: 'Chairman and Board of Directors appointed.' },
-  { value: 'Aug 2023', valueSize: 'text' as const, paragraph: 'Research collaboration announced with the Indiana Biosciences Research Institute (IBRI).' },
-  { value: 'Nov 2023', valueSize: 'text' as const, paragraph: '$4.5M grant awarded by the Bill & Melinda Gates Foundation for cattle methane reduction.' },
-  { value: 'Dec 2023', valueSize: 'text' as const, paragraph: 'Aaron Schacht named S&P Global Visionary CEO.' },
-  { value: 'Jul 2025', valueSize: 'text' as const, paragraph: 'Series B closed, raising $18.4M.' },
-  { value: 'Oct 2025', valueSize: 'text' as const, paragraph: 'Bezos Earth Fund grant received (~$2M) for the Rumen Digital Twin.' },
-  { value: 'Apr 2026', valueSize: 'text' as const, paragraph: "Two foundational US patents granted, protecting BE-101's core delivery mechanism and nanobody sequences." },
   { value: '2025–26', valueSize: 'text' as const, paragraph: 'USDA conditional licensure targeted for BE-101.' },
+  { value: 'Apr 2026', valueSize: 'text' as const, paragraph: "Two foundational US patents granted, protecting BE-101's core delivery mechanism and nanobody sequences." },
+  { value: 'Oct 2025', valueSize: 'text' as const, paragraph: 'Bezos Earth Fund grant received (~$2M) for the Rumen Digital Twin.' },
+  { value: 'Jul 2025', valueSize: 'text' as const, paragraph: 'Series B closed, raising $18.4M.' },
+  { value: 'Dec 2023', valueSize: 'text' as const, paragraph: 'Aaron Schacht named S&P Global Visionary CEO.' },
+  { value: 'Nov 2023', valueSize: 'text' as const, paragraph: '$4.5M grant awarded by the Bill & Melinda Gates Foundation for cattle methane reduction.' },
+  { value: 'Aug 2023', valueSize: 'text' as const, paragraph: 'Research collaboration announced with the Indiana Biosciences Research Institute (IBRI).' },
+  { value: 'Feb 2023', valueSize: 'text' as const, paragraph: 'Chairman and Board of Directors appointed.' },
+  { value: 'Jan 2023', valueSize: 'text' as const, paragraph: '$37M Series A financing closed.' },
+  { value: 'Dec 2022', valueSize: 'text' as const, paragraph: 'S&P Global Animal Health names BiomEdit Best Start-Up in Animal Health.' },
+  { value: 'Apr 2022', valueSize: 'text' as const, paragraph: 'BiomEdit established as an independent company in Fishers, Indiana.' },
 ];
 ---
 <FieldNotesLayout title="About" active="about">
@@ -51,28 +51,41 @@ const milestones = [
   />
 
   <section class="mission section-divider">
-    <p class="overline">Mission</p>
-    <p class="statement">We engineer living biologics that prevent disease, treat conditions, and improve animal health.</p>
-    <p class="statement-support">Traditional animal health relies on broad-spectrum antibiotics and generalized interventions. BiomEdit is building something different: Programmable Veterinary Biologics that target specific disease drivers at the source, engineered to work with the animal&rsquo;s own biology.</p>
-  </section>
-
-  <section class="vision section-divider">
-    <p class="overline">Vision</p>
-    <p class="statement is-vision">Transform animal health by creating programmable biologic solutions that redefine what is possible.</p>
-  </section>
-
-  <section class="values section-divider">
-    <p class="overline">Values</p>
-    <p class="values-intro">Our values are not aspirational. They describe how we work together every day.</p>
-    <div class="values-grid">
-      {values.map((value) => (
-        <div class="value-card" style={`--value-color:var(--color-${value.color});`}>
-          <h3>{value.name}</h3>
-          <p>{value.description}</p>
-        </div>
-      ))}
+    <div class="mission-grid">
+      <div class="mission-text">
+        <p class="overline">Mission</p>
+        <h2 class="mission-heading">We engineer living biologics that prevent disease, treat conditions, and improve animal health.</h2>
+        <p class="statement-support">Traditional animal health relies on broad-spectrum antibiotics and generalized interventions. BiomEdit is building something different: Programmable Veterinary Biologics that target specific disease drivers at the source, engineered to work with the animal&rsquo;s own biology.</p>
+      </div>
+      <div class="mission-image">
+        <img src="/images/amari-shutters-JABi6GpktFM-unsplash.jpg" alt="BiomEdit scientist at work in the lab" />
+      </div>
+      <div class="mission-image">
+        <img src="/images/woman-with-pig.jpg" alt="Farmer caring for livestock" />
+      </div>
     </div>
-    <div class="values-cta"><CTALink href="/company">Meet the team</CTALink></div>
+  </section>
+
+  <section class="vision-values section-divider">
+    <div class="vision-values-grid">
+      <div class="vision-col">
+        <p class="overline">Vision</p>
+        <h2 class="vision-heading">Transform animal health by creating programmable biologic solutions that redefine what is possible.</h2>
+      </div>
+      <div class="values-col">
+        <p class="overline">Values</p>
+        <p class="values-intro">Our values are not aspirational. They describe how we work together every day.</p>
+        <div class="values-grid">
+          {values.map((value) => (
+            <div class="value-card" style={`--value-color:var(--color-${value.color});`}>
+              <h3>{value.name}</h3>
+              <p>{value.description}</p>
+            </div>
+          ))}
+        </div>
+        <div class="values-cta"><CTALink href="/company">Meet the team</CTALink></div>
+      </div>
+    </div>
   </section>
 
   <section class="timeline section-divider">
@@ -87,35 +100,29 @@ const milestones = [
     ctaHref="/pipeline"
     secondaryCtaLabel="Partner with us"
     secondaryCtaHref="/investors-partners"
-    image="/images/footer-cta-bg-3.jpg"
+    image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
     imagePosition="50% 50%"
     blendMode="overlay"
-    imageOpacity={0.7}
+    imageOpacity={0.45}
+    noDivider
   />
 </FieldNotesLayout>
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
-  .mission { padding: 3.5rem 0 3rem; }
-  .vision { padding: 3rem 0; }
-  .statement {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 1.35;
-    color: var(--color-navy);
-    margin: 1rem 0 1.5rem;
-    max-width: 760px;
-  }
+  .mission { margin-top: 3rem; padding: 24px 0 3rem; }
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+  .mission-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .mission-heading { font-size: var(--text-h5); color: var(--text-primary); margin: 1rem 0 1.5rem; }
   .statement-support { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0; max-width: 640px; }
-  .statement.is-vision { font-size: 24px; color: var(--text-primary); margin: 1rem 0 0; max-width: 680px; }
 
-  .values { padding: 3.5rem 0 4rem; }
+  .vision-values { padding: 24px 0 4rem; }
+  .vision-values-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: start; }
+  .vision-heading { font-size: var(--text-h5); color: var(--text-primary); margin: 1rem 0 0; }
   .values-intro { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 1rem 0 2rem; max-width: 640px; }
-  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .value-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -136,7 +143,8 @@ const milestones = [
   .timeline h2 { font-size: var(--text-h5); margin: 0.5rem 0 2rem; }
 
   @media (max-width: 860px) {
-    .values-grid { grid-template-columns: 1fr 1fr; }
+    .mission-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .vision-values-grid { grid-template-columns: 1fr; gap: 2rem; }
   }
   @media (max-width: 600px) {
     .values-grid { grid-template-columns: 1fr; }

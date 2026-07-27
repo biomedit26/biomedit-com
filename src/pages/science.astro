@@ -90,8 +90,8 @@ const pillars = [
         <h3>Proof in the pipeline.</h3>
         <p>BE-101, commercially known as Optavant&trade;, is the first Programmable Veterinary Biologic to receive conditional USDA licensure &mdash; developed to protect poultry from sub-clinical necrotic enteritis without relying on systemic antibiotics. It&rsquo;s proof that the platform works, not just in the lab, but at commercial scale.</p>
         <div class="platform-action-ctas">
-          <CTALink href="/pipeline" tone="onDark">Explore the pipeline</CTALink>
-          <CTALink href="#" tone="onDark">Read the research</CTALink>
+          <CTALink href="/pipeline">Explore the pipeline</CTALink>
+          <CTALink href="#">Read the research</CTALink>
         </div>
       </div>
       <img src="/images/chicken-direct-blur.jpg" alt="Pastured poultry raised without systemic antibiotics" />
@@ -104,11 +104,11 @@ const pillars = [
     ctaHref="/pipeline"
     secondaryCtaLabel="Partner with us"
     secondaryCtaHref="/investors-partners"
-    image="/images/footer-cta-bg-3.jpg"
+    image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
     imagePosition="50% 50%"
     blendMode="overlay"
-    imageOpacity={0.7}
+    imageOpacity={0.45}
     noDivider
   />
 </FieldNotesLayout>
@@ -144,25 +144,26 @@ const pillars = [
   /* ---------- platform in action ---------- */
   .platform-action { padding: 1.5rem 0 4rem; }
   .platform-action-card {
-    background: var(--cool-800);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
+    overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    align-items: center;
-    padding: 3rem 44px 3rem 0;
+    align-items: stretch;
   }
-  .platform-action-text { padding-left: 44px; }
-  .platform-action-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1rem; }
-  .platform-action-text h3 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1rem; }
-  .platform-action-text p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; }
+  .platform-action-text { padding: 3rem 0 3rem 44px; display: flex; flex-direction: column; justify-content: center; }
+  .platform-action-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 1rem; }
+  .platform-action-text h3 { font-size: var(--text-h5); color: var(--text-primary); margin: 0 0 1rem; }
+  .platform-action-text p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
   .platform-action-ctas { display: flex; gap: 28px; flex-wrap: wrap; }
-  .platform-action-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .platform-action-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   @media (max-width: 860px) {
     .diff-grid, .pillars-grid { grid-template-columns: 1fr; }
-    .platform-action-card { grid-template-columns: 1fr; padding: 2.25rem 28px; gap: 1.5rem; }
-    .platform-action-card img { order: -1; }
-    .platform-action-text { padding-left: 0; }
+    .platform-action-card { grid-template-columns: 1fr; gap: 1.5rem; }
+    .platform-action-card img { order: -1; min-height: 260px; }
+    .platform-action-text { padding: 0 28px 2.25rem; }
   }
 </style>
