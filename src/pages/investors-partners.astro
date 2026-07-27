@@ -1,5 +1,6 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import IntroLead from '../components/modules/IntroLead.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
 import FactList from '../components/modules/FactList.astro';
 import EntryList from '../components/modules/EntryList.astro';
@@ -34,19 +35,12 @@ const grants = [
 ];
 ---
 <FieldNotesLayout title="Investors & Partners" active="investors">
-  <section class="hero-investors">
-    <FullBleedBand
-      background="var(--navy-deep-bg)"
-      image="/images/flowing-e-background.svg"
-      imageSize="240% auto"
-      imagePosition="80% 35%"
-      blendMode="overlay"
-    >
-      <p class="eyebrow">BiomEdit / Investors</p>
-      <h1>Backed by leaders in Agtech, lifesciences and sustainability.</h1>
-      <p class="lead">BiomEdit is pioneering programmable veterinary biologics, with investors and partners who understand what it takes to bring this category to market. Our first product is on track for commercial launch in Q4 2026, as we continue to build new solutions on our proprietary platform.</p>
-    </FullBleedBand>
-  </section>
+  <IntroLead
+    eyebrow="BiomEdit / Investors"
+    heading="Backed by leaders in Agtech, lifesciences and sustainability."
+    paragraphs={['BiomEdit is pioneering programmable veterinary biologics, with investors and partners who understand what it takes to bring this category to market. Our first product is on track for commercial launch in Q4 2026, as we continue to build new solutions on our proprietary platform.']}
+    variant="dark"
+  />
 
   <section class="lockups">
     <div class="lockups-top">
@@ -137,23 +131,16 @@ const grants = [
     ctaLabel="Connect with us"
     ctaHref="#"
     noDivider
+    image="/images/footer-cta-bg-3.jpg"
+    zoom={1.05}
+    imagePosition="50% 50%"
+    blendMode="overlay"
+    imageOpacity={0.7}
   />
 </FieldNotesLayout>
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
-
-  .hero-investors :global(.full-bleed-inner) { padding: 6rem 40px; }
-  .hero-investors .eyebrow {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--cool-400); margin: 0 0 1.5rem;
-  }
-  .hero-investors h1 { font-size: var(--text-h3); color: #FFFFFF; line-height: 1.1; margin: 0 0 1.5rem; max-width: 780px; }
-  .hero-investors .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.85); margin: 0; max-width: 620px; }
-
-  @media (max-width: 860px) {
-    .hero-investors :global(.full-bleed-inner) { padding: 3.5rem 40px; }
-  }
 
   .lockups { padding: 3.5rem 0; }
   .lockups-top { margin-bottom: 2.5rem; }

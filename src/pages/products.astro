@@ -1,8 +1,8 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import IntroLead from '../components/modules/IntroLead.astro';
 import Module11 from '../components/modules/Module11.astro';
 import Module21 from '../components/modules/Module21.astro';
-import ModuleDarkCard11 from '../components/modules/ModuleDarkCard11.astro';
 import ModuleCards2 from '../components/modules/ModuleCards2.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
@@ -20,17 +20,16 @@ const flockFacts = [
 <FieldNotesLayout title="Products" active="products">
   <!-- How BE-101 Works video (similar to the one on YouTube today) is a
        Phase 2 addition to this section — not built yet. -->
-  <ModuleDarkCard11
-    headingLevel="h1"
+  <IntroLead
     eyebrow="BiomEdit / Products"
     heading="BE-101 / Optavant™ — The first of any kind."
-    noDivider
     paragraphs={[
       'BE-101 (Optavant&trade;) protects broilers from necrotic enteritis without systemic antibiotics. Now available to U.S. producers under USDA conditional license.',
       'It is the first engineered microbial therapeutic to achieve licensure, in any species, any geography, any regulatory pathway.',
       "BE-101 is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases, without systemic antibiotics. It&rsquo;s the first product from our Programmable Veterinary Biologics&trade; platform.",
     ]}
-    image={{ src: '/images/boiler-hen-in-housing-single.jpg', alt: 'Pastured poultry raised without systemic antibiotics' }}
+    variant="dark"
+    layout="split"
   />
 
   <ModuleCards2
@@ -103,6 +102,11 @@ const flockFacts = [
     secondaryCtaLabel="Read the research"
     secondaryCtaHref="/science"
     noDivider
+    image="/images/footer-cta-bg-3.jpg"
+    zoom={1.05}
+    imagePosition="50% 50%"
+    blendMode="overlay"
+    imageOpacity={0.7}
   />
 </FieldNotesLayout>
 

@@ -1,0 +1,113 @@
+---
+// Shared page-intro pattern (winner of the About page's two-style
+// experiment): full-bleed band, an inset photo (optional), and a very
+// subtle flowing-e pattern blended into the background. Defaults to the
+// cool-400/dark-text treatment used sitewide; pass variant="dark" for the
+// cool-800/onDark treatment. Used as the top-of-page hero on every page
+// except Home, which keeps its own centered watermark-hero treatment.
+
+import FullBleedBand from './FullBleedBand.astro';
+
+interface Props {
+  eyebrow: string;
+  headingLevel?: 'h1' | 'h2';
+  heading: string;
+  paragraphs: string[];
+  // Omit to drop the image entirely and let the text column span 2/3 of
+  // the module width instead of sharing a 50/50 grid.
+  image?: { src: string; alt: string };
+  // 'light' (default): cool-400 band, dark text, flowing-e blended in as a
+  // subtle cool-gray tint. 'dark': cool-900 band, onDark text, flowing-e
+  // blended in with a subtle blue tint instead of gray.
+  variant?: 'light' | 'dark';
+  // Only applies when `image` is omitted. 'stacked' (default): eyebrow,
+  // heading, and paragraphs in a single column. 'split': heading in its own
+  // column with paragraphs top-aligned beside it — use for longer copy
+  // where a single stacked column runs too tall.
+  layout?: 'stacked' | 'split';
+}
+const {
+  eyebrow, headingLevel = 'h1', heading, paragraphs, image,
+  variant = 'light', layout = 'stacked',
+} = Astro.props;
+const Heading = headingLevel;
+const isDark = variant === 'dark';
+const isSplit = !image && layout === 'split';
+---
+<section class={`intro-lead ${isDark ? 'is-dark' : ''}`}>
+  <FullBleedBand
+    background={isDark ? 'var(--cool-800)' : 'var(--cool-400)'}
+    image="/images/flowing-e-background.svg"
+    imageFit="width"
+    blendMode={isDark ? 'screen' : 'overlay'}
+    grayscale={!isDark}
+    imageFilter={isDark ? 'grayscale(1) sepia(1) hue-rotate(200deg) saturate(2.5)' : undefined}
+    imageOpacity={isDark ? 0.08 : 0.18}
+  >
+    {image ? (
+      <div class="intro-grid">
+        <div class="intro-text">
+          <p class="eyebrow">{eyebrow}</p>
+          <Heading>{heading}</Heading>
+          {paragraphs.map((p) => <p set:html={p} />)}
+          <slot />
+        </div>
+        <div class="intro-image">
+          <img src={image.src} alt={image.alt} />
+        </div>
+      </div>
+    ) : isSplit ? (
+      <div class="intro-split">
+        <div class="intro-split-heading">
+          <p class="eyebrow">{eyebrow}</p>
+          <Heading>{heading}</Heading>
+        </div>
+        <div class="intro-split-body">
+          {paragraphs.map((p) => <p set:html={p} />)}
+          <slot />
+        </div>
+      </div>
+    ) : (
+      <div class="intro-text intro-text-wide">
+        <p class="eyebrow">{eyebrow}</p>
+        <Heading>{heading}</Heading>
+        {paragraphs.map((p) => <p set:html={p} />)}
+        <slot />
+      </div>
+    )}
+  </FullBleedBand>
+</section>
+
+<style>
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .intro-text .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+  .intro-text h1, .intro-text h2 { font-size: var(--text-h3); line-height: 1.15; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .intro-text p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.25rem; max-width: 520px; }
+  .intro-text p:last-of-type { margin-bottom: 0; }
+  .intro-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
+
+  .intro-text-wide { width: 66.666%; }
+  .intro-text-wide p { max-width: none; }
+
+  .intro-split { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+  .intro-split-heading .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+  .intro-split-heading h1, .intro-split-heading h2 { font-size: var(--text-h3); line-height: 1.15; color: var(--text-primary); margin: 0; }
+  .intro-split-body p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.25rem; }
+  .intro-split-body p:last-of-type { margin-bottom: 0; }
+
+  .intro-lead.is-dark .intro-text .eyebrow { color: var(--color-teal-dark); }
+  .intro-lead.is-dark .intro-text h1, .intro-lead.is-dark .intro-text h2 { color: #FFFFFF; }
+  .intro-lead.is-dark .intro-text p { color: var(--cool-300); }
+
+  .intro-lead.is-dark .intro-split-heading .eyebrow { color: var(--color-teal-dark); }
+  .intro-lead.is-dark .intro-split-heading h1, .intro-lead.is-dark .intro-split-heading h2 { color: #FFFFFF; }
+  .intro-lead.is-dark .intro-split-body p { color: var(--cool-300); }
+
+  @media (max-width: 860px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .intro-image { order: -1; }
+    .intro-text-wide { width: 100%; }
+    .intro-split { grid-template-columns: 1fr; gap: 1.5rem; }
+    .intro-split-heading h1, .intro-split-heading h2 { margin: 0 0 0.5rem; }
+  }
+</style>

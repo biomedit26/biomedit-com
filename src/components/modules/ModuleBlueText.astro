@@ -13,11 +13,22 @@ interface Props {
   secondaryCtaHref?: string;
   label?: string;
   noDivider?: boolean;
+  // Optional decorative background image, blended into the navy band —
+  // see FullBleedBand for how these are applied.
+  image?: string;
+  imagePosition?: string;
+  zoom?: number;
+  blendMode?: string;
+  grayscale?: boolean;
+  imageOpacity?: number;
 }
-const { heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label, noDivider = false } = Astro.props;
+const {
+  heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label, noDivider = false,
+  image, imagePosition, zoom, blendMode, grayscale, imageOpacity,
+} = Astro.props;
 ---
 <ModuleSection label={label} noDivider={noDivider}>
-  <FullBleedBand background="var(--navy-deep-bg)">
+  <FullBleedBand background="var(--navy-deep-bg)" image={image} imagePosition={imagePosition} zoom={zoom} blendMode={blendMode} grayscale={grayscale} imageOpacity={imageOpacity}>
     <div class="text-col">
       <h2>{heading}</h2>
       {paragraphs.map((p) => <p set:html={p} />)}

@@ -2,13 +2,22 @@
 // Usage:
 // <PipelineTracker stages={stages} candidates={candidates} footnote="..." />
 //
-// New pattern — no existing module matches this. 6-stage column header +
-// per-stage vertical stacks of collapsible candidate cards, with a
-// single-select category filter above. No JS: filtering is done with the
-// same radio-input + CSS :has() technique already used for the pipeline
-// filter tabs elsewhere in this codebase (see src/pages/pipeline.astro),
-// and expand/collapse uses native <details>/<summary> so multiple cards
-// can be open independently.
+// 6-stage column header + per-stage vertical stacks of collapsible candidate
+// cards, on a slightly darker panel background, with two independent
+// single-select filters above (focus area chips, species dropdown) that
+// combine so a card must match both to stay visible.
+//
+// Focus-area filtering uses the radio-input + CSS :has() technique already
+// used for the pipeline filter tabs elsewhere in this codebase (see
+// src/pages/pipeline.astro) — chips are <label>s for hidden radios. Species
+// uses the same hidden radios underneath (so the :has() filtering logic is
+// identical for both), but the visible control is a native <select> instead
+// of chips per request; a native <select>'s chosen option can't drive
+// sibling visibility in pure CSS, so a one-line inline onchange checks the
+// matching hidden radio. This is the only JS on the page.
+//
+// Expand/collapse uses native <details>/<summary> so multiple cards can be
+// open independently; the chevron rotates via the [open] attribute, no JS.
 
 interface Stage {
   eyebrow: string;
@@ -18,9 +27,17 @@ interface Stage {
 interface Candidate {
   id: string;
   category: 'teal' | 'navy' | 'green';
-  focus: string;
+  species: string;
+  speciesKey: 'poultry' | 'swine' | 'cattle' | 'feline' | 'canine';
+  mechanism: string;
   description: string;
   stage: number; // 1-indexed, matches `stages` position
+  // Full original stage/status text (e.g. "Candidate Optimization / In Vivo
+  // Study") — shown in the expanded detail; independent of `stage`, which
+  // only controls which column the card lands in.
+  stageNote?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 interface Props {
@@ -37,48 +54,88 @@ const categories = [
   { key: 'navy', label: 'Chronic Disease', color: 'var(--color-navy)' },
   { key: 'green', label: 'Sustainability', color: 'var(--color-green)' },
 ] as const;
+
+const speciesList = [
+  { key: 'poultry', label: 'Poultry' },
+  { key: 'swine', label: 'Swine' },
+  { key: 'cattle', label: 'Cattle' },
+  { key: 'feline', label: 'Feline' },
+  { key: 'canine', label: 'Canine' },
+] as const;
 ---
 <div class="pipeline-tracker">
   <input type="radio" name={`${idPrefix}-filter`} id={`${idPrefix}-all`} class="filter-input" checked />
   {categories.map((c) => (
     <input type="radio" name={`${idPrefix}-filter`} id={`${idPrefix}-${c.key}`} class="filter-input" />
   ))}
+  <input type="radio" name={`${idPrefix}-species-filter`} id={`${idPrefix}-species-any`} class="filter-input" checked />
+  {speciesList.map((s) => (
+    <input type="radio" name={`${idPrefix}-species-filter`} id={`${idPrefix}-species-${s.key}`} class="filter-input" />
+  ))}
 
-  <div class="filters">
-    <label for={`${idPrefix}-all`} class="filter-chip">All</label>
-    {categories.map((c) => (
-      <label for={`${idPrefix}-${c.key}`} class="filter-chip">
-        <span class="dot" style={`background:${c.color};`}></span>
-        {c.label}
-      </label>
-    ))}
-  </div>
+  <div class="tracker-panel">
+    <div class="tracker-band">
+      <p class="tracker-label">Our pipeline</p>
+    </div>
+    <div class="tracker-top">
+      <div class="filter-row">
+        <div class="filter-group">
+          <p class="filter-group-label">Focus Area</p>
+          <div class="filters">
+            <label for={`${idPrefix}-all`} class="filter-chip">All</label>
+            {categories.map((c) => (
+              <label for={`${idPrefix}-${c.key}`} class="filter-chip">
+                <span class="dot" style={`background:${c.color};`}></span>
+                {c.label}
+              </label>
+            ))}
+          </div>
+        </div>
 
-  <div class="stage-header">
-    {stages.map((s) => (
-      <div class="stage-header-cell">
-        <p class="stage-eyebrow">{s.eyebrow}</p>
-        <p class="stage-label">{s.label}</p>
+        <div class="filter-group filter-group-species">
+          <p class="filter-group-label">Species</p>
+          <select class="species-select" onchange="document.getElementById(this.value).checked = true">
+            <option value={`${idPrefix}-species-any`}>All Species</option>
+            {speciesList.map((s) => (
+              <option value={`${idPrefix}-species-${s.key}`}>{s.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
-    ))}
-  </div>
 
-  <div class="candidate-grid">
-    {stages.map((_, i) => (
-      <div class="stage-col">
-        {candidates.filter((c) => c.stage === i + 1).map((c) => (
-          <details class={`candidate-card cat-${c.category}`}>
-            <summary>
-              <span class="candidate-main">
-                <span class="code">{c.id}</span>
-                <span class="focus">{c.focus}</span>
-              </span>
-            </summary>
-            <p class="description">{c.description}</p>
-          </details>
+      <div class="stage-header">
+        {stages.map((s) => (
+          <div class="stage-header-cell">
+            <p class="stage-eyebrow">{s.eyebrow}</p>
+            <p class="stage-label">{s.label}</p>
+          </div>
         ))}
       </div>
-    ))}
+    </div>
+
+    <div class="candidate-grid">
+      {stages.map((_, i) => (
+        <div class="stage-col">
+          {candidates.filter((c) => c.stage === i + 1).map((c) => (
+            <details class={`candidate-card cat-${c.category} species-${c.speciesKey}`}>
+              <summary>
+                <span class="candidate-main">
+                  <span class="code">{c.id}</span>
+                  <span class="species-label">{c.species}</span>
+                </span>
+                <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </summary>
+              <div class="card-detail">
+                {c.stageNote && <p class="stage-note">{c.stageNote}</p>}
+                <p class="mechanism"><strong>Mechanism:</strong> {c.mechanism}</p>
+                <p class="description">{c.description}</p>
+                {c.ctaLabel && c.ctaHref && <a href={c.ctaHref} class="card-detail-link">{c.ctaLabel} &rarr;</a>}
+              </div>
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
   </div>
 
   {footnote && <p class="footnote">{footnote}</p>}
@@ -87,7 +144,16 @@ const categories = [
 <style>
   .filter-input { position: absolute; opacity: 0; pointer-events: none; }
 
-  .filters { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tracker-panel { background: var(--cool-200); border-radius: 8px; overflow: hidden; }
+  .tracker-band { background: var(--cool-800); padding: 0.85rem 1.5rem; }
+  .tracker-label { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cool-100); text-align: center; margin: 0; }
+
+  .tracker-top { background: var(--bg-secondary); padding: 1.5rem 1.5rem 0; }
+
+  .filter-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .filter-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 0.5rem; }
+
+  .filters { display: flex; gap: 20px; flex-wrap: wrap; }
   .filter-chip {
     display: flex;
     align-items: center;
@@ -106,6 +172,22 @@ const categories = [
   }
   .filter-chip .dot { width: 10px; height: 10px; border-radius: 2px; display: block; flex-shrink: 0; }
 
+  .species-select {
+    appearance: none;
+    cursor: pointer;
+    min-width: 170px;
+    padding: 0.5rem 32px 0.5rem 14px;
+    border-radius: 999px;
+    border: 1px solid var(--cool-400);
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%23666D7E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+    background-size: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
   .pipeline-tracker:has(.filter-input[id$="-all"]:checked) label[for$="-all"],
   .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) label[for$="-teal"],
   .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) label[for$="-navy"],
@@ -117,12 +199,9 @@ const categories = [
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
-    background: var(--cool-100);
-    border-radius: 6px 6px 0 0;
-    padding: 1rem 16px;
-    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
   }
-  .stage-header-cell:not(:first-child) { border-left: 1px solid var(--cool-500); padding-left: 20px; }
+  .stage-header-cell:not(:first-child) { border-left: 1px solid var(--cool-300); padding-left: 20px; }
   .stage-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 0; }
   .stage-label { font-size: 12px; font-weight: 700; color: var(--text-primary); line-height: 1.3; margin: 0.25rem 0 0; }
 
@@ -130,14 +209,15 @@ const categories = [
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--cool-500);
+    padding: 1.5rem;
   }
   .stage-col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .stage-col:not(:first-child) { border-left: 1px solid var(--cool-300); padding-left: 20px; }
 
   .candidate-card {
-    background: var(--cool-100);
+    background: var(--bg-secondary);
     border-radius: 6px;
+    border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
     overflow: hidden;
   }
@@ -150,6 +230,7 @@ const categories = [
     cursor: pointer;
     padding: 0.5rem 12px;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 8px;
   }
@@ -157,18 +238,34 @@ const categories = [
   .candidate-card summary::marker { content: ''; }
   .candidate-main { display: flex; flex-direction: column; }
   .code { font-weight: 700; font-size: 13px; color: var(--text-primary); display: block; }
-  .focus { font-size: 11px; color: var(--text-tertiary); }
-  .description { font-size: 12px; line-height: 1.6; color: var(--text-primary); margin: 0; padding: 0 12px 1rem; }
+  .species-label { font-size: 11px; color: var(--text-tertiary); margin-top: 0.25rem; }
+  .chevron { flex-shrink: 0; margin-top: 0.25rem; color: var(--text-tertiary); transition: transform 0.18s ease; }
+  .candidate-card[open] .chevron { transform: rotate(180deg); }
+
+  .card-detail { padding: 0 12px 1rem; }
+  .stage-note { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 0.5rem; }
+  .mechanism { font-size: 12px; color: var(--text-secondary); margin: 0 0 0.5rem; }
+  .description { font-size: 12px; line-height: 1.6; color: var(--text-primary); margin: 0 0 0.5rem; }
+  .card-detail-link { font-size: 12px; font-weight: 700; color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
 
   .footnote { font-size: 14px; color: var(--text-tertiary); margin: 1.5rem 0 0; }
 
-  /* category filtering — hide cards outside the selected category */
+  /* focus-area filtering — hide cards outside the selected category */
   .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) .candidate-card:not(.cat-teal) { display: none; }
   .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) .candidate-card:not(.cat-navy) { display: none; }
   .pipeline-tracker:has(.filter-input[id$="-green"]:checked) .candidate-card:not(.cat-green) { display: none; }
 
+  /* species filtering — combines with the above (a card must pass both) */
+  .pipeline-tracker:has(.filter-input[id$="-poultry"]:checked) .candidate-card:not(.species-poultry) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-swine"]:checked) .candidate-card:not(.species-swine) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-cattle"]:checked) .candidate-card:not(.species-cattle) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-feline"]:checked) .candidate-card:not(.species-feline) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-canine"]:checked) .candidate-card:not(.species-canine) { display: none; }
+
   @media (max-width: 960px) {
+    .filter-row { flex-direction: column; }
     .stage-header, .candidate-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .stage-header-cell:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-500); padding-top: 1rem; }
+    .stage-header-cell:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
+    .stage-col:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
   }
 </style>

@@ -6,22 +6,46 @@
 
 interface Props {
   background: string; // any CSS color value, e.g. "var(--cool-800)" or "var(--color-navy)"
-  // Optional decorative background image, blended into `background` via
-  // background-blend-mode rather than layered on top — this tints a
-  // grayscale/white source graphic into the band's own color family
-  // instead of showing its original colors, so it reads as a subtle
-  // textural pattern rather than a separate image.
+  // Optional decorative image, layered under the content and blended into
+  // `background` via mix-blend-mode — this tints a source graphic into the
+  // band's own color family instead of showing its original colors, so it
+  // reads as a subtle textural pattern rather than a separate image. Uses a
+  // real <img> (not a CSS background layer) specifically so `grayscale` can
+  // strip the source's own hue before blending — a plain CSS background
+  // layer can't be filtered independently of the color behind it, so a
+  // multi-color source would otherwise blend toward muddy/off-brand tones
+  // in whichever regions it isn't already close to `background`'s hue.
   image?: string;
-  imageSize?: string; // e.g. "220% auto" to show a zoomed-in crop
-  imagePosition?: string;
+  imagePosition?: string; // any object-position value, e.g. "30% 50%"
+  // >1 crops in tighter (zooms in); 1 is the least cropping possible while
+  // still filling the band (object-fit: cover's natural fill).
+  zoom?: number;
+  // 'cover' (default) fills the band on both axes, cropping whichever axis
+  // overflows. 'width' instead pins the image to 100% of the band's width
+  // (never cropped left/right) and lets height follow the source's aspect
+  // ratio, centered vertically — use for patterns that need to stay
+  // edge-to-edge rather than get cropped in to fill a short, wide band.
+  imageFit?: 'cover' | 'width';
   blendMode?: string;
+  // Strip the image's own color before blending, so the result reads as a
+  // pure tint of `background` regardless of the source's original colors —
+  // use when the source has hues far from `background` (e.g. warm tones
+  // going into a cool band), which would otherwise blend toward muddy
+  // in-between colors instead of a clean tint. Ignored if `imageFilter` is set.
+  grayscale?: boolean;
+  // Raw CSS filter value applied to the image before blending — use for a
+  // custom tint (e.g. "grayscale(1) sepia(1) hue-rotate(200deg) saturate(2.5)")
+  // rather than the plain `grayscale` shortcut. Takes precedence over `grayscale`.
+  imageFilter?: string;
+  imageOpacity?: number;
 }
-const { background, image, imageSize = '220% auto', imagePosition = 'center', blendMode = 'overlay' } = Astro.props;
-const bandStyle = image
-  ? `background-color:${background};background-image:url(${image});background-size:${imageSize};background-position:${imagePosition};background-repeat:no-repeat;background-blend-mode:${blendMode};`
-  : `background:${background};`;
+const { background, image, imagePosition = 'center', zoom = 1, imageFit = 'cover', blendMode = 'overlay', grayscale = false, imageFilter, imageOpacity = 1 } = Astro.props;
+const resolvedFilter = imageFilter ?? (grayscale ? 'grayscale(1)' : '');
+const imageStyle = `--img-pos:${imagePosition};--img-zoom:${zoom};--img-blend:${blendMode};--img-opacity:${imageOpacity};${resolvedFilter ? `filter:${resolvedFilter};` : ''}`;
+const imageClass = `full-bleed-image${imageFit === 'width' ? ' full-bleed-image--fit-width' : ''}`;
 ---
-<div class="full-bleed" style={bandStyle}>
+<div class="full-bleed" style={`background:${background};`}>
+  {image && <img class={imageClass} src={image} alt="" style={imageStyle} />}
   <div class="full-bleed-inner">
     <slot />
   </div>
@@ -35,15 +59,46 @@ const bandStyle = image
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    overflow: hidden;
+  }
+  .full-bleed-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--img-pos);
+    transform: scale(var(--img-zoom));
+    mix-blend-mode: var(--img-blend);
+    opacity: var(--img-opacity);
+    pointer-events: none;
+  }
+  .full-bleed-image--fit-width {
+    inset: auto;
+    top: 50%;
+    left: 0;
+    height: auto;
+    transform: translateY(-50%) scale(var(--img-zoom));
   }
   .full-bleed-inner {
-    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 5rem 40px;
   }
   @media (max-width: 860px) {
     .full-bleed-inner {
       padding: 3.5rem 40px;
+    }
+    /* Below this width, edge-to-edge fit would shrink the pattern's
+       linework past legibility. Pin it to a floor width instead and let it
+       crop — it only needs to read as a background texture here. */
+    .full-bleed-image--fit-width {
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      transform: translate(-50%, -50%) scale(var(--img-zoom));
     }
   }
 </style>

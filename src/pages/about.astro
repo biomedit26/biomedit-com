@@ -1,6 +1,6 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
-import Module11 from '../components/modules/Module11.astro';
+import IntroLead from '../components/modules/IntroLead.astro';
 import FactList from '../components/modules/FactList.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import CTALink from '../components/CTALink.astro';
@@ -43,23 +43,11 @@ const milestones = [
 ];
 ---
 <FieldNotesLayout title="About" active="about">
-  <Module11
-    variant="intro"
-    headingLevel="h1"
+  <IntroLead
     eyebrow="BiomEdit / About"
-    heading="About BiomEdit"
-    noDivider
-    paragraphs={[
-      'The name BiomEdit combines <em>biome</em> and <em>edit</em>: a reference to the microbiome and our ability to engineer it.',
-      "We're building a Programmable Veterinary Biologics&trade; platform designed to improve outcomes for animals and the people committed to their health.",
-      "That work happens in Fishers, Indiana, a place advancing research that promotes health in animals and the people who care for them.",
-    ]}
-  />
-
-  <Module11
     heading="Engineering a new chapter in animal health."
     paragraphs={["BiomEdit engineers Programmable Veterinary Biologics&trade;, living therapeutics built from strains designed to prevent and treat disease across various species, including poultry, livestock, and companion animals. Our pipeline spans infectious disease, sustainability, and chronic disease programs, led by BE-101/Optavant, progressing toward conditional USDA licensure. We're engineering a new chapter in animal health."]}
-    image={{ src: '/images/samples/lab-work.jpg', alt: 'BiomEdit scientist at work in the lab' }}
+    variant="dark"
   />
 
   <section class="mission section-divider">
@@ -99,6 +87,11 @@ const milestones = [
     ctaHref="/pipeline"
     secondaryCtaLabel="Partner with us"
     secondaryCtaHref="/investors-partners"
+    image="/images/footer-cta-bg-3.jpg"
+    zoom={1.05}
+    imagePosition="50% 50%"
+    blendMode="overlay"
+    imageOpacity={0.7}
   />
 </FieldNotesLayout>
 

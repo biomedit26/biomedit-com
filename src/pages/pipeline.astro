@@ -1,6 +1,7 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
-import Module11 from '../components/modules/Module11.astro';
+import IntroLead from '../components/modules/IntroLead.astro';
+import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import PipelineTracker from '../components/modules/PipelineTracker.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import Button from '../components/Button.astro';
@@ -15,54 +16,131 @@ const stages = [
   { eyebrow: 'Stage 6', label: 'Commercial' },
 ];
 
+// Species coverage note: the sitemap indicates humans will be added as a
+// future species — not reflected here or in the footnote below yet.
 const candidates = [
-  { id: 'BE-117', category: 'green' as const, focus: 'AMR', stage: 1, description: "Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs." },
-  { id: 'BE-17', category: 'green' as const, focus: 'Metabolic Disease', stage: 1, description: "A next-generation approach to metabolic health, building on early signals from the platform's foundational research." },
-  { id: 'BE-07', category: 'teal' as const, focus: 'AMR', stage: 2, description: "Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control." },
-  { id: 'BE-102', category: 'navy' as const, focus: 'Metabolic Disease', stage: 2, description: 'Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.' },
-  { id: 'BE-106', category: 'navy' as const, focus: 'Gut Health', stage: 2, description: 'Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.' },
-  { id: 'BE-105', category: 'green' as const, focus: 'Methane Reduction', stage: 2, description: 'Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.' },
-  { id: 'BE-01', category: 'teal' as const, focus: 'Gut Health', stage: 4, description: 'Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.' },
-  { id: 'BE-101', category: 'teal' as const, focus: 'Pathogen Protection', stage: 4, description: "The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch." },
-  { id: 'BE-02', category: 'teal' as const, focus: 'Pathogen Protection', stage: 5, description: 'Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.' },
+  {
+    id: 'BE-101 / Optavant™',
+    category: 'teal' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry',
+    mechanism: 'Nanobody',
+    stage: 5,
+    stageNote: 'Regulatory / Launch Readiness. Conditional USDA licensure. Commercial launch Q4 2026.',
+    description: 'A best-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.',
+    ctaLabel: 'Read more',
+    ctaHref: '/products',
+  },
+  {
+    id: 'BE-118',
+    category: 'teal' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry',
+    mechanism: 'Nanobody',
+    stage: 2,
+    stageNote: 'Candidate Optimization / In Vivo Study',
+    description: 'Probiotic vectored antibodies targeting HA antigens on the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.',
+  },
+  {
+    id: 'BE-119',
+    category: 'teal' as const,
+    species: 'Swine',
+    speciesKey: 'swine',
+    mechanism: 'Enzyme',
+    stage: 2,
+    stageNote: 'Candidate Optimization / In Vivo Study',
+    description: 'A probiotic vectored enzyme therapeutic that reduces E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics alone.',
+  },
+  {
+    id: 'BE-017',
+    category: 'green' as const,
+    species: 'Cattle',
+    speciesKey: 'cattle',
+    mechanism: 'Microbial Consortia',
+    stage: 2,
+    stageNote: 'Candidate Optimization',
+    description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.',
+  },
+  {
+    id: 'BE-117',
+    category: 'green' as const,
+    species: 'Cattle',
+    speciesKey: 'cattle',
+    mechanism: 'Nanobody & Peptide',
+    stage: 2,
+    stageNote: 'Candidate Optimization',
+    description: 'A first-in-class engineered rumen strain that continuously delivers anti-methanogen peptide and nanobody biomolecules directly in the rumen of dairy and beef cattle, reducing enteric methane emissions while improving feed efficiency and productivity.',
+  },
+  {
+    id: 'BE-105',
+    category: 'navy' as const,
+    species: 'Feline',
+    speciesKey: 'feline',
+    mechanism: 'Peptide',
+    stage: 2,
+    stageNote: 'Candidate Optimization / In Vivo Study',
+    description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and canine applications as future extensions.',
+  },
+  {
+    id: 'BE-122',
+    category: 'navy' as const,
+    species: 'Canine',
+    speciesKey: 'canine',
+    mechanism: 'Nanobody',
+    stage: 1,
+    stageNote: 'Discovery / Design',
+    description: 'Probiotic vectored antibodies designed to treat inflammatory bowel disease (IBD) in dogs, offering a potential alternative or complement to chronic corticosteroid therapy, with possible extension to cats.',
+  },
 ];
 ---
 <FieldNotesLayout title="Pipeline" active="pipeline">
-  <Module11
-    variant="intro"
-    headingLevel="h1"
+  <IntroLead
     eyebrow="BiomEdit / Pipeline"
     heading="Making biology programmable for animal health."
-    noDivider
     paragraphs={[
       "We&rsquo;re innovators. We look for measurable gaps in animal health and build the programmable biologics to close them.",
       'Every program starts with strain engineering, the foundation of our proprietary platform, and spans infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and we draw on our proprietary microbiome library to identify high-potential strains as starting points.',
       'The result: novel veterinary biologics that address important animal health challenges in a safe, sustainable and economically relevant manner &mdash; healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.',
     ]}
+    variant="dark"
+    layout="split"
   >
     <div class="header-ctas">
       <Button color="navy" variant="filled" href="/pipeline">Explore BE-101</Button>
-      <CTALink href="#">Explore our platform</CTALink>
+      <CTALink href="#" tone="onDark">Explore our platform</CTALink>
     </div>
-  </Module11>
+  </IntroLead>
 
-  <Module11
-    variant="intro"
-    eyebrow="Placeholder — pending sign-off"
-    heading="Our proof is in our execution."
-    paragraphs={['Our lead program, BE-101, has already shown what the BiomEdit platform can do. In controlled trials, engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain for broiler chickens, with mechanistic evidence behind the result, not just an observed outcome.']}
-  >
-    <CTALink href="#">Read the research</CTALink>
-  </Module11>
+  <section class="spotlight-section">
+    <div class="spotlight">
+      <div class="spotlight-text">
+        <p class="eyebrow">Featured Program — Infectious Disease</p>
+        <h3>BE-101 (Optavant<sup>&trade;</sup>) is a series of firsts.</h3>
+        <div class="spotlight-facts">
+          <div class="spotlight-fact">
+            <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+            <p>First programmable veterinary biologic to reach commercial launch (Q4 2026)</p>
+          </div>
+          <div class="spotlight-fact">
+            <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+            <p>First engineered microbial therapeutic ever to achieve licensure &mdash; in any species, in any geography, in any regulatory path</p>
+          </div>
+        </div>
+        <CTALink href="#" tone="onDark">Learn about BE-101</CTALink>
+      </div>
+      <img src="/images/samples/chickens.jpg" alt="Pastured poultry raised without systemic antibiotics" />
+    </div>
+  </section>
 
-  <Module11 variant="intro" heading="Three focus areas. One BiomEdit platform.">
-    <p>Our programmable veterinary biologics platform spans infectious disease, sustainability, and chronic disease therapeutics. We engineer bacteria to:</p>
-    <ul>
-      <li>deliver nanobodies, peptides, or enzymes (like the strains behind BE-101), or</li>
-      <li>work together as a microbial consortium.</li>
-    </ul>
-    <p class="no-margin">One platform, built to pivot based on what we&rsquo;re solving for.</p>
-  </Module11>
+  <div class="focus-text">
+    <ModulePlainText
+      heading="Three focus areas. One BiomEdit platform."
+      paragraphs={[
+        'Our programmable veterinary biologics platform spans <strong>infectious disease</strong>, <strong>sustainability</strong>, and <strong>chronic disease</strong> therapeutics. We engineer bacteria to deliver nanobodies, peptides, or enzymes (like the strains behind BE-101), or work together as a microbial consortium.',
+        '<strong>One platform, built to pivot based on what we&rsquo;re solving for.</strong>',
+      ]}
+    />
+  </div>
 
   <section class="tracker-section">
     <PipelineTracker
@@ -72,55 +150,50 @@ const candidates = [
     />
   </section>
 
-  <section class="spotlight-section">
-    <div class="spotlight">
-      <div class="spotlight-text">
-        <p class="eyebrow">Featured Program — Infectious Disease</p>
-        <h3>BE-101 (Optavant&trade;) is a series of firsts.</h3>
-        <ul>
-          <li>First programmable veterinary biologic to reach commercial launch (Q4 2026)</li>
-          <li>First engineered microbial therapeutic ever to achieve licensure &mdash; in any species, in any geography, in any regulatory path</li>
-        </ul>
-        <CTALink href="#" tone="onDark">Learn about BE-101</CTALink>
-      </div>
-      <img src="/images/samples/chickens.jpg" alt="Pastured poultry raised without systemic antibiotics" />
-    </div>
-  </section>
-
   <ModuleBlueText
     heading="Interested in what&rsquo;s next for BiomEdit?"
     ctaLabel="Explore our platform"
     ctaHref="/home"
     secondaryCtaLabel="Partner with us"
     secondaryCtaHref="/investors-partners"
+    noDivider
+    image="/images/footer-cta-bg-3.jpg"
+    zoom={1.05}
+    imagePosition="50% 50%"
+    blendMode="overlay"
+    imageOpacity={0.7}
   />
 </FieldNotesLayout>
 
 <style>
   .header-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 0.25rem; }
 
+  .focus-text :global(.text-wrap) { padding-bottom: 2rem; }
+
   .tracker-section { padding: 0 0 4rem; }
-  :global(.tracker-section p),
-  :global(.tracker-section ul) { font-size: 15px; line-height: 1.75; color: var(--text-primary); }
-  :global(.tracker-section ul) { padding-left: 20px; margin: 0 0 1rem; }
-  :global(.tracker-section .no-margin) { margin: 0; }
 
   .spotlight-section { padding: 0 0 4rem; }
   .spotlight {
     background: var(--cool-800);
     border-radius: 6px;
-    padding: 2.5rem 40px;
+    overflow: hidden;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 48px;
-    align-items: center;
+    align-items: stretch;
   }
+  .spotlight-text { padding: 2.5rem 40px; display: flex; flex-direction: column; justify-content: center; }
   .spotlight-text .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal-dark); margin: 0 0 1rem; }
   .spotlight-text h3 { font-size: var(--text-h4); margin: 0 0 1rem; color: #FFFFFF; line-height: 1.15; }
-  .spotlight-text ul { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0 0 1.5rem; padding-left: 20px; }
-  .spotlight img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+  .spotlight-text h3 sup { font-size: 0.4em; }
+  .spotlight-facts { display: flex; flex-direction: column; gap: 1rem; margin: 0 0 1.5rem; }
+  .spotlight-fact { display: flex; align-items: flex-start; gap: 12px; }
+  .fact-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--color-teal-dark); }
+  .spotlight-fact p { font-size: 15px; line-height: 1.75; color: var(--cool-300); margin: 0; }
+  .spotlight-text :global(.cta-link) { align-self: flex-start; }
+  .spotlight img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   @media (max-width: 860px) {
     .spotlight { grid-template-columns: 1fr; }
+    .spotlight img { min-height: 260px; }
   }
 </style>

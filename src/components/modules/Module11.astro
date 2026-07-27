@@ -59,6 +59,7 @@ const Heading = headingLevel;
   ) : (
     <div class="grid">
       <div class="text-col">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
         <Heading>{heading}</Heading>
         {paragraphs.map((p) => <p set:html={p} />)}
         {ctaLabel && ctaHref && (
@@ -69,11 +70,9 @@ const Heading = headingLevel;
         )}
         <slot />
       </div>
-      {image && (
-        <div class="image-col">
-          <img src={image.src} alt={image.alt} />
-        </div>
-      )}
+      <div class="image-col">
+        {image ? <img src={image.src} alt={image.alt} /> : <div class="image-placeholder" aria-hidden="true"></div>}
+      </div>
     </div>
   )}
 </ModuleSection>
@@ -87,7 +86,7 @@ const Heading = headingLevel;
     padding: 0 0 6rem;
     position: relative;
   }
-  .text-col h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  .text-col h1, .text-col h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
   .text-col p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
   .cta {
     display: inline-flex; align-items: center; gap: 6px;
@@ -97,6 +96,7 @@ const Heading = headingLevel;
   .cta:hover { opacity: 0.75; }
   .cta svg { width: 14px; height: 14px; }
   .image-col img { display: block; width: 100%; height: auto; border-radius: 4px; }
+  .image-placeholder { width: 100%; aspect-ratio: 3 / 2; background: var(--cool-300); border-radius: 4px; }
 
   .grid-intro {
     grid-template-columns: 280px 1fr;
@@ -116,7 +116,7 @@ const Heading = headingLevel;
     pointer-events: none;
   }
   .grid-intro .label-col, .grid-intro .body-col { position: relative; z-index: 1; }
-  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
+  .eyebrow, .text-col p.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 1rem; }
   .label-col h1, .label-col h2 { font-size: var(--text-h5); margin: 0; }
   .body-col p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; max-width: 680px; }
 
