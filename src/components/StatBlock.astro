@@ -12,11 +12,15 @@ interface Stat {
 
 interface Props {
   stats: Stat[];
+  align?: 'left' | 'center';
+  // Vertical hairlines between stats — on by default, set false for a
+  // plainer centered layout.
+  divider?: boolean;
 }
 
-const { stats } = Astro.props;
+const { stats, align = 'left', divider = true } = Astro.props;
 ---
-<div class="stat-block" style={`--stat-count:${stats.length};`}>
+<div class={`stat-block ${align === 'center' ? 'is-center' : ''} ${!divider ? 'no-divider' : ''}`} style={`--stat-count:${stats.length};`}>
   {stats.map((s) => (
     <div class="stat">
       <div class="stat-value">{s.value}</div>
@@ -38,6 +42,9 @@ const { stats } = Astro.props;
   .stat:last-child { padding-right: 0; border-right: none; }
   .stat-value { font-size: var(--text-h3); font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
   .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); }
+
+  .stat-block.is-center .stat { text-align: center; }
+  .stat-block.no-divider .stat { border-right: none; }
 
   @media (max-width: 700px) {
     .stat-block { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 0; }

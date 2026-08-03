@@ -26,7 +26,7 @@ interface Stage {
 
 interface Candidate {
   id: string;
-  category: 'teal' | 'navy' | 'green';
+  category: 'teal' | 'amber' | 'green';
   species: string;
   speciesKey: 'poultry' | 'swine' | 'cattle' | 'feline' | 'canine';
   mechanism: string;
@@ -51,7 +51,7 @@ const { stages, candidates, footnote, idPrefix = 'pt' } = Astro.props;
 
 const categories = [
   { key: 'teal', label: 'Infectious Disease', color: 'var(--color-teal)' },
-  { key: 'navy', label: 'Chronic Disease', color: 'var(--color-navy)' },
+  { key: 'amber', label: 'Chronic Disease', color: 'var(--color-amber)' },
   { key: 'green', label: 'Sustainability', color: 'var(--color-green)' },
 ] as const;
 
@@ -144,8 +144,8 @@ const speciesList = [
 <style>
   .filter-input { position: absolute; opacity: 0; pointer-events: none; }
 
-  .tracker-panel { background: var(--cool-200); border-radius: 8px; overflow: hidden; }
-  .tracker-band { background: var(--cool-800); padding: 0.85rem 1.5rem; }
+  .tracker-panel { background: var(--cool-200); border-radius: 8px; }
+  .tracker-band { background: var(--cool-800); padding: 0.85rem 1.5rem; border-radius: 8px 8px 0 0; }
   .tracker-label { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cool-100); text-align: center; margin: 0; }
 
   .tracker-top { background: var(--bg-secondary); padding: 1.5rem 1.5rem 0; }
@@ -190,7 +190,7 @@ const speciesList = [
 
   .pipeline-tracker:has(.filter-input[id$="-all"]:checked) label[for$="-all"],
   .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) label[for$="-teal"],
-  .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) label[for$="-navy"],
+  .pipeline-tracker:has(.filter-input[id$="-amber"]:checked) label[for$="-amber"],
   .pipeline-tracker:has(.filter-input[id$="-green"]:checked) label[for$="-green"] {
     background: var(--cool-200);
   }
@@ -220,10 +220,24 @@ const speciesList = [
     border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
     overflow: hidden;
+    position: relative;
+    transition: width 0.2s ease, margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
   .candidate-card.cat-teal { border-left-color: var(--color-teal); }
-  .candidate-card.cat-navy { border-left-color: var(--color-navy); }
+  .candidate-card.cat-amber { border-left-color: var(--color-amber); }
   .candidate-card.cat-green { border-left-color: var(--color-green); }
+
+  /* Expanded cards pop out wider than their column instead of just
+     growing downward — gives the detail text more room to breathe
+     without cramming it into a ~160px-wide stage column. */
+  .candidate-card[open] {
+    z-index: 5;
+    width: calc(100% + 56px);
+    margin-left: -28px;
+    margin-right: -28px;
+    box-shadow: 0 20px 40px -8px rgba(28, 31, 40, 0.28);
+    border-color: var(--cool-400);
+  }
 
   .candidate-card summary {
     list-style: none;
@@ -252,7 +266,7 @@ const speciesList = [
 
   /* focus-area filtering — hide cards outside the selected category */
   .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) .candidate-card:not(.cat-teal) { display: none; }
-  .pipeline-tracker:has(.filter-input[id$="-navy"]:checked) .candidate-card:not(.cat-navy) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-amber"]:checked) .candidate-card:not(.cat-amber) { display: none; }
   .pipeline-tracker:has(.filter-input[id$="-green"]:checked) .candidate-card:not(.cat-green) { display: none; }
 
   /* species filtering — combines with the above (a card must pass both) */
@@ -267,5 +281,8 @@ const speciesList = [
     .stage-header, .candidate-grid { grid-template-columns: 1fr; gap: 1rem; }
     .stage-header-cell:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
     .stage-col:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
+    /* Stage columns are already full-width when stacked — no room to pop
+       out wider, so keep expanded cards inline here. */
+    .candidate-card[open] { width: 100%; margin-left: 0; margin-right: 0; }
   }
 </style>

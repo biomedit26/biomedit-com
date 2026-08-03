@@ -2,25 +2,42 @@
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
-import FactList from '../components/modules/FactList.astro';
+import Module11 from '../components/modules/Module11.astro';
 import EntryList from '../components/modules/EntryList.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import CTALink from '../components/CTALink.astro';
-import LogoPlaceholder from '../components/LogoPlaceholder.astro';
 
-// Emphasis split: Investors get the full left column at a larger logo
-// scale; Partnerships & Grants and Launch Partners share the right column,
+// Emphasis split: Investors get the full-width top row at a larger logo
+// scale; Partnerships & Grants and Launch Partners share the bottom row,
 // stacked and sized down to reflect a roughly 50/30/20 weighting overall.
-const investors = ['Anterra Capital', 'Viking', 'Nutreco NuFrontiers', 'AgriZero', 'BetAgro Ventures', 'Elevate Ventures'];
-const partnershipsGrants = ['Nutreco', 'Bill &amp; Melinda Gates Foundation', 'Global Methane Hub', 'Bezos Earth Fund', 'USDA NIFA', 'NIH'];
-const launchPartners = ['Elanco', 'Ginkgo Bioworks', 'Ferment'];
+const investors = [
+  { name: 'Anterra Capital', logo: '/images/investor-partner/anterra-capital.svg' },
+  { name: 'Viking', logo: '/images/investor-partner/viking.svg' },
+  { name: 'Nutreco NuFrontiers', logo: '/images/investor-partner/nutreco.svg' },
+  { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png' },
+  { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png' },
+];
+const partnershipsGrants = [
+  { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg' },
+  { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg' },
+  { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
+  { name: 'USDA NIFA', logo: '/images/investor-partner/usda.svg' },
+  { name: 'NIH', logo: '/images/investor-partner/nih.png' },
+];
+const launchPartners = [
+  { name: 'Elanco', logo: '/images/investor-partner/elanco.svg' },
+  { name: 'Ginkgo Bioworks', logo: '/images/investor-partner/ginkgo-bioworks.svg' },
+  { name: 'Ferment', logo: '/images/investor-partner/ferment.png' },
+];
 
-const newCategoryFacts = [
-  { value: '1st', valueSize: 'h5' as const, paragraph: 'BE-101 is the first engineered microbial therapeutic ever to achieve licensure, in any species, any geography, any regulatory pathway.' },
-  { value: 'Our Platform', valueSize: 'h5' as const, paragraph: 'A programmable biologics platform built on strain engineering, AI/ML, and a proprietary microbiome library — not a single product.' },
-  { value: '2', valueSize: 'h5' as const, paragraph: 'Foundational patents, announced April 21, 2026, protect the core delivery mechanism and the nanobody sequences behind BE-101. Our platform generates further IP across strain, delivery mechanism, indication, and process.' },
-  { value: '$5.5–6M', valueSize: 'h5' as const, paragraph: 'In non-dilutive capital raised to date, supporting sustainability-focused work alongside the core pipeline.' },
+const newCategoryCards = [
+  { color: 'teal', heading: 'A Series of Firsts', paragraph: 'BE-101 is the first engineered microbial therapeutic ever to achieve licensure, in any species, any geography, any regulatory pathway.' },
+  { color: 'navy', heading: 'Our Platform', paragraph: 'Our Programmable Veterinary Biologics platform is built on strain engineering, AI/ML, and a proprietary microbiome library — not a single product.' },
+  { color: 'orange', heading: 'Foundational Patents', paragraph: 'Two patents, announced April 21, 2026, protect the core delivery mechanism and the nanobody sequences behind BE-101. Our platform generates further IP across strain, delivery mechanism, indication, and process.' },
+  { color: 'green', heading: '$5.5–6M', paragraph: 'In non-dilutive capital raised to date, supporting sustainability-focused work alongside the core pipeline.' },
 ];
 
 const awards = [
@@ -48,10 +65,9 @@ const grants = [
         <h3 style="color:var(--color-navy);">Investors</h3>
         <div class="category-rule" style="background:var(--color-navy);"></div>
         <div class="logo-row">
-          {investors.map((name) => (
+          {investors.map((p) => (
             <div class="logo-chip">
-              <LogoPlaceholder color="navy" size="lg" />
-              <span class="logo-name" set:html={name} />
+              <img src={p.logo} alt={p.name} loading="lazy" />
             </div>
           ))}
         </div>
@@ -63,10 +79,9 @@ const grants = [
         <h3 style="color:var(--color-orange);">Partnerships &amp; Grants</h3>
         <div class="category-rule" style="background:var(--color-orange);"></div>
         <div class="logo-row">
-          {partnershipsGrants.map((name) => (
+          {partnershipsGrants.map((p) => (
             <div class="logo-chip">
-              <LogoPlaceholder color="orange" size="md" />
-              <span class="logo-name" set:html={name} />
+              <img src={p.logo} alt={p.name} loading="lazy" />
             </div>
           ))}
         </div>
@@ -76,16 +91,14 @@ const grants = [
         <h3 style="color:var(--color-teal);">Launch Partners</h3>
         <div class="category-rule" style="background:var(--color-teal);"></div>
         <div class="logo-row">
-          {launchPartners.map((name) => (
+          {launchPartners.map((p) => (
             <div class="logo-chip">
-              <LogoPlaceholder color="teal" size="sm" />
-              <span class="logo-name" set:html={name} />
+              <img src={p.logo} alt={p.name} loading="lazy" />
             </div>
           ))}
         </div>
       </div>
     </div>
-    <p class="lockup-footnote">Placeholder logos — sourced from June 2026 Series C deck; swap in real marks</p>
   </section>
 
   <ModulePlainText
@@ -97,11 +110,16 @@ const grants = [
   />
 
   <section class="new-category section-divider">
+    <h2>A new category, built for what&rsquo;s next in animal health.</h2>
     <div class="new-category-grid">
       <img src="/images/drew-tGYrlchfObE-unsplash.jpg" alt="Gloved hand holding a petri dish of cultured strain in the lab" />
-      <div>
-        <h2>A new category, built for what&rsquo;s next in animal health.</h2>
-        <FactList items={newCategoryFacts} />
+      <div class="new-category-cards">
+        {newCategoryCards.map((card) => (
+          <div class="new-category-card" style={`border-top-color:var(--color-${card.color});`}>
+            <h3>{card.heading}</h3>
+            <p>{card.paragraph}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -117,13 +135,15 @@ const grants = [
     </FullBleedBand>
   </section>
 
-  <section class="partner-cta">
-    <div class="partner-cta-text">
-      <h2>How we work with partners and investors.</h2>
-      <p>BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.</p>
-      <CTALink href="#">Let&rsquo;s meet</CTALink>
-    </div>
-  </section>
+  <div class="partner-module">
+    <Module11
+      heading="How we work with partners and investors."
+      paragraphs={['BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.']}
+      ctaLabel="Let&rsquo;s meet"
+      ctaHref="#"
+      image={{ src: '/images/woman-in-lab-dropper.jpg', alt: 'Scientist in the lab using a dropper' }}
+    />
+  </div>
 
   <ModuleBlueText
     heading="Passionate about creating therapeutics that put animal&rsquo;s health and wellbeing first? We want to hear from you."
@@ -149,31 +169,42 @@ const grants = [
   .lockup-category h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.75rem; }
   .category-rule { height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
 
-  .logo-row { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
-  .logo-chip { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; scroll-snap-align: start; }
-  .logo-chip .logo-name { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-align: center; max-width: 130px; }
-  .is-lg .logo-chip .logo-name { font-size: 13px; max-width: 152px; }
-  .is-sm .logo-chip .logo-name { font-size: 11px; max-width: 104px; }
+  .logo-row { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; row-gap: 24px; }
+  .logo-chip { flex: 0 0 auto; display: flex; align-items: center; }
+  .logo-chip img { display: block; height: 40px; width: auto; }
+  .is-lg .logo-chip img { height: 44px; }
+  .is-md .logo-chip img { height: 34px; }
+  .is-sm .logo-chip img { height: 38px; }
 
-  .lockup-footnote { font-size: 11px; color: var(--text-tertiary); margin: 2rem 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
-
-  .new-category { padding: 3.5rem 0; }
+  .new-category { padding: 24px 0 3.5rem; }
+  .new-category h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
   .new-category-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; }
-  .new-category-grid h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
   .new-category-grid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+  .new-category-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .new-category-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid transparent;
+    border-radius: 6px;
+    padding: 1.75rem 28px;
+  }
+  .new-category-card h3 { font-size: var(--text-h6); color: var(--text-primary); margin: 0 0 0.75rem; }
+  .new-category-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0; }
+
+  .partner-module { margin-top: 6rem; }
+  .partner-module :global(.grid) { align-items: center; }
 
   .awards :global(.full-bleed-inner) { text-align: center; }
-  .awards h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 2.5rem; }
+  .awards h2 { font-size: var(--text-body); color: #FFFFFF; margin: 0 0 2.5rem; }
   .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 760px; margin: 0 auto; text-align: left; }
   .awards-cta { padding-top: 2.5rem; }
-
-  .partner-cta { padding: 3.5rem 0 4rem; }
-  .partner-cta-text { max-width: 640px; margin: 0 auto; text-align: center; }
-  .partner-cta-text h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
-  .partner-cta-text p { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .awards-cta :global(.cta-link) { font-size: var(--text-body); }
 
   @media (max-width: 860px) {
     .lockups-bottom, .new-category-grid, .awards-grid { grid-template-columns: 1fr; }
     .lockups-bottom { gap: 2.5rem; }
+  }
+  @media (max-width: 600px) {
+    .new-category-cards { grid-template-columns: 1fr; }
   }
 </style>

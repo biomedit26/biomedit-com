@@ -1,7 +1,6 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
-import FactList from '../components/modules/FactList.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import CTALink from '../components/CTALink.astro';
 
@@ -28,18 +27,47 @@ const values = [
   },
 ];
 
+// Grouped year -> month -> bullet items, newest first. `month: null` is
+// for milestones tied to a year/target rather than a specific month.
 const milestones = [
-  { value: '2025–26', valueSize: 'text' as const, paragraph: 'USDA conditional licensure targeted for BE-101.' },
-  { value: 'Apr 2026', valueSize: 'text' as const, paragraph: "Two foundational US patents granted, protecting BE-101's core delivery mechanism and nanobody sequences." },
-  { value: 'Oct 2025', valueSize: 'text' as const, paragraph: 'Bezos Earth Fund grant received (~$2M) for the Rumen Digital Twin.' },
-  { value: 'Jul 2025', valueSize: 'text' as const, paragraph: 'Series B closed, raising $18.4M.' },
-  { value: 'Dec 2023', valueSize: 'text' as const, paragraph: 'Aaron Schacht named S&P Global Visionary CEO.' },
-  { value: 'Nov 2023', valueSize: 'text' as const, paragraph: '$4.5M grant awarded by the Bill & Melinda Gates Foundation for cattle methane reduction.' },
-  { value: 'Aug 2023', valueSize: 'text' as const, paragraph: 'Research collaboration announced with the Indiana Biosciences Research Institute (IBRI).' },
-  { value: 'Feb 2023', valueSize: 'text' as const, paragraph: 'Chairman and Board of Directors appointed.' },
-  { value: 'Jan 2023', valueSize: 'text' as const, paragraph: '$37M Series A financing closed.' },
-  { value: 'Dec 2022', valueSize: 'text' as const, paragraph: 'S&P Global Animal Health names BiomEdit Best Start-Up in Animal Health.' },
-  { value: 'Apr 2022', valueSize: 'text' as const, paragraph: 'BiomEdit established as an independent company in Fishers, Indiana.' },
+  {
+    year: '2026',
+    months: [
+      { month: null, items: ['USDA conditional licensure targeted for BE-101.'] },
+      { month: 'April', items: ["Two foundational US patents granted, protecting BE-101's core delivery mechanism and nanobody sequences."] },
+    ],
+  },
+  {
+    year: '2025',
+    months: [
+      { month: 'October', items: ['Bezos Earth Fund grant received (~$2M) for the Rumen Digital Twin.'] },
+      { month: 'July', items: ['Series B closed, raising $18.4M.'] },
+    ],
+  },
+  {
+    year: '2024',
+    months: [
+      { month: 'May', items: ['Diamond Animal Health chosen as process development and manufacturing partner for BE-101.'] },
+      { month: 'February', items: ['BiomEdit secures USDA conditional licensure pathway for BE-101.'] },
+    ],
+  },
+  {
+    year: '2023',
+    months: [
+      { month: 'December', items: ['Aaron Schacht named S&P Global Visionary CEO.'] },
+      { month: 'November', items: ['$4.5M grant awarded by the Bill & Melinda Gates Foundation for cattle methane reduction.'] },
+      { month: 'August', items: ['Research collaboration announced with the Indiana Biosciences Research Institute (IBRI).'] },
+      { month: 'February', items: ['Chairman and Board of Directors appointed.'] },
+      { month: 'January', items: ['$37M Series A financing closed.'] },
+    ],
+  },
+  {
+    year: '2022',
+    months: [
+      { month: 'December', items: ['S&P Global Animal Health names BiomEdit Best Start-Up in Animal Health.'] },
+      { month: 'April', items: ['BiomEdit established as an independent company in Fishers, Indiana.'] },
+    ],
+  },
 ];
 ---
 <FieldNotesLayout title="About" active="about">
@@ -83,15 +111,31 @@ const milestones = [
             </div>
           ))}
         </div>
-        <div class="values-cta"><CTALink href="/company">Meet the team</CTALink></div>
+        <div class="values-cta"><CTALink href="/company">Meet our team</CTALink></div>
       </div>
     </div>
   </section>
 
   <section class="timeline section-divider">
     <p class="overline">Since 2022</p>
-    <h2>Milestones on the way to licensure.</h2>
-    <FactList items={milestones} />
+    <h2>Milestones</h2>
+    <div class="milestones">
+      {milestones.map((yearGroup) => (
+        <div class="milestone-year-group">
+          <div class="milestone-year">{yearGroup.year}</div>
+          <div class="milestone-months">
+            {yearGroup.months.map((m) => (
+              <div class="milestone-month-group">
+                {m.month && <p class="milestone-month">{m.month}</p>}
+                <ul class="milestone-list">
+                  {m.items.map((text) => <li>{text}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
 
   <ModuleBlueText
@@ -116,12 +160,12 @@ const milestones = [
   .mission-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
   .mission-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
   .mission-heading { font-size: var(--text-h5); color: var(--text-primary); margin: 1rem 0 1.5rem; }
-  .statement-support { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 0; max-width: 640px; }
+  .statement-support { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0; max-width: 640px; }
 
   .vision-values { padding: 24px 0 4rem; }
   .vision-values-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: start; }
   .vision-heading { font-size: var(--text-h5); color: var(--text-primary); margin: 1rem 0 0; }
-  .values-intro { font-size: 15px; line-height: 1.75; color: var(--text-primary); margin: 1rem 0 2rem; max-width: 640px; }
+  .values-intro { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 1rem 0 2rem; max-width: 640px; }
   .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .value-card {
     background: var(--bg-secondary);
@@ -136,11 +180,31 @@ const milestones = [
     text-transform: uppercase;
     margin: 0 0 0.75rem;
   }
-  .value-card p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0; }
+  .value-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
   .values-cta { padding-top: 2rem; }
 
   .timeline { padding: 3.5rem 0 4rem; }
   .timeline h2 { font-size: var(--text-h5); margin: 0.5rem 0 2rem; }
+
+  .milestones { display: flex; flex-direction: column; text-align: left; }
+  .milestone-year-group {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--cool-400);
+  }
+  .milestone-year-group:first-child { border-top: 1px solid var(--cool-400); }
+  .milestone-year { font-size: var(--text-h4); font-weight: 700; line-height: 1.2; color: var(--text-primary); margin: 0 0 1rem; }
+  .milestone-months { display: flex; flex-direction: column; gap: 1.5rem; }
+  .milestone-month {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin: 0 0 0.5rem;
+  }
+  .milestone-list { margin: 0; padding: 0 0 0 1.1rem; max-width: 65ch; }
+  .milestone-list li { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 0.4rem; }
+  .milestone-list li:last-child { margin-bottom: 0; }
 
   @media (max-width: 860px) {
     .mission-grid { grid-template-columns: 1fr; gap: 1.5rem; }

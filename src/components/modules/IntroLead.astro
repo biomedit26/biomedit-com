@@ -80,9 +80,9 @@ const isSplit = !image && layout === 'split';
 
 <style>
   .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .intro-text .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
-  .intro-text h1, .intro-text h2 { font-size: var(--text-h3); line-height: 1.15; color: var(--text-primary); margin: 0 0 1.5rem; }
-  .intro-text p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.25rem; max-width: 520px; }
+  .intro-text .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+  .intro-text h1, .intro-text h2 { font-size: var(--text-h3); line-height: 1.2; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .intro-text p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1.25rem; max-width: 520px; }
   .intro-text p:last-of-type { margin-bottom: 0; }
   .intro-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
 
@@ -90,9 +90,9 @@ const isSplit = !image && layout === 'split';
   .intro-text-wide p { max-width: none; }
 
   .intro-split { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
-  .intro-split-heading .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
-  .intro-split-heading h1, .intro-split-heading h2 { font-size: var(--text-h3); line-height: 1.15; color: var(--text-primary); margin: 0; }
-  .intro-split-body p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1.25rem; }
+  .intro-split-heading .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+  .intro-split-heading h1, .intro-split-heading h2 { font-size: var(--text-h3); line-height: 1.2; color: var(--text-primary); margin: 0; }
+  .intro-split-body p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1.25rem; }
   .intro-split-body p:last-of-type { margin-bottom: 0; }
 
   .intro-lead.is-dark .intro-text .eyebrow { color: var(--color-teal-dark); }

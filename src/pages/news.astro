@@ -1,10 +1,218 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import IntroLead from '../components/modules/IntroLead.astro';
+import Badge from '../components/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('news')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
+  'press-release': 'Press Release',
+  article: 'Article',
+  event: 'Event',
+};
+const categoryColors: Record<'press-release' | 'article' | 'event', 'teal' | 'green' | 'amber'> = {
+  'press-release': 'teal',
+  article: 'green',
+  event: 'amber',
+};
 ---
-<SiteLayout title="News">
-  <div style="max-width:900px;margin:0 auto;padding:80px 40px;">
-    <p class="overline">Coming soon</p>
-    <h1>News</h1>
-    <p>Placeholder page — structure only. Content and graphics come next.</p>
+<FieldNotesLayout title="News" active="news">
+  <IntroLead
+    eyebrow="BiomEdit / News"
+    heading="Read the latest from BiomEdit."
+    paragraphs={[]}
+    variant="dark"
+  />
+
+  <section class="news-photo">
+    <img src="/images/AHNTI-Europe-Panel-Photo-BiomEdit-A-Schacht-2023-scaled-e1706262567768-2048x597.jpg" alt="Aaron Schacht speaking on an industry panel at AHNTI Europe" />
+  </section>
+
+  <div class="news-index">
+    <input type="radio" name="news-filter" id="filter-all" class="filter-input" checked />
+    <input type="radio" name="news-filter" id="filter-press" class="filter-input" />
+    <input type="radio" name="news-filter" id="filter-articles" class="filter-input" />
+    <input type="radio" name="news-filter" id="filter-events" class="filter-input" />
+    <input type="radio" name="news-view" id="view-grid" class="filter-input" checked />
+    <input type="radio" name="news-view" id="view-list" class="filter-input" />
+
+    <section class="news-toolbar">
+      <div class="filter-pills">
+        <label for="filter-all" class="filter-pill is-gray">Show all</label>
+        <label for="filter-press" class="filter-pill is-teal">Press Releases</label>
+        <label for="filter-articles" class="filter-pill is-green">Articles</label>
+        <label for="filter-events" class="filter-pill is-amber">Events</label>
+      </div>
+      <div class="view-toggle">
+        <label for="view-grid" class="view-toggle-btn" aria-label="Grid view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </label>
+        <label for="view-list" class="view-toggle-btn" aria-label="List view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </label>
+      </div>
+    </section>
+
+    <div class="news-results">
+      <section class="news-grid">
+        {posts.map((post) => (
+          <a href={`/news/${post.slug}`} class={`news-item news-card cat-${post.data.category}`}>
+            <div class="news-card-image">
+              <img src={post.data.image} alt={post.data.imageAlt} />
+            </div>
+            <div class="news-card-text">
+              <h3 class="news-card-title">{post.data.title}</h3>
+              <div class="news-card-meta">
+                <span class="news-card-date">
+                  {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
+                </span>
+                <Badge color={categoryColors[post.data.category]}>{categoryLabels[post.data.category]}</Badge>
+              </div>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      <section class="news-list">
+        {posts.map((post) => (
+          <a href={`/news/${post.slug}`} class={`news-item news-row cat-${post.data.category}`}>
+            <Badge color={categoryColors[post.data.category]}>{categoryLabels[post.data.category]}</Badge>
+            <span class="news-row-title">{post.data.title}</span>
+            <span class="news-row-date">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
+            </span>
+          </a>
+        ))}
+      </section>
+    </div>
   </div>
-</SiteLayout>
+</FieldNotesLayout>
+
+<style>
+  .news-photo {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  .news-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .news-toolbar {
+    padding: 2.5rem 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-input { position: absolute; opacity: 0; pointer-events: none; }
+  .filter-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+  .filter-pill {
+    padding: 0.5rem 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--border-color);
+    color: var(--text-secondary);
+    user-select: none;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .filter-pill.is-gray { color: var(--cool-600); border-color: var(--cool-400); }
+  .filter-pill.is-teal { color: var(--color-teal); border-color: var(--color-teal); }
+  .filter-pill.is-green { color: var(--color-green); border-color: var(--color-green); }
+  .filter-pill.is-amber { color: var(--color-amber); border-color: var(--color-amber); }
+
+  #filter-all:checked ~ .news-toolbar .filter-pill[for="filter-all"] { background: var(--cool-600); border-color: var(--cool-600); color: #FFFFFF; }
+  #filter-press:checked ~ .news-toolbar .filter-pill[for="filter-press"] { background: var(--color-teal); color: #FFFFFF; }
+  #filter-articles:checked ~ .news-toolbar .filter-pill[for="filter-articles"] { background: var(--color-green); color: #FFFFFF; }
+  #filter-events:checked ~ .news-toolbar .filter-pill[for="filter-events"] { background: var(--color-amber); color: #FFFFFF; }
+
+  .view-toggle { display: flex; gap: 8px; flex-shrink: 0; }
+  .view-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--border-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .view-toggle-btn svg { width: 17px; height: 17px; }
+  #view-grid:checked ~ .news-toolbar .view-toggle-btn[for="view-grid"],
+  #view-list:checked ~ .news-toolbar .view-toggle-btn[for="view-list"] {
+    background: var(--cool-600);
+    border-color: var(--cool-600);
+    color: #FFFFFF;
+  }
+
+  /* ---------- grid view (default) ---------- */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-bottom: 4.5rem;
+  }
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .news-card-text { padding: 20px 20px 18px; }
+  .news-card-title { font-size: 16px; font-weight: 700; line-height: 1.2; color: var(--text-primary); margin: 0 0 12px; }
+  .news-card:hover .news-card-title { color: var(--color-navy); }
+  .news-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .news-card-date { font-size: 13px; color: var(--text-tertiary); white-space: nowrap; }
+  .news-card-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  /* ---------- list view ---------- */
+  .news-list { display: flex; flex-direction: column; padding-bottom: 4.5rem; }
+  .news-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+  }
+  .news-row:first-child { border-top: 1px solid var(--border-color); }
+  .news-row-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .news-row:hover .news-row-title { color: var(--color-navy); }
+  .news-row-date { font-size: 13px; color: var(--text-tertiary); white-space: nowrap; }
+
+  /* list is hidden until "list view" is selected */
+  .news-list { display: none; }
+  #view-list:checked ~ .news-results .news-list { display: flex; }
+  #view-list:checked ~ .news-results .news-grid { display: none; }
+
+  /* category filtering — applies to whichever view is visible */
+  #filter-press:checked ~ .news-results .news-item:not(.cat-press-release) { display: none; }
+  #filter-articles:checked ~ .news-results .news-item:not(.cat-article) { display: none; }
+  #filter-events:checked ~ .news-results .news-item:not(.cat-event) { display: none; }
+
+  @media (max-width: 1100px) {
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .news-grid { grid-template-columns: 1fr; }
+    .news-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>

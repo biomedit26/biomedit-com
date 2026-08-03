@@ -8,15 +8,20 @@ interface Props {
   variant?: 'filled' | 'outline';
   shape?: 'default' | 'pill';
   href?: string;
+  // For external links — set to "_blank" to open in a new tab (rel is
+  // added automatically).
+  target?: string;
 }
 
-const { color = 'navy', variant = 'filled', shape = 'default', href } = Astro.props;
+const { color = 'navy', variant = 'filled', shape = 'default', href, target } = Astro.props;
 const Tag = href ? 'a' : 'button';
 
 const colorVar = `var(--color-${color})`;
 ---
 <Tag
   href={href}
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   class={`btn btn-${variant} btn-${color} ${shape === 'pill' ? 'btn-pill' : ''}`}
   style={
     variant === 'filled'

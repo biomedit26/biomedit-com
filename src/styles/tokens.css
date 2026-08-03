@@ -44,15 +44,34 @@
   --border-color: var(--cool-200);
   --link-color: var(--color-navy);
 
-  /* type scale — 1.333 ratio, base 16px */
+  /* type scale — 1.333 ratio, base 18px */
   --text-display: 90px;
   --text-h2: 67px;
   --text-h3: 51px;
   --text-h4: 38px;
   --text-h5: 28px;
   --text-h6: 21px;
-  --text-body: 16px;
+  --text-body: 18px;
+  --text-eyebrow: 16px;
   --text-caption: 12px;
+}
+
+/* Mobile type scale — headlines/subheads step down 1-2 levels so nothing
+   wraps awkwardly or runs off narrow screens; body copy drops to 16px and
+   eyebrows drop to 14px. Every heading, body-copy, and eyebrow rule
+   sitewide reads these tokens, so this is the single place that controls
+   the mobile scale-down. */
+@media (max-width: 700px) {
+  :root {
+    --text-display: 51px;
+    --text-h2: 38px;
+    --text-h3: 30px;
+    --text-h4: 24px;
+    --text-h5: 21px;
+    --text-h6: 18px;
+    --text-body: 16px;
+    --text-eyebrow: 14px;
+  }
 }
 
 /* dark theme — apply via <html data-theme="dark"> */
@@ -85,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 0.5em;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 h1 { font-size: var(--text-h2); }
 h2 { font-size: var(--text-h3); }
@@ -94,7 +113,7 @@ h4 { font-size: var(--text-h5); }
 h5 { font-size: var(--text-h6); }
 h6 { font-size: var(--text-body); text-transform: uppercase; letter-spacing: 0.04em; }
 
-p { font-size: var(--text-body); line-height: 1.75; color: var(--text-primary); margin: 0 0 1em; }
+p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1em; }
 
 a { color: var(--link-color); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -131,7 +150,7 @@ tr:last-child td { border-bottom: none; }
    =================================================================== */
 
 .overline {
-  font-size: 11px;
+  font-size: var(--text-eyebrow);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;

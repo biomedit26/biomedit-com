@@ -24,9 +24,9 @@ interface Props {
 const { heroVariant } = Astro.props;
 
 const pipelineRows = [
-  { category: 'Infectious Disease', codes: 'BE-118, BE-119' },
-  { category: 'Sustainability', codes: 'BE-017, BE-117' },
-  { category: 'Chronic Disease', codes: 'BE-105, BE-122' },
+  { category: 'Infectious Disease', codes: 'BE-118, BE-119', color: 'teal' as const },
+  { category: 'Sustainability', codes: 'BE-017, BE-117', color: 'green' as const },
+  { category: 'Chronic Disease', codes: 'BE-105, BE-122', color: 'amber' as const },
 ];
 
 const stats = [
@@ -42,24 +42,22 @@ const news = [
   { tone: 'orange' as const, tag: 'Event', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
 ];
 
-// No real logo assets available yet — simulated full-color marks (distinct
-// icon shape + brand color per partner) standing in until real logos are
-// dropped in, same "placeholder, swap later" convention used on the
-// Investors & Partners page's lockup section.
 const partners = [
-  { name: 'Elanco', color: 'navy' as const, shape: 'circle' as const },
-  { name: 'Ginkgo Bioworks', color: 'teal' as const, shape: 'hexagon' as const },
-  { name: 'Anterra Capital', color: 'orange' as const, shape: 'diamond' as const },
-  { name: 'Bill & Melinda Gates Foundation', color: 'green' as const, shape: 'square' as const },
-  { name: 'Bezos Earth Fund', color: 'amber' as const, shape: 'triangle' as const },
+  { name: 'Elanco', logo: '/images/investor-partner/elanco.svg' },
+  { name: 'Ginkgo Bioworks', logo: '/images/investor-partner/ginkgo-bioworks.svg' },
+  { name: 'Anterra Capital', logo: '/images/investor-partner/anterra-capital.svg' },
+  { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
+  { name: 'Viking', logo: '/images/investor-partner/viking.svg' },
+  { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg' },
+  { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png' },
+  { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png' },
+  { name: 'Ferment', logo: '/images/investor-partner/ferment.png' },
+  { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png' },
+  { name: 'USDA', logo: '/images/investor-partner/usda.svg', wide: true },
+  { name: 'NIH', logo: '/images/investor-partner/nih.png', wide: true },
 ];
-const partnerMarks = {
-  circle: '<circle cx="12" cy="12" r="9"/>',
-  hexagon: '<path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z"/>',
-  diamond: '<path d="M12 2.5l9.5 9.5-9.5 9.5-9.5-9.5z"/>',
-  square: '<rect x="3.5" y="3.5" width="17" height="17" rx="3"/>',
-  triangle: '<path d="M12 3l9.5 17H2.5z"/>',
-};
 ---
 <section class={`who-we-are ${heroVariant === 'video' ? 'no-divider' : ''}`}>
   {heroVariant === 'video' && (
@@ -119,25 +117,27 @@ const partnerMarks = {
 <div class={`pipeline-brief-wrap ${heroVariant === 'video' ? 'clears-watermark' : ''}`}>
   <FloatingCard>
     <div class="pipeline-brief-head">
-      <h2>From discovery to commercial launch</h2>
-      <CTALink href="/pipeline">View full pipeline</CTALink>
+      <h2>Pipeline</h2>
+      <CTALink href="/pipeline">View all programs</CTALink>
     </div>
 
     <div class="lead-program">
-      <div>
+      <div class="lead-program-text">
         <p class="eyebrow">Lead Program — Infectious Disease</p>
         <h3>BE-101 / Optavant&trade;</h3>
         <p class="lead-p">The first Programmable Veterinary Biologic to reach commercial launch, engineered to protect poultry from one of the industry's most costly diseases, necrotic enteritis, without systemic antibiotics.</p>
         <CTALink href="/pipeline">Learn about BE-101</CTALink>
         <p class="lead-highlight">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
       </div>
-      <img src="/images/boiler-hen-in-housing-single.jpg" alt="Pastured poultry raised without systemic antibiotics" />
+      <div class="lead-program-image">
+        <img src="/images/boiler-hen-in-housing-single.jpg" alt="Pastured poultry raised without systemic antibiotics" />
+      </div>
     </div>
 
     <div class="pipeline-rows">
       {pipelineRows.map((row) => (
         <div class="pipeline-row">
-          <span class="row-category">{row.category}</span>
+          <span class="row-category" style={`color:var(--color-${row.color});`}>{row.category}</span>
           <span class="row-codes">{row.codes}</span>
           <CTALink href="/pipeline">Details</CTALink>
         </div>
@@ -153,7 +153,7 @@ const partnerMarks = {
   paragraphs={['"One day there will be engineered microbial therapeutics in all species. BiomEdit is leading the way."']}
   attribution="Aaron Schacht, CEO, BiomEdit"
   photos={[
-    { src: '/images/85gb-photo-9Ltj6ikhBPY-unsplash.jpg', alt: 'BiomEdit team member with a pig on the farm', ratio: '3/2' },
+    { src: '/images/istockphoto-1305316712-1024x1024.jpg', alt: 'Veterinarian examining a cat with a stethoscope', ratio: '3/2' },
     { src: '/images/engin-akyurt-GBszMrOChZ8-unsplash.jpg', alt: 'Close-up of livestock', ratio: '2/3' },
   ]}
 />
@@ -166,15 +166,12 @@ const partnerMarks = {
       </div>
       <div class="investors-body">
         <p>BiomEdit is building the first Programmable Veterinary Biologics platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
-        <div class="logo-marquee">
-          <div class="logo-track">
-            {[...partners, ...partners].map((p, i) => (
-              <span class={`logo-chip ${i >= partners.length ? 'is-duplicate' : ''}`} aria-hidden={i >= partners.length ? 'true' : undefined}>
-                <svg viewBox="0 0 24 24" fill={`var(--color-${p.color})`} set:html={partnerMarks[p.shape]} />
-                <span class="logo-chip-name">{p.name}</span>
-              </span>
-            ))}
-          </div>
+        <div class="logo-grid">
+          {partners.map((p) => (
+            <div class={`logo-cell ${p.wide ? 'is-wide' : ''}`}>
+              <img src={p.logo} alt={p.name} loading="lazy" />
+            </div>
+          ))}
         </div>
         <CTALink href="/investors-partners">Partner with us</CTALink>
       </div>
@@ -188,7 +185,7 @@ const partnerMarks = {
 </section>
 
 <section class="stats-section">
-  <StatBlock stats={stats} />
+  <StatBlock stats={stats} align="center" divider={false} />
 </section>
 
 <section id="news" class="news-section">
@@ -260,7 +257,7 @@ const partnerMarks = {
     margin-bottom: 3rem;
   }
   .how-we-build-label h2 { font-size: var(--text-h5); margin: 0; }
-  .how-we-build-body p { font-size: 16px; line-height: 1.75; color: var(--text-primary); margin: 0 0 1rem; max-width: 680px; }
+  .how-we-build-body p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1rem; max-width: 680px; }
   .how-we-build-body p:last-child { margin-bottom: 0; }
 
   .how-we-build-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 2.5rem; }
@@ -284,7 +281,7 @@ const partnerMarks = {
   }
   .build-icon svg { width: 32px; height: 32px; }
   .build-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
-  .build-card p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0; }
+  .build-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
 
   .how-we-build-cta { padding-top: 0.5rem; }
 
@@ -306,30 +303,24 @@ const partnerMarks = {
   .investors-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
   .investors-label h2 { font-size: var(--text-h5); margin: 0; }
   .investors-body { min-width: 0; }
-  .investors-body p { font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1.75rem; max-width: 640px; }
-  .logo-marquee {
-    margin-bottom: 2rem;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
-    mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
-  }
-  .logo-track {
-    display: flex;
+  .investors-body p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0 0 1.75rem; max-width: 640px; }
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 28px 32px;
     align-items: center;
-    gap: 2.75rem;
-    width: max-content;
-    animation: logo-scroll 26s linear infinite;
+    margin-bottom: 2rem;
+    animation: logos-fade-in 0.8s ease both;
   }
-  .logo-marquee:hover .logo-track { animation-play-state: paused; }
-  .logo-chip { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .logo-chip svg { width: 26px; height: 26px; flex-shrink: 0; }
-  .logo-chip-name { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
-  @keyframes logo-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  .logo-cell { display: flex; align-items: center; justify-content: flex-start; height: 36px; }
+  .logo-cell.is-wide { grid-column: span 2; }
+  .logo-cell img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+  @keyframes logos-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .logo-track { animation: none; }
+    .logo-grid { animation: none; }
   }
 
   @media (max-width: 860px) {
@@ -351,14 +342,18 @@ const partnerMarks = {
   .lead-program {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 48px;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--cool-400);
-    margin-bottom: 0.5rem;
+    align-items: stretch;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid var(--color-navy);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
   }
-  .lead-program .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 0.5rem; }
-  .lead-program h3 { font-size: var(--text-h4); line-height: 1.15; margin: 0 0 1rem; }
-  .lead-p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 1rem; }
+  .lead-program-text { padding: 2.5rem 40px; }
+  .lead-program .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 0.5rem; }
+  .lead-program h3 { font-size: var(--text-h4); line-height: 1.2; margin: 0 0 1rem; }
+  .lead-p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0 0 1rem; }
   .lead-p:last-of-type { margin-bottom: 1.5rem; }
   .lead-highlight {
     margin: 1.5rem 0 0;
@@ -367,11 +362,11 @@ const partnerMarks = {
     border-left: 3px solid var(--color-teal);
     border-radius: 4px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: var(--text-body);
     line-height: 1.5;
     color: var(--text-primary);
   }
-  .lead-program img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+  .lead-program-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   .pipeline-rows { display: flex; flex-direction: column; }
   .pipeline-row {
@@ -383,12 +378,12 @@ const partnerMarks = {
     border-bottom: 1px solid var(--cool-400);
   }
   .pipeline-row:last-child { border-bottom: none; }
-  .row-category { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
-  .row-codes { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .row-category { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .row-codes { font-size: 16px; font-weight: 700; color: var(--text-primary); }
 
   .mission { text-align: center; padding: 1.5rem 40px 0; max-width: 680px; margin: 0 auto; }
   .mission h2 { font-size: var(--text-h4); margin: 0 0 1.5rem; }
-  .mission p { font-size: 16px; color: var(--text-primary); line-height: 1.75; margin: 0; }
+  .mission p { font-size: var(--text-body); color: var(--text-primary); line-height: 1.75; margin: 0; }
 
   .stats-section { padding: 3.5rem 40px; border-bottom: 1px solid var(--cool-500); }
 
@@ -410,6 +405,7 @@ const partnerMarks = {
 
   @media (max-width: 860px) {
     .lead-program { grid-template-columns: 1fr; }
+    .lead-program-image img { min-height: 220px; }
     .pipeline-row, .news-row { grid-template-columns: 1fr; gap: 0.5rem; }
   }
 </style>

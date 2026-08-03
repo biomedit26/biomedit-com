@@ -1,0 +1,183 @@
+---
+import FieldNotesLayout from '../../layouts/FieldNotesLayout.astro';
+import FullBleedBand from '../../components/modules/FullBleedBand.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
+  'press-release': 'Press Release',
+  article: 'Article',
+  event: 'Event',
+};
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+
+const eyebrow = post.data.source
+  ? `${post.data.source} · ${formattedDate}`
+  : `${categoryLabels[post.data.category]} · ${formattedDate}`;
+
+// Approximate read time from the raw markdown word count — standard 200 wpm.
+const wordCount = post.body.trim().split(/\s+/).length;
+const readTime = Math.max(1, Math.round(wordCount / 200));
+
+const pageUrl = `https://biomedit.com/news/${post.slug}/`;
+const shareText = post.data.title;
+const shareLinks = {
+  twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`,
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`,
+  linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`,
+  bluesky: `https://bsky.app/intent/compose?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`,
+};
+---
+<FieldNotesLayout title={post.data.title} active="news">
+  <div class="article-header">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{post.data.title}</h1>
+    <div class="article-meta">
+      <span class="read-time">{readTime} min read</span>
+      <div class="share-row">
+        <span class="share-label">Share</span>
+        <a class="share-icon" href={shareLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Share on X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="share-icon" href={shareLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21.5v-7.75h2.6l.39-3.02h-3v-1.93c0-.87.24-1.47 1.5-1.47h1.6V4.63c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.42-3.9 4.02v2.24H7.75v3.02h2.6v7.75z"/></svg>
+        </a>
+        <a class="share-icon" href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56v12h3.38zM5.25 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20.5v-6.7c0-3.6-1.92-5.27-4.48-5.27-2.07 0-2.98 1.14-3.49 1.94V8.5H9.16c.04.96 0 12 0 12h3.37v-6.7c0-.36.03-.72.13-.98.29-.72.95-1.47 2.06-1.47 1.45 0 2.03 1.1 2.03 2.72v6.43z"/></svg>
+        </a>
+        <a class="share-icon" href={shareLinks.bluesky} target="_blank" rel="noopener noreferrer" aria-label="Share on Bluesky">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.44C10.87 8.2 7.87 4.2 5.1 2.3 2.45.5 1.46.85 1.46 3.85c0 .6.36 5.03.58 5.75.75 2.44 3.45 3.27 5.93 3 .13-.02.26-.03.4-.05-2.13.7-4.02 2.4-1.7 4.98 2.65 2.9 3.85-.65 4.4-2.3.55 1.65 1.35 5.06 4.32 2.3 2.22-2.5.43-4.28-1.7-4.98.13.02.27.03.4.05 2.48.27 5.18-.56 5.93-3 .22-.72.58-5.15.58-5.75 0-3-.99-3.35-3.64-1.55C16.13 4.2 13.13 8.2 12 10.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="article-lead">
+    <div class="article-lead-image">
+      <img src={post.data.image} alt={post.data.imageAlt} />
+    </div>
+    <div class="article-lead-text-wrap">
+      <p class="article-lead-text">{post.data.lead}</p>
+    </div>
+  </section>
+
+  <section class="article-body">
+    <Content />
+  </section>
+
+  <section class="article-cta">
+    <FullBleedBand background="var(--navy-deep-bg)">
+      <div class="article-cta-inner">
+        <p class="eyebrow">Discover more</p>
+        <h2>Join the conversation on LinkedIn</h2>
+        <Button color="amber" variant="filled" href="https://www.linkedin.com/company/biomedit" target="_blank">View now</Button>
+      </div>
+    </FullBleedBand>
+  </section>
+</FieldNotesLayout>
+
+<style>
+  .article-header { padding: 3rem 0 0; }
+  .article-header .eyebrow {
+    font-size: var(--text-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin: 0 0 1rem;
+  }
+  .article-header h1 { font-size: var(--text-h3); line-height: 1.2; margin: 0 0 1.5rem; max-width: 900px; }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .read-time { font-size: 14px; color: var(--text-secondary); }
+  .share-row { display: flex; align-items: center; gap: 12px; }
+  .share-label { font-size: 14px; color: var(--text-secondary); margin-right: 4px; }
+  .share-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .share-icon svg { width: 15px; height: 15px; }
+  .share-icon:hover { background: var(--color-navy); color: #FFFFFF; }
+
+  .article-lead {
+    background: var(--cool-800);
+    border-radius: 6px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: stretch;
+    margin: 2.5rem 0;
+  }
+  .article-lead-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .article-lead-text-wrap { padding: 2.5rem 40px; display: flex; align-items: center; }
+  .article-lead-text {
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.55;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .article-body { max-width: 720px; padding: 0 0 4.5rem; }
+  .article-body :global(p) { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .article-body :global(h2) { font-size: var(--text-h6); margin: 2rem 0 1rem; }
+  .article-body :global(h3) { font-size: 17px; margin: 1.75rem 0 1rem; }
+  .article-body :global(ul) { margin: 0 0 1.5rem; padding-left: 1.25rem; }
+  .article-body :global(li) { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 0.6rem; }
+  .article-body :global(a) { color: var(--color-navy); text-decoration: underline; text-underline-offset: 2px; }
+  .article-body :global(strong) { font-weight: 700; }
+  .article-body :global(blockquote) {
+    margin: 1.5rem 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 3px solid var(--color-teal);
+    font-style: italic;
+  }
+  .article-body :global(hr) { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
+
+  .article-cta :global(.full-bleed-inner) { text-align: center; }
+  .article-cta-inner { max-width: 560px; margin: 0 auto; }
+  .article-cta .eyebrow {
+    font-size: var(--text-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal-dark);
+    margin: 0 0 1rem;
+  }
+  .article-cta h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.75rem; }
+
+  @media (max-width: 860px) {
+    .article-lead { grid-template-columns: 1fr; }
+    .article-lead-image img { aspect-ratio: 3 / 2; }
+  }
+</style>

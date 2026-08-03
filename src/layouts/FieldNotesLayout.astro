@@ -11,7 +11,7 @@ import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  active?: 'home' | 'about' | 'science' | 'pipeline' | 'products' | 'investors';
+  active?: 'home' | 'about' | 'science' | 'pipeline' | 'products' | 'investors' | 'news';
 }
 const { title, active } = Astro.props;
 
@@ -21,6 +21,7 @@ const nav = [
   { label: 'Pipeline', href: '/pipeline', key: 'pipeline', enabled: true },
   { label: 'Products', href: '/products', key: 'products', enabled: true },
   { label: 'Investors & Partners', href: '/investors-partners', key: 'investors', enabled: true },
+  { label: 'News', href: '/news', key: 'news', enabled: true },
 ];
 
 const year = new Date().getFullYear();

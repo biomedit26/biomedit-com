@@ -42,9 +42,9 @@ import Button from '../components/Button.astro';
   .hero :global(.full-bleed-inner) { text-align: center; }
   .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
   .hero .eyebrow {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--color-teal-dark); margin: 0 0 1.5rem;
   }
-  .hero h1 { font-size: var(--text-h2); line-height: 1.1; margin: 0 0 1.5rem; color: #FFFFFF; }
+  .hero h1 { font-size: var(--text-h2); line-height: 1.2; margin: 0 0 1.5rem; color: #FFFFFF; }
   .hero .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--cool-300); margin: 0 0 2rem; }
 </style>

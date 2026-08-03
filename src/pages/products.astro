@@ -4,6 +4,7 @@ import IntroLead from '../components/modules/IntroLead.astro';
 import Module11 from '../components/modules/Module11.astro';
 import Module21 from '../components/modules/Module21.astro';
 import ModuleCards2 from '../components/modules/ModuleCards2.astro';
+import ModuleSection from '../components/modules/ModuleSection.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import FactList from '../components/modules/FactList.astro';
@@ -11,10 +12,10 @@ import StatBlock from '../components/StatBlock.astro';
 import CTALink from '../components/CTALink.astro';
 
 const flockFacts = [
-  { value: 'Performance', color: 'navy' as const, valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
-  { value: 'Compliance', color: 'teal' as const, valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
-  { value: 'Mechanism', color: 'orange' as const, valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so birds spend less energy on immune response and more on growth." },
-  { value: 'Outcomes', color: 'green' as const, valueSize: 'text' as const, paragraph: 'Improved performance and healthier birds.' },
+  { value: 'Performance', valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
+  { value: 'Compliance', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
+  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so birds spend less energy on immune response and more on growth." },
+  { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Improved performance and healthier birds.' },
 ];
 ---
 <FieldNotesLayout title="Products" active="products">
@@ -32,12 +33,27 @@ const flockFacts = [
     layout="split"
   />
 
-  <ModuleCards2
-    lead
-    noDivider
-    cardLeft={{ value: '$6B', paragraphs: ['Necrotic enteritis costs the poultry industry an estimated $6B annually.'] }}
-    cardRight={{ paragraphs: ['The strain is engineered to produce and secrete nanobodies that neutralize the C. perfringens toxins responsible for necrotic enteritis, delivered directly in the gut.'] }}
-  />
+  <ModuleSection noDivider>
+    <div class="problem-solution">
+      <div class="problem-card">
+        <p class="card-eyebrow">The problem</p>
+        <div class="problem-stat">$6B</div>
+        <p>Necrotic enteritis costs the poultry industry an estimated $6B annually.</p>
+      </div>
+      <div class="solution-card">
+        <p class="card-eyebrow is-teal">The solution</p>
+        <p class="solution-lead">BE-101 (Optavant&trade;) protects broilers from necrotic enteritis without systemic antibiotics.</p>
+        <div class="solution-highlight">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+          <p>Now available to U.S. producers under USDA conditional license.</p>
+        </div>
+        <div class="solution-fact">
+          <span class="fact-number">1st</span>
+          <p>The first engineered microbial therapeutic to achieve licensure, in any species, geography, or regulatory pathway.</p>
+        </div>
+      </div>
+    </div>
+  </ModuleSection>
 
   <Module11
     heading="What it means for your flock"
@@ -63,12 +79,14 @@ const flockFacts = [
     image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by BE-101' }}
   >
     <StatBlock
+      align="center"
+      divider={false}
       stats={[
         { value: '+76g', label: 'Weight gain vs. antibiotic (p = 0.025)' },
         { value: '+81g', label: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
       ]}
     />
-    <CTALink href="/science">Read the full study</CTALink>
+    <div class="evidence-cta"><CTALink href="/science">Read the full study</CTALink></div>
   </Module11>
 
   <!-- NEW quote, sourced from Aaron's public remarks in BiomEdit's Series B
@@ -78,11 +96,12 @@ const flockFacts = [
        since the original announcement. -->
   <ModulePlainText
     quote
+    quoteSize="lg"
     noDivider
     paragraphs={['&ldquo;This is an exciting chapter for BiomEdit. We are bringing a transformational poultry solution to U.S. broiler producers and pushing the frontiers of sustainable livestock production.&rdquo;']}
     attribution="Aaron Schacht, CEO, BiomEdit"
     quoteFont="sans"
-    attributionSize="md"
+    attributionSize="lg"
   />
 
   <Module11 variant="intro" heading="Other products in our pipeline">
@@ -98,6 +117,7 @@ const flockFacts = [
         paragraphs: ['Oral biologic for chronic gastrointestinal disease.'],
       }}
     />
+    <CTALink href="/pipeline">Explore our pipeline</CTALink>
   </Module11>
 
   <ModuleBlueText
@@ -117,4 +137,61 @@ const flockFacts = [
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
+
+  .evidence-cta { margin-top: 3rem; }
+
+  .problem-solution { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; padding: 0 0 4rem; }
+
+  .card-eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-navy-dark); margin: 0 0 1rem; }
+  .card-eyebrow.is-teal { color: var(--color-teal); }
+
+  .problem-card {
+    background: var(--color-navy);
+    border-radius: 6px;
+    padding: 2.5rem 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .problem-stat { font-size: var(--text-h3); font-weight: 700; line-height: 1; color: #FFFFFF; margin: 0 0 1rem; }
+  .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0; }
+
+  .solution-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2.5rem 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .solution-lead { font-size: 19px; font-weight: 500; line-height: 1.55; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .solution-highlight, .solution-fact { display: flex; align-items: flex-start; gap: 12px; }
+  .solution-highlight {
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 0 0 1.25rem;
+  }
+  .solution-highlight svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--color-green); }
+  .solution-highlight p { font-weight: 700; color: var(--text-primary); margin: 0; }
+  .fact-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .solution-fact p { color: var(--text-secondary); margin: 0; }
+
+  @media (max-width: 860px) {
+    .problem-solution { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
 </style>
