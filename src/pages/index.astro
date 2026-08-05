@@ -1,79 +1,44 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-const notes = (await getCollection('notes')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
-
-// Add an entry here each time you drop a new deliverable into public/roughs.
-const roughs = [
-  {
-    title: 'Identity Rough v0.1',
-    description: 'Typographic direction comparison — Space Grotesk / Fraunces / Archivo Black',
-    href: '/roughs/biomedit-identity-rough.html',
-  },
-];
-
-const sitePreview = [
-  { title: 'Home', href: '/home' },
-  { title: 'Home (video hero)', href: '/home-video' },
-  { title: 'Pipeline', href: '/pipeline' },
-  { title: 'Investors & Partners', href: '/investors-partners' },
-];
-
-const contentModules = [
-  {
-    title: 'Content Modules',
-    description: 'Reusable homepage section modules — cards, dark panels, plain text — with sample copy.',
-    href: '/content-modules',
-  },
-];
+// BiomEdit marketing homepage — built from the Field Notes concept
+// (design_handoff_field_notes/README.md). Lives at the site root; the
+// old /home route now redirects here (see public/_redirects).
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
+import FullBleedBand from '../components/modules/FullBleedBand.astro';
+import Button from '../components/Button.astro';
 ---
-<Layout title="BiomEdit — Starbriq workspace">
-  <h1>BiomEdit</h1>
-  <p style="color:#565660;">Working space for brand identity, research, and design deliverables.</p>
+<FieldNotesLayout title="Home" active="home">
+  <section class="hero">
+    <FullBleedBand
+      background="var(--cool-800)"
+      image="/images/flowing-e-background.svg"
+      imageFit="width"
+      blendMode="screen"
+      imageFilter="grayscale(1) sepia(1) hue-rotate(200deg) saturate(2.5)"
+      imageOpacity={0.08}
+    >
+      <div class="hero-inner">
+        <p class="eyebrow">Programmable Veterinary Biologics&trade;</p>
+        <h1>Engineering a new chapter in animal health.</h1>
+        <p class="lead">Our deep scientific, commercial, and regulatory expertise help solve unmet needs in animal health through our new biotechnology platform.</p>
+        <Button color="amber" variant="filled" href="#">
+          Read more
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </Button>
+      </div>
+    </FullBleedBand>
+  </section>
 
-  <h2 style="margin-top:48px;">Roughs &amp; deliverables</h2>
-  <ul style="list-style:none; padding:0;">
-    {roughs.map((r) => (
-      <li style="border:1px solid #E4E3DD; border-radius:6px; padding:16px 20px; margin-bottom:12px;">
-        <a href={r.href} style="font-weight:600; color:#2B3682; text-decoration:none;">{r.title}</a>
-        <p style="margin:6px 0 0; font-size:14px; color:#565660;">{r.description}</p>
-      </li>
-    ))}
-  </ul>
+  <FieldNotesHomeBody heroVariant="alt" />
+</FieldNotesLayout>
 
-  <h2 style="margin-top:48px;">Site preview</h2>
-  <ul style="list-style:none; padding:0;">
-    {sitePreview.map((s) => (
-      <li style="border:1px solid #E4E3DD; border-radius:6px; padding:16px 20px; margin-bottom:12px;">
-        <a href={s.href} target="_blank" rel="noopener" style="font-weight:600; color:#2B3682; text-decoration:none;">{s.title}</a>
-      </li>
-    ))}
-  </ul>
-
-  <h2 style="margin-top:48px;">Content modules</h2>
-  <ul style="list-style:none; padding:0;">
-    {contentModules.map((m) => (
-      <li style="border:1px solid #E4E3DD; border-radius:6px; padding:16px 20px; margin-bottom:12px;">
-        <a href={m.href} style="font-weight:600; color:#2B3682; text-decoration:none;">{m.title}</a>
-        <p style="margin:6px 0 0; font-size:14px; color:#565660;">{m.description}</p>
-      </li>
-    ))}
-  </ul>
-
-  <h2 style="margin-top:48px;">Recent notes</h2>
-  <ul style="list-style:none; padding:0;">
-    {notes.map((note) => (
-      <li style="border-bottom:1px solid #E4E3DD; padding:12px 0;">
-        <a href={`/notes/${note.slug}`} style="font-weight:600; color:#2B3682; text-decoration:none;">
-          {note.data.title}
-        </a>
-        <p style="margin:4px 0 0; font-size:13px; color:#8C8B80;">
-          {note.data.date.toDateString()} — {note.data.summary}
-        </p>
-      </li>
-    ))}
-  </ul>
-</Layout>
+<style>
+  .hero :global(.full-bleed-inner) { text-align: center; }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .hero .eyebrow {
+    font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-teal-dark); margin: 0 0 1.5rem;
+  }
+  .hero h1 { font-size: var(--text-h2); line-height: 1.2; margin: 0 0 1.5rem; color: #FFFFFF; }
+  .hero .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--cool-300); margin: 0 0 2rem; }
+</style>
