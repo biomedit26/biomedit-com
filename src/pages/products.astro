@@ -23,14 +23,12 @@ const flockFacts = [
        Phase 2 addition to this section — not built yet. -->
   <IntroLead
     eyebrow="BiomEdit / Products"
-    heading="BE-101 / Optavant™ — The first of any kind."
+    heading="BE-101 / Optavant<sup>&trade;</sup> — The first of any kind."
     paragraphs={[
-      'BE-101 (Optavant&trade;) protects broilers from necrotic enteritis without systemic antibiotics. Now available to U.S. producers under USDA conditional license.',
-      'It is the first engineered microbial therapeutic to achieve licensure, in any species, any geography, any regulatory pathway.',
-      "BE-101 is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases, without systemic antibiotics. It&rsquo;s the first product from our Programmable Veterinary Biologics&trade; platform.",
+      "BE-101 (Optavant&trade;) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It&rsquo;s the first product from our Programmable Veterinary Biologics&trade; platform.",
+      '<strong>Now available to U.S. producers under USDA conditional license.</strong>',
     ]}
     variant="dark"
-    layout="split"
   />
 
   <ModuleSection noDivider>
@@ -86,7 +84,7 @@ const flockFacts = [
         { value: '+81g', label: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
       ]}
     />
-    <div class="evidence-cta"><CTALink href="/science">Read the full study</CTALink></div>
+    <div class="evidence-cta"><CTALink href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank">Read the full study</CTALink></div>
   </Module11>
 
   <!-- NEW quote, sourced from Aaron's public remarks in BiomEdit's Series B
@@ -120,6 +118,10 @@ const flockFacts = [
     <CTALink href="/pipeline">Explore our pipeline</CTALink>
   </Module11>
 
+  <section class="legal-disclaimer section-divider">
+    <p>The subject product is licensed conditionally by USDA for the passive immunity of healthy chicks against Clostridium perfringens. Conditional licensure permits commercialization while additional effectiveness data continue to be developed in accordance with USDA requirements. Product use is limited to the approved label and indications. The subject product is covered by one or more U.S. patents, including U.S. Patent Nos. 12,599,637 and 12,427,174. Additional U.S. and foreign patents may be pending. BiomEdit&trade; and Optavant&trade; are trademarks of BiomEdit, Inc.</p>
+  </section>
+
   <ModuleBlueText
     heading="Curious what&rsquo;s next after BE-101?"
     ctaLabel="View our full pipeline"
@@ -137,6 +139,9 @@ const flockFacts = [
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
+
+  .legal-disclaimer { padding: 2rem 0 3rem; }
+  .legal-disclaimer p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
 
   .evidence-cta { margin-top: 3rem; }
 

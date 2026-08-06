@@ -6,23 +6,23 @@ import CTALink from '../components/CTALink.astro';
 
 const differentiators = [
   {
-    title: 'Proprietary strain engineering platform',
-    description: 'BiomEdit selects, screens, and engineers beneficial bacterial strains to produce and deliver targeted therapeutic proteins directly in the gut &mdash; no systemic antibiotic required. The strain is the foundation of every product we build.',
+    title: 'Proprietary strain engineering',
+    description: "We start every product from the same foundation, a beneficial bacterial strain we select, screen, and engineer to carry a specific payload, without relying on antibiotics alone. Strain engineering isn't a step in our process, it's the foundation we build everything else on. The strain is the foundation of every product we build.",
     color: 'teal' as const,
   },
   {
     title: 'High-throughput sequencing and AI/ML',
-    description: 'Used to screen and engineer beneficial bacteria rapidly and at scale, accelerating candidate selection and reducing time, cost, and animal burden from discovery to market.',
+    description: 'We identify and optimize candidate strains rapidly and at scale, cutting time, cost, and animal burden from discovery to market.',
     color: 'navy' as const,
   },
   {
     title: 'Programmable architecture',
-    description: 'The same strain engineering platform can be adapted for multiple therapeutic payloads, targets, species, and disease areas, making every new product faster and more defensible than the last.',
+    description: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, cattle, swine, dogs, and cats, so each new product builds on proven ground instead of starting over.',
     color: 'orange' as const,
   },
   {
     title: 'Durable IP across the full stack',
-    description: "Each product generates protected intellectual property across strain, delivery mechanism, indication, and process, compounding the platform's competitive advantage over time.",
+    description: "We generate protected intellectual property with every product across strain, delivery mechanism, indication, and process, compounding the platform's competitive advantage over time.",
     color: 'green' as const,
   },
 ];
@@ -31,21 +31,22 @@ const pillars = [
   {
     heading: 'We built it first',
     paragraphs: [
-      "At BiomEdit, we're the first company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, built on our proprietary strain engineering platform. This is a milestone no other company has reached in any species, any geography, or any regulatory pathway.",
-      'BE-101, commercially known as Optavant&trade;, is proof that the engineered microbial therapeutics we build are real, licensed, and coming to market. Our expanding pipeline spans infectious disease, chronic disease, and sustainability challenges across poultry, livestock, and companion animals.',
+      'BiomEdit is the first company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, built on our proprietary strain engineering platform. This is a milestone no other company has reached in any species, any geography, or any regulatory pathway.',
+      'BE-101, commercially known as Optavant&trade;, is proof that the engineered microbial therapeutics we build are real, licensed, and coming to market.',
     ],
   },
   {
     heading: 'We advance using the latest AI/ML technology',
     paragraphs: [
-      "Our AI/ML infrastructure works hand-in-hand with our strain engineering platform, accelerating candidate selection and reducing the time, cost, and animal burden of bringing precision biologics to market. We've built, and continue to advance, AI capabilities that move the industry from reactive trial-and-error approaches toward predictive, programmable animal health. This approach has been a critical factor in earning grant support, most notably from the Bezos Earth Fund and the Gates Foundation.",
+      'Our AI/ML infrastructure works hand-in-hand with our strain engineering platform, accelerating candidate selection and reducing the time, cost, and animal burden of bringing precision biologics to market.',
+      'Our AI capabilities move the industry from reactive &ldquo;trial and error&rdquo; approaches toward predictive, programmable animal health. This approach has been a critical factor in earning grant support, most notably from Bezos Earth Fund and Gates Foundation.',
     ],
   },
   {
-    heading: 'We are powered by a proprietary gut microbiome library',
+    heading: "We're powered by a proprietary gut microbiome library",
     paragraphs: [
       'Our proprietary strain library, built over years of sampling and characterization, gives BiomEdit access to novel strains and a deeper understanding of microbiome biology that others cannot easily replicate.',
-      'Developed specifically for animal health, it enables our team to screen, identify, and engineer high-potential microbial candidates from a foundation built for precision targeting, without systemic antibiotics &mdash; including some designed as antibiotic alternatives.',
+      'Developed specifically for animal health, it enables our team to screen, identify, and engineer high-potential microbial candidates from a foundation built for precision targeting, including some designed as antibiotic alternatives.',
     ],
   },
 ];
@@ -60,6 +61,7 @@ const pillars = [
 
   <section class="pvb-definition section-divider">
     <h2>Programmable Veterinary Biologics: our new platform</h2>
+    <p class="pvb-intro">Programmable Veterinary Biologics is our unique platform for animal health, built on a proprietary strain engineering process that turns beneficial bacteria into programmable, targeted delivery systems. Rather than the passive protection of traditional probiotics or the systemic, host-dependent response of vaccines, we engineer strains to produce and deliver targeted therapeutic payloads, such as nanobodies, peptides, and enzymes, directly at the site of disease.</p>
 
     <div class="diff-grid">
       {differentiators.map((d) => (
@@ -84,7 +86,7 @@ const pillars = [
         </div>
       ))}
     </div>
-    <div class="pillars-cta"><CTALink href="/science">Explore our science</CTALink></div>
+    <div class="pillars-cta"><CTALink href="/pipeline">Explore our pipeline</CTALink></div>
   </section>
 
   <section class="platform-action">
@@ -94,7 +96,7 @@ const pillars = [
         <h3>Proof in the pipeline.</h3>
         <p>BE-101, commercially known as Optavant&trade;, is the first Programmable Veterinary Biologic to receive conditional USDA licensure &mdash; developed to protect poultry from sub-clinical necrotic enteritis without relying on systemic antibiotics. It&rsquo;s proof that the platform works, not just in the lab, but at commercial scale.</p>
         <div class="platform-action-ctas">
-          <CTALink href="#">Read the research</CTALink>
+          <CTALink href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank">Read the research</CTALink>
         </div>
       </div>
       <img src="/images/chicken-direct-blur.jpg" alt="Pastured poultry raised without systemic antibiotics" />
@@ -121,7 +123,8 @@ const pillars = [
 
   /* ---------- PVB definition ---------- */
   .pvb-definition { padding: 1.5rem 0 4rem; }
-  .pvb-definition h2 { font-size: var(--text-h5); margin: 0 0 2rem; max-width: 760px; }
+  .pvb-definition h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; max-width: 760px; }
+  .pvb-definition .pvb-intro { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 2rem; max-width: 760px; }
 
   .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .diff-card {
@@ -140,7 +143,7 @@ const pillars = [
   .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
   .pillar-heading-row { display: flex; align-items: center; gap: 16px; margin: 0 0 1rem; }
   .pillar-number { font-size: var(--text-h3); font-weight: 700; color: var(--text-primary); line-height: 1; }
-  .pillar h3 { font-size: 17px; color: var(--text-primary); margin: 0; }
+  .pillar h3 { font-size: var(--text-h6); color: var(--text-primary); margin: 0; }
   .pillar p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1rem; }
   .pillar p:last-child { margin-bottom: 0; }
   .pillars-cta { padding-top: 2.5rem; }

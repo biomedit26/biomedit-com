@@ -1,6 +1,7 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
+import Module11 from '../components/modules/Module11.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import PipelineTracker from '../components/modules/PipelineTracker.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
@@ -23,7 +24,7 @@ const candidates = [
     id: 'BE-101 / Optavant™',
     category: 'teal' as const,
     species: 'Poultry',
-    speciesKey: 'poultry',
+    speciesKey: 'poultry' as const,
     mechanism: 'Nanobody',
     stage: 5,
     stageNote: 'Regulatory / Launch Readiness. Conditional USDA licensure. Commercial launch Q4 2026.',
@@ -35,7 +36,7 @@ const candidates = [
     id: 'BE-118',
     category: 'teal' as const,
     species: 'Poultry',
-    speciesKey: 'poultry',
+    speciesKey: 'poultry' as const,
     mechanism: 'Nanobody',
     stage: 2,
     stageNote: 'Candidate Optimization / In Vivo Study',
@@ -45,17 +46,17 @@ const candidates = [
     id: 'BE-119',
     category: 'teal' as const,
     species: 'Swine',
-    speciesKey: 'swine',
+    speciesKey: 'swine' as const,
     mechanism: 'Enzyme',
     stage: 2,
     stageNote: 'Candidate Optimization / In Vivo Study',
-    description: 'A probiotic vectored enzyme therapeutic that reduces E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics alone.',
+    description: 'A probiotic vectored enzyme therapeutic that aims to reduce E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.',
   },
   {
     id: 'BE-017',
     category: 'green' as const,
     species: 'Cattle',
-    speciesKey: 'cattle',
+    speciesKey: 'cattle' as const,
     mechanism: 'Microbial Consortia',
     stage: 2,
     stageNote: 'Candidate Optimization',
@@ -65,7 +66,7 @@ const candidates = [
     id: 'BE-117',
     category: 'green' as const,
     species: 'Cattle',
-    speciesKey: 'cattle',
+    speciesKey: 'cattle' as const,
     mechanism: 'Nanobody & Peptide',
     stage: 2,
     stageNote: 'Candidate Optimization',
@@ -75,7 +76,7 @@ const candidates = [
     id: 'BE-105',
     category: 'amber' as const,
     species: 'Feline',
-    speciesKey: 'feline',
+    speciesKey: 'feline' as const,
     mechanism: 'Peptide',
     stage: 2,
     stageNote: 'Candidate Optimization / In Vivo Study',
@@ -85,7 +86,7 @@ const candidates = [
     id: 'BE-122',
     category: 'amber' as const,
     species: 'Canine',
-    speciesKey: 'canine',
+    speciesKey: 'canine' as const,
     mechanism: 'Nanobody',
     stage: 1,
     stageNote: 'Discovery / Design',
@@ -99,17 +100,26 @@ const candidates = [
     heading="Making biology programmable for animal health."
     paragraphs={[
       "We&rsquo;re innovators. We look for measurable gaps in animal health and build the programmable biologics to close them.",
-      'Every program starts with strain engineering, the foundation of our proprietary platform, and spans infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and we draw on our proprietary microbiome library to identify high-potential strains as starting points.',
-      'The result: novel veterinary biologics that address important animal health challenges in a safe, sustainable and economically relevant manner &mdash; healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.',
     ]}
     variant="dark"
-    layout="split"
   >
     <div class="header-ctas">
       <Button color="amber" variant="filled" href="/pipeline">Explore BE-101</Button>
       <CTALink href="#" tone="onDark">Explore our platform</CTALink>
     </div>
   </IntroLead>
+
+  <div class="strain-module">
+    <Module11
+      heading="Strain engineering: where every program starts."
+      columns="1fr 2fr"
+      paragraphs={[
+        'This is the foundation of our proprietary platform, and focuses on infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and draw on our proprietary microbiome library to identify high-potential strains as starting points.',
+        'The result: novel veterinary biologics built to deliver healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.',
+      ]}
+      image={{ src: '/images/umar-kashif-V8hNNFPV27M-unsplash.jpg', alt: 'Close-up of a shaggy Highland cattle calf' }}
+    />
+  </div>
 
   <section class="spotlight-section">
     <div class="spotlight">
@@ -119,14 +129,14 @@ const candidates = [
         <div class="spotlight-facts">
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
-            <p>First programmable veterinary biologic to reach commercial launch (Q4 2026)</p>
+            <p>First Programmable Veterinary Biologic&trade; to reach commercial launch (Q4 2026)</p>
           </div>
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
-            <p>First engineered microbial therapeutic ever to achieve licensure &mdash; in any species, in any geography, in any regulatory path</p>
+            <p>First engineered microbial therapeutic ever to achieve licensure: in any species, in any geography, in any regulatory path</p>
           </div>
         </div>
-        <CTALink href="#">Learn about BE-101</CTALink>
+        <CTALink href="/products">Learn about BE-101</CTALink>
       </div>
       <img src="/images/chicken-heads-blur-bg.jpg" alt="Close-up of broiler chickens" />
     </div>
@@ -136,7 +146,7 @@ const candidates = [
     <ModulePlainText
       heading="Three focus areas. One BiomEdit platform."
       paragraphs={[
-        'Our programmable veterinary biologics platform spans <strong>infectious disease</strong>, <strong>sustainability</strong>, and <strong>chronic disease</strong> therapeutics. We engineer bacteria to deliver nanobodies, peptides, or enzymes (like the strains behind BE-101), or work together as a microbial consortium. One platform, built to pivot based on what we&rsquo;re solving for.',
+        'Our programmable veterinary biologics platform spans <strong>infectious disease</strong>, <strong>sustainability</strong>, and <strong>chronic disease</strong> therapeutics. We engineer bacteria to deliver nanobodies (like the strains behind BE-101), peptides, or enzymes, or work together as a microbial consortium. One platform, built to pivot based on what we&rsquo;re solving for.',
       ]}
     />
   </div>
@@ -151,10 +161,8 @@ const candidates = [
 
   <ModuleBlueText
     heading="Interested in what&rsquo;s next for BiomEdit?"
-    ctaLabel="Explore our platform"
-    ctaHref="/"
-    secondaryCtaLabel="Partner with us"
-    secondaryCtaHref="/investors-partners"
+    ctaLabel="Partner with us"
+    ctaHref="/investors-partners"
     noDivider
     image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
     zoom={1.05}
@@ -165,7 +173,11 @@ const candidates = [
 </FieldNotesLayout>
 
 <style>
-  .header-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 0.25rem; }
+  .header-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 1.5rem; }
+
+  .strain-module { margin-top: 3.5rem; }
+  .strain-module :global(.grid) { align-items: center; }
+  .strain-module :global(.image-col) { order: -1; }
 
   .focus-text :global(.text-wrap) { padding-bottom: 2rem; }
 

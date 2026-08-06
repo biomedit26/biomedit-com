@@ -24,9 +24,17 @@ interface Props {
 const { heroVariant } = Astro.props;
 
 const pipelineRows = [
-  { category: 'Infectious Disease', codes: 'BE-118, BE-119', color: 'teal' as const },
-  { category: 'Sustainability', codes: 'BE-017, BE-117', color: 'green' as const },
-  { category: 'Chronic Disease', codes: 'BE-105, BE-122', color: 'amber' as const },
+  {
+    category: 'Infectious Disease',
+    codes: [
+      { code: 'BE-101', href: '/products' },
+      { code: 'BE-118' },
+      { code: 'BE-119' },
+    ],
+    color: 'teal' as const,
+  },
+  { category: 'Sustainability', codes: [{ code: 'BE-017' }, { code: 'BE-117' }], color: 'green' as const },
+  { category: 'Chronic Disease', codes: [{ code: 'BE-105' }, { code: 'BE-122' }], color: 'amber' as const },
 ];
 
 const stats = [
@@ -65,7 +73,7 @@ const partners = [
   )}
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
-      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. We build living therapeutics from the ground up &mdash; an experienced team of industry veterans researching and innovating the microbiome for over a decade.</p>
+      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. These living therapeutics are built from engineered strains that help food producers and animal health professionals improve productivity, reduce dependence on antibiotics, and deliver better outcomes for the animals in their care.</p>
       <CTALink href="#">Discover our science</CTALink>
     </div>
     <div class="who-we-are-image">
@@ -80,7 +88,7 @@ const partners = [
       <h2>How we build</h2>
     </div>
     <div class="how-we-build-body">
-      <p>BiomEdit is different from other animal health biotechnology companies. We have an experienced team of industry veterans and experts who have been researching and innovating the microbiome for decades. Our lab is centrally located at the Indiana Biosciences Research Institute, where we continue to build a first-of-its-kind platform for precision therapeutics with engineered beneficial bacteria strains to combat disease in animals.</p>
+      <p>BiomEdit is different from other animal health biotechnology companies. We have an experienced team of industry veterans and experts who have been researching and innovating the microbiome for decades. Our lab is centrally located at the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, where we continue to build a first-of-its-kind platform for precision therapeutics with engineered beneficial bacteria strains to combat disease in animals.</p>
       <p>We use synthetic biology, AI/ML, and large-scale strain libraries to reduce the need for antibiotics. Every day we push to solve the problems that matter most for animal health, food security, and a more sustainable world.</p>
     </div>
   </div>
@@ -138,7 +146,14 @@ const partners = [
       {pipelineRows.map((row) => (
         <div class="pipeline-row">
           <span class="row-category" style={`color:var(--color-${row.color});`}>{row.category}</span>
-          <span class="row-codes">{row.codes}</span>
+          <span class="row-codes">
+            {row.codes.map((c, i) => (
+              <>
+                {i > 0 && ', '}
+                {c.href ? <a href={c.href} class="row-code-link">{c.code}</a> : c.code}
+              </>
+            ))}
+          </span>
           <CTALink href="/pipeline">Details</CTALink>
         </div>
       ))}
@@ -380,6 +395,8 @@ const partners = [
   .pipeline-row:last-child { border-bottom: none; }
   .row-category { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
   .row-codes { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .row-code-link { color: var(--color-navy); text-decoration: underline; text-underline-offset: 2px; }
+  .row-code-link:hover { opacity: 0.75; }
 
   .mission { text-align: center; padding: 1.5rem 40px 0; max-width: 680px; margin: 0 auto; }
   .mission h2 { font-size: var(--text-h4); margin: 0 0 1.5rem; }
