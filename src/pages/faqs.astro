@@ -1,0 +1,179 @@
+---
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import CTALink from '../components/CTALink.astro';
+
+const faqs = [
+  {
+    question: 'What does BiomEdit do?',
+    preview: 'BiomEdit engineers Programmable Veterinary Biologics&trade;, living therapeutics built from strains delivering biological payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals.',
+    extra: [
+      'Our mission is to engineer living biologics that prevent disease, treat conditions, and improve animal health. In practice, that means we combine microbiome science, synthetic biology, and AI-powered discovery to build a repeatable engine for animal health products.',
+      'BiomEdit is backed by leading global investors including Anterra Capital, Viking Global Investors, Nutreco, AgriZeroNZ, Elevate Ventures, Betagro Ventures and others. We are engineering a new chapter in animal health and this begins with our Programmable Veterinary Biologics platform.',
+    ],
+  },
+  {
+    question: 'When did BiomEdit launch?',
+    preview: 'BiomEdit launched in April 2022 as a carve out of Elanco Animal Health, founded by CEO Aaron Schacht with members of Elanco&rsquo;s former microbiome R&amp;D team.',
+    extra: [
+      'We are headquartered at the Indiana Biosciences Research Institute (IBRI) at 16 Tech Innovation District in Indianapolis, giving our team access to state-of-the-art lab space and a broader life sciences network.',
+    ],
+  },
+  {
+    question: 'What are BiomEdit&rsquo;s mission and vision?',
+    preview: 'BiomEdit&rsquo;s mission is to engineer living biologics that prevent disease, treat conditions, and improve animal health.',
+    extra: [
+      'Our vision is to transform animal health by creating programmable biologic solutions that redefine what is possible.',
+    ],
+    cta: { label: 'Learn more', href: '/about' },
+  },
+  {
+    question: 'What is the science behind BiomEdit&rsquo;s Programmable Veterinary Biologics&trade; platform?',
+    preview: 'BiomEdit leads with science: every decision starts with evidence as the company is building something genuinely new with our Programmable Veterinary Biologics&trade; platform.',
+    extra: [
+      'BiomEdit&rsquo;s platform is based on three pillars: strain engineering, a consistent methodology for engineering species-specific bacterial strains to deliver nanobody, peptide, or enzyme payloads; AI/ML-enabled discovery, which accelerates target selection, payload design, and candidate prioritization; and a substantial microbial strain library that provides a discovery foundation that competitors can&rsquo;t easily replicate.',
+    ],
+    cta: { label: 'Read more', href: '/science' },
+  },
+  {
+    question: 'What are BiomEdit&rsquo;s products?',
+    preview: 'BiomEdit&rsquo;s product pipeline spans infectious disease, sustainability, and chronic disease programs from our Programmable Veterinary Biologics platform.',
+    extra: [
+      'Our leading product is BE-101/Optavant, a first-of-its-kind engineered bacteria biologic for poultry that has received conditional USDA licensure. Our pipeline of products includes:',
+    ],
+    list: [
+      { code: 'BE-101/Optavant', description: 'A first-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.' },
+      { code: 'BE-118', description: 'Probiotic vectored antibodies targeting antigens of the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.' },
+      { code: 'BE-119', description: 'A probiotic vectored enzyme therapeutic that aims to reduce E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.' },
+      { code: 'BE-017', description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.' },
+      { code: 'BE-117', description: 'A first-in-class engineered rumen strain that continuously delivers anti-methanogen peptide and nanobody biomolecules directly in the rumen of dairy and beef cattle, reducing enteric methane emissions while improving feed efficiency and productivity.' },
+      { code: 'BE-105', description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and canine applications as future extensions.' },
+      { code: 'BE-122', description: 'Probiotic vectored antibodies designed to treat inflammatory bowel disease (IBD) in dogs, offering a potential alternative or complement to chronic corticosteroid therapy, with potential extension to other species.' },
+    ],
+    cta: { label: 'Read more', href: '/pipeline' },
+  },
+  {
+    question: 'What is pvAb&trade; (Probiotic Vectored Antibody)?',
+    preview: 'BiomEdit&rsquo;s Probiotic Vectored Antibody (pvAb&trade;) is a specific delivery mechanism within our Programmable Veterinary Biologics&trade; platform, where engineered probiotic strains secrete antibody or nanobody fragments directly in the gut to combat disease and protect animals.',
+    extra: [
+      'We use pvAb technology in BE-101, BE-118, BE-122, and BE-117.',
+    ],
+  },
+  {
+    question: 'What is BE-101 or Optavant?',
+    preview: 'BiomEdit created BE-101, the first engineered microbial therapeutic to achieve regulatory approval, in any species, any geography, any regulatory pathway, in this case USDA.',
+    extra: [
+      'It is a first-in-class engineered probiotic for chickens that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting broilers from necrotic enteritis without antibiotics. BE-101 reduces mortality and supports flock performance. It will be marketed as Optavant&trade;.',
+    ],
+  },
+  {
+    question: 'Does BiomEdit hold patents for its technology?',
+    preview: 'BiomEdit holds foundational patents protecting our engineered probiotic delivery platform, including &ldquo;Genetically Modified Lactobacillus and Uses Thereof&rdquo; (U.S. Patent 12,599,637) and &ldquo;Probiotic Compositions Comprising Lactobacillus reuteri Strains and Methods of Use&rdquo; (U.S. Patent 12,427,174), issued April 2026.',
+    extra: [
+      'These patents cover the engineered Lactobacillus reuteri strains and delivery systems underlying BE-101 and future pipeline products.',
+    ],
+  },
+  {
+    question: 'What species does BiomEdit&rsquo;s platform address?',
+    preview: 'BiomEdit&rsquo;s platform addresses poultry, swine, cattle, dogs, and cats, spanning infectious disease, sustainability, and chronic disease programs.',
+    extra: [],
+  },
+  {
+    question: 'Who works at BiomEdit?',
+    preview: 'BiomEdit&rsquo;s team is comprised of scientists and leaders with decades of experience working together through setbacks and breakthroughs.',
+    extra: [
+      'BiomEdit attracts exceptional teammates, partners, and investors united by a shared mission in animal health. Collectively, the team holds 23 doctoral degrees, 4 MBAs, 73 patents, and more than 450 peer-reviewed publications, and is led by our award-winning CEO, Aaron Schacht.',
+    ],
+    cta: { label: 'Learn more', href: '/team' },
+  },
+  {
+    question: 'Is BiomEdit hiring?',
+    preview: 'BiomEdit hires periodically for leadership, research, development, regulatory, and operational roles as our pipeline advances, in keeping with our commitment to attract exceptional teammates who share our mission in animal health.',
+    extra: [
+      'Recent openings have included research scientist, microbiologist, and internship roles in strain engineering and synthetic biology. Current openings will be posted on BiomEdit&rsquo;s LinkedIn company page.',
+    ],
+    cta: { label: 'Connect with us', href: 'https://www.linkedin.com/company/biomedit', target: '_blank' },
+  },
+  {
+    question: 'How do I contact BiomEdit for press or partnership inquiries?',
+    preview: 'Visit BiomEdit&rsquo;s Contact Us page and submit an inquiry.',
+    extra: [
+      'Someone from the team will respond within 1-2 business days.',
+    ],
+    cta: { label: 'Visit Contact Us', href: '/contact-us' },
+  },
+];
+---
+<FieldNotesLayout title="FAQs">
+  <div class="legal-page">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <div class="faq-card">
+          <h3 set:html={faq.question} />
+          <p class="faq-preview" set:html={faq.preview} />
+          {(faq.extra.length > 0 || faq.list) && (
+            <details class="faq-details">
+              <summary>
+                <span>Show more</span>
+                <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </summary>
+              <div class="faq-extra">
+                {faq.extra.map((p) => <p set:html={p} />)}
+                {faq.list && (
+                  <ul>
+                    {faq.list.map((item) => (
+                      <li><strong>{item.code}</strong> &mdash; {item.description}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </details>
+          )}
+          {faq.cta && (
+            <div class="faq-cta">
+              <CTALink href={faq.cta.href} target={faq.cta.target}>{faq.cta.label}</CTALink>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</FieldNotesLayout>
+
+<style>
+  .legal-page { padding: 4rem 0 5rem; }
+  .legal-page h1 { font-size: var(--text-h3); margin: 0 0 2.5rem; }
+
+  .faq-list { max-width: 720px; display: flex; flex-direction: column; }
+  .faq-card { padding: 2rem 0; border-bottom: 1px solid var(--cool-300); }
+  .faq-card:first-child { padding-top: 0; }
+  .faq-card:last-child { border-bottom: none; padding-bottom: 0; }
+  .faq-card h3 { font-size: var(--text-h6); margin: 0 0 0.75rem; }
+  .faq-preview { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0; }
+
+  .faq-details { margin-top: 0.75rem; }
+  .faq-details summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-navy);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-details summary::-webkit-details-marker { display: none; }
+  .faq-details summary::marker { content: ''; }
+  .faq-details .chevron { transition: transform 0.18s ease; }
+  .faq-details[open] .chevron { transform: rotate(180deg); }
+
+  .faq-extra { padding-top: 1rem; }
+  .faq-extra p { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0 0 1rem; }
+  .faq-extra p:last-child { margin-bottom: 0; }
+  .faq-extra ul { margin: 0; padding-left: 1.25rem; }
+  .faq-extra li { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0 0 0.75rem; }
+  .faq-extra li:last-child { margin-bottom: 0; }
+
+  .faq-cta { margin-top: 1rem; }
+</style>

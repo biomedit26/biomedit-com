@@ -1,12 +1,19 @@
 ---
 import ModuleSection from './ModuleSection.astro';
 import FullBleedBand from './FullBleedBand.astro';
+import Button from '../Button.astro';
 
 interface Props {
   heading: string;
   paragraphs?: string[];
   ctaLabel?: string;
   ctaHref?: string;
+  // For external links — set to "_blank" to open in a new tab.
+  ctaTarget?: string;
+  // 'link' (default): the underlined arrow-link style used elsewhere in
+  // this module. 'button': a solid amber Button, for a stronger single
+  // primary CTA (e.g. the Company pages' "Discover more" band).
+  ctaStyle?: 'link' | 'button';
   // Optional second link, rendered alongside the first — e.g. the
   // Pipeline page's "Explore Our Platform" / "Partner With Us" pair.
   secondaryCtaLabel?: string;
@@ -23,7 +30,7 @@ interface Props {
   imageOpacity?: number;
 }
 const {
-  heading, paragraphs = [], ctaLabel, ctaHref, secondaryCtaLabel, secondaryCtaHref, label, noDivider = false,
+  heading, paragraphs = [], ctaLabel, ctaHref, ctaTarget, ctaStyle = 'link', secondaryCtaLabel, secondaryCtaHref, label, noDivider = false,
   image, imagePosition, zoom, blendMode, grayscale, imageOpacity,
 } = Astro.props;
 ---
@@ -34,10 +41,14 @@ const {
       {paragraphs.map((p) => <p set:html={p} />)}
       {(ctaLabel && ctaHref) && (
         <div class="ctas">
-          <a class="cta" href={ctaHref}>
-            {ctaLabel}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
+          {ctaStyle === 'button' ? (
+            <Button color="amber" variant="filled" href={ctaHref} target={ctaTarget}>{ctaLabel}</Button>
+          ) : (
+            <a class="cta" href={ctaHref} target={ctaTarget}>
+              {ctaLabel}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          )}
           {(secondaryCtaLabel && secondaryCtaHref) && (
             <a class="cta" href={secondaryCtaHref}>
               {secondaryCtaLabel}

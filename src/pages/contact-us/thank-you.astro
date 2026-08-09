@@ -1,0 +1,19 @@
+---
+import FieldNotesLayout from '../../layouts/FieldNotesLayout.astro';
+import CTALink from '../../components/CTALink.astro';
+---
+<FieldNotesLayout title="Thank You">
+  <div class="thank-you">
+    <p class="overline">Message sent</p>
+    <h1>Thanks for reaching out.</h1>
+    <p>Someone from our team will get back to you within 1&ndash;2 business days.</p>
+    <CTALink href="/">Back to home</CTALink>
+  </div>
+</FieldNotesLayout>
+
+<style>
+  .thank-you { padding: 5rem 0 6rem; max-width: 560px; }
+  .thank-you .overline { margin: 0 0 1rem; }
+  .thank-you h1 { font-size: var(--text-h3); margin: 0 0 1rem; }
+  .thank-you p { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0 0 2rem; }
+</style>

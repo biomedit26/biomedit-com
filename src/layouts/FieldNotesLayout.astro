@@ -11,12 +11,18 @@ import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  active?: 'home' | 'about' | 'science' | 'pipeline' | 'products' | 'investors' | 'news';
+  active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'pipeline' | 'products' | 'investors' | 'news';
 }
 const { title, active } = Astro.props;
 
+const companyChildren = [
+  { label: 'About', href: '/about', key: 'about' },
+  { label: 'Our Team', href: '/team', key: 'team' },
+  { label: 'Board of Directors', href: '/board-of-directors', key: 'board' },
+];
+const isCompanyActive = companyChildren.some((c) => c.key === active);
+
 const nav = [
-  { label: 'Company', href: '/about', key: 'about', enabled: true },
   { label: 'Science', href: '/science', key: 'science', enabled: true },
   { label: 'Pipeline', href: '/pipeline', key: 'pipeline', enabled: true },
   { label: 'Products', href: '/products', key: 'products', enabled: true },
@@ -89,7 +95,7 @@ const year = new Date().getFullYear();
       gap: 40px;
     }
     .logo svg { height: 40px; width: auto; display: block; }
-    .main-nav nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+    .main-nav nav > ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
     .main-nav nav li a, .main-nav nav li span {
       font-size: 16px;
       font-weight: 700;
@@ -103,6 +109,59 @@ const year = new Date().getFullYear();
       text-decoration-thickness: 2px;
     }
     .main-nav nav li span.disabled { color: var(--cool-400); cursor: not-allowed; }
+
+    /* ---------- Company dropdown ---------- */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: default;
+    }
+    .nav-dropdown-trigger.active { color: var(--color-navy); }
+    .nav-dropdown-trigger .chevron { transition: transform 0.15s ease; }
+    .nav-dropdown-trigger:hover .chevron,
+    .nav-dropdown-trigger:focus .chevron {
+      transform: rotate(180deg);
+    }
+    .nav-submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0;
+      padding: 0.5rem 0;
+      list-style: none;
+      background: #FFFFFF;
+      border: 1px solid var(--cool-200);
+      border-radius: 6px;
+      box-shadow: 0 12px 24px rgba(28, 31, 40, 0.12);
+      min-width: 210px;
+      z-index: 20;
+    }
+    .nav-dropdown-trigger:hover + .nav-submenu,
+    .nav-dropdown-trigger:focus + .nav-submenu,
+    .nav-submenu:hover,
+    .nav-submenu:focus-within {
+      display: block;
+    }
+    .nav-submenu li { padding: 0; }
+    .nav-submenu a {
+      display: block;
+      padding: 0.6rem 1.25rem;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .nav-submenu a:hover { color: var(--color-navy); background: var(--bg-tertiary); }
+    .nav-submenu a.active { color: var(--color-navy); }
 
     .nav-toggle-btn {
       display: none;
@@ -134,7 +193,21 @@ const year = new Date().getFullYear();
         border-bottom: 1px solid var(--cool-400);
         padding: 1.5rem 40px;
       }
-      .main-nav nav ul { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .main-nav nav > ul { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+
+      .nav-dropdown { display: flex; flex-direction: column; gap: 1rem; }
+      .nav-dropdown-trigger .chevron { display: none; }
+      .nav-submenu {
+        display: flex;
+        position: static;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 0 0 1.25rem;
+        border: none;
+        box-shadow: none;
+        min-width: 0;
+      }
+      .nav-submenu a { padding: 0; font-size: 16px; }
 
       .nav-toggle-input:checked ~ nav { display: flex; }
       .nav-toggle-input:checked ~ .nav-toggle-btn .nav-toggle-line:first-child {
@@ -171,6 +244,8 @@ const year = new Date().getFullYear();
       color: var(--cool-600);
     }
     .footer-legal-links a:hover, .footer-social a:hover { color: var(--color-navy); }
+    .footer-linkedin { display: inline-flex; align-items: center; gap: 6px; }
+    .footer-linkedin:hover { color: var(--color-navy); }
     .footer-divider { border-top: 1px solid var(--cool-300); }
     .footer-bottom {
       display: flex;
@@ -208,7 +283,7 @@ const year = new Date().getFullYear();
       <div class="masthead-inner">
         <div class="masthead-row">
           <a href="#">Careers</a>
-          <a href="#">Contact Us</a>
+          <a href="/contact-us">Contact Us</a>
         </div>
       </div>
     </div>
@@ -224,6 +299,17 @@ const year = new Date().getFullYear();
         </label>
         <nav aria-label="Primary">
           <ul>
+            <li class="nav-dropdown">
+              <button type="button" class={`nav-dropdown-trigger ${isCompanyActive ? 'active' : ''}`} aria-haspopup="true">
+                Company
+                <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <ul class="nav-submenu">
+                {companyChildren.map((child) => (
+                  <li><a href={child.href} class={active === child.key ? 'active' : ''}>{child.label}</a></li>
+                ))}
+              </ul>
+            </li>
             {nav.map((item) => (
               item.enabled ? (
                 <li><a href={item.href} class={active === item.key ? 'active' : ''}>{item.label}</a></li>
@@ -248,7 +334,10 @@ const year = new Date().getFullYear();
           <a href="/cookies">Cookies</a>
           <a href="/faqs">FAQs</a>
         </div>
-        <a href="https://www.linkedin.com/company/biomedit" target="_blank" rel="noopener">Follow on LinkedIn</a>
+        <a class="footer-linkedin" href="https://www.linkedin.com/company/biomedit" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          Follow on LinkedIn
+        </a>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
