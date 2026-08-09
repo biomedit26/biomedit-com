@@ -13,7 +13,7 @@ const values = [
   {
     name: 'Execute With Clarity',
     color: 'navy' as const,
-    description: 'We move with precision and execute to help animals, people and the world. We are clear about what we are building, how we are building it, and who is accountable for delivering it.',
+    description: 'We move with precision and execute to help animals, people and the world. We are clear about how we are building, how we are building it, and who is accountable for delivering it.',
   },
   {
     name: 'Build Together',
@@ -23,7 +23,7 @@ const values = [
   {
     name: 'Pioneer With Purpose',
     color: 'green' as const,
-    description: 'We are true pioneers engineering a new platform category of Programmable Veterinary Biologics. Each new product we pursue helps solve unmet needs in animal health.',
+    description: 'We are true pioneers engineering a new platform category of Programmable Veterinary Biologics<sup>&trade;</sup>. Each new product we pursue helps solve unmet needs in animal health.',
   },
 ];
 
@@ -75,7 +75,7 @@ const milestones = [
     eyebrow="BiomEdit / About"
     heading="About BiomEdit"
     paragraphs={[
-      "BiomEdit engineers Programmable Veterinary Biologics&trade;, living therapeutics built from strains designed to prevent and treat disease across various species, including poultry, livestock, and companion animals. Our pipeline spans infectious disease, sustainability, and chronic disease programs, led by BE-101/Optavant, progressing toward conditional USDA licensure.",
+      "BiomEdit engineers Programmable Veterinary Biologics<sup>&trade;</sup>, living therapeutics built from strains designed to prevent and treat disease across various species, including poultry, livestock, and companion animals. Our pipeline spans infectious disease, sustainability, and chronic disease programs, led by BE-101/Optavant, progressing toward conditional USDA licensure.",
       "<strong style=\"color:#FFFFFF;\">We're engineering a new chapter in animal health.</strong>",
     ]}
     variant="dark"
@@ -86,7 +86,7 @@ const milestones = [
       <div class="mission-text">
         <p class="overline">Mission</p>
         <h2 class="mission-heading">We engineer living biologics that prevent disease, treat conditions, and improve animal health.</h2>
-        <p class="statement-support">Traditional animal health relies on broad-spectrum antibiotics and generalized interventions. BiomEdit is building something different: Programmable Veterinary Biologics that target specific disease drivers at the source, engineered to work with the animal&rsquo;s own biology.</p>
+        <p class="statement-support">Traditional animal health relies on broad-spectrum antibiotics and generalized interventions. BiomEdit is building something different: Programmable Veterinary Biologics<sup>&trade;</sup> that target specific disease drivers at the source, engineered to work with the animal&rsquo;s own biology.</p>
       </div>
       <div class="mission-image">
         <img src="/images/amari-shutters-JABi6GpktFM-unsplash.jpg" alt="BiomEdit scientist at work in the lab" />
@@ -110,7 +110,7 @@ const milestones = [
           {values.map((value) => (
             <div class="value-card" style={`--value-color:var(--color-${value.color});`}>
               <h3>{value.name}</h3>
-              <p>{value.description}</p>
+              <p set:html={value.description} />
             </div>
           ))}
         </div>

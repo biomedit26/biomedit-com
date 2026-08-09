@@ -11,6 +11,7 @@
 // that isn't in this repo. Standing in with the existing sample images
 // until the real assets are dropped in.
 
+import { getCollection } from 'astro:content';
 import ModuleDarkText from './modules/ModuleDarkText.astro';
 import ModuleBlueText from './modules/ModuleBlueText.astro';
 import FloatingCard from './modules/FloatingCard.astro';
@@ -44,27 +45,39 @@ const stats = [
   { value: '200+', label: 'Years combined experience' },
 ];
 
-const news = [
-  { tone: 'teal' as const, tag: 'Press', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
-  { tone: 'navy' as const, tag: 'Article', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
-  { tone: 'orange' as const, tag: 'Event', headline: '[Placeholder headline — swap in real news item]', date: '[Date]' },
-];
+const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
+  'press-release': 'Press Release',
+  article: 'Article',
+  event: 'Event',
+};
+const categoryColors: Record<'press-release' | 'article' | 'event', 'teal' | 'green' | 'amber'> = {
+  'press-release': 'teal',
+  article: 'green',
+  event: 'amber',
+};
+const news = (await getCollection('news'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
+// Order matches the sequence partners appear in across the three groups
+// on /investors-partners (Investors, then Partnerships & Grants, then
+// Launch Partners) — just without the group labels. Nutreco appears in
+// both groups there; shown once here, at its first-appearance position.
 const partners = [
-  { name: 'Elanco', logo: '/images/investor-partner/elanco.svg' },
-  { name: 'Ginkgo Bioworks', logo: '/images/investor-partner/ginkgo-bioworks.svg' },
-  { name: 'Anterra Capital', logo: '/images/investor-partner/anterra-capital.svg' },
-  { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg' },
+  { name: 'Anterra Capital', logo: '/images/investor-partner/anterra-capital.svg', href: 'https://anterracapital.com/' },
+  { name: 'Viking', logo: '/images/investor-partner/viking.svg', href: 'https://vikingglobal.com/' },
+  { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
+  { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg', href: 'https://www.agrizero.nz/' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://uat.betagroventures.com/en' },
+  { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png', href: 'https://elevateventures.com/' },
+  { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg', href: 'https://www.gatesfoundation.org/' },
+  { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png', href: 'https://www.globalmethanehub.org/' },
   { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
-  { name: 'Viking', logo: '/images/investor-partner/viking.svg' },
-  { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg' },
-  { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg' },
-  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png' },
-  { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png' },
-  { name: 'Ferment', logo: '/images/investor-partner/ferment.png' },
-  { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png' },
-  { name: 'USDA', logo: '/images/investor-partner/usda.svg', wide: true },
-  { name: 'NIH', logo: '/images/investor-partner/nih.png', wide: true },
+  { name: 'USDA', logo: '/images/investor-partner/usda-icon.svg', href: 'https://www.usda.gov/' },
+  { name: 'NIH', logo: '/images/investor-partner/nih-icon.png', href: 'https://www.nih.gov/' },
+  { name: 'Elanco', logo: '/images/investor-partner/elanco.svg', href: 'https://www.elanco.com/us' },
+  { name: 'Ginkgo Bioworks', logo: '/images/investor-partner/ginkgo-bioworks.svg', href: 'https://www.ginkgo.bio/' },
+  { name: 'Ferment', logo: '/images/investor-partner/ferment.png', small: true, href: 'https://www.ferment.co/' },
 ];
 ---
 <section class={`who-we-are ${heroVariant === 'video' ? 'no-divider' : ''}`}>
@@ -73,8 +86,8 @@ const partners = [
   )}
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
-      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics&trade; platform. These living therapeutics are built from engineered strains that help food producers and animal health professionals improve productivity, reduce dependence on antibiotics, and deliver better outcomes for the animals in their care.</p>
-      <CTALink href="#">Discover our science</CTALink>
+      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics<sup>&trade;</sup> platform. These living therapeutics are built from engineered strains that help food producers and animal health professionals improve productivity, reduce dependence on antibiotics, and deliver better outcomes for the animals in their care.</p>
+      <CTALink href="/about">More about us</CTALink>
     </div>
     <div class="who-we-are-image">
       <img src="/images/woman-in-lab.jpg" alt="BiomEdit scientist working in the lab" />
@@ -180,12 +193,18 @@ const partners = [
         <h2>Backed by leaders in life sciences and animal health.</h2>
       </div>
       <div class="investors-body">
-        <p>BiomEdit is building the first Programmable Veterinary Biologics platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
+        <p>BiomEdit is building the first Programmable Veterinary Biologics<sup>&trade;</sup> platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
         <div class="logo-grid">
           {partners.map((p) => (
-            <div class={`logo-cell ${p.wide ? 'is-wide' : ''}`}>
-              <img src={p.logo} alt={p.name} loading="lazy" />
-            </div>
+            p.href ? (
+              <a class={`logo-cell ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <img src={p.logo} alt={p.name} loading="lazy" />
+              </a>
+            ) : (
+              <div class={`logo-cell ${p.small ? 'is-small' : ''}`}>
+                <img src={p.logo} alt={p.name} loading="lazy" />
+              </div>
+            )
           ))}
         </div>
         <CTALink href="/investors-partners">Partner with us</CTALink>
@@ -206,15 +225,17 @@ const partners = [
 <section id="news" class="news-section">
   <div class="news-head">
     <h2>Latest from BiomEdit</h2>
-    <CTALink href="#">View all news</CTALink>
+    <CTALink href="/news">View all news</CTALink>
   </div>
   <div class="news-list">
-    {news.map((item) => (
-      <div class="news-row">
-        <Badge color={item.tone}>{item.tag}</Badge>
-        <span class="news-headline">{item.headline}</span>
-        <span class="news-date">{item.date}</span>
-      </div>
+    {news.map((post) => (
+      <a href={`/news/${post.slug}`} class="news-row">
+        <Badge color={categoryColors[post.data.category]}>{categoryLabels[post.data.category]}</Badge>
+        <span class="news-headline">{post.data.title}</span>
+        <span class="news-date">
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
+        </span>
+      </a>
     ))}
   </div>
 </section>
@@ -327,9 +348,10 @@ const partners = [
     margin-bottom: 2rem;
     animation: logos-fade-in 0.8s ease both;
   }
-  .logo-cell { display: flex; align-items: center; justify-content: flex-start; height: 36px; }
-  .logo-cell.is-wide { grid-column: span 2; }
+  .logo-cell { display: flex; align-items: center; justify-content: flex-start; height: 36px; text-decoration: none; }
+  .logo-cell:hover img { opacity: 0.7; }
   .logo-cell img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+  .logo-cell.is-small img { max-height: 50%; }
   @keyframes logos-fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -410,15 +432,17 @@ const partners = [
   .news-list { display: flex; flex-direction: column; }
   .news-row {
     display: grid;
-    grid-template-columns: 100px 1fr auto;
+    grid-template-columns: 140px 1fr auto;
     gap: 24px;
     align-items: baseline;
     padding: 1rem 0;
     border-bottom: 1px solid var(--cool-500);
+    text-decoration: none;
   }
   .news-row:last-child { border-bottom: none; }
+  .news-row:hover .news-headline { color: var(--color-navy); }
   .news-headline { font-size: 15px; font-weight: 700; color: var(--text-primary); }
-  .news-date { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; }
+  .news-date { font-size: 16px; color: var(--text-primary); white-space: nowrap; }
 
   @media (max-width: 860px) {
     .lead-program { grid-template-columns: 1fr; }
