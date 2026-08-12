@@ -1,0 +1,55 @@
+---
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+---
+<FieldNotesLayout title="Compliance">
+  <div class="legal-page">
+    <h1>Compliance</h1>
+
+    <div class="legal-body">
+      <h2>Biosafety</h2>
+      <p>The NIH Guidelines establish safety and containment requirements for research involving recombinant or synthetic nucleic acid molecules, and BiomEdit&rsquo;s Institutional Biosafety Committee (IBC) reviews, approves, and monitors applicable projects to support compliance with those requirements.</p>
+      <p>The IBC meets on a scheduled basis and includes subject matter experts, an animal health expert, and community members.</p>
+      <p>Approved IBC meeting minutes, beginning with the January 2026 initial IBC meeting, are posted on this site after approval by the IBC.</p>
+      <p>For questions about IBC meetings, please contact <a href="mailto:ibc@biomedit.com">ibc@biomedit.com</a>.</p>
+
+      <h2>IBC Meeting Minutes</h2>
+      <h3>2026</h3>
+      <ul class="minutes-list">
+        <li><a href="/resources/03.12.2026-BiomEdit-IBC-Meeting-Minutes-Redacted.pdf" target="_blank" rel="noopener">Thursday, March 12, 2026</a></li>
+        <li><a href="/resources/01.22.2026-BiomEdit-IBC-Minutes.pdf" target="_blank" rel="noopener">Thursday, January 22, 2026</a></li>
+      </ul>
+    </div>
+  </div>
+</FieldNotesLayout>
+
+<style>
+  .legal-page { padding: 4rem 0 5rem; }
+  .legal-page h1 { font-size: var(--text-h3); margin: 0 0 2.5rem; }
+
+  .legal-body { max-width: 680px; }
+  .legal-body h2 { font-size: var(--text-h6); margin: 2.5rem 0 1rem; }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body h3 { font-size: 17px; margin: 1.75rem 0 0.75rem; }
+  .legal-body p { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0 0 1.25rem; }
+
+  .minutes-list { list-style: none; margin: 0; padding: 0; }
+  .minutes-list li { border-bottom: 1px solid var(--border-color); }
+  .minutes-list li:first-child { border-top: 1px solid var(--border-color); }
+  .minutes-list a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 1rem 0;
+    font-size: var(--text-body);
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+  .minutes-list a:hover { opacity: 0.75; }
+  .minutes-list a::after {
+    content: 'View PDF \2197';
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-tertiary);
+  }
+</style>

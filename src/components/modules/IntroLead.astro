@@ -82,7 +82,7 @@ const isSplit = !image && layout === 'split';
   .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
   .intro-text .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
   .intro-text h1, .intro-text h2 { font-size: var(--text-h3); line-height: 1.2; color: var(--text-primary); margin: 0 0 1.5rem; }
-  .intro-text h1 sup, .intro-text h2 sup, .intro-split-heading h1 sup, .intro-split-heading h2 sup { font-size: 0.4em; }
+  .intro-text h1 :global(sup), .intro-text h2 :global(sup), .intro-split-heading h1 :global(sup), .intro-split-heading h2 :global(sup) { font-size: 0.3em; }
   .intro-text p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1.25rem; max-width: 520px; }
   .intro-text p:last-of-type { margin-bottom: 0; }
   .intro-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
