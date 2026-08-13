@@ -28,7 +28,7 @@ const pipelineRows = [
   {
     category: 'Infectious Disease',
     codes: [
-      { code: 'BE-101', href: '/products' },
+      { code: 'CPerf LLV', href: '/products' },
       { code: 'BE-118' },
       { code: 'BE-119' },
     ],
@@ -39,10 +39,10 @@ const pipelineRows = [
 ];
 
 const stats = [
-  { value: '23', label: 'Doctoral degrees' },
-  { value: '73', label: 'Patents' },
+  { value: '20', label: 'Doctoral degrees' },
+  { value: '9', label: 'Patents' },
   { value: '450+', label: 'Peer-reviewed publications' },
-  { value: '200+', label: 'Years combined experience' },
+  { value: '200+', label: 'Years of combined leadership experience' },
 ];
 
 const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
@@ -86,8 +86,10 @@ const partners = [
   )}
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
-      <p class="lead">At BiomEdit, our scientists and researchers created novel precision therapeutics on our new Programmable Veterinary Biologics<sup>&trade;</sup> platform. These living therapeutics are built from engineered strains that help food producers and animal health professionals improve productivity, reduce dependence on antibiotics, and deliver better outcomes for the animals in their care.</p>
-      <CTALink href="/about">More about us</CTALink>
+      <h2>Who we are</h2>
+      <p class="lead">At BiomEdit, we develop engineered microbial biologics for animal health. Located at 16Tech inside the laboratory facilities of the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, our experienced team works together to advance our Programmable Veterinary Biologics<sup>&trade;</sup> platform. From scientists and researchers to product developers and regulatory experts, we are building a new category in animal health.</p>
+      <p class="lead"><strong>Our goal:</strong> better outcomes for animals, farmers and veterinarians, through precise, practical solutions.</p>
+      <CTALink href="/science">Discover our science</CTALink>
     </div>
     <div class="who-we-are-image">
       <img src="/images/woman-in-lab.jpg" alt="BiomEdit scientist working in the lab" />
@@ -98,11 +100,11 @@ const partners = [
 <section class="how-we-build">
   <div class="how-we-build-intro">
     <div class="how-we-build-label">
-      <h2>How we build</h2>
+      <h2>What we do</h2>
     </div>
     <div class="how-we-build-body">
-      <p>BiomEdit is different from other animal health biotechnology companies. We have an experienced team of industry veterans and experts who have been researching and innovating the microbiome for decades. Our lab is centrally located at the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, where we continue to build a first-of-its-kind platform for precision therapeutics with engineered beneficial bacteria strains to combat disease in animals.</p>
-      <p>We use synthetic biology, AI/ML, and large-scale strain libraries to reduce the need for antibiotics. Every day we push to solve the problems that matter most for animal health, food security, and a more sustainable world.</p>
+      <p>Our platform combines strain engineering, computational biology, and product development. We engineer beneficial bacterial strains to deliver specific biologic functions that address important animal health challenges. Our microbial strain library consists of strains selected from the species we intend to treat.</p>
+      <p>The result: products designed to fit into existing care and management practices in animal health.</p>
     </div>
   </div>
 
@@ -111,22 +113,22 @@ const partners = [
       <div class="build-icon" style="--icon-color:var(--color-navy);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6.5 21l5.5-3 5.5 3-2-7.5"/></svg>
       </div>
-      <h3>A Company of Firsts</h3>
-      <p>First company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, in any species, any geography, any regulatory pathway. BE-101/Optavant&trade; is proof it&rsquo;s real.</p>
+      <h3>Platform to Product</h3>
+      <p>Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector, or CPerf LLV (formerly known as BE-101), is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-teal);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
       </div>
-      <h3>The Latest AI/ML Technology</h3>
-      <p>Our AI/ML infrastructure works hand-in-hand with our proprietary strain engineering platform, accelerating discovery and reducing time to market.</p>
+      <h3>Computational Biology</h3>
+      <p>We use sequencing, computational biology and AI/ML to characterize microbial communities, identify candidate strains, design payloads and inform product design and development.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-green);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="6" rx="3"/><path d="M7 12H4M17 12h3M9 9V6M15 9V6M9 15v3M15 15v3"/></svg>
       </div>
-      <h3>Our Proprietary Gut Microbiome Library</h3>
-      <p>A head start in discovery competitors can&rsquo;t replicate, built specifically for animal health.</p>
+      <h3>Microbial Strain Library</h3>
+      <p>Our microbial strain library spans a wide range of species, giving us a broad starting point for identifying and engineering strains suited to specific species, targets, and applications.</p>
     </div>
   </div>
 
@@ -138,16 +140,19 @@ const partners = [
 <div class={`pipeline-brief-wrap ${heroVariant === 'video' ? 'clears-watermark' : ''}`}>
   <FloatingCard>
     <div class="pipeline-brief-head">
-      <h2>Pipeline</h2>
+      <div>
+        <h2>Pipeline</h2>
+        <p class="pipeline-subhead">From discovery to commercial launch.</p>
+      </div>
       <CTALink href="/pipeline">View all programs</CTALink>
     </div>
 
     <div class="lead-program">
       <div class="lead-program-text">
         <p class="eyebrow">Lead Program — Infectious Disease</p>
-        <h3>BE-101 / Optavant&trade;</h3>
-        <p class="lead-p">The first Programmable Veterinary Biologic to reach commercial launch, engineered to protect poultry from one of the industry's most costly diseases, necrotic enteritis, without systemic antibiotics.</p>
-        <CTALink href="/pipeline">Learn about BE-101</CTALink>
+        <h3>CPerf LLV*</h3>
+        <p class="lead-p">Our lead Programmable Veterinary Biologic, developed to prevent necrotic enteritis in poultry through targeted delivery of nanobodies against C. perfringens toxins.</p>
+        <CTALink href="/pipeline">Learn more</CTALink>
         <p class="lead-highlight">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
       </div>
       <div class="lead-program-image">
@@ -178,7 +183,7 @@ const partners = [
   quote
   noDivider
   topDivider
-  paragraphs={['"One day there will be engineered microbial therapeutics in all species. BiomEdit is leading the way."']}
+  paragraphs={['"We believe engineered microbes will become an important therapeutic modality across species. Our job is to turn that potential into products that work in the real world."']}
   attribution="Aaron Schacht, CEO, BiomEdit"
   photos={[
     { src: '/images/judy-beth-morris-qqT6nYoG5xg-unsplash.jpg', alt: 'Veterinarian examining a white kitten', ratio: '3/2' },
@@ -193,7 +198,7 @@ const partners = [
         <h2>Backed by leaders in life sciences and animal health.</h2>
       </div>
       <div class="investors-body">
-        <p>BiomEdit is building the first Programmable Veterinary Biologics<sup>&trade;</sup> platform with investors and partners who understand what it takes to bring this novel technology to market.</p>
+        <p>We work with investors, research organizations, funding agencies and commercial partners to advance our Programmable Veterinary Biologics<sup>&trade;</sup> programs from discovery through commercialization.</p>
         <div class="logo-grid">
           {partners.map((p) => (
             p.href ? (
@@ -214,17 +219,18 @@ const partners = [
 </section>
 
 <section class="mission">
-  <h2>Built by scientists. Run by experts who challenge the status quo.</h2>
-  <p>Over two centuries of combined research experience, focused on one goal: engineering microbial therapeutics that change animal health for good.</p>
+  <h2>Our experience behind the science.</h2>
+  <p>At BiomEdit, our team combines expertise in microbiology, computational biology, strain engineering, product development, regulatory affairs, and commercialization. Many have worked together for years, delivering results across human and animal health, multiple organizations, products, and species.</p>
 </section>
 
 <section class="stats-section">
   <StatBlock stats={stats} align="center" divider={false} />
+  <div class="stats-cta"><CTALink href="/team">Meet our team</CTALink></div>
 </section>
 
 <section id="news" class="news-section">
   <div class="news-head">
-    <h2>Latest from BiomEdit</h2>
+    <h2>Latest from BiomEdit.</h2>
     <CTALink href="/news">View all news</CTALink>
   </div>
   <div class="news-list">
@@ -241,9 +247,9 @@ const partners = [
 </section>
 
 <ModuleBlueText
-  heading="Passionate about creating therapeutics that put animal&rsquo;s health and wellbeing first? We want to hear from you."
+  heading="Interested in working with BiomEdit? Connect with us."
   ctaLabel="Connect with us"
-  ctaHref="#"
+  ctaHref="/contact-us"
   noDivider
   image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
   zoom={1.05}
@@ -255,10 +261,11 @@ const partners = [
 <style>
   .who-we-are {
     position: relative;
+    margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid var(--cool-500);
   }
-  .who-we-are.no-divider { border-top: none; padding-top: 0; }
+  .who-we-are.no-divider { margin-top: 0; border-top: none; padding-top: 0; }
   .who-we-are-watermark {
     position: absolute;
     top: 4rem;
@@ -365,6 +372,7 @@ const partners = [
     .investors-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   }
 
+  .who-we-are-text h2 { font-size: var(--text-h5); margin: 0 0 1.25rem; }
   .who-we-are-text .lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); margin: 0 0 1.5rem; }
   .who-we-are-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
 
@@ -376,6 +384,7 @@ const partners = [
   .pipeline-brief-wrap.clears-watermark { margin-top: 4rem; }
   .pipeline-brief-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }
   .pipeline-brief-head h2 { font-size: var(--text-h5); margin: 0; }
+  .pipeline-subhead { font-size: var(--text-body); color: var(--text-secondary); margin: 0.35rem 0 0; }
 
   .lead-program {
     display: grid;
@@ -426,6 +435,7 @@ const partners = [
   .mission p { font-size: var(--text-body); color: var(--text-primary); line-height: 1.75; margin: 0; }
 
   .stats-section { padding: 3.5rem 40px; border-bottom: 1px solid var(--cool-500); }
+  .stats-cta { display: flex; justify-content: center; margin-top: 2.5rem; }
 
   .news-section { padding: 3.5rem 40px 4rem; }
   .news-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }

@@ -2,7 +2,16 @@
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
+import StatBlock from '../components/StatBlock.astro';
 import { leaders } from '../data/leaders';
+
+const teamStats = [
+  { value: '20', label: 'Doctoral degrees' },
+  { value: '4', label: 'MBAs' },
+  { value: '9', label: 'Patents' },
+  { value: '450+', label: 'Peer-reviewed publications' },
+  { value: '200+', label: 'Years of combined leadership experience' },
+];
 
 // Alphabetical by first name.
 const teamMembers = [
@@ -35,10 +44,14 @@ const teamMembers = [
 <FieldNotesLayout title="Our Team" active="team">
   <IntroLead
     eyebrow="BiomEdit / Our Team"
-    heading="Scientists and experts building something new."
-    paragraphs={['BiomEdit brings together scientists, engineers, and operators who have spent careers at the intersection of biology and commercial animal health. Many of us have worked together for decades. That shared history is part of what makes this platform possible.']}
+    heading="Our scientists, researchers, product developers, and regulatory experts are building something new."
+    paragraphs={['BiomEdit brings together scientists, engineers, and operators who have spent careers at the intersection of biology and commercial animal health. That combination of backgrounds is part of what makes this platform possible.']}
     variant="dark"
   />
+
+  <section class="team-stats">
+    <StatBlock stats={teamStats} align="center" />
+  </section>
 
   <section class="leadership section-divider">
     <h2>Leadership</h2>
@@ -102,6 +115,8 @@ const teamMembers = [
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
+
+  .team-stats { padding: 3rem 0; }
 
   .leadership { padding: 3.5rem 0 4rem; }
   .leadership h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
