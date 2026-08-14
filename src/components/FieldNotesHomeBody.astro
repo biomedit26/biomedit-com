@@ -28,7 +28,7 @@ const pipelineRows = [
   {
     category: 'Infectious Disease',
     codes: [
-      { code: 'CPerf LLV', href: '/products' },
+      { code: 'CPerf LLV*', href: '/products' },
       { code: 'BE-118' },
       { code: 'BE-119' },
     ],
@@ -104,7 +104,7 @@ const partners = [
     </div>
     <div class="how-we-build-body">
       <p>Our platform combines strain engineering, computational biology, and product development. We engineer beneficial bacterial strains to deliver specific biologic functions that address important animal health challenges. Our microbial strain library consists of strains selected from the species we intend to treat.</p>
-      <p>The result: products designed to fit into existing care and management practices in animal health.</p>
+      <p><strong>The result</strong>: products designed to fit into existing care and management practices in animal health.</p>
     </div>
   </div>
 
@@ -114,14 +114,14 @@ const partners = [
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6.5 21l5.5-3 5.5 3-2-7.5"/></svg>
       </div>
       <h3>Platform to Product</h3>
-      <p>Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector, or CPerf LLV (formerly known as BE-101), is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
+      <p>CPerf LLV* (formerly known as BE-101), is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-teal);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
       </div>
       <h3>Computational Biology</h3>
-      <p>We use sequencing, computational biology and AI/ML to characterize microbial communities, identify candidate strains, design payloads and inform product design and development.</p>
+      <p>We use sequencing, computational biology and AI/ML to characterize microbial communities, identify candidate strains, design payloads, and inform product design and development.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-green);">
@@ -150,8 +150,8 @@ const partners = [
     <div class="lead-program">
       <div class="lead-program-text">
         <p class="eyebrow">Lead Program — Infectious Disease</p>
-        <h3>CPerf LLV*</h3>
-        <p class="lead-p">Our lead Programmable Veterinary Biologic, developed to prevent necrotic enteritis in poultry through targeted delivery of nanobodies against C. perfringens toxins.</p>
+        <h3>CPerf LLV* / Optavant&trade;</h3>
+        <p class="lead-p">Our lead Programmable Veterinary Biologic was developed to prevent necrotic enteritis in poultry through targeted delivery of nanobodies against C. perfringens toxins.</p>
         <CTALink href="/pipeline">Learn more</CTALink>
         <p class="lead-highlight">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
       </div>
@@ -186,7 +186,7 @@ const partners = [
   paragraphs={['"We believe engineered microbes will become an important therapeutic modality across species. Our job is to turn that potential into products that work in the real world."']}
   attribution="Aaron Schacht, CEO, BiomEdit"
   photos={[
-    { src: '/images/judy-beth-morris-qqT6nYoG5xg-unsplash.jpg', alt: 'Veterinarian examining a white kitten', ratio: '3/2' },
+    { src: '/images/judy-beth-morris-5Bi6MWlWMbw-unsplash.jpg', alt: 'Veterinarian examining a white kitten', ratio: '3/2' },
     { src: '/images/engin-akyurt-GBszMrOChZ8-unsplash.jpg', alt: 'Close-up of livestock', ratio: '2/3' },
   ]}
 />
@@ -198,7 +198,7 @@ const partners = [
         <h2>Backed by leaders in life sciences and animal health.</h2>
       </div>
       <div class="investors-body">
-        <p>We work with investors, research organizations, funding agencies and commercial partners to advance our Programmable Veterinary Biologics<sup>&trade;</sup> programs from discovery through commercialization.</p>
+        <p>We work with investors, research organizations, funding agencies, and commercial partners to advance our Programmable Veterinary Biologics<sup>&trade;</sup> programs from discovery through commercialization.</p>
         <div class="logo-grid">
           {partners.map((p) => (
             p.href ? (
@@ -246,8 +246,12 @@ const partners = [
   </div>
 </section>
 
+<section class="footnote">
+  <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
+</section>
+
 <ModuleBlueText
-  heading="Interested in working with BiomEdit? Connect with us."
+  heading="Interested in working with BiomEdit?"
   ctaLabel="Connect with us"
   ctaHref="/contact-us"
   noDivider
@@ -430,14 +434,18 @@ const partners = [
   .row-code-link { color: var(--color-navy); text-decoration: underline; text-underline-offset: 2px; }
   .row-code-link:hover { opacity: 0.75; }
 
-  .mission { text-align: center; padding: 1.5rem 40px 0; max-width: 680px; margin: 0 auto; }
+  .mission { text-align: center; padding: 1.5rem 40px 0; max-width: 820px; margin: 0 auto; }
   .mission h2 { font-size: var(--text-h4); margin: 0 0 1.5rem; }
   .mission p { font-size: var(--text-body); color: var(--text-primary); line-height: 1.75; margin: 0; }
 
   .stats-section { padding: 3.5rem 40px; border-bottom: 1px solid var(--cool-500); }
+  .stats-section :global(.stat-label) { font-size: 16px; }
   .stats-cta { display: flex; justify-content: center; margin-top: 2.5rem; }
 
   .news-section { padding: 3.5rem 40px 4rem; }
+
+  .footnote { padding: 0 40px 2rem; }
+  .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
   .news-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }
   .news-head h2 { font-size: var(--text-h5); margin: 0; }
   .news-list { display: flex; flex-direction: column; }
