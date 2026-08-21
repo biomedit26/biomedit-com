@@ -11,7 +11,7 @@ import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'pipeline' | 'products' | 'investors' | 'news';
+  active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'publications' | 'pipeline' | 'products' | 'investors' | 'news';
 }
 const { title, active } = Astro.props;
 
@@ -22,8 +22,13 @@ const companyChildren = [
 ];
 const isCompanyActive = companyChildren.some((c) => c.key === active);
 
+const scienceChildren = [
+  { label: 'Our Platform', href: '/science', key: 'science' },
+  { label: 'Patents and Publications', href: '/publications', key: 'publications' },
+];
+const isScienceActive = scienceChildren.some((c) => c.key === active);
+
 const nav = [
-  { label: 'Science', href: '/science', key: 'science', enabled: true },
   { label: 'Pipeline', href: '/pipeline', key: 'pipeline', enabled: true },
   { label: 'Products', href: '/products', key: 'products', enabled: true },
   { label: 'Investors & Partners', href: '/investors-partners', key: 'investors', enabled: true },
@@ -317,6 +322,17 @@ const year = new Date().getFullYear();
               </button>
               <ul class="nav-submenu">
                 {companyChildren.map((child) => (
+                  <li><a href={child.href} class={active === child.key ? 'active' : ''}>{child.label}</a></li>
+                ))}
+              </ul>
+            </li>
+            <li class="nav-dropdown">
+              <button type="button" class={`nav-dropdown-trigger ${isScienceActive ? 'active' : ''}`} aria-haspopup="true">
+                Science
+                <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <ul class="nav-submenu">
+                {scienceChildren.map((child) => (
                   <li><a href={child.href} class={active === child.key ? 'active' : ''}>{child.label}</a></li>
                 ))}
               </ul>
