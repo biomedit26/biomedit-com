@@ -14,7 +14,7 @@ interface Props {
   ctaLabel?: string;
   ctaHref?: string;
   label?: string;
-  // "quote" variant: renders a single paragraph as a large Fraunces-italic
+  // "quote" variant: renders a single paragraph as a large PT Serif-italic
   // pull quote instead of heading + body copy, and — when `photos` is
   // given — sits it alongside up to two supporting photographs in a
   // 3-column grid rather than the default centered single column.
@@ -77,9 +77,9 @@ const { heading, paragraphs = [], ctaLabel, ctaHref, label, quote = false, photo
   .cta svg { width: 14px; height: 14px; }
 
   .text-col p.quote, .quote-col p.quote {
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'PT Serif', serif;
     font-style: italic;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 26px;
     line-height: 1.5;
     color: #FFFFFF;

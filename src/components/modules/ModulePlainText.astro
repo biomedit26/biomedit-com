@@ -7,13 +7,13 @@ interface Props {
   ctaLabel?: string;
   ctaHref?: string;
   label?: string;
-  // "quote" variant: renders paragraphs[0] as a large Fraunces-italic pull
+  // "quote" variant: renders paragraphs[0] as a large PT Serif-italic pull
   // quote instead of heading + body copy. Mirrors ModuleDarkText's quote
   // variant, sized for a light background.
   quote?: boolean;
   attribution?: string;
   noDivider?: boolean;
-  // 'serif' (default): Fraunces italic, matching the site's other pull-quotes.
+  // 'serif' (default): PT Serif italic, matching the site's other pull-quotes.
   // 'sans': PT Sans italic instead, for a lighter, less formal quote treatment.
   quoteFont?: 'serif' | 'sans';
   // Attribution byline size. 'sm' (default, 13px), 'md' (14px), or 'lg'
@@ -67,7 +67,7 @@ const {
   .cta svg { width: 14px; height: 14px; }
 
   .text-col p.quote {
-    font-family: 'Fraunces', serif;
+    font-family: 'PT Serif', serif;
     font-style: italic;
     font-size: var(--text-h6);
     line-height: 1.5;
