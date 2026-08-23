@@ -45,9 +45,10 @@ const isSplit = !image && layout === 'split';
     background={isDark ? 'var(--cool-800)' : 'var(--cool-400)'}
     image="/images/flowing-e-graphic-static.svg"
     imageFit="width"
+    zoom={0.85}
     blendMode={isDark ? 'screen' : 'overlay'}
     imageFilter={isDark ? undefined : 'grayscale(1)'}
-    imageOpacity={isDark ? 0.21 : 0.25}
+    imageOpacity={isDark ? 0.17 : 0.2}
   >
     {image ? (
       <div class="intro-grid">

@@ -89,6 +89,10 @@ const imageClass = `full-bleed-image${imageFit === 'width' ? ' full-bleed-image-
     top: 50%;
     left: 0;
     height: auto;
+    /* Pivot from the left edge (not center) so a zoom < 1 pulls the image
+       in from the right and vertically, but keeps it flush against the
+       viewport's left edge instead of centering it. */
+    transform-origin: 0% 50%;
     transform: translateY(-50%) scale(var(--img-zoom));
   }
   /* When rawSvg is used, .full-bleed-image is a <div> wrapping an inlined

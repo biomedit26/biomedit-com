@@ -12,28 +12,14 @@ import Button from '../components/Button.astro';
 // this SVG's CSS @keyframes animations when it's referenced as an image
 // resource — only when its markup lives directly in the page.
 //
-// The source export's every animation runs on a 5s cycle, but each element
-// only actually moves during roughly the first 1.5s of that — the rest is a
-// static hold before it loops. At 5s that reads as motionless; compressing
-// every duration to 3.5s (all elements use the literal value "5s", so a
-// global replace is safe — verified via grep before relying on it) keeps
-// the exact per-element easing/stagger the export was built with, just
-// runs the same cycle a bit tighter so the motion is perceptible.
-//
-// Plays once and holds its final state rather than looping — every
-// animation uses the literal keyword "infinite" (verified via grep), so a
-// global replace to "1 forwards" is safe: 1 = play once, forwards = hold
-// the last keyframe's values after finishing instead of reverting.
-//
-// Uses the recolored copy (see flowing-e-graphic-recolored.svg) — the
-// original export's linework is baked in light grays with one near-full-
-// canvas white background/mask shape. The old imageFilter recipe below was
-// tuned for a different, rasterized source image and doesn't translate to
-// this one; recoloring the SVG directly and hiding that mask shape gives
-// direct, predictable control instead.
-const heroSvg = readFileSync(new URL('../../public/images/flowing-e-graphic-recolored.svg', import.meta.url), 'utf-8')
-  .replace(/\b5s\b/g, '3.5s')
-  .replace(/\binfinite\b/g, '1 forwards');
+// flowing-e-graphic-recolored.svg is a build script's output (not a raw
+// design export) — see the git history for the generation script. It bakes
+// in: the site's palette (recolored from the source export's grays),
+// per-element settle-in keyframes staggered across the first ~22% of a
+// 3.5s timeline, the radiating-lines/concentric-circles groups fading in
+// after that, and animation-iteration-count:1 + fill-mode:forwards so it
+// plays once on load and holds its final state rather than looping.
+const heroSvg = readFileSync(new URL('../../public/images/flowing-e-graphic-recolored.svg', import.meta.url), 'utf-8');
 ---
 <FieldNotesLayout title="Home" active="home">
   <section class="hero">
@@ -41,8 +27,9 @@ const heroSvg = readFileSync(new URL('../../public/images/flowing-e-graphic-reco
       background="var(--cool-800)"
       rawSvg={heroSvg}
       imageFit="width"
+      zoom={0.85}
       blendMode="screen"
-      imageOpacity={0.3}
+      imageOpacity={0.24}
     >
       <div class="hero-inner">
         <p class="eyebrow">Programmable Veterinary Biologics<sup>&trade;</sup></p>
