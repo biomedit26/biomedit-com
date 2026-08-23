@@ -38,14 +38,25 @@ interface Props {
   // rather than the plain `grayscale` shortcut. Takes precedence over `grayscale`.
   imageFilter?: string;
   imageOpacity?: number;
+  // Raw <svg>...</svg> markup to inline directly into the page instead of
+  // loading `image` as a file. Use this for a source SVG that animates
+  // itself via CSS @keyframes — Firefox and Safari don't run CSS/SMIL
+  // animations on SVGs loaded via <img src>, so a self-animating source
+  // needs to live in the DOM directly. Takes precedence over `image`.
+  // Only `imageFit="width"` is supported in this mode.
+  rawSvg?: string;
 }
-const { background, image, imagePosition = 'center', zoom = 1, imageFit = 'cover', blendMode = 'overlay', grayscale = false, imageFilter, imageOpacity = 1 } = Astro.props;
+const { background, image, rawSvg, imagePosition = 'center', zoom = 1, imageFit = 'cover', blendMode = 'overlay', grayscale = false, imageFilter, imageOpacity = 1 } = Astro.props;
 const resolvedFilter = imageFilter ?? (grayscale ? 'grayscale(1)' : '');
 const imageStyle = `--img-pos:${imagePosition};--img-zoom:${zoom};--img-blend:${blendMode};--img-opacity:${imageOpacity};${resolvedFilter ? `filter:${resolvedFilter};` : ''}`;
 const imageClass = `full-bleed-image${imageFit === 'width' ? ' full-bleed-image--fit-width' : ''}`;
 ---
 <div class="full-bleed" style={`background:${background};`}>
-  {image && <img class={imageClass} src={image} alt="" style={imageStyle} />}
+  {rawSvg ? (
+    <div class={imageClass} style={imageStyle} set:html={rawSvg} />
+  ) : (
+    image && <img class={imageClass} src={image} alt="" style={imageStyle} />
+  )}
   <div class="full-bleed-inner">
     <slot />
   </div>
@@ -79,6 +90,14 @@ const imageClass = `full-bleed-image${imageFit === 'width' ? ' full-bleed-image-
     left: 0;
     height: auto;
     transform: translateY(-50%) scale(var(--img-zoom));
+  }
+  /* When rawSvg is used, .full-bleed-image is a <div> wrapping an inlined
+     <svg> rather than an <img> — the injected markup isn't scoped by Astro,
+     so this needs :global to reach it. */
+  .full-bleed-image--fit-width :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .full-bleed-inner {
     position: relative;

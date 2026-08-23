@@ -5,6 +5,12 @@
 // cool-400/dark-text treatment used sitewide; pass variant="dark" for the
 // cool-800/onDark treatment. Used as the top-of-page hero on every page
 // except Home, which keeps its own centered watermark-hero treatment.
+//
+// Uses the static "settled" render of the same flowing-e graphic Home
+// animates (see flowing-e-graphic-static.svg / index.astro) so every page
+// reads as one consistent motif — just without the animation, since this
+// is a plain cacheable file shared across every page that uses it, not
+// inlined per-page like Home's animated version has to be.
 
 import FullBleedBand from './FullBleedBand.astro';
 
@@ -37,12 +43,11 @@ const isSplit = !image && layout === 'split';
 <section class={`intro-lead ${isDark ? 'is-dark' : ''}`}>
   <FullBleedBand
     background={isDark ? 'var(--cool-800)' : 'var(--cool-400)'}
-    image="/images/flowing-e-background.svg"
+    image="/images/flowing-e-graphic-static.svg"
     imageFit="width"
     blendMode={isDark ? 'screen' : 'overlay'}
-    grayscale={!isDark}
-    imageFilter={isDark ? 'grayscale(1) sepia(1) hue-rotate(200deg) saturate(2.5)' : undefined}
-    imageOpacity={isDark ? 0.08 : 0.18}
+    imageFilter={isDark ? undefined : 'grayscale(1)'}
+    imageOpacity={isDark ? 0.21 : 0.25}
   >
     {image ? (
       <div class="intro-grid">
