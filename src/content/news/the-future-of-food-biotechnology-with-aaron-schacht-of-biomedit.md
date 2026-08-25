@@ -1,11 +1,15 @@
 ---
 title: "The Future of Food Biotechnology with Aaron Schacht of BiomEdit"
-date: 2025-06-01
-category: article
-source: "America's Nest Egg podcast, via Ancera"
+date: 2025-01-01
+category: videos-podcasts
+secondaryCategory: in-the-news
 image: "/images/drew-tGYrlchfObE-unsplash.jpg"
 imageAlt: "Gloved hand holding a petri dish of cultured strain in the lab"
 lead: "Host and Ancera CEO Arjun Ganesan speaks with BiomEdit CEO Aaron Schacht about how lessons from human health innovation are now being applied to transform animal health."
+source: "America's Nest Egg podcast, via Ancera"
+videoUrl: https://www.youtube.com/watch?v=tP_cv92tJZo
+metaTitle: "Podcast: Aaron Schacht on the Future of Food Biotech"
+metaDescription: "BiomEdit CEO Aaron Schacht joins the America's Nest Egg podcast to discuss how synthetic biology is bringing human-health-grade innovation to animal health."
 ---
 
 On a recent episode of the America's Nest Egg podcast, host and Ancera CEO Arjun Ganesan spoke with Aaron Schacht, CEO of BiomEdit. With over 30 years of experience, Schacht has served as executive vice president at Elanco Animal Health, and in various research and development positions at Eli Lilly and Company.

@@ -1,11 +1,13 @@
 ---
 title: "The IOS Of Synthetic Biology Is Here. And Thanks To This Incubator, The Apps Are Rolling In. (Forbes)"
 date: 2023-04-26
-category: article
-source: "Forbes"
+category: in-the-news
 image: "/images/Forbes-screenshot-website-.jpg"
 imageAlt: "Screenshot of the Forbes article featuring BiomEdit"
 lead: "A Forbes feature by synthetic biology author John Cumbers looks at how incubators like Ginkgo Bioworks are accelerating the next generation of synthetic biology companies, including BiomEdit."
+source: "Forbes"
+metaTitle: "Forbes: BiomEdit and the Rise of Synthetic Biology Startups"
+metaDescription: "Forbes contributor John Cumbers highlights BiomEdit as a leading example of synthetic biology startups turning platform science into commercial applications."
 ---
 
 This entry is a media-coverage repost of a Forbes article by John Cumbers (Senior Contributor, synthetic biology author), featured on BiomEdit's News & Insights page under the Media Coverage category. The original article is hosted on Forbes.com rather than reproduced here.

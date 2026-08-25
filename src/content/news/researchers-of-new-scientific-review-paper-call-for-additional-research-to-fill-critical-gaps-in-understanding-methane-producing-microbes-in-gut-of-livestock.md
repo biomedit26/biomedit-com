@@ -5,6 +5,8 @@ category: press-release
 image: "/images/cows-in-the-cowshed-in-dairy-farm-2023-11-27-04-54-34-utc-scaled.jpg"
 imageAlt: "Dairy cattle in a cowshed"
 lead: "Additional research is key to developing solutions that work with livestock's own microbiome to reduce methane emissions and increase feed efficiency to tackle climate change and food security."
+metaTitle: "New Review Paper Maps Gaps in Rumen Methanogen Research"
+metaDescription: "BiomEdit researchers co-author a scientific review in Frontiers in Microbiology outlining critical gaps in understanding methane-producing microbes in livestock guts."
 ---
 
 FISHERS, IND. (November 16, 2023) – A new scientific review paper published this month provides important insights into the current knowledge base of rumen methanogens – the microorganisms that produce methane as a byproduct of their metabolism in the rumen, or stomach, of ruminants like cattle and sheep – and the gaps that exist in the field. In this groundbreaking paper titled "[Evolving Understanding of Rumen Methanogen Ecophysiology](https://www.frontiersin.org/articles/10.3389/fmicb.2023.1296008/full)," published in Frontiers in Microbiology as part of The Methane Moment research topic, the authors call for more research in the diversity, physiology, and metabolism of rumen methanogens.

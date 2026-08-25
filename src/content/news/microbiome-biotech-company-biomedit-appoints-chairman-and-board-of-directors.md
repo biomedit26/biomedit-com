@@ -1,10 +1,12 @@
 ---
 title: "Microbiome Biotech Company BiomEdit Appoints Chairman and Board of Directors"
 date: 2023-02-09
-category: article
+category: press-release
 image: "/images/BOD-BiomEdit-Graphic.jpeg"
 imageAlt: "Graphic announcing BiomEdit's Board of Directors"
 lead: "Board composed of executive leaders with deep expertise across animal health, human health and financial sectors."
+metaTitle: "BiomEdit Appoints Chairman and Board of Directors"
+metaDescription: "BiomEdit announces its first full Board of Directors, led by veteran animal health executive Patrick James as Chairman, alongside four senior industry leaders."
 ---
 
 FISHERS, Ind. (Feb. 9, 2023) – Today, Animal Health's most advanced microbiome company, BiomEdit, announced the appointment of its first full Board of Directors, led by longtime Animal Health executive leader, Patrick James, as Chairman. The board is comprised of five senior executive leaders with a diverse mix of experiences across Animal Health, Human Health and Financial sectors, as well as previous board and governance experience.

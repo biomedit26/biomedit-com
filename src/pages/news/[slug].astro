@@ -3,6 +3,7 @@ import FieldNotesLayout from '../../layouts/FieldNotesLayout.astro';
 import FullBleedBand from '../../components/modules/FullBleedBand.astro';
 import Button from '../../components/Button.astro';
 import { getCollection } from 'astro:content';
+import { getYouTubeEmbedUrl, getVideoThumbnail } from '../../utils/video';
 
 export async function getStaticPaths() {
   const posts = await getCollection('news');
@@ -15,10 +16,12 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
+const categoryLabels: Record<'press-release' | 'article' | 'event' | 'in-the-news' | 'videos-podcasts', string> = {
   'press-release': 'Press Release',
   article: 'Article',
   event: 'Event',
+  'in-the-news': 'In the News',
+  'videos-podcasts': 'Videos & Podcasts',
 };
 
 const formattedDate = post.data.date.toLocaleDateString('en-US', {
@@ -31,6 +34,14 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
 const eyebrow = post.data.source
   ? `${post.data.source} · ${formattedDate}`
   : `${categoryLabels[post.data.category]} · ${formattedDate}`;
+
+const metaTitle = post.data.metaTitle ?? post.data.title;
+const metaDescription = post.data.metaDescription ?? post.data.lead;
+const heroImage = post.data.image ?? (post.data.videoUrl ? getVideoThumbnail(post.data.videoUrl) : null);
+const youtubeEmbedUrl = post.data.videoUrl ? getYouTubeEmbedUrl(post.data.videoUrl) : null;
+// Not a YouTube URL but still a videoUrl — treat as a direct file (e.g. a
+// self-hosted .mp4) and embed via <video> instead of an iframe.
+const directVideoUrl = post.data.videoUrl && !youtubeEmbedUrl ? post.data.videoUrl : null;
 
 // Approximate read time from the raw markdown word count — standard 200 wpm.
 const wordCount = post.body.trim().split(/\s+/).length;
@@ -45,7 +56,7 @@ const shareLinks = {
   bluesky: `https://bsky.app/intent/compose?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`,
 };
 ---
-<FieldNotesLayout title={post.data.title} active="news">
+<FieldNotesLayout title={metaTitle} description={metaDescription} image={heroImage ?? undefined} active="news">
   <div class="article-header">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{post.data.title}</h1>
@@ -69,9 +80,22 @@ const shareLinks = {
     </div>
   </div>
 
-  <section class="article-lead">
+  <section class={`article-lead ${youtubeEmbedUrl || directVideoUrl ? 'has-video' : ''}`}>
     <div class="article-lead-image">
-      <img src={post.data.image} alt={post.data.imageAlt} />
+      {youtubeEmbedUrl ? (
+        <iframe
+          src={youtubeEmbedUrl}
+          title={post.data.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      ) : directVideoUrl ? (
+        <video src={directVideoUrl} controls preload="metadata"></video>
+      ) : post.data.image ? (
+        <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} />
+      ) : (
+        <div class="article-lead-placeholder" role="img" aria-label={post.data.imageAlt ?? post.data.title}></div>
+      )}
     </div>
     <div class="article-lead-text-wrap">
       <p class="article-lead-text">{post.data.lead}</p>
@@ -138,7 +162,19 @@ const shareLinks = {
     align-items: stretch;
     margin: 2.5rem 0;
   }
-  .article-lead-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Video pages get an even 50/50 split instead of the image default —
+     there's more vertical room to work with and the video reads better
+     larger. */
+  .article-lead.has-video { grid-template-columns: 1fr 1fr; }
+  .article-lead-image img,
+  .article-lead-image video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* iframes can't reliably object-fit their embedded content, so instead
+     of stretching (and distorting) it to the row's height, size it by its
+     own 16:9 aspect ratio and center it — any leftover vertical space just
+     shows the surrounding dark card background. */
+  .article-lead-image:has(iframe) { display: flex; align-items: center; justify-content: center; }
+  .article-lead-image iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; max-height: 100%; border: 0; }
+  .article-lead-placeholder { width: 100%; height: 100%; min-height: 220px; background: var(--cool-400); }
   .article-lead-text-wrap { padding: 2.5rem 40px; display: flex; align-items: center; }
   .article-lead-text {
     font-weight: 500;
@@ -177,7 +213,11 @@ const shareLinks = {
   .article-cta h2 { font-size: var(--text-h5); color: #FFFFFF; margin: 0 0 1.75rem; }
 
   @media (max-width: 860px) {
-    .article-lead { grid-template-columns: 1fr; }
-    .article-lead-image img { aspect-ratio: 3 / 2; }
+    .article-lead,
+    .article-lead.has-video { grid-template-columns: 1fr; }
+    .article-lead-image img,
+    .article-lead-image video,
+    .article-lead-image iframe,
+    .article-lead-placeholder { aspect-ratio: 3 / 2; min-height: 0; }
   }
 </style>

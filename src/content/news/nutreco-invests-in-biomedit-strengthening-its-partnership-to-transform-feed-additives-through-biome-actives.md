@@ -1,10 +1,12 @@
 ---
 title: "Nutreco Invests in BiomEdit, Strengthening Its Partnership to Transform Feed Additives Through Biome-actives"
 date: 2023-02-18
-category: article
+category: press-release
 image: "/images/Nutreco-Logo.png"
 imageAlt: "Nutreco logo"
 lead: "Nutreco, global leader in animal nutrition and aquafeed, takes a minority stake in BiomEdit, deepening the companies' strategic research and commercial partnership."
+metaTitle: "Nutreco Takes Minority Stake in BiomEdit"
+metaDescription: "Nutreco invests in BiomEdit, strengthening their strategic partnership to develop novel microbiome-derived feed additives for livestock and aquaculture."
 ---
 
 February 18, 2023 – Nutreco, global leader in animal nutrition and aquafeed, today announces that it has taken a minority stake in animal health's most advanced microbiome biotech company, BiomEdit. The two companies recently entered into a ground-breaking, long-term strategic research and commercial partnership – the first since BiomEdit was founded – to bring livestock and aquaculture producers innovative and truly novel feed additives developed through microbiome technology. Today's announcement represents a further strengthening of this partnership.

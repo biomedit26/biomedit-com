@@ -5,6 +5,8 @@ category: press-release
 image: "/images/Bezos-Earth-Fund-logo-650x278-1.png"
 imageAlt: "Bezos Earth Fund logo"
 lead: "Partnership with Bioversity International USA and Yale University will build the Rumen Digital Twin to model and optimize climate-smart feed and microbiome interventions."
+metaTitle: "BiomEdit Wins Bezos Earth Fund Grant for Methane AI Model"
+metaDescription: "BiomEdit receives nearly $2M from the Bezos Earth Fund to build the Rumen Digital Twin, an AI model that identifies strategies to cut cattle methane emissions."
 ---
 
 GREENFIELD, IND. (Oct. 23, 2025) – In partnership with Bioversity International USA and Yale University, BiomEdit, a pioneering animal health biotechnology company, announced today it has been selected as one of 15 global teams awarded funding of nearly $2 million from the [Bezos Earth Fund's AI for Climate and Nature Grand Challenge](https://www.bezosearthfund.org/initiatives/ai-for-climate-and-nature). The funding will support development of the Rumen Digital Twin, an artificial intelligence (AI) foundation model designed to identify the most effective strategies for reducing methane emissions in cattle while also optimizing animal productivity and welfare.

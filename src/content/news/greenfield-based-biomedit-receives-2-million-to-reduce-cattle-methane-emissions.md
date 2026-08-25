@@ -1,11 +1,13 @@
 ---
 title: "Greenfield-Based BiomEdit Receives $2 Million to Reduce Cattle Methane Emissions"
 date: 2025-10-24
-category: article
-source: "Hoosier Ag Today"
+category: in-the-news
 image: "/images/cows-in-the-cowshed-in-dairy-farm-2023-11-27-04-54-34-utc-scaled.jpg"
 imageAlt: "Dairy cattle in a cowshed"
 lead: "BiomEdit is being awarded nearly $2 million from the Bezos Earth Fund's AI for Climate and Nature Grand Challenge to further develop the Rumen Digital Twin, an AI tool designed to reduce methane emissions in cattle while boosting productivity."
+source: "Hoosier Ag Today"
+metaTitle: "Hoosier Ag Today: BiomEdit's $2M Methane AI Grant"
+metaDescription: "Hoosier Ag Today reports on BiomEdit's nearly $2M Bezos Earth Fund award to build an AI model reducing cattle methane emissions while boosting productivity."
 ---
 
 BiomEdit, an animal health biotechnology company based in Greenfield, Indiana, is being awarded nearly $2 million from the Bezos Earth Fund's AI for Climate and Nature Grand Challenge to further develop an AI tool called the Rumen Digital Twin, which is designed to develop new ways to reduce methane emissions in cattle while boosting animal productivity.

@@ -5,11 +5,13 @@ category: press-release
 image: "/images/Broilers-Feeding96-scaled.jpg"
 imageAlt: "Broiler chickens feeding in a commercial poultry house"
 lead: "Poultry industry's first engineered probiotic biologic moves into final development and regulatory stages for USDA conditional licensure and commercial scale-up."
+metaTitle: "BiomEdit Closes $18.4M Series B, Advances CPerf LLV (BE-101)"
+metaDescription: "BiomEdit secures oversubscribed Series B funding, advances CPerf LLV (BE-101) toward USDA conditional licensure, and strengthens leadership with two new executive hires."
 ---
 
-GREENFIELD, IND. (July 16, 2025) – BiomEdit, a pioneering animal health biotechnology company, today announced a significant milestone in the development of BE-101, its lead candidate for the prevention of mortality associated with necrotic enteritis (NE) in broiler chickens. The product has entered the final phase of the U.S. Department of Agriculture's (USDA) conditional licensure process and is advancing toward commercialization, expected in 2026.
+GREENFIELD, IND. (July 16, 2025) – BiomEdit, a pioneering animal health biotechnology company, today announced a significant milestone in the development of CPerf LLV (BE-101), its lead candidate for the prevention of mortality associated with necrotic enteritis (NE) in broiler chickens. The product has entered the final phase of the U.S. Department of Agriculture's (USDA) conditional licensure process and is advancing toward commercialization, expected in 2026.
 
-BE-101, which will assume the brand name "Optavant™" upon full licensure, is the first-of-its-kind probiotic vectored antibody (pvAb™) product designed to neutralize Clostridium perfringens toxins – the major cause of NE associated productivity losses, disease and mortality, offering poultry producers a powerful, non-antibiotic solution to a disease that causes an estimated $6 billion in annual losses worldwide.
+CPerf LLV (BE-101), which will assume the brand name "Optavant™" upon full licensure, is the first-of-its-kind probiotic vectored antibody (pvAb™) product designed to neutralize Clostridium perfringens toxins – the major cause of NE associated productivity losses, disease and mortality, offering poultry producers a powerful, non-antibiotic solution to a disease that causes an estimated $6 billion in annual losses worldwide.
 
 Recent progress includes:
 
@@ -20,11 +22,11 @@ Recent progress includes:
 
 To support upcoming commercialization, BiomEdit has selected Diamond Animal Health as its contract development and manufacturing organization (CDMO). Commercial scale-up activities are in progress.
 
-"These approvals and study results represent a major inflection point for BE-101 and the entire BiomEdit platform," said Aaron Schacht, CEO of BiomEdit. "We're pleased to work closely with USDA to bring this novel solution to producers and to secure the right partner in Diamond Animal Health for commercial readiness."
+"These approvals and study results represent a major inflection point for CPerf LLV (BE-101) and the entire BiomEdit platform," said Aaron Schacht, CEO of BiomEdit. "We're pleased to work closely with USDA to bring this novel solution to producers and to secure the right partner in Diamond Animal Health for commercial readiness."
 
 "We're proud to support BiomEdit in the advancement of this truly innovative biologic platform," said Dean Warras, CEO of Diamond Animal Health.
 
-BiomEdit also announced the successful close of its Series B financing, led by Anterra Capital, with follow-on investment from Nutreco and new participation from AgriZeroNZ, Indiana's Elevate Ventures, and Betagro Ventures among others. The oversubscribed round (~$18.4M) provides sufficient capital to fund BiomEdit through conditional licensure and into the commercial launch of BE-101.
+BiomEdit also announced the successful close of its Series B financing, led by Anterra Capital, with follow-on investment from Nutreco and new participation from AgriZeroNZ, Indiana's Elevate Ventures, and Betagro Ventures among others. The oversubscribed round (~$18.4M) provides sufficient capital to fund BiomEdit through conditional licensure and into the commercial launch of CPerf LLV (BE-101).
 
 In support of this next phase, BiomEdit has added two seasoned animal health industry executives: Kristin Bloink, DVM, MPH, has joined as Vice President of Development, and Andrew Carlson has joined as Chief Commercial Officer.
 

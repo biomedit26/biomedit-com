@@ -1,17 +1,19 @@
 ---
-title: "How It Works: Pipeline Project BE-101"
+title: "How It Works: Pipeline Project CPerf LLV (BE-101)"
 date: 2024-04-16
 category: article
+secondaryCategory: videos-podcasts
 image: "/images/How-it-works2.png"
-imageAlt: "Diagram explaining the BE-101 probiotic vectored antibody mechanism"
-lead: "BE-101 – a probiotic vectored antibody (pvAb™) biological specifically engineered to combat the damaging effects of necrotic enteritis in broiler chickens."
+imageAlt: "Diagram explaining the CPerf LLV (BE-101) probiotic vectored antibody mechanism"
+lead: "CPerf LLV (BE-101) – a probiotic vectored antibody (pvAb™) biological specifically engineered to combat the damaging effects of necrotic enteritis in broiler chickens."
+videoUrl: https://biomedit.com/wp-content/uploads/2024/04/Biomedit_08_compressed.mp4
+metaTitle: "How CPerf LLV (BE-101) Works: BiomEdit's pvAb Technology Explained"
+metaDescription: "An inside look at how CPerf LLV (BE-101) works — BiomEdit's probiotic vectored antibody technology engineered to neutralize toxins that cause necrotic enteritis in broiler chickens."
 ---
 
-As BiomEdit's newest project to enter pivotal development, BE-101 represents one of our most advanced and promising assets. Its demonstrated successes, both in vitro and in vivo, validate our approach and the suitability of our platform to address unmet needs in animal health. For this reason, we're proud to share the video below, which explains the technology that forms the foundation for the BE-101 project.
+As BiomEdit's newest project to enter pivotal development, CPerf LLV (BE-101) represents one of our most advanced and promising assets. Its demonstrated successes, both in vitro and in vivo, validate our approach and the suitability of our platform to address unmet needs in animal health. For this reason, we're proud to share the video below, which explains the technology that forms the foundation for the CPerf LLV (BE-101) project.
 
 *Please note that the video describes a scientific project concept and is not a description of a marketed product.*
-
-[Watch the BE-101 explainer video](https://biomedit.com/wp-content/uploads/2024/04/Biomedit_08_compressed.mp4)
 
 For further information, see the following references:
 

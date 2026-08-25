@@ -12,8 +12,16 @@ import '../styles/tokens.css';
 interface Props {
   title: string;
   active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'publications' | 'pipeline' | 'products' | 'investors' | 'news';
+  // Optional — feeds <meta name="description"> and the Open Graph tags.
+  // No page sets this today, so omitting it is safe; pages that want
+  // better search/LLM/social-share indexing (e.g. news articles) should
+  // pass one.
+  description?: string;
+  // Root-relative image URL for og:image. No sitewide default exists yet,
+  // so the tag is simply omitted when this isn't passed.
+  image?: string;
 }
-const { title, active } = Astro.props;
+const { title, active, description, image } = Astro.props;
 
 const companyChildren = [
   { label: 'About', href: '/about', key: 'about' },
@@ -53,6 +61,12 @@ const year = new Date().getFullYear();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} · BiomEdit</title>
+  {description && <meta name="description" content={description} />}
+  <meta property="og:title" content={`${title} · BiomEdit`} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:type" content="website" />
+  {image && <meta property="og:image" content={new URL(image, Astro.site ?? 'https://biomedit.com').toString()} />}
+  <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <style>
     * { box-sizing: border-box; }
@@ -73,11 +87,10 @@ const year = new Date().getFullYear();
       padding: 0 40px;
     }
     .masthead-row {
-      padding: 0.5rem 0;
+      padding: 16px 0 4px;
       display: flex;
       justify-content: flex-end;
       gap: 28px;
-      border-bottom: 1px solid var(--cool-200);
     }
     .masthead-row a {
       font-size: 12px;
@@ -98,13 +111,13 @@ const year = new Date().getFullYear();
       position: relative;
       max-width: 1280px;
       margin: 0 auto;
-      padding: 1rem 40px;
+      padding: 4px 40px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 40px;
     }
-    .logo svg { height: 40px; width: auto; display: block; }
+    .logo svg { height: 40px; width: auto; display: block; position: relative; top: -4px; }
     .main-nav nav > ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
     .main-nav nav li a, .main-nav nav li span {
       font-size: 16px;

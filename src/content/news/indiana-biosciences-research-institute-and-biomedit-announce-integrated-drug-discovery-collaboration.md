@@ -5,6 +5,8 @@ category: press-release
 image: "/images/scientist-in-the-laboratory-blurred-photo-2023-11-27-05-36-55-utc-scaled.jpg"
 imageAlt: "Scientist working in a research laboratory"
 lead: "The partnership will enable the development of new engineered medicines to address unmet needs in animal health."
+metaTitle: "BiomEdit and IBRI Announce Drug Discovery Partnership"
+metaDescription: "BiomEdit and the Indiana Biosciences Research Institute announce a collaboration to advance microbiome-based drug discovery for companion animal and human health."
 ---
 
 INDIANAPOLIS, IND. (August 22, 2023) – The [Indiana Biosciences Research Institute](https://www.indianabiosciences.org/) (IBRI), a leading translational research organization, is pleased to announce an integrated drug discovery collaboration with BiomEdit, the most advanced microbiome company in animal health.
