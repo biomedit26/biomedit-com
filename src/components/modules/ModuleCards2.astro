@@ -9,6 +9,7 @@ interface Card {
   paragraphs: string[];
   ctaLabel?: string;
   ctaHref?: string;
+  image?: { src: string; alt: string };
 }
 interface Props {
   cardLeft: Card;
@@ -37,6 +38,11 @@ const cards = [cardLeft, cardRight];
   <div class="grid">
     {cards.map((card) => (
       <div class="content-card">
+        {card.image && (
+          <div class="card-image">
+            <img src={card.image.src} alt={card.image.alt} loading="lazy" />
+          </div>
+        )}
         {card.value ? (
           <div class="stat-row">
             <span class="stat-value">{card.value}</span>
@@ -75,6 +81,13 @@ const cards = [cardLeft, cardRight];
     border-radius: 6px;
     padding: 2.5rem 36px;
   }
+  .card-image {
+    margin: -2.5rem -36px 1.5rem;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+  }
+  .card-image img { display: block; width: 100%; height: 220px; object-fit: cover; }
+
   .content-card h2, .content-card h3 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
   .content-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0 0 1.5rem; }
   .content-card p.lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); }

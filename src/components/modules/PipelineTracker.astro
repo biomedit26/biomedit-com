@@ -136,9 +136,14 @@ const speciesList = [
         </div>
       ))}
     </div>
-  </div>
 
-  {footnote && <p class="footnote">{footnote}</p>}
+    {footnote && (
+      <div class="footnote-block">
+        <p class="footnote-label">Species Coverage</p>
+        <p class="footnote">{footnote}</p>
+      </div>
+    )}
+  </div>
 </div>
 
 <style>
@@ -262,7 +267,10 @@ const speciesList = [
   .description { font-size: 12px; line-height: 1.6; color: var(--text-primary); margin: 0 0 0.5rem; }
   .card-detail-link { font-size: 12px; font-weight: 700; color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
 
-  .footnote { font-size: 14px; color: var(--text-tertiary); margin: 1.5rem 0 0; }
+  .footnote-block { padding: 0 1.5rem 1.5rem; text-align: left; }
+  .footnote-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 0 0 0.5rem; }
+  .footnote { font-size: 16px; color: var(--text-primary); margin: 0; }
+  .candidate-grid { padding-bottom: 1.5rem; }
 
   /* focus-area filtering — hide cards outside the selected category */
   .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) .candidate-card:not(.cat-teal) { display: none; }

@@ -45,15 +45,19 @@ const stats = [
   { value: '200+', label: 'Years of combined leadership experience' },
 ];
 
-const categoryLabels: Record<'press-release' | 'article' | 'event', string> = {
+const categoryLabels: Record<'press-release' | 'article' | 'event' | 'in-the-news' | 'videos-podcasts', string> = {
   'press-release': 'Press Release',
   article: 'Article',
   event: 'Event',
+  'in-the-news': 'In the News',
+  'videos-podcasts': 'Videos & Podcasts',
 };
-const categoryColors: Record<'press-release' | 'article' | 'event', 'teal' | 'green' | 'amber'> = {
+const categoryColors: Record<'press-release' | 'article' | 'event' | 'in-the-news' | 'videos-podcasts', 'teal' | 'green' | 'amber' | 'navy' | 'orange'> = {
   'press-release': 'teal',
   article: 'green',
   event: 'amber',
+  'in-the-news': 'navy',
+  'videos-podcasts': 'orange',
 };
 const news = (await getCollection('news'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -87,8 +91,8 @@ const partners = [
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
       <h2>Who we are</h2>
-      <p class="lead">At BiomEdit, we develop engineered microbial biologics for animal health. Located at 16Tech inside the laboratory facilities of the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, our experienced team works together to advance our Programmable Veterinary Biologics<sup>&trade;</sup> platform. From scientists and researchers to product developers and regulatory experts, we are building a new category in animal health.</p>
-      <p class="lead"><strong>Our goal:</strong> better outcomes for animals, farmers and veterinarians, through precise, practical solutions.</p>
+      <p class="lead">At BiomEdit, we develop engineered microbial biologics for animal health. Located at 16Tech inside the laboratory facilities of the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, our experienced team works together to advance our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup> platform</a>. From scientists and researchers to product developers and regulatory experts, we are building a new category in animal health.</p>
+      <p class="lead"><strong>Our goal:</strong> better outcomes for animals, farmers, and veterinarians through precise, practical solutions.</p>
       <CTALink href="/science">Discover our science</CTALink>
     </div>
     <div class="who-we-are-image">
@@ -113,8 +117,8 @@ const partners = [
       <div class="build-icon" style="--icon-color:var(--color-navy);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6.5 21l5.5-3 5.5 3-2-7.5"/></svg>
       </div>
-      <h3>Platform to Product</h3>
-      <p>CPerf LLV* (formerly known as BE-101), is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
+      <h3>Strain Engineering</h3>
+      <p><a href="/products">CPerf LLV* (formerly known as BE-101)</a>, is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
     </div>
     <div class="build-card">
       <div class="build-icon" style="--icon-color:var(--color-teal);">

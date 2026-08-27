@@ -7,7 +7,6 @@ import { leaders } from '../data/leaders';
 
 const teamStats = [
   { value: '20', label: 'Doctoral degrees' },
-  { value: '4', label: 'MBAs' },
   { value: '9', label: 'Patents' },
   { value: '450+', label: 'Peer-reviewed publications' },
   { value: '200+', label: 'Years of combined leadership experience' },
@@ -44,13 +43,20 @@ const teamMembers = [
 <FieldNotesLayout title="Our Team" active="team">
   <IntroLead
     eyebrow="BiomEdit / Our Team"
-    heading="Our scientists, researchers, product developers, and regulatory experts are building something new."
-    paragraphs={['BiomEdit brings together scientists, engineers, and operators who have spent careers at the intersection of biology and commercial animal health. That combination of backgrounds is part of what makes this platform possible.']}
+    heading="Our team is building something new"
+    paragraphs={['BiomEdit brings together scientists, engineers, product developers, and regulatory experts who have spent careers at the intersection of biology and commercial animal health. That combination of backgrounds is part of what makes this platform possible.']}
     variant="dark"
   />
 
   <section class="team-stats">
-    <StatBlock stats={teamStats} align="center" />
+    <div class="team-stats-grid">
+      <div class="stats-col">
+        <StatBlock stats={teamStats} align="left" />
+      </div>
+      <div class="photo-col">
+        <img src="/images/090325_BiomEdit-Team_1692.jpg" alt="The BiomEdit team" />
+      </div>
+    </div>
   </section>
 
   <section class="leadership section-divider">
@@ -116,7 +122,17 @@ const teamMembers = [
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
-  .team-stats { padding: 3rem 0; }
+  .team-stats { padding: 3.5rem 0 4rem; }
+  .team-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; }
+  .stats-col { display: flex; align-items: center; }
+  .stats-col :global(.stat-block) { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 24px; }
+  .stats-col :global(.stat) { border-right: none !important; padding: 0 !important; }
+  .photo-col img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; border-radius: 6px; }
+
+  @media (max-width: 700px) {
+    .team-stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-col img { min-height: 220px; }
+  }
 
   .leadership { padding: 3.5rem 0 4rem; }
   .leadership h2 { font-size: var(--text-h5); margin: 0 0 2rem; }

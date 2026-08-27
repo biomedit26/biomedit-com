@@ -10,7 +10,7 @@ export interface Leader {
 export const leaders: Leader[] = [
   {
     slug: 'arvind-kumar',
-    name: 'Arvind Kumar, BVSc, MVSc, MS, PhD',
+    name: 'Arvind Kumar',
     title: 'Vice President, Research',
     image: '/images/leadership/arvind-kumar.jpg',
     linkedin: 'https://www.linkedin.com/in/arvind-kumar-mahajan-7a7b4414/',
@@ -18,12 +18,12 @@ export const leaders: Leader[] = [
       'Dr. Arvind Kumar serves as Vice President of Research and Co-Founder of BiomEdit, where he leads the company’s scientific strategy, translational research programs, and global scientific partnerships. A pioneer in microbiome science and biotechnology innovation, Dr. Arvind architected the probiotic delivery platform and foundational microbiome research that underpin BiomEdit’s Programmable Veterinary Biologics<sup>&trade;</sup> technology.',
       'A recognized leader in microbial engineering, animal health, and vaccine innovation, Arvind has spearheaded the development of BiomEdit’s flagship platforms, including probiotic-vectored biologics (pvAb™), AI-powered Digital Twin models, and microbial solutions for methane mitigation. He has helped raise significant non-dilutive funding from leading organizations, including the Bill &amp; Melinda Gates Foundation, Global Methane Hub, Bezos Earth Fund, NIH, and USDA, advancing and de-risking BiomEdit’s innovation pipeline while fostering strategic collaborations across academia, industry, and the public sector.',
       'A veterinarian by training, Arvind combines deep expertise in biologics research with a passion for translating breakthrough science into impactful products. With more than three decades of experience spanning academia, industry, and veterinary practice, he has held leadership roles at Elanco Animal Health, Lohmann Animal Health (Germany), the Roslin Institute, and the University of Edinburgh (UK) and College of Veterinary Sciences Palampur (India). Having built and led high-performing teams across Asia, Europe, and the United States, he brings a globally minded, culturally agile leadership style that fosters innovation, collaboration, and scientific excellence.',
-      'Arvind holds degrees in Veterinary Medicine, Veterinary Microbiology from Agriculture University Palampur, Immunology from Imperial College London, and a PhD from the University of Edinburgh. He is passionate about translating breakthrough science into practical solutions that advance animal health, food security, and environmental sustainability. As the original inventor of Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (aka BE-101), Arvind has helped translate an innovative concept into a product advancing toward commercial deployment. He is an inventor on more than 30 granted and pending patent families and has authored more than 70 peer-reviewed scientific publications spanning microbial engineering, synthetic biology, immunology, and animal health.',
+      'Arvind holds degrees in Veterinary Medicine, Veterinary Microbiology from Agriculture University Palampur, Immunology from Imperial College London, and a PhD from the University of Edinburgh. He is passionate about translating breakthrough science into practical solutions that advance animal health, food security, and environmental sustainability. As an original inventor of Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (aka BE-101), Arvind has helped translate an innovative concept into a product advancing toward commercial deployment. He is an inventor on more than 30 granted and pending patent families and has authored more than 70 peer-reviewed scientific publications spanning microbial engineering, synthetic biology, immunology, and animal health.',
     ],
   },
   {
     slug: 'kristin-bloink',
-    name: 'Kristin Bloink, DVM, MPH, DACVPM',
+    name: 'Kristin Bloink',
     title: 'Vice President, Product Development',
     image: '/images/leadership/kristin-bloink.jpg',
     linkedin: 'https://www.linkedin.com/in/kristin-bloink-b9597023/',
@@ -36,7 +36,7 @@ export const leaders: Leader[] = [
   },
   {
     slug: 'emily-helmes',
-    name: 'Emily Helmes, MBA',
+    name: 'Emily Helmes',
     title: 'Vice President, Regulatory',
     image: '/images/leadership/emily-helmes.jpg',
     linkedin: 'https://www.linkedin.com/in/emily-b-helmes/',
@@ -49,7 +49,7 @@ export const leaders: Leader[] = [
   },
   {
     slug: 'andrew-carlson',
-    name: 'Andrew Carlson, MBA',
+    name: 'Andrew Carlson',
     title: 'Chief Commercial Officer',
     image: '/images/leadership/andrew-carlson.jpg',
     linkedin: null,
@@ -77,7 +77,7 @@ export const leaders: Leader[] = [
   },
   {
     slug: 'eric-young',
-    name: 'Eric Young, MBA',
+    name: 'Eric Young',
     title: 'Chief Financial Officer and Chief Business Officer',
     image: '/images/leadership/eric-young.jpg',
     linkedin: 'https://www.linkedin.com/in/eric-young-48a74331/',
@@ -89,7 +89,7 @@ export const leaders: Leader[] = [
   },
   {
     slug: 'bruce-schelkopf',
-    name: 'Bruce Schelkopf, MS, MBA, JD, PhD/DBA',
+    name: 'Bruce Schelkopf',
     title: 'General Counsel, Chief IP Officer, & Company Secretary',
     image: '/images/leadership/bruce-schelkopf.jpg',
     linkedin: 'https://www.linkedin.com/in/bruceschelkopf/',

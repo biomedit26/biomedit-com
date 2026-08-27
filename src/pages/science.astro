@@ -4,89 +4,91 @@ import IntroLead from '../components/modules/IntroLead.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import CTALink from '../components/CTALink.astro';
 
-const differentiators = [
+const focusAreas = [
   {
-    title: 'Proprietary strain engineering',
-    description: "We start every product from the same foundation, a beneficial bacterial strain we select, screen, and engineer to carry a specific payload, without relying on antibiotics alone. Strain engineering isn't a step in our process, it's the foundation of every product we build.",
+    title: 'Infectious Disease',
+    description: 'Mitigating pathogenic outbreaks to protect herd health and pet populations.',
     color: 'teal' as const,
   },
   {
-    title: 'High-throughput sequencing and AI/ML',
-    description: 'We identify and optimize candidate strains rapidly and at scale, cutting time, cost, and animal burden from discovery to market.',
-    color: 'navy' as const,
+    title: 'Chronic Disease',
+    description: 'Targeting long-term, metabolic, and inflammatory health degradation in pets and livestock.',
+    color: 'amber' as const,
   },
   {
-    title: 'Programmable architecture',
-    description: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, cattle, swine, dogs, and cats, so each new product builds on proven ground instead of starting over.',
-    color: 'orange' as const,
-  },
-  {
-    title: 'Durable IP across the full stack',
-    description: "We generate protected intellectual property with every product across strain, delivery mechanism, indication, and process, compounding the platform's competitive advantage over time.",
+    title: 'Sustainability Challenges',
+    description: 'Reducing the environmental footprint of production agriculture and animal care systems.',
     color: 'green' as const,
   },
 ];
 
-const pillars = [
+const lifecycleStages = [
   {
-    heading: 'We built it first',
-    paragraphs: [
-      'BiomEdit is the first company to receive USDA conditional licensure for a Programmable Veterinary Biologic&trade;, built on our proprietary strain engineering platform. This is a milestone no other company has reached in any species, any geography, or any regulatory pathway.',
-      'CPerf LLV*, commercially known as Optavant&trade;, is proof that the engineered microbial therapeutics we build are real, licensed, and coming to market.',
-    ],
+    heading: 'Data-Driven Species & Chassis Matching',
+    paragraph: 'We select bacterial strains suited to the target animal species and intended application. Drawing from our microbial strain library, we identify strains with the characteristics needed to survive, engraft or colonize, and perform the intended biological function in the target environment.',
   },
   {
-    heading: 'We advance using the latest AI/ML technology',
-    paragraphs: [
-      'Our AI/ML infrastructure works hand-in-hand with our strain engineering platform, accelerating candidate selection and reducing the time, cost, and animal burden of bringing precision biologics to market.',
-      'Our AI capabilities move the industry from reactive &ldquo;trial and error&rdquo; approaches toward predictive, programmable animal health. This approach has been a critical factor in earning grant support, most notably from Bezos Earth Fund and Gates Foundation.',
-    ],
+    heading: 'Strain Engineering & Payload Design',
+    paragraph: 'We use complementary approaches to modify microbial function. We engineer bacterial strains to produce specific biological payloads, such as nanobodies, peptides, or enzymes, and use our Guided Biotics&reg; technology to selectively target specific bacterial populations within the microbiome. Together, these capabilities allow us to design programs around the biology of the disease or challenge and the desired microbial effect.',
   },
   {
-    heading: "We're powered by a proprietary gut microbiome library",
-    paragraphs: [
-      'Our proprietary strain library, built over years of sampling and characterization, gives BiomEdit access to novel strains and a deeper understanding of microbiome biology that others cannot easily replicate.',
-      'Developed specifically for animal health, it enables our team to screen, identify, and engineer high-potential microbial candidates from a foundation built for precision targeting, including some designed as antibiotic alternatives.',
-    ],
+    heading: 'High-throughput Sequencing and Computational Biology',
+    paragraph: 'High-throughput sequencing and computational biology help us characterize bacterial strains, select promising candidates, and guide strain and payload design. We use AI and machine learning where appropriate to analyze complex biological data and improve candidate selection. These capabilities support a more predictive approach to product development and have contributed to research supported by organizations including the Bezos Earth Fund and Gates Foundation.',
+  },
+  {
+    heading: 'Regulatory Navigation & Product Development',
+    paragraph: 'Our in-house regulatory and product development teams work alongside our scientists to translate new technologies into products that can be manufactured, approved, and used in animal health. Regulatory, safety, stability, and manufacturing requirements are considered early in development so that product candidates are designed with a practical path to commercialization. Our team has experience across multiple technologies and regulatory frameworks, including the USDA pathway for CPerf LLV* and MAPA approval in Brazil for BiomElix One.',
+  },
+  {
+    heading: 'Seamless Veterinary & Farm Integration',
+    paragraph: 'We develop biologics with practical manufacturing and use in mind. Our products are designed to work with established production processes and animal health delivery systems, including feed, drinking water, and standard veterinary administration. This approach minimizes the need for specialized infrastructure and supports adoption and deployment at commercial scale.',
   },
 ];
 ---
 <FieldNotesLayout title="Our Platform" active="science">
   <IntroLead
     eyebrow="BiomEdit / Our Platform"
-    heading="Engineering beneficial bacteria into Programmable Veterinary Biologics<sup>&trade;</sup>."
-    paragraphs={['BiomEdit engineers selected bacterial strains to produce and deliver biologic payloads, including nanobodies, peptides, and enzymes, for targeted efficacy in animal health.']}
+    heading="Engineering bacteria into Programmable Veterinary Biologics<sup>&trade;</sup>"
+    paragraphs={['BiomEdit builds selected bacterial strains to produce and deliver biologic payloads, including nanobodies, peptides and enzymes, for targeted efficacy in animal health.']}
     variant="dark"
   />
 
   <section class="pvb-definition section-divider">
-    <h2>A precision-engineered, living biologics platform.</h2>
-    <p class="pvb-intro">Programmable Veterinary Biologics are engineered beneficial bacteria designed to perform specific biological functions in an animal. Through strain engineering, each strain is selected for characteristics suited to the target species and application, then built to produce a payload, such as a nanobody, peptide, or enzyme, precisely where it&rsquo;s needed. The result is a flexible delivery approach where the organism, payload, and biological target can each be adapted for different diseases and species. That flexibility comes from our four core capabilities.</p>
+    <h2>A flexible platform addressing complex needs.</h2>
+    <p class="pvb-intro">We develop microbiome-based solutions to specific animal health problems. Our Programmable Veterinary Biologics<sup>&trade;</sup> are engineered bacteria designed to perform defined biological functions, complemented by technology that selectively targets bacteria already present in the microbiome. We focus these capabilities on three areas of animal health where we believe they can have meaningful impact.</p>
 
-    <div class="diff-grid">
-      {differentiators.map((d) => (
-        <div class="diff-card" style={`--diff-color:var(--color-${d.color});`}>
-          <h3>{d.title}</h3>
-          <p set:html={d.description} />
+    <div class="focus-grid">
+      {focusAreas.map((f) => (
+        <div class="focus-card" style={`--focus-color:var(--color-${f.color});`}>
+          <h3>{f.title}</h3>
+          <p>{f.description}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <section class="pillars section-divider">
-    <h2>How it works: three pillars.</h2>
-    <div class="pillars-grid">
-      {pillars.map((pillar, i) => (
-        <div class="pillar">
-          <div class="pillar-heading-row">
-            <span class="pillar-number">{i + 1}</span>
-            <h3>{pillar.heading}</h3>
-          </div>
-          {pillar.paragraphs.map((p) => <p set:html={p} />)}
+  <section class="lifecycle section-divider">
+    <h2>Our precision-engineered, living biologics lifecycle</h2>
+    <p class="lifecycle-intro">We focus on unmet animal health challenges across different diseases and species, including poultry, cattle, swine, cats and dogs. Every program within our Programmable Veterinary Biologics<sup>&trade;</sup> platform moves systematically through a defined five-stage lifecycle.</p>
+    <div class="lifecycle-body">
+      <div class="lifecycle-image">
+        <img src="/images/lifecycle-image.png" alt="BiomEdit scientist working with lab equipment in a biosafety cabinet" />
+      </div>
+      <div class="lifecycle-text">
+        <div class="lifecycle-list">
+          {lifecycleStages.map((stage, i) => (
+            <div class="lifecycle-item">
+              <span class="stage-number">{i + 1}</span>
+              <div class="stage-content">
+                <h3>{stage.heading}</h3>
+                <p set:html={stage.paragraph} />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+        <div class="lifecycle-cta"><CTALink href="/pipeline">View our pipeline</CTALink></div>
+      </div>
     </div>
-    <div class="pillars-cta"><CTALink href="/pipeline">Explore our pipeline</CTALink></div>
   </section>
 
   <section class="platform-action">
@@ -94,13 +96,17 @@ const pillars = [
       <div class="platform-action-text">
         <p class="eyebrow">Platform in Action</p>
         <h3>Proof in the pipeline.</h3>
-        <p>CPerf LLV* (BE-101), is the first Programmable Veterinary Biologic to receive conditional USDA licensure. It was developed to protect poultry from sub-clinical necrotic enteritis without relying on systemic antibiotics. It&rsquo;s proof that the platform works, not just in the lab, but at commercial scale.</p>
+        <p>CPerf LLV* (BE-101) is the first Programmable Veterinary Biologic<sup>&trade;</sup> to receive conditional USDA licensure. Developed to protect poultry from subclinical necrotic enteritis without systemic antibiotics, it demonstrates the translation of our platform from engineered strain design through regulatory approval and commercial-scale use.</p>
         <div class="platform-action-ctas">
           <CTALink href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank">Read the research</CTALink>
         </div>
       </div>
       <img src="/images/Broilers-Feeding96-scaled.jpg" alt="Broiler chickens feeding in a commercial poultry house" />
     </div>
+  </section>
+
+  <section class="footnote">
+    <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
   </section>
 
   <ModuleBlueText
@@ -121,32 +127,47 @@ const pillars = [
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
+  .footnote { padding: 0 0 2rem; }
+  .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+
   /* ---------- PVB definition ---------- */
   .pvb-definition { margin-top: 24px; padding: 1.5rem 0 4rem; }
   .pvb-definition h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; max-width: 760px; }
   .pvb-definition .pvb-intro { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 2rem; max-width: 760px; }
 
-  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .diff-card {
+  .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .focus-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-left: 3px solid var(--diff-color);
+    border-left: 3px solid var(--focus-color);
     border-radius: 6px;
     padding: 2rem 28px;
   }
-  .diff-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
-  .diff-card p:last-child { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
+  .focus-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
+  .focus-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
 
-  /* ---------- three pillars ---------- */
-  .pillars { padding: 1.5rem 0 4rem; }
-  .pillars h2 { font-size: var(--text-h5); margin: 0 0 2.5rem; }
-  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-  .pillar-heading-row { display: flex; align-items: center; gap: 16px; margin: 0 0 1rem; }
-  .pillar-number { font-size: var(--text-h3); font-weight: 700; color: var(--text-primary); line-height: 1; }
-  .pillar h3 { font-size: var(--text-h6); color: var(--text-primary); margin: 0; }
-  .pillar p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1rem; }
-  .pillar p:last-child { margin-bottom: 0; }
-  .pillars-cta { padding-top: 2.5rem; }
+  /* ---------- lifecycle ---------- */
+  .lifecycle { padding: 1.5rem 0 4rem; }
+  .lifecycle h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; max-width: 760px; }
+  .lifecycle-intro { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 2rem; max-width: 760px; }
+
+  .lifecycle-body { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
+  .lifecycle-image { position: sticky; top: 24px; }
+  .lifecycle-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
+
+  .lifecycle-list { display: flex; flex-direction: column; }
+  .lifecycle-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 32px;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--cool-400);
+  }
+  .lifecycle-item:first-of-type { border-top: 1px solid var(--cool-400); }
+  .stage-number { font-size: var(--text-h3); font-weight: 700; color: var(--color-teal); line-height: 1; }
+  .stage-content h3 { font-size: var(--text-h6); color: var(--text-primary); margin: 0 0 0.75rem; }
+  .stage-content p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0; max-width: 760px; }
+  .lifecycle-cta { padding-top: 2.5rem; }
 
   /* ---------- platform in action ---------- */
   .platform-action { padding: 1.5rem 0 4rem; }
@@ -168,7 +189,11 @@ const pillars = [
   .platform-action-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   @media (max-width: 860px) {
-    .diff-grid, .pillars-grid { grid-template-columns: 1fr; }
+    .focus-grid { grid-template-columns: 1fr; }
+    .lifecycle-body { grid-template-columns: 1fr; gap: 1.5rem; }
+    .lifecycle-image { position: static; }
+    .lifecycle-item { grid-template-columns: 44px 1fr; gap: 20px; }
+    .stage-number { font-size: var(--text-h5); }
     .platform-action-card { grid-template-columns: 1fr; gap: 1.5rem; }
     .platform-action-card img { order: -1; min-height: 260px; }
     .platform-action-text { padding: 0 28px 2.25rem; }

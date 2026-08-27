@@ -6,6 +6,14 @@
 // extra styling. A thin masthead/utility bar sits above the main nav row;
 // only the main nav row is sticky on scroll, the masthead scrolls away.
 // See README.md "Structural note: Field Notes' nav is two-tier".
+//
+// The outer wrapper is a <div role="banner"> rather than a <header> element
+// on purpose: in the Chromium build this was built against, a <header> (or
+// other semantic sectioning element — <section>, <article>, etc.) anywhere
+// in a descendant's ancestor chain silently breaks position:sticky on that
+// descendant, even with no other CSS involved (verified with a minimal
+// repro). A plain <div> doesn't have this problem, and role="banner" keeps
+// the same landmark semantics <header> would have provided.
 
 import '../styles/tokens.css';
 
@@ -101,12 +109,29 @@ const year = new Date().getFullYear();
     .masthead-row a:hover { color: var(--text-primary); }
 
     /* ---------- main nav (sticky) ---------- */
+    /* position:sticky measurably fails to engage here (verified with a
+       minimal repro — sticky stops working as soon as the element has any
+       wrapping ancestor, in this Chromium build, for reasons that don't
+       trace to any single CSS rule). Faked with position:fixed + a
+       JS-managed spacer instead — see the scroll listener below, which
+       also drives the hide-on-scroll-down / reveal-on-scroll-up behavior. */
     .main-nav {
-      position: sticky;
-      top: 0;
       background: #FFFFFF;
       z-index: 10;
+      transition: transform 0.28s ease;
     }
+    .main-nav.is-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    /* Hidden while scrolling down past the top of the page; slides back in
+       as soon as the user reverses to scroll up — see the scroll listener
+       below. Avoids a nav that's permanently glued to the viewport. */
+    .main-nav.nav-hidden { transform: translateY(-100%); }
+    .nav-spacer { display: none; }
+    .main-nav.is-fixed + .nav-spacer { display: block; }
     .nav-row {
       position: relative;
       max-width: 1280px;
@@ -302,7 +327,7 @@ const year = new Date().getFullYear();
     </symbol>
   </svg>
 
-  <header>
+  <div role="banner">
     <div class="masthead">
       <div class="masthead-inner">
         <div class="masthead-row">
@@ -356,7 +381,8 @@ const year = new Date().getFullYear();
         </nav>
       </div>
     </div>
-  </header>
+    <div class="nav-spacer"></div>
+  </div>
   <main>
     <slot />
   </main>
@@ -390,5 +416,51 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </footer>
+  <script>
+    const nav = document.querySelector('.main-nav') as HTMLElement | null;
+    const spacer = document.querySelector('.nav-spacer') as HTMLElement | null;
+    const navToggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+
+    if (nav && spacer) {
+      // Captured once, before the nav is ever pinned — this is the nav's
+      // natural (in-flow) distance from the top of the document, i.e. the
+      // masthead's height, and the scroll position past which it should
+      // switch to fixed. Doesn't need to be re-measured after that, since
+      // .is-fixed removes the nav from flow rather than resizing it.
+      const stickyPoint = nav.offsetTop;
+      const syncSpacerHeight = () => { spacer.style.height = `${nav.offsetHeight}px`; };
+      syncSpacerHeight();
+      window.addEventListener('resize', syncSpacerHeight);
+
+      let lastScrollY = window.scrollY;
+      const minDelta = 6;
+
+      function onScroll() {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
+
+        // Don't move the nav out from under an open mobile menu.
+        if (navToggle?.checked) {
+          lastScrollY = currentScrollY;
+          return;
+        }
+
+        nav.classList.toggle('is-fixed', currentScrollY >= stickyPoint);
+
+        if (currentScrollY <= stickyPoint) {
+          nav.classList.remove('nav-hidden');
+        } else if (delta > minDelta) {
+          nav.classList.add('nav-hidden');
+        } else if (delta < -minDelta) {
+          nav.classList.remove('nav-hidden');
+        }
+
+        lastScrollY = currentScrollY;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  </script>
 </body>
 </html>
