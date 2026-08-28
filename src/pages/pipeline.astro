@@ -1,11 +1,9 @@
 ---
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
-import Module11 from '../components/modules/Module11.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import PipelineTracker from '../components/modules/PipelineTracker.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
-import Button from '../components/Button.astro';
 import CTALink from '../components/CTALink.astro';
 
 const stages = [
@@ -21,7 +19,7 @@ const stages = [
 // future species — not reflected here or in the footnote below yet.
 const candidates = [
   {
-    id: 'CPerf LLV* / Optavant™',
+    id: 'CPerf LLV*/(BE-101)',
     category: 'teal' as const,
     species: 'Poultry',
     speciesKey: 'poultry' as const,
@@ -31,6 +29,16 @@ const candidates = [
     description: 'A best-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.',
     ctaLabel: 'Read more',
     ctaHref: '/products',
+  },
+  {
+    id: 'BEX1 (BiomElix® One)',
+    category: 'teal' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry' as const,
+    mechanism: 'CRISPR-based editing (Guided Biotic)',
+    stage: 5,
+    stageNote: "Regulatory Approval / Launch Readiness. Approved by Brazil's MAPA.",
+    description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture (MAPA) as part of BiomEdit's acquisition of Folium Science.",
   },
   {
     id: 'BE-118',
@@ -99,33 +107,16 @@ const candidates = [
     eyebrow="BiomEdit / Pipeline"
     heading="Making biology programmable for animal health"
     paragraphs={[
-      "We&rsquo;re innovators. We look for measurable gaps in animal health and build the programmable biologics to close them.",
+      "We&rsquo;re innovators. We look for measurable gaps in animal health and build the Programmable Veterinary Biologics<sup>&trade;</sup> to close them.",
     ]}
     variant="dark"
-  >
-    <div class="header-ctas">
-      <Button color="amber" variant="filled" href="/pipeline">Explore CPerf LLV*</Button>
-      <CTALink href="#" tone="onDark">Explore our platform</CTALink>
-    </div>
-  </IntroLead>
-
-  <div class="strain-module">
-    <Module11
-      heading="Strain engineering: where every program starts."
-      columns="1fr 2fr"
-      paragraphs={[
-        'This is the foundation of our proprietary platform, and focuses on infectious disease, sustainability, and chronic disease therapeutics. We apply AI/ML to target selection, accelerate payload and candidate design, and draw on our proprietary microbiome library to identify high-potential strains as starting points.',
-        'The result: novel veterinary biologics built to deliver healthier animals, fewer antibiotics, and new tools for what matters most to protein producers and pet owners.',
-      ]}
-      image={{ src: '/images/umar-kashif-V8hNNFPV27M-unsplash.jpg', alt: 'Close-up of a shaggy Highland cattle calf' }}
-    />
-  </div>
+  />
 
   <section class="spotlight-section">
     <div class="spotlight">
       <div class="spotlight-text">
         <p class="eyebrow">Featured Program — Infectious Disease</p>
-        <h3>CPerf LLV* (Optavant<sup>&trade;</sup>) is a series of firsts.</h3>
+        <h3>CPerf LLV* (BE-101) granted USDA Conditional Licensure.</h3>
         <div class="spotlight-facts">
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
@@ -133,7 +124,11 @@ const candidates = [
           </div>
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
-            <p>First engineered microbial therapeutic ever to achieve licensure: in any species, in any geography, in any regulatory path</p>
+            <p>First engineered bacterial biologic to achieve licensure for poultry.</p>
+          </div>
+          <div class="spotlight-fact">
+            <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+            <p>A new non-antibiotic approach designed to give producers an option for managing necrotic enteritis.</p>
           </div>
         </div>
         <CTALink href="/products">Learn about CPerf LLV*</CTALink>
@@ -146,7 +141,7 @@ const candidates = [
     <ModulePlainText
       heading="Three focus areas. One BiomEdit platform."
       paragraphs={[
-        'Our programmable veterinary biologics platform spans <strong>infectious disease</strong>, <strong>sustainability</strong>, and <strong>chronic disease</strong> therapeutics. We engineer bacteria to deliver nanobodies (like the strains behind CPerf LLV*), peptides, or enzymes, or work together as a microbial consortium. One platform, built to pivot based on what we&rsquo;re solving for.',
+        'Our Programmable Veterinary Biologics<sup>&trade;</sup> platform spans three focus areas: <strong>infectious disease</strong>, <strong>sustainability</strong>, and <strong>chronic disease</strong>. We engineer beneficial bacteria to perform specific biological functions, including producing nanobodies, peptides, or enzymes, or working together as microbial consortia. Our platform also incorporates technology acquired from Folium Science that selectively targets specific bacterial populations already present in the microbiome. These complementary approaches can be applied across livestock and companion animals, with in-house capabilities spanning discovery, development, regulatory, and commercialization.',
       ]}
     />
   </div>
@@ -180,13 +175,8 @@ const candidates = [
   .footnote { padding: 0 0 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
 
-  .header-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 1.5rem; }
-
-  .strain-module { margin-top: 3.5rem; }
-  .strain-module :global(.grid) { align-items: center; }
-  .strain-module :global(.image-col) { order: -1; }
-
   .focus-text :global(.text-wrap) { padding-bottom: 2rem; }
+  .focus-text :global(.text-col) { text-align: left; margin: 0; max-width: 760px; }
 
   .tracker-section { padding: 0 0 4rem; }
 

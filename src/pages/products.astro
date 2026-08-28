@@ -8,8 +8,15 @@ import ModuleSection from '../components/modules/ModuleSection.astro';
 import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import FactList from '../components/modules/FactList.astro';
-import StatBlock from '../components/StatBlock.astro';
 import CTALink from '../components/CTALink.astro';
+
+const evidencePoints = [
+  { value: '+76g', description: 'Weight gain vs. antibiotic (p = 0.025)' },
+  { value: '+81g', description: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
+  { value: '6&ndash;7 pt', description: 'Improvement in feed conversion ratio at key time points' },
+  { description: 'Increased finished weight compared with challenged controls.' },
+  { value: 'Up to 48%', description: 'Reduction in mortality in an earlier <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener">clinical challenge model</a>.' },
+];
 
 const flockFacts = [
   { value: 'Performance', valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
@@ -23,9 +30,9 @@ const flockFacts = [
        Phase 2 addition to this section — not built yet. -->
   <IntroLead
     eyebrow="BiomEdit / Products"
-    heading="CPerf LLV* / Optavant<sup>&trade;</sup><br />The first of any kind"
+    heading="CPerf LLV* (BE-101) &mdash;The first-of-its-kind engineered bacteria biologic"
     paragraphs={[
-      "CPerf LLV* (Optavant&trade;) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It&rsquo;s the first product from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.",
+      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (aka BE-101) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.",
       '<strong>Now available to U.S. producers under USDA conditional license.</strong>',
     ]}
     variant="dark"
@@ -36,36 +43,36 @@ const flockFacts = [
       <div class="problem-card">
         <p class="card-eyebrow">The problem</p>
         <div class="problem-stat">$6B</div>
-        <p>Necrotic enteritis costs the poultry industry an estimated $6B annually. CPerf LLV* addresses this problem at its source, without relying on systemic antibiotics.</p>
+        <p>Necrotic enteritis costs the poultry industry an estimated $6B annually.</p>
       </div>
       <div class="solution-card">
         <p class="card-eyebrow is-teal">The solution</p>
-        <p class="solution-lead">CPerf LLV* (Optavant&trade;) protects broilers from necrotic enteritis without systemic antibiotics.</p>
+        <p class="solution-lead">CPerf LLV* protects broilers from necrotic enteritis without systemic antibiotics.</p>
         <div class="solution-highlight">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
           <p>Now available to U.S. producers under USDA conditional license.</p>
         </div>
         <div class="solution-fact">
           <span class="fact-number">1st</span>
-          <p>The first engineered microbial therapeutic to achieve licensure, in any species, geography, or regulatory pathway.</p>
+          <p>The first-of-its-kind engineered bacteria biologic for poultry to achieve USDA licensure.</p>
         </div>
       </div>
     </div>
   </ModuleSection>
 
   <Module11
-    heading="What it means for your flock"
+    heading="What it means for broiler production."
     image={{ src: '/images/boiler-hen-in-housing-single.jpg', alt: 'Pastured poultry raised without systemic antibiotics' }}
   >
     <FactList items={flockFacts} />
   </Module11>
 
   <Module21
-    heading="How CPerf LLV* fits your program"
+    heading="How CPerf LLV* is administered"
     columns="1fr 2fr"
     paragraphs={[
       'Two applications, and no daily protocol to manage.',
-      'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second application at 14 days maintains protection through the growth cycle &mdash; there&rsquo;s no continuous in-feed program to manage.',
+      'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
       'The colonized strain produces protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
     ]}
     image={{ src: '/images/gut-diagram-with-labels.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
@@ -76,14 +83,13 @@ const flockFacts = [
     paragraphs={['In a controlled 43-day trial, poultry treated with CPerf LLV*&rsquo;s engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain, with mechanistic evidence of reduced immune activation and oxidative stress.']}
     image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by CPerf LLV' }}
   >
-    <StatBlock
-      align="center"
-      divider={false}
-      stats={[
-        { value: '+76g', label: 'Weight gain vs. antibiotic (p = 0.025)' },
-        { value: '+81g', label: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
-      ]}
-    />
+    <div class="evidence-grid">
+      {evidencePoints.map((s) => (
+        <div class="evidence-card">
+          <p set:html={`${s.value ? `<strong class="evidence-value">${s.value} </strong>` : ''}${s.description}`} />
+        </div>
+      ))}
+    </div>
     <div class="evidence-cta"><CTALink href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank">Read the full study</CTALink></div>
   </Module11>
 
@@ -107,7 +113,7 @@ const flockFacts = [
       headingLevel="h3"
       cardLeft={{
         heading: 'BE-105 | Obesity & Diabetes (Cats)',
-        paragraphs: ['Oral biologic for chronic weight management and metabolic health and first demonstration that microbial therapeutics can potentially deliver systemic peptide pharmacology.'],
+        paragraphs: ['Oral biologic for chronic weight management and metabolic health and first demonstration that microbial biologics can potentially deliver systemic peptide pharmacology.'],
         image: { src: '/images/reinis-bruzitis-aR0nwx0b950-unsplash.jpg', alt: 'Cat' },
       }}
       cardRight={{
@@ -151,7 +157,18 @@ const flockFacts = [
   .footnote { padding: 0 0 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
 
-  .evidence-cta { margin-top: 3rem; }
+  .evidence-grid { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .evidence-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.25rem 1.75rem;
+    text-align: left;
+  }
+  .evidence-value { font-weight: 700; color: var(--text-primary); }
+  .evidence-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
+
+  .evidence-cta { margin-top: 2.5rem; }
 
   .problem-solution { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; padding: 0 0 4rem; }
 
@@ -164,7 +181,7 @@ const flockFacts = [
     padding: 2.5rem 36px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .problem-stat { font-size: var(--text-h3); font-weight: 700; line-height: 1; color: #FFFFFF; margin: 0 0 1rem; }
   .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0; }

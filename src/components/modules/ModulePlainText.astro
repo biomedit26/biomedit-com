@@ -19,9 +19,10 @@ interface Props {
   // Attribution byline size. 'sm' (default, 13px), 'md' (14px), or 'lg'
   // (--text-h6, two steps up the type scale from 'md').
   attributionSize?: 'sm' | 'md' | 'lg';
-  // Quote text size. 'md' (default, --text-h6) or 'lg' (--text-h4, two
-  // steps up the type scale) for a quote that needs more visual weight.
-  quoteSize?: 'md' | 'lg';
+  // Quote text size. 'md' (default, --text-h6), 'lg' (--text-h5, one step
+  // up), or 'xl' (--text-h4, two steps up) for a quote that needs more
+  // visual weight.
+  quoteSize?: 'md' | 'lg' | 'xl';
 }
 const {
   heading, paragraphs, ctaLabel, ctaHref, label, quote = false, attribution, noDivider = false,
@@ -33,7 +34,7 @@ const {
     <div class="text-col">
       {quote ? (
         <>
-          <p class={`quote ${quoteFont === 'sans' ? 'is-sans' : ''} ${quoteSize === 'lg' ? 'is-lg' : ''}`} set:html={paragraphs[0]} />
+          <p class={`quote ${quoteFont === 'sans' ? 'is-sans' : ''} ${quoteSize === 'lg' ? 'is-lg' : ''} ${quoteSize === 'xl' ? 'is-xl' : ''}`} set:html={paragraphs[0]} />
           {attribution && <cite class={`quote-cite ${attributionSize === 'md' ? 'is-md' : ''} ${attributionSize === 'lg' ? 'is-lg' : ''} ${quoteFont === 'sans' ? 'is-sans' : ''}`}>{attribution}</cite>}
         </>
       ) : (
@@ -74,7 +75,8 @@ const {
     color: var(--color-navy);
     margin: 0;
   }
-  .text-col p.quote.is-lg { font-size: var(--text-h4); }
+  .text-col p.quote.is-lg { font-size: var(--text-h5); }
+  .text-col p.quote.is-xl { font-size: var(--text-h4); }
   .text-col p.quote.is-sans {
     font-family: 'PT Sans', sans-serif;
     font-style: italic;
