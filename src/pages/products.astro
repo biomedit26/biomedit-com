@@ -21,8 +21,8 @@ const evidencePoints = [
 const flockFacts = [
   { value: 'Performance', valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
   { value: 'Compliance', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
-  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so birds spend less energy on immune response and more on growth." },
-  { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Improved performance and healthier birds.' },
+  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so broilers spend less energy on immune response and more on growth." },
+  { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Improved performance, healthier birds, and reduced mortality.' },
 ];
 ---
 <FieldNotesLayout title="Products" active="products">
@@ -32,7 +32,7 @@ const flockFacts = [
     eyebrow="BiomEdit / Products"
     heading="CPerf LLV* (BE-101) &mdash;The first-of-its-kind engineered bacteria biologic"
     paragraphs={[
-      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (aka BE-101) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.",
+      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (BE-101) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.",
       '<strong>Now available to U.S. producers under USDA conditional license.</strong>',
     ]}
     variant="dark"
@@ -44,10 +44,11 @@ const flockFacts = [
         <p class="card-eyebrow">The problem</p>
         <div class="problem-stat">$6B</div>
         <p>Necrotic enteritis costs the poultry industry an estimated $6B annually.</p>
+        <p>The shift to antibiotic-free production has made necrotic enteritis harder to control, and costlier to ignore.</p>
       </div>
       <div class="solution-card">
         <p class="card-eyebrow is-teal">The solution</p>
-        <p class="solution-lead">CPerf LLV* protects broilers from necrotic enteritis without systemic antibiotics.</p>
+        <p class="solution-lead">CPerf LLV* helps protect broilers from necrotic enteritis (NE) without systemic antibiotics by neutralizing Clostridium perfringens toxins, a primary driver of NE-related disease, managing mortality and productivity losses.</p>
         <div class="solution-highlight">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
           <p>Now available to U.S. producers under USDA conditional license.</p>
@@ -73,7 +74,7 @@ const flockFacts = [
     paragraphs={[
       'Two applications, and no daily protocol to manage.',
       'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
-      'The colonized strain produces protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
+      'The colonized strain produces and secretes protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
     ]}
     image={{ src: '/images/gut-diagram-with-labels.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
   />
@@ -118,7 +119,7 @@ const flockFacts = [
       }}
       cardRight={{
         heading: 'BE-122 | Inflammatory Bowel Disease (Dogs)',
-        paragraphs: ['Oral biologic for chronic gastrointestinal disease.'],
+        paragraphs: ['Oral biologic to help treat inflammatory bowel disease (IBD) in dogs, offering a potential alternative or complement to chronic corticosteroid therapy.'],
         image: { src: '/images/pauline-loroy-U3aF7hgUSrk-unsplash.jpg', alt: 'Dog' },
       }}
     />
@@ -137,7 +138,7 @@ const flockFacts = [
     heading="Curious what&rsquo;s next after CPerf LLV*?"
     ctaLabel="View our full pipeline"
     ctaHref="/pipeline"
-    secondaryCtaLabel="Read the research"
+    secondaryCtaLabel="Learn about our science"
     secondaryCtaHref="/science"
     noDivider
     image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
@@ -184,7 +185,8 @@ const flockFacts = [
     justify-content: flex-start;
   }
   .problem-stat { font-size: var(--text-h3); font-weight: 700; line-height: 1; color: #FFFFFF; margin: 0 0 1rem; }
-  .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0; }
+  .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0 0 1rem; }
+  .problem-card p:last-child { margin-bottom: 0; }
 
   .solution-card {
     background: var(--bg-secondary);

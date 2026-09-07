@@ -33,16 +33,19 @@ const launchPartners = [
   { name: 'Ferment', logo: '/images/investor-partner/ferment.png', small: true, href: 'https://www.ferment.co/' },
 ];
 
-const newCategoryCards = [
-  { color: 'teal', heading: 'A Series of Firsts', paragraph: 'CPerf LLV* is the first engineered microbial therapeutic ever to achieve licensure, in any species, any geography, any regulatory pathway.' },
-  { color: 'navy', heading: 'Our Platform', paragraph: 'Our Programmable Veterinary Biologics<sup>&trade;</sup> platform is built on strain engineering, AI/ML, and a proprietary microbiome library — not a single product.' },
-  { color: 'orange', heading: 'Durable IP', paragraph: 'Two patents, announced April 21, 2026, protect the core delivery mechanism and the nanobody sequences behind CPerf LLV*. Our platform generates further IP across strain, delivery mechanism, indication, and process.' },
-  { color: 'green', heading: 'Capital efficiency', paragraph: '$5.5&ndash;6M in non-dilutive capital raised to date, supporting sustainability-focused work alongside the core pipeline.' },
+// In order of emphasis, per leadership-approved copy.
+const whyBiomEditPoints = [
+  { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic&trade;', paragraph: 'CPerf LLV* is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
+  { color: 'navy', heading: 'Our Platform', paragraph: 'Our Programmable Veterinary Biologics<sup>&trade;</sup> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic<sup>&reg;</sup> technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix<sup>&reg;</sup> One, approved in Brazil.' },
+  { color: 'orange', heading: 'Foundational Patents', paragraph: 'We have patents that protect the core delivery mechanism and the nanobody sequences behind CPerf LLV* and other programs.' },
+  { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the Bezos Earth Fund and the Gates Foundation.' },
+  { color: 'teal', heading: 'Programmable Architecture', paragraph: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, swine, cattle, dogs, and cats, so each new product builds on proven ground instead of starting over.' },
+  { color: 'navy', heading: 'Durable IP Across the Full Stack', paragraph: 'We generate protected intellectual property (IP) with every product across strain, delivery mechanism, indication, and process, compounding the platform&rsquo;s competitive advantage with each release.' },
+  { color: 'orange', heading: 'A Results-Driven Team', paragraph: 'Our executive team has over 200 years of combined experience, over 450 publications, and a track record of inventing dozens of commercial animal health innovations.' },
 ];
 
 const awards = [
   { title: '2026 Deal of the Year, TechPoint Mira Awards', description: "Recognized for BiomEdit's $18.4M Series B round, led by Elanco Animal Health." },
-  { title: '2023 Visionary CEO Award, S&P Global Animal Health', description: 'Aaron Schacht recognized for leadership and innovation in animal health.' },
   { title: '2022 Best Start-Up in Animal Health, S&P Global Animal Health', description: "Awarded shortly after BiomEdit's founding." },
 ];
 
@@ -54,8 +57,8 @@ const grants = [
 <FieldNotesLayout title="Investors & Partners" active="investors">
   <IntroLead
     eyebrow="BiomEdit / Investors"
-    heading="Backed by leaders in Agtech, lifesciences and sustainability"
-    paragraphs={['BiomEdit is pioneering Programmable Veterinary Biologics<sup>&trade;</sup>, with investors and partners who understand what it takes to bring this category to market. Our first product is conditionally licensed and on track for commercial launch in Q4 2026, as we continue to build new solutions on our proprietary platform.']}
+    heading="Backed by leaders in agtech, lifesciences and sustainability"
+    paragraphs={['BiomEdit is pioneering Programmable Veterinary Biologics<sup>&trade;</sup>, with investors and partners who understand what it takes to bring this category to market. Our first product, CPerf LLV*, is on track for commercial launch in Q4 2026, as we continue to advance new solutions across our multi-species pipeline.']}
     variant="dark"
   />
 
@@ -132,11 +135,14 @@ const grants = [
     <h2>A new category, built for what&rsquo;s next in animal health.</h2>
     <div class="new-category-grid">
       <img src="/images/biomedit-new-vertical.png" alt="Scientist pipetting samples into a tube rack in the lab" />
-      <div class="new-category-cards">
-        {newCategoryCards.map((card) => (
-          <div class="new-category-card" style={`border-top-color:var(--color-${card.color});`}>
-            <h3>{card.heading}</h3>
-            <p set:html={card.paragraph} />
+      <div class="why-biomedit-list">
+        {whyBiomEditPoints.map((point, i) => (
+          <div class="why-biomedit-item" style={`--point-color:var(--color-${point.color});`}>
+            <span class="why-biomedit-number">{i + 1}</span>
+            <div class="why-biomedit-content">
+              <h3 set:html={point.heading} />
+              <p set:html={point.paragraph} />
+            </div>
           </div>
         ))}
       </div>
@@ -145,7 +151,7 @@ const grants = [
 
   <section class="awards">
     <FullBleedBand background="var(--cool-800)">
-      <h2>Recognized by the industry we&rsquo;re building for.</h2>
+      <h2>Industry recognition for what we deliver.</h2>
       <div class="awards-grid">
         <EntryList label="Key Awards & Honors" items={awards} tone="onDark" />
         <EntryList label="Major Grants & Funding Awards" items={grants} tone="onDark" />
@@ -169,7 +175,7 @@ const grants = [
   </section>
 
   <ModuleBlueText
-    heading="Passionate about creating therapeutics that put animal&rsquo;s health and wellbeing first? We want to hear from you."
+    heading="Want to learn more about BiomEdit?"
     ctaLabel="Connect with us"
     ctaHref="#"
     noDivider
@@ -212,18 +218,35 @@ const grants = [
 
   .new-category { padding: 24px 0 3.5rem; }
   .new-category h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
-  .new-category-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; }
-  .new-category-grid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
-  .new-category-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .new-category-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-top: 4px solid transparent;
-    border-radius: 6px;
-    padding: 1.75rem 28px;
+  .new-category-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+  .new-category-grid > img { display: block; width: 100%; height: auto; object-fit: cover; border-radius: 6px; position: sticky; top: 24px; }
+
+  .why-biomedit-list { display: flex; flex-direction: column; }
+  .why-biomedit-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 20px;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--cool-300);
   }
-  .new-category-card h3 { font-size: var(--text-h6); color: var(--text-primary); margin: 0 0 0.75rem; }
-  .new-category-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0; }
+  .why-biomedit-item:first-child { padding-top: 0; }
+  .why-biomedit-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .why-biomedit-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--point-color) 14%, transparent);
+    color: var(--point-color);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .why-biomedit-content h3 { font-size: 17px; color: var(--text-primary); margin: 0 0 0.5rem; }
+  .why-biomedit-content h3 sup { font-size: 0.6em; }
+  .why-biomedit-content p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
 
   .partner-module { margin-top: 6rem; }
   .partner-module :global(.grid) { align-items: center; }
@@ -237,8 +260,6 @@ const grants = [
   @media (max-width: 860px) {
     .lockups-bottom, .new-category-grid, .awards-grid { grid-template-columns: 1fr; }
     .lockups-bottom { gap: 2.5rem; }
-  }
-  @media (max-width: 600px) {
-    .new-category-cards { grid-template-columns: 1fr; }
+    .new-category-grid > img { position: static; }
   }
 </style>

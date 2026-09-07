@@ -5,11 +5,17 @@ import CTALink from '../components/CTALink.astro';
 const faqs = [
   {
     question: 'What does BiomEdit do?',
-    preview: 'BiomEdit engineers Programmable Veterinary Biologics<sup>&trade;</sup>, living therapeutics built from strains delivering biological payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals.',
+    preview: 'BiomEdit created Programmable Veterinary Biologics<sup>&trade;</sup>, living biologics built from strains delivering payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic&reg; technology that selectively targets specific bacterial populations within the microbiome.',
     extra: [
-      'Our mission is to engineer living biologics that prevent disease, treat conditions, and improve animal health. In practice, that means we combine microbiome science, synthetic biology, and AI-powered discovery to build a repeatable engine for animal health products.',
-      'BiomEdit is backed by leading global investors including Anterra Capital, Viking Global Investors, Nutreco, AgriZeroNZ, Elevate Ventures, Betagro Ventures and others. We are engineering a new chapter in animal health and this begins with our Programmable Veterinary Biologics<sup>&trade;</sup> platform.',
+      'Together, these technologies offer a new approach to animal health: engineering beneficial bacteria to deliver specific biological functions, and selectively targeting bacteria already present in the microbiome. Both approaches are designed to address specific disease mechanisms while fitting within established animal health and production practices.',
+      'Our mission is to engineer living biologics to prevent disease, treat conditions, and improve animal health. In practice, that means we combine strain engineering, computational biology, and our proprietary microbial strain library to build a repeatable engine for animal health products.',
     ],
+  },
+  {
+    question: 'Who has invested in BiomEdit?',
+    preview: 'BiomEdit is backed by leading global investors including Anterra Capital, Viking Global Investors, Nutreco, AgriZeroNZ, Elevate Ventures, Betagro Ventures and others. We are engineering a new chapter in animal health through our Programmable Veterinary Biologics<sup>&trade;</sup> platform.',
+    extra: [],
+    cta: { label: 'Learn more', href: '/investors-partners' },
   },
   {
     question: 'When did BiomEdit launch?',
@@ -22,24 +28,20 @@ const faqs = [
     question: 'What are BiomEdit&rsquo;s mission and vision?',
     preview: 'BiomEdit&rsquo;s mission is to engineer living biologics that prevent disease, treat conditions, and improve animal health.',
     extra: [
-      'Our vision is to transform animal health by creating programmable biologic solutions that redefine what is possible.',
+      'Our vision is to transform animal health by creating programmable biologic solutions that advance care and well-being.',
     ],
     cta: { label: 'Learn more', href: '/about' },
   },
   {
     question: 'What is the science behind BiomEdit&rsquo;s Programmable Veterinary Biologics<sup>&trade;</sup> platform?',
-    preview: 'BiomEdit leads with science: every decision starts with evidence as the company is building something genuinely new with our Programmable Veterinary Biologics<sup>&trade;</sup> platform.',
-    extra: [
-      'BiomEdit&rsquo;s platform is based on three pillars: strain engineering, a consistent methodology for engineering species-specific bacterial strains to deliver nanobody, peptide, or enzyme payloads; AI/ML-enabled discovery, which accelerates target selection, payload design, and candidate prioritization; and a substantial microbial strain library that provides a discovery foundation that competitors can&rsquo;t easily replicate.',
-    ],
+    preview: 'BiomEdit&rsquo;s Programmable Veterinary Biologics<sup>&trade;</sup> platform spans three focus areas, infectious disease, sustainability, and chronic disease, and every program moves through a defined five-stage lifecycle: Data-Driven Species &amp; Chassis Matching, Strain Engineering &amp; Payload Design, High-throughput Sequencing and Computational Biology, Regulatory Navigation &amp; Product Development, and Seamless Veterinary &amp; Producer Integration. This lifecycle draws on a substantial microbial strain library that provides a discovery foundation competitors can&rsquo;t easily replicate.',
+    extra: [],
     cta: { label: 'Read more', href: '/science' },
   },
   {
     question: 'What are BiomEdit&rsquo;s products?',
-    preview: 'BiomEdit&rsquo;s product pipeline spans infectious disease, sustainability, and chronic disease programs from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.',
-    extra: [
-      'Our leading product is CPerf LLV*/Optavant, a first-of-its-kind engineered bacteria biologic for poultry that has received conditional USDA licensure. Our pipeline of products includes:',
-    ],
+    preview: 'BiomEdit&rsquo;s product pipeline spans infectious disease, sustainability, and chronic disease programs from our Programmable Veterinary Biologics<sup>&trade;</sup> platform. Our leading product is CPerf LLV*, a first-of-its-kind engineered bacteria biologic for poultry that has received conditional USDA licensure. Our pipeline of products includes:',
+    extra: [],
     list: [
       { code: 'CPerf LLV*/Optavant', description: 'A first-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.' },
       { code: 'BE-118', description: 'Probiotic vectored antibodies targeting antigens of the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.' },
@@ -47,7 +49,7 @@ const faqs = [
       { code: 'BEX1 (BiomElix® One)', description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture (MAPA) as part of BiomEdit's acquisition of Folium Science." },
       { code: 'BE-017', description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.' },
       { code: 'BE-117', description: 'A first-in-class engineered rumen strain that continuously delivers anti-methanogen peptide and nanobody biomolecules directly in the rumen of dairy and beef cattle, reducing enteric methane emissions while improving feed efficiency and productivity.' },
-      { code: 'BE-105', description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and canine applications as future extensions.' },
+      { code: 'BE-105', description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and dog applications as future extensions.' },
       { code: 'BE-122', description: 'Probiotic vectored antibodies designed to treat inflammatory bowel disease (IBD) in dogs, offering a potential alternative or complement to chronic corticosteroid therapy, with potential extension to other species.' },
     ],
     cta: { label: 'Read more', href: '/pipeline' },
@@ -61,9 +63,9 @@ const faqs = [
   },
   {
     question: 'What is CPerf LLV* or Optavant?',
-    preview: 'BiomEdit created CPerf LLV*, the first engineered microbial therapeutic to achieve regulatory approval, in any species, any geography, any regulatory pathway, in this case USDA.',
+    preview: 'BiomEdit created CPerf LLV*, the first engineered bacterial biologic from our Programmable Veterinary Biologics<sup>&trade;</sup> platform to achieve USDA conditional licensure in poultry.',
     extra: [
-      'It is a first-in-class engineered probiotic for chickens that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting broilers from necrotic enteritis without antibiotics. CPerf LLV* reduces mortality and supports flock performance. It will be marketed as Optavant&trade;.',
+      'It&rsquo;s a first-in-class engineered probiotic for chickens that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting them from necrotic enteritis without antibiotics. CPerf LLV* reduces mortality and supports flock performance. It will be marketed as Optavant&trade; when it is commercially available.',
     ],
   },
   {
@@ -80,10 +82,8 @@ const faqs = [
   },
   {
     question: 'Who works at BiomEdit?',
-    preview: 'BiomEdit&rsquo;s team is comprised of scientists and leaders with decades of experience working together through setbacks and breakthroughs.',
-    extra: [
-      'BiomEdit attracts exceptional teammates, partners, and investors united by a shared mission in animal health. Collectively, the team holds 23 doctoral degrees, 4 MBAs, 73 patents, and more than 450 peer-reviewed publications, and is led by our award-winning CEO, Aaron Schacht.',
-    ],
+    preview: 'BiomEdit brings together scientists, engineers, product developers, and regulatory experts who have worked through setbacks and breakthroughs together across careers at the intersection of biology and commercial animal health. That combination of backgrounds, and a shared mission in animal health, is part of what makes this platform possible. Collectively, we have over 450 peer-reviewed publications, 20 doctoral degrees, 10 patents, and over 200 years of combined leadership experience in animal health, led by CEO Aaron Schacht.',
+    extra: [],
     cta: { label: 'Learn more', href: '/team' },
   },
   {
