@@ -28,7 +28,7 @@ interface Candidate {
   id: string;
   category: 'teal' | 'amber' | 'green';
   species: string;
-  speciesKey: 'poultry' | 'swine' | 'cattle' | 'feline' | 'canine';
+  speciesKey: 'poultry' | 'swine' | 'cattle' | 'cats' | 'dogs';
   mechanism: string;
   description: string;
   stage: number; // 1-indexed, matches `stages` position
@@ -59,8 +59,8 @@ const speciesList = [
   { key: 'poultry', label: 'Poultry' },
   { key: 'swine', label: 'Swine' },
   { key: 'cattle', label: 'Cattle' },
-  { key: 'feline', label: 'Feline' },
-  { key: 'canine', label: 'Canine' },
+  { key: 'cats', label: 'Cats' },
+  { key: 'dogs', label: 'Dogs' },
 ] as const;
 ---
 <div class="pipeline-tracker">
@@ -281,8 +281,8 @@ const speciesList = [
   .pipeline-tracker:has(.filter-input[id$="-poultry"]:checked) .candidate-card:not(.species-poultry) { display: none; }
   .pipeline-tracker:has(.filter-input[id$="-swine"]:checked) .candidate-card:not(.species-swine) { display: none; }
   .pipeline-tracker:has(.filter-input[id$="-cattle"]:checked) .candidate-card:not(.species-cattle) { display: none; }
-  .pipeline-tracker:has(.filter-input[id$="-feline"]:checked) .candidate-card:not(.species-feline) { display: none; }
-  .pipeline-tracker:has(.filter-input[id$="-canine"]:checked) .candidate-card:not(.species-canine) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-cats"]:checked) .candidate-card:not(.species-cats) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-dogs"]:checked) .candidate-card:not(.species-dogs) { display: none; }
 
   @media (max-width: 960px) {
     .filter-row { flex-direction: column; }

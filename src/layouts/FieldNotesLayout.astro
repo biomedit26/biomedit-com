@@ -116,6 +116,11 @@ const year = new Date().getFullYear();
        JS-managed spacer instead — see the scroll listener below, which
        also drives the hide-on-scroll-down / reveal-on-scroll-up behavior. */
     .main-nav {
+      /* Must stay positioned (not static) — z-index only takes effect on a
+         positioned element, and this stacking context needs to outrank
+         page content like the hero band's internal z-index:1 layer, or
+         that content paints over the mobile dropdown menu. */
+      position: relative;
       background: #FFFFFF;
       z-index: 10;
       transition: transform 0.28s ease;

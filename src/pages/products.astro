@@ -11,17 +11,17 @@ import FactList from '../components/modules/FactList.astro';
 import CTALink from '../components/CTALink.astro';
 
 const evidencePoints = [
-  { value: '+76g', description: 'Weight gain vs. antibiotic (p = 0.025)' },
-  { value: '+81g', description: 'Weight gain vs. wild-type probiotic (p = 0.017)' },
-  { value: '6&ndash;7 pt', description: 'Improvement in feed conversion ratio at key time points' },
-  { description: 'Increased finished weight compared with challenged controls.' },
-  { value: 'Up to 48%', description: 'Reduction in mortality in an earlier <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener">clinical challenge model</a>.' },
+  '<strong>+76g</strong> weight gain vs. antibiotic (p = 0.025)',
+  '<strong>+81g</strong> weight gain vs. wild-type probiotic (p = 0.017)',
+  '<strong>6- to 7-point improvement</strong> in feed conversion ratio at key time points',
+  '<strong>Increased finished weight</strong> compared with challenged controls.',
+  '<strong>Up 48% reduction in mortality</strong> according to an earlier <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener">clinical challenge model</a>.',
 ];
 
 const flockFacts = [
   { value: 'Performance', valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions.' },
   { value: 'Compliance', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
-  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets C. perfringens toxins directly in the gut, so broilers spend less energy on immune response and more on growth." },
+  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets <em>C. perfringens</em> toxins directly in the gut, so broilers spend less energy on immune response and more on growth." },
   { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Improved performance, healthier birds, and reduced mortality.' },
 ];
 ---
@@ -32,8 +32,7 @@ const flockFacts = [
     eyebrow="BiomEdit / Products"
     heading="CPerf LLV* (BE-101) &mdash;The first-of-its-kind engineered bacteria biologic"
     paragraphs={[
-      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (BE-101) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our Programmable Veterinary Biologics<sup>&trade;</sup> platform.",
-      '<strong>Now available to U.S. producers under USDA conditional license.</strong>',
+      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (BE-101) is an engineered probiotic strain that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our <a href=\"/science\">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform.",
     ]}
     variant="dark"
   />
@@ -43,7 +42,7 @@ const flockFacts = [
       <div class="problem-card">
         <p class="card-eyebrow">The problem</p>
         <div class="problem-stat">$6B</div>
-        <p>Necrotic enteritis costs the poultry industry an estimated $6B annually.</p>
+        <p>Necrotic enteritis costs the poultry industry an <a href="https://www.poultryworld.net/poultry/the-true-cost-of-necrotic-enteritis/" target="_blank" rel="noopener">estimated $6B annually</a>.</p>
         <p>The shift to antibiotic-free production has made necrotic enteritis harder to control, and costlier to ignore.</p>
       </div>
       <div class="solution-card">
@@ -76,7 +75,7 @@ const flockFacts = [
       'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
       'The colonized strain produces and secretes protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
     ]}
-    image={{ src: '/images/gut-diagram-with-labels.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
+    image={{ src: '/images/TLBE_CPerfLLV_LI_vs3.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
   />
 
   <Module11
@@ -85,9 +84,9 @@ const flockFacts = [
     image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by CPerf LLV' }}
   >
     <div class="evidence-grid">
-      {evidencePoints.map((s) => (
+      {evidencePoints.map((point) => (
         <div class="evidence-card">
-          <p set:html={`${s.value ? `<strong class="evidence-value">${s.value} </strong>` : ''}${s.description}`} />
+          <p set:html={point} />
         </div>
       ))}
     </div>
@@ -166,8 +165,8 @@ const flockFacts = [
     padding: 1.25rem 1.75rem;
     text-align: left;
   }
-  .evidence-value { font-weight: 700; color: var(--text-primary); }
   .evidence-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
+  .evidence-card p strong { color: var(--text-primary); }
 
   .evidence-cta { margin-top: 2.5rem; }
 
@@ -186,6 +185,7 @@ const flockFacts = [
   }
   .problem-stat { font-size: var(--text-h3); font-weight: 700; line-height: 1; color: #FFFFFF; margin: 0 0 1rem; }
   .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0 0 1rem; }
+  .problem-card p a { color: inherit; }
   .problem-card p:last-child { margin-bottom: 0; }
 
   .solution-card {

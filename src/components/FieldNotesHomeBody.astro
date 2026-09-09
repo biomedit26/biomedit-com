@@ -60,7 +60,11 @@ const categoryColors: Record<'press-release' | 'article' | 'event' | 'in-the-new
   'in-the-news': 'navy',
   'videos-podcasts': 'orange',
 };
+// Homepage "Latest from BiomEdit" excludes only the videos-podcasts
+// category (external video/podcast mentions); press releases, articles,
+// events, and in-the-news coverage are all eligible.
 const news = (await getCollection('news'))
+  .filter((post) => post.data.category !== 'videos-podcasts')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -115,23 +119,23 @@ const partners = [
 
   <div class="how-we-build-grid">
     <div class="build-card">
-      <div class="build-icon" style="--icon-color:var(--color-navy);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6.5 21l5.5-3 5.5 3-2-7.5"/></svg>
+      <div class="build-icon" style="--icon-color:var(--color-navy-dark);">
+        <img src="/images/icons/strain-engineering.svg" alt="" width="32" height="32" />
       </div>
       <h3>Strain Engineering</h3>
       <p><a href="/products">CPerf LLV* (formerly known as BE-101)</a>, is our lead product from our platform, developed for the prevention of necrotic enteritis in poultry. It establishes a regulatory and development path that can be applied to additional products.</p>
       <p>BiomElix&reg; One (BEX1) is a second proof point, acquired through Folium Science and approved for use in Brazil to reduce Salmonella in poultry.</p>
     </div>
     <div class="build-card">
-      <div class="build-icon" style="--icon-color:var(--color-teal);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+      <div class="build-icon" style="--icon-color:var(--color-teal-dark);">
+        <img src="/images/icons/ai-ml-enabled-discovery.svg" alt="" width="32" height="32" />
       </div>
       <h3>Computational Biology</h3>
-      <p>We use sequencing, computational biology and AI/ML to characterize microbial communities, identify candidate strains, design payloads, and inform product design and development.</p>
+      <p>We use sequencing, computational biology, and AI/ML to characterize microbial communities, identify candidate strains, design payloads, and inform product design and development.</p>
     </div>
     <div class="build-card">
-      <div class="build-icon" style="--icon-color:var(--color-green);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="6" rx="3"/><path d="M7 12H4M17 12h3M9 9V6M15 9V6M9 15v3M15 15v3"/></svg>
+      <div class="build-icon" style="--icon-color:var(--color-orange-dark);">
+        <img src="/images/icons/proprietary-microbiome-library.svg" alt="" width="32" height="32" />
       </div>
       <h3>Proprietary Microbial Strain Library</h3>
       <p>Our microbial strain library spans a wide range of species, giving us a broad starting point for identifying and engineering strains suited to specific species, targets, and applications.</p>
@@ -157,7 +161,7 @@ const partners = [
       <div class="lead-program-text">
         <p class="eyebrow">Lead Program — Infectious Disease</p>
         <h3>CPerf LLV*</h3>
-        <p class="lead-p">Our lead Programmable Veterinary Biologic, developed to prevent necrotic enteritis in poultry through targeted delivery of nanobodies against C. perfringens toxins.</p>
+        <p class="lead-p">Our lead Programmable Veterinary Biologic, developed to prevent necrotic enteritis in poultry through targeted delivery of nanobodies against <em>C. perfringens</em> toxins.</p>
         <CTALink href="/pipeline">Learn more</CTALink>
         <p class="lead-highlight">Conditional USDA licensure received. Commercial launch Q4 2026.</p>
       </div>
@@ -333,7 +337,7 @@ const partners = [
     justify-content: center;
     margin: 0 auto 1.25rem;
   }
-  .build-icon svg { width: 32px; height: 32px; }
+  .build-icon img { display: block; width: 32px; height: 32px; }
   .build-card h3 { font-size: 17px; margin: 0 0 0.75rem; }
   .build-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
 
@@ -428,7 +432,7 @@ const partners = [
   .pipeline-rows { display: flex; flex-direction: column; }
   .pipeline-row {
     display: grid;
-    grid-template-columns: 140px 1fr auto;
+    grid-template-columns: 190px 1fr auto;
     gap: 24px;
     align-items: center;
     padding: 1.5rem 0;

@@ -33,11 +33,11 @@ const lifecycleStages = [
   },
   {
     heading: 'High-throughput Sequencing and Computational Biology',
-    paragraph: 'High-throughput sequencing and computational biology help us characterize bacterial strains, select promising candidates, and guide strain and payload design. We use AI and machine learning where appropriate to analyze complex biological data and improve candidate selection. These capabilities support a more predictive approach to product development and have contributed to research supported by organizations including the Bezos Earth Fund and Gates Foundation.',
+    paragraph: 'High-throughput sequencing and computational biology help us characterize bacterial strains, select promising candidates, and guide strain and payload design. We use AI and machine learning where appropriate to analyze complex biological data and improve candidate selection. These capabilities support a more predictive approach to product development and have contributed to research supported by organizations including the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener">Bezos Earth Fund</a> and <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener">Gates Foundation</a>.',
   },
   {
     heading: 'Regulatory Navigation & Product Development',
-    paragraph: 'Our in-house regulatory and product development teams work alongside our scientists to translate new technologies into products that can be manufactured, approved, and used in animal health. Regulatory, safety, stability, and manufacturing requirements are considered early in development so that product candidates are designed with a practical path to commercialization. Our team has experience across multiple technologies and regulatory frameworks, including the USDA pathway for CPerf LLV* and MAPA approval in Brazil for BiomElix&reg; One.',
+    paragraph: 'Our in-house regulatory and product development teams work alongside our scientists to translate new technologies into products that can be manufactured, approved, and used in animal health. Regulatory, safety, stability, and manufacturing requirements are considered early in development so that product candidates are designed with a practical path to commercialization. Our team has experience across multiple technologies and regulatory frameworks, including the USDA pathway for <a href="/products">CPerf LLV*</a> and MAPA approval in Brazil for BiomElix&reg; One.',
   },
   {
     heading: 'Seamless Veterinary & Producer Integration',
@@ -96,7 +96,7 @@ const lifecycleStages = [
       <div class="platform-action-text">
         <p class="eyebrow">Platform in Action</p>
         <h3>Proof in the pipeline.</h3>
-        <p>CPerf LLV* (BE-101) is the first Programmable Veterinary Biologic<sup>&trade;</sup> to receive conditional USDA licensure. Developed to protect poultry from subclinical necrotic enteritis without systemic antibiotics, it demonstrates the translation of our platform from engineered strain design through regulatory approval and commercial-scale use.</p>
+        <p><a href="/products">CPerf LLV* (BE-101)</a> is the first Programmable Veterinary Biologic<sup>&trade;</sup> to receive conditional USDA licensure. Developed to protect poultry from subclinical necrotic enteritis without systemic antibiotics, it demonstrates the translation of our platform from engineered strain design through regulatory approval and commercial-scale use.</p>
         <div class="platform-action-ctas">
           <CTALink href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank">Read the research</CTALink>
         </div>
@@ -106,9 +106,14 @@ const lifecycleStages = [
   </section>
 
   <section class="guided-biotics section-divider">
-    <h2>Our Guided Biotics<sup>&reg;</sup> Technology</h2>
-    <p>In addition to engineering bacterial strains in our Programmable Veterinary Biologics<sup>&trade;</sup> platform, Guided Biotics<sup>&reg;</sup>, acquired through Folium Science, uses CRISPR-based technology to selectively target specific bacterial populations already present in the microbiome, without disrupting the broader microbial community.</p>
-    <p>Guided Biotics is the foundation behind BiomElix<sup>&reg;</sup> One, approved by Brazil&rsquo;s Ministry of Agriculture and Livestock (MAPA) as a non-GMO animal feed additive that targets Salmonella in the poultry gut microbiome.</p>
+    <div class="guided-biotics-card">
+      <div class="guided-biotics-text">
+        <h2>Our Guided Biotics<sup>&reg;</sup> Technology</h2>
+        <p>In addition to engineering bacterial strains in our Programmable Veterinary Biologics<sup>&trade;</sup> platform, Guided Biotics<sup>&reg;</sup>, acquired through Folium Science, uses CRISPR-based technology to selectively target specific bacterial populations already present in the microbiome, without disrupting the broader microbial community.</p>
+        <p>Guided Biotics is the foundation behind BiomElix<sup>&reg;</sup> One, approved by Brazil&rsquo;s Ministry of Agriculture and Livestock (MAPA) as a non-GMO animal feed additive that targets Salmonella in the poultry gut microbiome.</p>
+      </div>
+      <img src="/images/GuidedBiotics.png" alt="Illustration of Guided Biotics CRISPR technology precisely targeting Salmonella DNA in the gut microbiome" />
+    </div>
   </section>
 
   <section class="footnote">
@@ -196,9 +201,16 @@ const lifecycleStages = [
 
   /* ---------- Guided Biotics ---------- */
   .guided-biotics { padding: 1.5rem 0 4rem; }
-  .guided-biotics h2 { font-size: var(--text-h5); margin: 0 0 1.5rem; max-width: 760px; }
-  .guided-biotics p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1rem; max-width: 760px; }
-  .guided-biotics p:last-child { margin-bottom: 0; }
+  .guided-biotics-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .guided-biotics-text h2 { font-size: var(--text-h5); margin: 0 0 1rem; }
+  .guided-biotics-text p { font-size: var(--text-body); line-height: 1.5; color: var(--text-primary); margin: 0 0 1rem; }
+  .guided-biotics-text p:last-child { margin-bottom: 0; }
+  .guided-biotics-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
 
   @media (max-width: 860px) {
     .focus-grid { grid-template-columns: 1fr; }
@@ -209,5 +221,7 @@ const lifecycleStages = [
     .platform-action-card { grid-template-columns: 1fr; gap: 1.5rem; }
     .platform-action-card img { order: -1; min-height: 260px; }
     .platform-action-text { padding: 0 28px 2.25rem; }
+    .guided-biotics-card { grid-template-columns: 1fr; gap: 1.5rem; }
+    .guided-biotics-card img { order: -1; }
   }
 </style>

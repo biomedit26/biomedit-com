@@ -28,7 +28,7 @@ const { items } = Astro.props;
       >
         {item.value}
       </div>
-      <p class="fact-paragraph">{item.paragraph}</p>
+      <p class="fact-paragraph" set:html={item.paragraph} />
     </div>
   ))}
 </div>
