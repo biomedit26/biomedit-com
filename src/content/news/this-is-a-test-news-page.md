@@ -9,4 +9,6 @@ lead: Lead summary
 
 ![](/images/news/082626_BiomEdit_046.jpg)
 
+![](/images/news/this-is-a-test-news-page/082626_BiomEdit_083.jpg)
+
 Body copy here
