@@ -5,4 +5,8 @@ category: article
 secondaryCategory: ''
 lead: Lead summary
 ---
+### Intro text here
+
+![](082626_BiomEdit_046.jpg)
+
 Body copy here
