@@ -26,6 +26,14 @@ export default config({
       path: 'src/content/news/*',
       format: { contentField: 'content' },
       entryLayout: 'content',
+      // Puts a "Preview" link in the entry editor pointed at the Netlify
+      // branch deploy for the `preview` branch (set up in Netlify's
+      // Branches and deploy contexts settings). Hardcoded to that one
+      // branch rather than using Keystatic's {branch} token — Netlify
+      // doesn't serve a matching `main--biomedit.netlify.app` alias for
+      // the production branch, so a {branch}-templated URL would 404 the
+      // moment someone previews from `main` instead of `preview`.
+      previewUrl: 'https://preview--biomedit.netlify.app/news/{slug}',
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         date: fields.date({ label: 'Date', defaultValue: { kind: 'today' } }),
