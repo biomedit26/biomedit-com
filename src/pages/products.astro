@@ -5,7 +5,7 @@ import Module11 from '../components/modules/Module11.astro';
 import Module21 from '../components/modules/Module21.astro';
 import ModuleCards2 from '../components/modules/ModuleCards2.astro';
 import ModuleSection from '../components/modules/ModuleSection.astro';
-import ModulePlainText from '../components/modules/ModulePlainText.astro';
+import ModuleDarkText from '../components/modules/ModuleDarkText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import FactList from '../components/modules/FactList.astro';
 import CTALink from '../components/CTALink.astro';
@@ -75,7 +75,7 @@ const flockFacts = [
       'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strain during natural preening, and it colonizes the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
       'The colonized strain produces and secretes protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
     ]}
-    image={{ src: '/images/TLBE_CPerfLLV_LI_vs3.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
+    image={{ src: '/images/CPerfLLV_Illustration4.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
   />
 
   <Module11
@@ -98,13 +98,16 @@ const flockFacts = [
        "engineered microbial therapeutics in all species" quote. Confirm with
        Aaron that this remains accurate given where CPerf LLV* has progressed
        since the original announcement. -->
-  <ModulePlainText
+  <ModuleDarkText
     quote
-    quoteSize="lg"
     noDivider
+    topDivider
     paragraphs={['&ldquo;This is an exciting chapter for BiomEdit. We are bringing a transformational poultry solution to U.S. broiler producers and pushing the frontiers of sustainable livestock production.&rdquo;']}
     attribution="Aaron Schacht, CEO, BiomEdit"
-    attributionSize="lg"
+    photos={[
+      { src: '/images/082626_BiomEdit_121.jpg', alt: 'BiomEdit scientists examining lab equipment', ratio: '3/2' },
+      { src: '/images/082626_BiomEdit_011.jpg', alt: 'Automated pipetting system processing samples in the lab', ratio: '2/3' },
+    ]}
   />
 
   <Module11 variant="intro" heading="Other products in our pipeline">

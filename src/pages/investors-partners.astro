@@ -2,10 +2,10 @@
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
+import ModuleSection from '../components/modules/ModuleSection.astro';
 import Module11 from '../components/modules/Module11.astro';
 import EntryList from '../components/modules/EntryList.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
-import ModulePlainText from '../components/modules/ModulePlainText.astro';
 import CTALink from '../components/CTALink.astro';
 
 // Emphasis split: Investors get the full-width top row at a larger logo
@@ -124,12 +124,19 @@ const grants = [
     </div>
   </section>
 
-  <ModulePlainText
-    quote
-    paragraphs={['&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics<sup>&trade;</sup>. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;']}
-    attribution="Brett Wong, Partner, Anterra Capital"
-    attributionSize="md"
-  />
+  <ModuleSection noDivider>
+    <FullBleedBand background="var(--cool-800)">
+      <div class="top-divider"></div>
+      <div class="quote-photo-grid">
+        <img class="quote-photo quote-photo-lg" src="/images/082626_BiomEdit_083.jpg" alt="BiomEdit scientist examining a sample in the lab" />
+        <img class="quote-photo quote-photo-sm" src="/images/082626_BiomEdit_081.jpg" alt="Stacked petri dishes on a lab bench" />
+        <div class="quote-col">
+          <p class="quote">&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics<sup>&trade;</sup>. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;</p>
+          <cite class="quote-cite">Brett Wong, Partner, Anterra Capital</cite>
+        </div>
+      </div>
+    </FullBleedBand>
+  </ModuleSection>
 
   <section class="new-category section-divider">
     <h2>A new category, built for what&rsquo;s next in animal health.</h2>
@@ -166,7 +173,7 @@ const grants = [
       paragraphs={['BiomEdit is a private venture funded biotechnology company that targets venture capital and non-dilutive grants. Venture capital typically supports advancement of the pipeline while non-dilutive grants have supported the exploration and establishment of new pipeline projects.']}
       ctaLabel="Let&rsquo;s meet"
       ctaHref="/contact-us"
-      image={{ src: '/images/biomedit-new-hor.png', alt: 'BiomEdit scientists at work in the lab' }}
+      image={{ src: '/images/082626_BiomEdit_046.jpg', alt: 'BiomEdit scientists at work in the lab' }}
     />
   </div>
 
@@ -189,6 +196,45 @@ const grants = [
 
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
+
+  .top-divider {
+    border-top: 1px solid var(--cool-600);
+    margin-bottom: 24px;
+  }
+
+  .quote-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+  .quote-photo { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .quote-photo-lg { grid-column: span 3; }
+  .quote-photo-sm { grid-column: span 2; }
+  .quote-col { grid-column: span 2; }
+  .quote-col .quote {
+    font-family: 'PT Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #FFFFFF;
+    margin: 0;
+  }
+  .quote-col .quote-cite {
+    display: block;
+    margin-top: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    color: var(--cool-400);
+  }
+
+  @media (max-width: 860px) {
+    .quote-photo-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .quote-photo-lg, .quote-photo-sm, .quote-col { grid-column: span 1; }
+  }
 
   .footnote { padding: 0 0 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }

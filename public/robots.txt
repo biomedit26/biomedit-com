@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /styleguide/
+Disallow: /content-modules/
+Disallow: /home-video/
+Disallow: /notes/
+Disallow: /series-c/
+
+Sitemap: https://biomedit.com/sitemap-index.xml

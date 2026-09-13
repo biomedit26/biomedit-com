@@ -7,6 +7,7 @@ import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
 import Button from '../components/Button.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
 
 // Inlined (not loaded via <img src>) because Firefox and Safari don't run
 // this SVG's CSS @keyframes animations when it's referenced as an image
@@ -22,6 +23,14 @@ import Button from '../components/Button.astro';
 const heroSvg = readFileSync(new URL('../../public/images/flowing-e-graphic-recolored.svg', import.meta.url), 'utf-8');
 ---
 <FieldNotesLayout title="Home" active="home">
+  <AnnouncementBar
+    slot="announcement"
+    id="cperf-llv-launch-2026"
+    message="CPerf LLV* (BE-101) is now available to U.S. poultry producers &mdash; the first Programmable Veterinary Biologic&trade; to reach commercial launch."
+    ctaLabel="Explore CPerf LLV*"
+    ctaHref="/products"
+  />
+
   <section class="hero">
     <FullBleedBand
       background="var(--cool-800)"

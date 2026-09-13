@@ -26,7 +26,7 @@ interface Stage {
 
 interface Candidate {
   id: string;
-  category: 'teal' | 'amber' | 'green';
+  category: 'infectious-disease' | 'chronic-disease' | 'sustainability';
   species: string;
   speciesKey: 'poultry' | 'swine' | 'cattle' | 'cats' | 'dogs';
   mechanism: string;
@@ -50,9 +50,9 @@ interface Props {
 const { stages, candidates, footnote, idPrefix = 'pt' } = Astro.props;
 
 const categories = [
-  { key: 'teal', label: 'Infectious Disease', color: 'var(--color-teal)' },
-  { key: 'amber', label: 'Chronic Disease', color: 'var(--color-amber)' },
-  { key: 'green', label: 'Sustainability', color: 'var(--color-green)' },
+  { key: 'infectious-disease', label: 'Infectious Disease', color: 'var(--color-teal)' },
+  { key: 'chronic-disease', label: 'Chronic Disease', color: 'var(--color-amber)' },
+  { key: 'sustainability', label: 'Sustainability', color: 'var(--color-green)' },
 ] as const;
 
 const speciesList = [
@@ -146,6 +146,21 @@ const speciesList = [
   </div>
 </div>
 
+<script>
+  // Lets a link elsewhere on the site (e.g. the homepage pipeline preview's
+  // "Details" links) deep-link straight into a filtered tab, via
+  // /pipeline#pt-teal, #pt-amber, #pt-green, etc. — same ids the focus-area
+  // and species radios already use, so this just pre-checks the one named
+  // in the hash on load.
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const input = document.getElementById(hash);
+    if (input instanceof HTMLInputElement && input.type === 'radio') {
+      input.checked = true;
+    }
+  }
+</script>
+
 <style>
   .filter-input { position: absolute; opacity: 0; pointer-events: none; }
 
@@ -194,9 +209,9 @@ const speciesList = [
   }
 
   .pipeline-tracker:has(.filter-input[id$="-all"]:checked) label[for$="-all"],
-  .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) label[for$="-teal"],
-  .pipeline-tracker:has(.filter-input[id$="-amber"]:checked) label[for$="-amber"],
-  .pipeline-tracker:has(.filter-input[id$="-green"]:checked) label[for$="-green"] {
+  .pipeline-tracker:has(.filter-input[id$="-infectious-disease"]:checked) label[for$="-infectious-disease"],
+  .pipeline-tracker:has(.filter-input[id$="-chronic-disease"]:checked) label[for$="-chronic-disease"],
+  .pipeline-tracker:has(.filter-input[id$="-sustainability"]:checked) label[for$="-sustainability"] {
     background: var(--cool-200);
   }
 
@@ -228,9 +243,9 @@ const speciesList = [
     position: relative;
     transition: width 0.2s ease, margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
-  .candidate-card.cat-teal { border-left-color: var(--color-teal); }
-  .candidate-card.cat-amber { border-left-color: var(--color-amber); }
-  .candidate-card.cat-green { border-left-color: var(--color-green); }
+  .candidate-card.cat-infectious-disease { border-left-color: var(--color-teal); }
+  .candidate-card.cat-chronic-disease { border-left-color: var(--color-amber); }
+  .candidate-card.cat-sustainability { border-left-color: var(--color-green); }
 
   /* Expanded cards pop out wider than their column instead of just
      growing downward — gives the detail text more room to breathe
@@ -273,9 +288,9 @@ const speciesList = [
   .candidate-grid { padding-bottom: 1.5rem; }
 
   /* focus-area filtering — hide cards outside the selected category */
-  .pipeline-tracker:has(.filter-input[id$="-teal"]:checked) .candidate-card:not(.cat-teal) { display: none; }
-  .pipeline-tracker:has(.filter-input[id$="-amber"]:checked) .candidate-card:not(.cat-amber) { display: none; }
-  .pipeline-tracker:has(.filter-input[id$="-green"]:checked) .candidate-card:not(.cat-green) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-infectious-disease"]:checked) .candidate-card:not(.cat-infectious-disease) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-chronic-disease"]:checked) .candidate-card:not(.cat-chronic-disease) { display: none; }
+  .pipeline-tracker:has(.filter-input[id$="-sustainability"]:checked) .candidate-card:not(.cat-sustainability) { display: none; }
 
   /* species filtering — combines with the above (a card must pass both) */
   .pipeline-tracker:has(.filter-input[id$="-poultry"]:checked) .candidate-card:not(.species-poultry) { display: none; }

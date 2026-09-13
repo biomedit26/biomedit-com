@@ -1,0 +1,124 @@
+---
+// Dismissible announcement bar for site-wide (or page-specific) news call-
+// outs — e.g. a product launch/regulatory milestone. Not yet wired up
+// anywhere; index.astro renders a sample CPerf LLV* launch message via
+// <AnnouncementBar slot="announcement"> so the pattern exists once real
+// approval comes through — swap the copy/href/id at that point.
+//
+// Dismissal is remembered per-browser via localStorage, keyed by `id`, so
+// changing `id` when the message changes (e.g. 'cperf-llv-launch-2026') is
+// what makes a new announcement reappear for someone who dismissed an
+// earlier one.
+interface Props {
+  id: string;
+  message: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const { id, message, ctaLabel, ctaHref } = Astro.props;
+---
+<div class="announcement-bar" data-announcement-id={id} hidden>
+  <div class="announcement-inner">
+    <p class="announcement-text">
+      <span class="announcement-badge">New</span>
+      {message}
+      {ctaLabel && ctaHref && <a href={ctaHref} class="announcement-cta">{ctaLabel}</a>}
+    </p>
+    <button type="button" class="announcement-dismiss" aria-label="Dismiss announcement">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_PREFIX = 'biomedit-announcement-dismissed:';
+
+  document.querySelectorAll('.announcement-bar[data-announcement-id]').forEach((bar) => {
+    const id = bar.getAttribute('data-announcement-id');
+    if (!id) return;
+    const key = STORAGE_PREFIX + id;
+
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(key) === '1';
+    } catch {
+      dismissed = false;
+    }
+
+    if (!dismissed) {
+      bar.removeAttribute('hidden');
+    }
+
+    bar.querySelector('.announcement-dismiss')?.addEventListener('click', () => {
+      bar.setAttribute('hidden', '');
+      try {
+        localStorage.setItem(key, '1');
+      } catch {
+        // Private browsing / storage disabled — bar simply won't stay
+        // dismissed across reloads, which is an acceptable fallback.
+      }
+    });
+  });
+</script>
+
+<style>
+  .announcement-bar {
+    background: var(--color-navy);
+  }
+  .announcement-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0.75rem 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .announcement-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .announcement-badge {
+    display: inline-block;
+    background: var(--color-amber);
+    color: var(--color-navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-right: 10px;
+  }
+  .announcement-cta {
+    display: inline-block;
+    margin-left: 10px;
+    color: var(--color-amber-dark);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .announcement-dismiss {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--cool-300);
+    cursor: pointer;
+  }
+  .announcement-dismiss:hover { color: #FFFFFF; }
+
+  @media (max-width: 700px) {
+    .announcement-inner { padding: 0.75rem 20px; gap: 10px; }
+    .announcement-text { text-align: left; }
+    .announcement-cta { display: block; margin-left: 0; margin-top: 4px; }
+  }
+</style>

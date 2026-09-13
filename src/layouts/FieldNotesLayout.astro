@@ -19,7 +19,7 @@ import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'publications' | 'pipeline' | 'products' | 'investors' | 'news';
+  active?: 'home' | 'about' | 'team' | 'board' | 'science' | 'publications' | 'pipeline' | 'products' | 'investors' | 'news' | 'careers' | 'contact';
   // Optional — feeds <meta name="description"> and the Open Graph tags.
   // No page sets this today, so omitting it is safe; pages that want
   // better search/LLM/social-share indexing (e.g. news articles) should
@@ -40,7 +40,7 @@ const isCompanyActive = companyChildren.some((c) => c.key === active);
 
 const scienceChildren = [
   { label: 'Our Platform', href: '/science', key: 'science' },
-  { label: 'Patents and Publications', href: '/publications', key: 'publications' },
+  { label: 'Publications and Patents', href: '/publications', key: 'publications' },
 ];
 const isScienceActive = scienceChildren.some((c) => c.key === active);
 
@@ -68,6 +68,10 @@ const year = new Date().getFullYear();
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <title>{title} · BiomEdit</title>
   {description && <meta name="description" content={description} />}
   <meta property="og:title" content={`${title} · BiomEdit`} />
@@ -107,6 +111,12 @@ const year = new Date().getFullYear();
       color: var(--text-secondary);
     }
     .masthead-row a:hover { color: var(--text-primary); }
+    .masthead-row a.active {
+      color: var(--color-navy);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 2px;
+    }
 
     /* ---------- main nav (sticky) ---------- */
     /* position:sticky measurably fails to engage here (verified with a
@@ -332,12 +342,14 @@ const year = new Date().getFullYear();
     </symbol>
   </svg>
 
+  <slot name="announcement" />
+
   <div role="banner">
     <div class="masthead">
       <div class="masthead-inner">
         <div class="masthead-row">
-          <a href="/careers">Careers</a>
-          <a href="/contact-us">Contact Us</a>
+          <a href="/careers" class={active === 'careers' ? 'active' : ''}>Careers</a>
+          <a href="/contact-us" class={active === 'contact' ? 'active' : ''}>Contact Us</a>
         </div>
       </div>
     </div>

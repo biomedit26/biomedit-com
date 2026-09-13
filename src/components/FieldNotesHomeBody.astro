@@ -27,6 +27,7 @@ const { heroVariant } = Astro.props;
 const pipelineRows = [
   {
     category: 'Infectious Disease',
+    slug: 'infectious-disease',
     codes: [
       { code: 'CPerf LLV*', href: '/products' },
       { code: 'BE-118' },
@@ -35,8 +36,8 @@ const pipelineRows = [
     ],
     color: 'teal' as const,
   },
-  { category: 'Sustainability', codes: [{ code: 'BE-017' }, { code: 'BE-117' }], color: 'green' as const },
-  { category: 'Chronic Disease', codes: [{ code: 'BE-105' }, { code: 'BE-122' }], color: 'amber' as const },
+  { category: 'Sustainability', slug: 'sustainability', codes: [{ code: 'BE-017' }, { code: 'BE-117' }], color: 'green' as const },
+  { category: 'Chronic Disease', slug: 'chronic-disease', codes: [{ code: 'BE-105' }, { code: 'BE-122' }], color: 'amber' as const },
 ];
 
 const stats = [
@@ -60,11 +61,9 @@ const categoryColors: Record<'press-release' | 'article' | 'event' | 'in-the-new
   'in-the-news': 'navy',
   'videos-podcasts': 'orange',
 };
-// Homepage "Latest from BiomEdit" excludes only the videos-podcasts
-// category (external video/podcast mentions); press releases, articles,
-// events, and in-the-news coverage are all eligible.
+// Homepage "Latest from BiomEdit" pulls the 3 most recent items from the
+// news page, regardless of category.
 const news = (await getCollection('news'))
-  .filter((post) => post.data.category !== 'videos-podcasts')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -81,7 +80,7 @@ const partners = [
   { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png', href: 'https://elevateventures.com/' },
   { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg', href: 'https://www.gatesfoundation.org/' },
   { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png', href: 'https://www.globalmethanehub.org/' },
-  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp', href: 'https://www.bezosearthfund.org/' },
   { name: 'USDA', logo: '/images/investor-partner/usda-icon.svg', href: 'https://www.usda.gov/' },
   { name: 'NIH', logo: '/images/investor-partner/nih-icon.png', href: 'https://www.nih.gov/' },
   { name: 'Elanco', logo: '/images/investor-partner/elanco.svg', href: 'https://www.elanco.com/us' },
@@ -182,7 +181,7 @@ const partners = [
               </>
             ))}
           </span>
-          <CTALink href="/pipeline">Details</CTALink>
+          <CTALink href={`/pipeline#pt-${row.slug}`}>Details</CTALink>
         </div>
       ))}
     </div>
