@@ -42,7 +42,12 @@ const news = defineCollection({
     title: z.string(),
     date: z.date(),
     category: z.enum(newsCategories),
-    secondaryCategory: z.enum(newsCategories).optional(),
+    // The Keystatic CMS's secondary-category select uses '' to represent
+    // "none" (a plain select can't omit itself from frontmatter the way an
+    // optional field can) — accepted here alongside undefined for
+    // hand-authored files that simply omit the key. Downstream code
+    // (news.astro) already treats both as falsy via `.filter(Boolean)`.
+    secondaryCategory: z.union([z.enum(newsCategories), z.literal('')]).optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     lead: z.string(),

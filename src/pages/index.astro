@@ -2,7 +2,6 @@
 // BiomEdit marketing homepage — built from the Field Notes concept
 // (design_handoff_field_notes/README.md). Lives at the site root; the
 // old /home route now redirects here (see public/_redirects).
-import { readFileSync } from 'node:fs';
 import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
@@ -20,7 +19,14 @@ import AnnouncementBar from '../components/AnnouncementBar.astro';
 // 3.5s timeline, the radiating-lines/concentric-circles groups fading in
 // after that, and animation-iteration-count:1 + fill-mode:forwards so it
 // plays once on load and holds its final state rather than looping.
-const heroSvg = readFileSync(new URL('../../public/images/flowing-e-graphic-recolored.svg', import.meta.url), 'utf-8');
+//
+// Lives in src/assets (not public/) and is loaded via Vite's `?raw`
+// import rather than a manual readFileSync — a filesystem read relative
+// to import.meta.url breaks once this page is part of a server-rendered
+// bundle (needed for the Keystatic admin routes to work in production),
+// since the bundled file no longer sits at the same relative path from
+// public/ that the source file does.
+import heroSvg from '../assets/flowing-e-graphic-recolored.svg?raw';
 ---
 <FieldNotesLayout title="Home" active="home">
   <AnnouncementBar
