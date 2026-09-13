@@ -40,14 +40,35 @@ export default config({
           options: [{ label: 'None', value: '' }, ...newsCategories],
           defaultValue: '',
         }),
-        image: fields.text({ label: 'Image path (e.g. /images/example.jpg)', description: 'Optional — leave blank to fall back to the video thumbnail or a placeholder.' }),
+        image: fields.image({
+          label: 'Image',
+          description: 'Optional — leave blank to fall back to the video thumbnail or a placeholder. Uploads land in public/images/news and commit to the repo alongside the entry.',
+          directory: 'public/images/news',
+          publicPath: '/images/news/',
+        }),
         imageAlt: fields.text({ label: 'Image alt text' }),
         lead: fields.text({ label: 'Lead / summary', multiline: true, validation: { isRequired: true } }),
         source: fields.text({ label: 'Source (third-party reposts only, e.g. "Feedstuffs (Informa Markets)")' }),
         videoUrl: fields.text({ label: 'Video URL (YouTube or direct file — embeds a player when set)' }),
         metaTitle: fields.text({ label: 'Meta title override (optional SEO)' }),
         metaDescription: fields.text({ label: 'Meta description override (optional SEO)', multiline: true }),
-        content: fields.markdoc({ label: 'Body', extension: 'md' }),
+        content: fields.markdoc({
+          label: 'Body',
+          extension: 'md',
+          // Inline images dropped into the body need an absolute /images/...
+          // path (matching the hero `image` field above) — this collection
+          // is flat one-file-per-post (no per-entry folder), so a relative
+          // path Astro would try to resolve as a build-time import doesn't
+          // have anywhere valid to resolve *from*, and breaks the entire
+          // site build the moment one is inserted. An absolute path is
+          // passed through as a literal URL instead, sidestepping that.
+          options: {
+            image: {
+              directory: 'public/images/news',
+              publicPath: '/images/news/',
+            },
+          },
+        }),
       },
     }),
   },
