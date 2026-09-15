@@ -7,3 +7,7 @@ image: /images/news/this-is-a-news-item-4/image.jpg
 lead: Summary is here
 ---
 Body copy
+
+---
+
+More text
