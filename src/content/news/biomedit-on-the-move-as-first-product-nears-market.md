@@ -2,6 +2,8 @@
 title: "BiomEdit on the Move as First Product Nears Market"
 date: 2026-05-28
 category: in-the-news
+image: "/images/boiler-hen-in-housing-single.jpg"
+imageAlt: "Broiler chicken in commercial poultry housing"
 lead: "IBJ reports that CPerf LLV (BE-101) (soon to be branded Optavant) is expected to reach commercial availability in Q3 2026 pending full USDA licensure, covering BiomEdit's operational progress."
 source: "Indianapolis Business Journal"
 metaTitle: "IBJ: BiomEdit Nears Market With First Product"

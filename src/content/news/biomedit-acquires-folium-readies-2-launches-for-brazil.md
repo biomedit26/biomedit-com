@@ -2,6 +2,8 @@
 title: "BiomEdit acquires Folium, readies 2 launches for Brazil"
 date: 2026-08-26
 category: in-the-news
+image: "/images/biologicals-for-animal-health.jpg"
+imageAlt: "Broiler chicks in a commercial poultry house"
 lead: "Independent reporting with direct CEO Aaron Schacht quotes: Folium's CRISPR-Cas team stays on as advisors, BiomElix One and CPerf LLV (BE-101) are on track for simultaneous 2027 Brazil launches, and BiomEdit still plans a Series C round after CPerf LLV (BE-101)'s USDA licensure."
 source: "AgNavigator"
 metaTitle: "BiomEdit Acquires Folium, Readies Two 2027 Brazil Launches | AgNavigator"

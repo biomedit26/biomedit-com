@@ -2,6 +2,8 @@
 title: "BiomEdit acquires England-based company's technology and pipeline assets"
 date: 2026-08-25
 category: in-the-news
+image: "/images/sangharsh-lohakare-8o_LkMpo8ug-unsplash.jpg"
+imageAlt: "Abstract 3D rendering of a DNA double helix"
 lead: "Local business-press coverage of the Folium Science acquisition, framing it for the Indianapolis market as BiomEdit gaining an England-based company's CRISPR-Cas technology and Brazil-approved feed additive."
 source: "Indianapolis Business Journal (IBJ)"
 metaTitle: "BiomEdit Acquires England-Based Folium Science's Technology | IBJ"

@@ -2,6 +2,8 @@
 title: "BiomEdit Acquires Folium Science Technology and Pipeline Assets to Expand Programmable Veterinary Biologics Capabilities"
 date: 2026-08-25
 category: press-release
+image: "/images/082626_BiomEdit_007.jpg"
+imageAlt: "BiomEdit scientist working with lab automation equipment"
 lead: "Acquisition adds Folium Science's Guided Biotics® CRISPR-Cas microbiome technology and BiomElix® One, a Brazil-approved poultry feed additive, to BiomEdit's pipeline."
 metaTitle: "BiomEdit Acquires Folium Science Technology and Pipeline Assets"
 metaDescription: "BiomEdit acquires Folium Science's CRISPR-based Guided Biotics platform and BiomElix One, a Brazil-approved poultry feed additive, expanding its Programmable Veterinary Biologics pipeline."

@@ -2,6 +2,8 @@
 title: "BiomEdit Partners with Bioversity International and Yale to Develop Rumen Digital Twin"
 date: 2025-10-29
 category: in-the-news
+image: "/images/biomedit-partners-bioversity.jpg"
+imageAlt: "Dairy cattle grazing in a pasture at sunset"
 lead: "SynBioBeta's in-depth coverage of BiomEdit's partnership with Bioversity International USA and Yale to build the Rumen Digital Twin, one of 15 global teams awarded Bezos Earth Fund AI for Climate and Nature Grand Challenge funding."
 source: "SynBioBeta"
 metaTitle: "SynBioBeta on BiomEdit's Rumen Digital Twin Partnership"

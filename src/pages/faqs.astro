@@ -5,7 +5,7 @@ import CTALink from '../components/CTALink.astro';
 const faqs = [
   {
     question: 'What does BiomEdit do?',
-    preview: 'BiomEdit created Programmable Veterinary Biologics<sup>&trade;</sup>, living biologics built from strains delivering payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic&reg; technology that selectively targets specific bacterial populations within the microbiome.',
+    preview: 'BiomEdit creates Programmable Veterinary Biologics<sup>&trade;</sup>, living biologics built from strains delivering payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic&reg; technology that selectively targets specific bacterial populations within the microbiome.',
     extra: [
       'Together, these technologies offer a new approach to animal health: engineering beneficial bacteria to deliver specific biological functions, and selectively targeting bacteria already present in the microbiome. Both approaches are designed to address specific disease mechanisms while fitting within established animal health and production practices.',
       'Our mission is to engineer living biologics to prevent disease, treat conditions, and improve animal health. In practice, that means we combine strain engineering, computational biology, and our proprietary microbial strain library to build a repeatable engine for animal health products.',
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: 'What is the science behind BiomEdit&rsquo;s Programmable Veterinary Biologics<sup>&trade;</sup> platform?',
-    preview: 'BiomEdit&rsquo;s Programmable Veterinary Biologics<sup>&trade;</sup> platform spans three focus areas, infectious disease, sustainability, and chronic disease, and every program moves through a defined five-stage lifecycle: Data-Driven Species &amp; Chassis Matching, Strain Engineering &amp; Payload Design, High-throughput Sequencing and Computational Biology, Regulatory Navigation &amp; Product Development, and Seamless Veterinary &amp; Producer Integration. This lifecycle draws on a substantial microbial strain library that provides a discovery foundation competitors can&rsquo;t easily replicate.',
+    preview: 'BiomEdit&rsquo;s Programmable Veterinary Biologics<sup>&trade;</sup> platform spans three focus areas, infectious disease, sustainability, and chronic disease, and every program moves through a defined five-stage lifecycle: Data-Driven Species &amp; Chassis Matching, Strain Engineering &amp; Payload Design, High-throughput Sequencing and Computational Biology, Regulatory Navigation &amp; Product Development, and Seamless Veterinary &amp; Producer Integration. This lifecycle draws on a proprietary microbial strain library that provides a discovery foundation competitors can&rsquo;t easily replicate.',
     extra: [],
     cta: { label: 'Read more', href: '/science' },
   },
@@ -40,7 +40,7 @@ const faqs = [
     list: [
       { code: 'CPerf LLV*/Optavant', description: 'A first-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.' },
       { code: 'BE-118', description: 'Probiotic vectored antibodies targeting antigens of the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.' },
-      { code: 'BE-119', description: 'A probiotic vectored enzyme therapeutic that aims to reduce E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.' },
+      { code: 'BE-119', description: 'A probiotic vectored enzyme therapeutic that aims to reduce <em>E. coli</em>-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.' },
       { code: 'BEX1 (BiomElix® One)', description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture (MAPA) as part of BiomEdit's acquisition of Folium Science." },
       { code: 'BE-017', description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.' },
       { code: 'BE-117', description: 'A first-in-class engineered rumen strain that continuously delivers anti-methanogen peptide and nanobody biomolecules directly in the rumen of dairy and beef cattle, reducing enteric methane emissions while improving feed efficiency and productivity.' },
@@ -56,12 +56,12 @@ const faqs = [
   },
   {
     question: 'What is CPerf LLV* or Optavant?',
-    preview: 'BiomEdit created CPerf LLV*, the first engineered bacterial biologic from our Programmable Veterinary Biologics<sup>&trade;</sup> platform to achieve USDA conditional licensure in poultry. It&rsquo;s a first-in-class engineered probiotic for chickens that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting them from necrotic enteritis without antibiotics. CPerf LLV* reduces mortality and supports flock performance. It will be marketed as Optavant&trade; when it is commercially available.',
+    preview: 'BiomEdit created CPerf LLV*, the first engineered bacterial biologic from our Programmable Veterinary Biologics<sup>&trade;</sup> platform to achieve USDA conditional licensure in poultry. It&rsquo;s a first-in-class engineered probiotic for chickens that secretes nanobodies neutralizing Clostridium <em>perfringens</em> toxins in the broiler gut, protecting them from necrotic enteritis without antibiotics. CPerf LLV* reduces mortality and supports flock performance. It will be marketed as Optavant&trade; in the US when the full license is issued for the product.',
     extra: [],
   },
   {
     question: 'Does BiomEdit hold patents for its technology?',
-    preview: 'BiomEdit holds foundational patents protecting our engineered probiotic delivery platform, including &ldquo;Genetically Modified Lactobacillus and Uses Thereof&rdquo; (U.S. Patent 12,599,637) and &ldquo;Probiotic Compositions Comprising Lactobacillus reuteri Strains and Methods of Use&rdquo; (U.S. Patent 12,427,174), issued April 2026. These patents cover the engineered Lactobacillus reuteri strains and delivery systems underlying CPerf LLV* and future pipeline products.',
+    preview: 'BiomEdit holds foundational patents protecting our engineered probiotic delivery platform, including &ldquo;Genetically Modified Lactobacillus and Uses Thereof&rdquo; (U.S. Patent 12,599,637) and &ldquo;Probiotic Compositions Comprising Lactobacillus <em>reuteri</em> Strains and Methods of Use&rdquo; (U.S. Patent 12,427,174), issued April 2026. These patents cover the engineered Lactobacillus <em>reuteri</em> strains and delivery systems underlying CPerf LLV* and future pipeline products.',
     extra: [],
   },
   {
@@ -109,7 +109,7 @@ const faqs = [
                 {faq.list && (
                   <ul>
                     {faq.list.map((item) => (
-                      <li><strong>{item.code}</strong> &mdash; {item.description}</li>
+                      <li><strong>{item.code}</strong> &mdash; <span set:html={item.description} /></li>
                     ))}
                   </ul>
                 )}

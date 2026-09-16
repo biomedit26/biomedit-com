@@ -2,6 +2,8 @@
 title: "Engineered Bacteria Could Stop Poultry Necrotic Enteritis"
 date: 2025-09-12
 category: in-the-news
+image: "/images/broiler-breeders-with-feeders.jpg"
+imageAlt: "Broiler breeders in a commercial poultry house with feeders"
 lead: "WATTPoultry coverage of BiomEdit's engineered bacteria CPerf LLV (BE-101) approach as a non-antibiotic alternative for preventing necrotic enteritis in broilers."
 source: "WATTPoultry.com (WATT AgNet)"
 metaTitle: "WATTPoultry on BiomEdit's Engineered Bacteria for Necrotic Enteritis"

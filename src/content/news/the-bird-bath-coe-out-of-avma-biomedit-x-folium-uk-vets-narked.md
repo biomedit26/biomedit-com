@@ -2,6 +2,8 @@
 title: "The Bird Bath: COE out of AVMA?, BiomEdit x Folium, UK Vets Narked"
 date: 2026-09-01
 category: videos-podcasts
+image: "/images/thomas-le-HFWahRo6l4Q-unsplash.jpg"
+imageAlt: "Studio microphone used for podcast recording"
 lead: "Weekly vet-med news roundup covering the Folium Science acquisition, with an overview of Folium's Guided Biotics® CRISPR-Cas platform, alongside unrelated AVMA and UK veterinary industry stories."
 source: "The Bird Bath (veterinary industry podcast)"
 metaTitle: "The Bird Bath: BiomEdit Acquires Folium Science (CRISPR)"
