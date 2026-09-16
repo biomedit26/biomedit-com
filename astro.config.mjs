@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import netlify from '@astrojs/netlify';
+import rehypeExternalLinks from 'rehype-external-links';
 
 // Internal/reference pages that exist for dev use, not for search — kept
 // out of the sitemap so they don't get indexed alongside real site content.
@@ -22,6 +23,15 @@ export default defineConfig({
   site: 'https://biomedit.com',
   output: 'hybrid',
   adapter: netlify(),
+  markdown: {
+    // Every link in news article bodies (Content collections, e.g.
+    // src/content/news/*.md) that points off-site opens in a new tab —
+    // applies automatically to every post, current and future, rather
+    // than needing target="_blank" hand-added to each markdown link.
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+    ],
+  },
   integrations: [
     sitemap({
       filter: (page) => !EXCLUDED_FROM_SITEMAP.some((pattern) => pattern.test(page)),

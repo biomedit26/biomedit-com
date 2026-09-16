@@ -20,4 +20,4 @@ Throughout the conversation, Schacht highlighted the progress made in human heal
 
 Schacht described synthetic biology as "a collective term for anything you would do to engineer a cell," and discussed how BiomEdit is applying it to change and raise the expectations of livestock producers, veterinarians, and pet owners.
 
-*Source: America's Nest Egg podcast, via Ancera*
+*Source: [America's Nest Egg podcast, via Ancera](https://www.ancera.com/post/the-future-of-food-biotechnology-with-aaron-schacht-of-biomedit)*

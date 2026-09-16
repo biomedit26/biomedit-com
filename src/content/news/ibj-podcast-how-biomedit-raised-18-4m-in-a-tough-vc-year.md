@@ -16,4 +16,4 @@ In this episode of the IBJ Podcast, BiomEdit CEO and founder Aaron Schacht talks
 
 The conversation covers the tough fundraising environment for venture capital during the round, and how BiomEdit adjusted its pitch and milestones to close an oversubscribed raise led by Anterra Capital with participation from Nutreco, AgriZeroNZ, Elevate Ventures and Betagro Ventures.
 
-*Source: Indianapolis Business Journal (IBJ)*
+*Source: [Indianapolis Business Journal (IBJ)](https://www.ibj.com/articles/ibj-podcast-heres-how-biomedit-raised-18-4m-in-a-tough-vc-year)*

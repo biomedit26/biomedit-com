@@ -2,6 +2,7 @@
 title: "BiomEdit Bets on Engineered Probiotic to Transform Animal Health and Productivity"
 date: 2025-05-29
 category: in-the-news
+secondaryCategory: event
 image: "/images/healthy-chicken.jpg"
 imageAlt: "Healthy broiler chicken protected by CPerf LLV (BE-101)"
 lead: "With US poultry producers facing persistent challenges from subclinical necrotic enteritis, BiomEdit CEO Aaron Schacht discusses how the company's engineered probiotic CPerf LLV (BE-101) is designed to address the disease at its root cause."
@@ -24,4 +25,4 @@ With over 9 billion broilers produced annually in the US and just 20 major integ
 
 Building on the success of CPerf LLV (BE-101), BiomEdit is also turning its attention to the cattle industry. "Our technology platform was built on a foundational vision: combining a deep understanding of the animal microbiome with the tools of synthetic biology to engineer microbes capable of delivering therapeutic or biologically active molecules," Schacht said, describing how a Gates Foundation grant helped the company apply its poultry and swine microbiome learnings to the cow's rumen.
 
-*Source: AgNavigator*
+*Source: [AgNavigator](https://www.agnavigator.com/Article/2025/05/29/biomedit-bets-on-engineered-probiotic-to-transform-animal-health-and-productivity/)*

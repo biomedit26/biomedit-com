@@ -22,4 +22,4 @@ CPerf LLV (BE-101) is an engineered probiotic vectored antibody biologic designe
 
 Upon full licensure, CPerf LLV (BE-101) will be commercialized under the brand name Optavant™ and will represent the first non-antibiotic biologic specifically designed to combat NE while improving flock health and production outcomes. BiomEdit is backed by Anterra Capital, Viking Global, Nutreco, AgriZeroNZ, Elevate, Betagro Ventures and other investors.
 
-*Source: Feedstuffs (Informa Markets)*
+*Source: [Feedstuffs (Informa Markets)](https://www.feedstuffs.com/poultry/biomedit-necrotic-enteritis-treatment-clears-usda-hurdle)*

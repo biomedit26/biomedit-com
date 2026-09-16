@@ -2,6 +2,7 @@
 title: "CEO Aaron Schacht Speaks at Ferment Conference"
 date: 2024-05-13
 category: videos-podcasts
+secondaryCategory: event
 image: "/images/Copy-of-Ferment_2024_1109-scaled.jpg"
 imageAlt: "Aaron Schacht presenting on stage at Ginkgo Bioworks' Ferment conference"
 lead: "BiomEdit CEO Aaron Schacht joins Ginkgo Bioworks' annual Ferment conference to share how synthetic biology is solving some of animal health's most intractable problems."

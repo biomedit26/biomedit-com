@@ -11,4 +11,4 @@ metaDescription: "BiomEdit CEO Aaron Schacht joins the Cures & Capital podcast t
 
 BiomEdit CEO Aaron Schacht joins the Cures & Capital podcast to discuss improving R&D productivity across the pharmaceutical industry, drawing on his Eli Lilly leadership experience and a landmark Nature Reviews Drug Discovery framework. Also available as audio on Spotify and Apple Podcasts.
 
-*Source: Cures & Capital (YouTube/Podcast)*
+*Source: [Cures & Capital (YouTube/Podcast)](https://www.youtube.com/watch?v=7JDTKU0Pkf8)*
