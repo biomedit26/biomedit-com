@@ -51,17 +51,17 @@ const teamMembers = [
 
   <section class="team-stats">
     <div class="team-stats-grid">
-      <div class="stats-col">
-        <StatBlock stats={teamStats} align="left" />
-      </div>
       <div class="photo-col">
         <img src="/images/090325_BiomEdit-Team_1692.jpg" alt="The BiomEdit team" />
+      </div>
+      <div class="stats-col">
+        <StatBlock stats={teamStats} align="left" />
       </div>
     </div>
   </section>
 
   <section class="leadership section-divider">
-    <h2>Leadership</h2>
+    <h2>Executive Leadership</h2>
     <div class="leadership-grid">
       {leaders.map((leader) => (
         <div class="leader-card">
@@ -124,11 +124,12 @@ const teamMembers = [
   .section-divider { border-top: 1px solid var(--cool-500); }
 
   .team-stats { padding: 3.5rem 0 4rem; }
-  .team-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; }
+  .team-stats-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 56px; align-items: stretch; }
+  .photo-col img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; border-radius: 6px; }
   .stats-col { display: flex; align-items: center; }
   .stats-col :global(.stat-block) { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 24px; }
   .stats-col :global(.stat) { border-right: none !important; padding: 0 !important; }
-  .photo-col img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; border-radius: 6px; }
+  .stats-col :global(.stat-label) { font-size: 12px; }
 
   @media (max-width: 700px) {
     .team-stats-grid { grid-template-columns: 1fr; gap: 2rem; }
