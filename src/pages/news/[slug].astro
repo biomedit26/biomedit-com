@@ -48,6 +48,26 @@ const wordCount = post.body.trim().split(/\s+/).length;
 const readTime = Math.max(1, Math.round(wordCount / 200));
 
 const pageUrl = `https://biomedit.com/news/${post.slug}/`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: post.data.title,
+  description: metaDescription,
+  datePublished: post.data.date.toISOString(),
+  ...(heroImage && { image: [new URL(heroImage, 'https://biomedit.com').toString()] }),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+  author: post.data.source
+    ? { '@type': 'Organization', name: post.data.source }
+    : { '@type': 'Organization', name: 'BiomEdit', url: 'https://biomedit.com' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'BiomEdit',
+    url: 'https://biomedit.com',
+    logo: { '@type': 'ImageObject', url: 'https://biomedit.com/images/BiomEdit_logo.jpg' },
+  },
+};
+
 const shareText = post.data.title;
 const shareLinks = {
   twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`,
@@ -57,6 +77,7 @@ const shareLinks = {
 };
 ---
 <FieldNotesLayout title={metaTitle} description={metaDescription} image={heroImage ?? undefined} active="news">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <div class="article-header">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{post.data.title}</h1>

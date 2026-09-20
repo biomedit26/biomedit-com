@@ -108,7 +108,7 @@ const patentCoverage = [
   'Applications across multiple species, spanning livestock, pets and human health.',
 ];
 ---
-<FieldNotesLayout title="Patents and Publications" active="publications">
+<FieldNotesLayout title="Patents and Publications" description="Peer-reviewed science and intellectual property behind BiomEdit's Programmable Veterinary Biologics™ platform." active="publications">
   <IntroLead
     eyebrow="BiomEdit / Patents and Publications"
     heading="Peer-reviewed science and protected IP behind our platform"
@@ -119,7 +119,7 @@ const patentCoverage = [
   <section class="publications section-divider">
     <h2>Peer-reviewed publications from our scientists.</h2>
 
-    <a href={featured.link} target="_blank" rel="noopener" class="pub-featured">
+    <a href={featured.link} target="_blank" rel="noopener noreferrer" class="pub-featured">
       <div class="pub-featured-text">
         <p class="pub-featured-eyebrow">Latest Publication</p>
         <h3>{featured.title}</h3>
@@ -137,7 +137,7 @@ const patentCoverage = [
 
     <div class="pub-grid">
       {rest.map((p) => (
-        <a href={p.link} target="_blank" rel="noopener" class="pub-card">
+        <a href={p.link} target="_blank" rel="noopener noreferrer" class="pub-card">
           <div class="pub-card-image">
             <img src={p.image} alt="" />
           </div>
@@ -215,8 +215,8 @@ const patentCoverage = [
     border-bottom: 1px solid var(--color-navy); padding-bottom: 0.25rem; align-self: flex-start;
   }
   .pub-featured-cta svg { width: 14px; height: 14px; }
-  .pub-featured-image { position: relative; overflow: hidden; }
-  .pub-featured-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .pub-featured-image { position: relative; overflow: hidden; background: #FFFFFF; }
+  .pub-featured-image img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 24px; }
   .pub-featured-image::after { content: ''; position: absolute; inset: 0; background: rgba(28, 31, 40, 0.3); }
 
   .pub-meta { font-size: 16px; color: var(--text-secondary); margin: 0; }

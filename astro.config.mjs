@@ -7,7 +7,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 
 // Internal/reference pages that exist for dev use, not for search — kept
 // out of the sitemap so they don't get indexed alongside real site content.
-const EXCLUDED_FROM_SITEMAP = [/\/styleguide\/?$/, /\/content-modules\/?$/, /\/home-video\/?$/, /\/notes(\/|$)/, /\/series-c\/?$/, /\/keystatic(\/|$)/];
+const EXCLUDED_FROM_SITEMAP = [/\/styleguide\/?$/, /\/content-modules\/?$/, /\/home-video\/?$/, /\/notes(\/|$)/, /\/series-c\/?$/, /\/keystatic(\/|$)/, /\/contact-us\/thank-you\/?$/];
 
 // Keystatic's admin UI needs a non-static route, which Astro 4 only allows
 // under 'hybrid'/'server' output — hybrid keeps every other route static

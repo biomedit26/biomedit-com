@@ -39,7 +39,7 @@ const candidates = [
     mechanism: 'CRISPR-based editing (Guided Biotic)',
     stage: 5,
     stageNote: "Regulatory Approval / Launch Readiness. Approved by Brazil's MAPA.",
-    description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture (MAPA) as part of BiomEdit's acquisition of Folium Science.",
+    description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture and Livestock (MAPA) as part of BiomEdit's acquisition of Folium Science.",
   },
   {
     id: 'BE-118',
@@ -103,7 +103,7 @@ const candidates = [
   },
 ];
 ---
-<FieldNotesLayout title="Pipeline" active="pipeline">
+<FieldNotesLayout title="Pipeline" description="BiomEdit's pipeline spans infectious disease, sustainability, and chronic disease, built on our Programmable Veterinary Biologics™ platform." active="pipeline">
   <IntroLead
     eyebrow="BiomEdit / Pipeline"
     heading="Making biology programmable for animal health"
@@ -122,7 +122,7 @@ const candidates = [
     <div class="spotlight">
       <div class="spotlight-text">
         <p class="eyebrow">Featured Program — Infectious Disease</p>
-        <h3>CPerf LLV* (BE-101) granted USDA Conditional Licensure.</h3>
+        <h2>CPerf LLV* (BE-101) granted USDA Conditional Licensure.</h2>
         <div class="spotlight-facts">
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
@@ -147,7 +147,7 @@ const candidates = [
     <ModulePlainText
       heading="Three focus areas. One BiomEdit platform."
       paragraphs={[
-        'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform spans three focus areas: <strong><a href="/science">infectious disease</a></strong>, <strong><a href="/science">sustainability</a></strong>, and <strong><a href="/science">chronic disease</a></strong>. We engineer beneficial bacteria to perform specific biological functions, including producing nanobodies, peptides, or enzymes, or working together as microbial consortia. Our platform also incorporates technology acquired from Folium Science that selectively targets specific bacterial populations already present in the microbiome. These complementary approaches can be applied across livestock and companion animals, with in-house capabilities spanning discovery, development, regulatory, and commercialization.',
+        'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform spans three focus areas: <strong><a href="/science#focus-areas">infectious disease</a></strong>, <strong><a href="/science#focus-areas">sustainability</a></strong>, and <strong><a href="/science#focus-areas">chronic disease</a></strong>. We engineer beneficial bacteria to perform specific biological functions, including producing nanobodies, peptides, or enzymes, or working together as microbial consortia. Our platform also incorporates technology acquired from Folium Science that selectively targets specific bacterial populations already present in the microbiome. These complementary approaches can be applied across livestock and companion animals, with in-house capabilities spanning discovery, development, regulatory, and commercialization.',
       ]}
     />
   </div>
@@ -200,8 +200,8 @@ const candidates = [
   }
   .spotlight-text { padding: 2.5rem 40px; display: flex; flex-direction: column; justify-content: center; }
   .spotlight-text .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-teal); margin: 0 0 1rem; }
-  .spotlight-text h3 { font-size: var(--text-h4); margin: 0 0 1rem; color: var(--text-primary); line-height: 1.2; }
-  .spotlight-text h3 sup { font-size: 0.4em; }
+  .spotlight-text h2 { font-size: var(--text-h4); margin: 0 0 1rem; color: var(--text-primary); line-height: 1.2; }
+  .spotlight-text h2 sup { font-size: 0.4em; }
   .spotlight-facts { display: flex; flex-direction: column; gap: 1rem; margin: 0 0 1.5rem; }
   .spotlight-fact { display: flex; align-items: flex-start; gap: 12px; }
   .fact-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--color-teal); }

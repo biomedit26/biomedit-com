@@ -5,7 +5,7 @@ import CTALink from '../components/CTALink.astro';
 const faqs = [
   {
     question: 'What does BiomEdit do?',
-    preview: 'BiomEdit creates Programmable Veterinary Biologics<sup>&trade;</sup>, living biologics built from strains delivering payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic&reg; technology that selectively targets specific bacterial populations within the microbiome.',
+    preview: 'BiomEdit creates Programmable Veterinary Biologics<sup>&trade;</sup>, living biologics built from strains delivering payloads designed to prevent and treat disease across species, including poultry, livestock, and companion animals. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotics&reg; technology that selectively targets specific bacterial populations within the microbiome.',
     extra: [
       'Together, these technologies offer a new approach to animal health: engineering beneficial bacteria to deliver specific biological functions, and selectively targeting bacteria already present in the microbiome. Both approaches are designed to address specific disease mechanisms while fitting within established animal health and production practices.',
       'Our mission is to engineer living biologics to prevent disease, treat conditions, and improve animal health. In practice, that means we combine strain engineering, computational biology, and our proprietary microbial strain library to build a repeatable engine for animal health products.',
@@ -41,7 +41,7 @@ const faqs = [
       { code: 'CPerf LLV*/Optavant', description: 'A first-in-class engineered probiotic that secretes nanobodies neutralizing Clostridium perfringens toxins in the broiler gut, protecting chickens from necrotic enteritis without antibiotics. Reduces mortality and supports flock performance.' },
       { code: 'BE-118', description: 'Probiotic vectored antibodies targeting antigens of the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.' },
       { code: 'BE-119', description: 'A probiotic vectored enzyme therapeutic that aims to reduce <em>E. coli</em>-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.' },
-      { code: 'BEX1 (BiomElix® One)', description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture (MAPA) as part of BiomEdit's acquisition of Folium Science." },
+      { code: 'BEX1 (BiomElix® One)', description: "A non-GMO feed additive built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. Approved by Brazil's Ministry of Agriculture and Livestock (MAPA) as part of BiomEdit's acquisition of Folium Science." },
       { code: 'BE-017', description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.' },
       { code: 'BE-117', description: 'A first-in-class engineered rumen strain that continuously delivers anti-methanogen peptide and nanobody biomolecules directly in the rumen of dairy and beef cattle, reducing enteric methane emissions while improving feed efficiency and productivity.' },
       { code: 'BE-105', description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and dog applications as future extensions.' },
@@ -89,14 +89,14 @@ const faqs = [
   },
 ];
 ---
-<FieldNotesLayout title="FAQs">
+<FieldNotesLayout title="FAQs" description="Answers to common questions about BiomEdit, our Programmable Veterinary Biologics™ platform, and our first product, CPerf LLV*.">
   <div class="legal-page">
     <h1>Frequently Asked Questions</h1>
 
     <div class="faq-list">
       {faqs.map((faq) => (
         <div class="faq-card">
-          <h3 set:html={faq.question} />
+          <h2 set:html={faq.question} />
           <p class="faq-preview" set:html={faq.preview} />
           {(faq.extra.length > 0 || faq.list) && (
             <details class="faq-details">
@@ -142,7 +142,7 @@ const faqs = [
   .faq-card { padding: 2rem 0; border-bottom: 1px solid var(--cool-300); }
   .faq-card:first-child { padding-top: 0; }
   .faq-card:last-child { border-bottom: none; padding-bottom: 0; }
-  .faq-card h3 { font-size: var(--text-h6); margin: 0 0 0.75rem; }
+  .faq-card h2 { font-size: var(--text-h6); margin: 0 0 0.75rem; }
   .faq-preview { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0; }
 
   .faq-details { margin-top: 0.75rem; }

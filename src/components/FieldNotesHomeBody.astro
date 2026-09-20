@@ -76,11 +76,11 @@ const partners = [
   { name: 'Viking', logo: '/images/investor-partner/viking.svg', href: 'https://vikingglobal.com/' },
   { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
   { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg', href: 'https://www.agrizero.nz/' },
-  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://uat.betagroventures.com/en' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://betagroventures.com/en' },
   { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png', href: 'https://elevateventures.com/' },
   { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg', href: 'https://www.gatesfoundation.org/' },
   { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png', href: 'https://www.globalmethanehub.org/' },
-  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp', href: 'https://www.bezosearthfund.org/' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.png', href: 'https://www.bezosearthfund.org/' },
   { name: 'USDA', logo: '/images/investor-partner/usda-icon.svg', href: 'https://www.usda.gov/' },
   { name: 'NIH', logo: '/images/investor-partner/nih-icon.png', href: 'https://www.nih.gov/' },
   { name: 'Elanco', logo: '/images/investor-partner/elanco.svg', href: 'https://www.elanco.com/us' },
@@ -95,7 +95,7 @@ const partners = [
   <div class="who-we-are-grid">
     <div class="who-we-are-text">
       <h2>Who we are</h2>
-      <p class="lead">At BiomEdit, we develop engineered microbial biologics to improve animal health. Located inside the laboratory facilities of the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener">Indiana Biosciences Research Institute</a>, our experienced team works together to advance our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup> platform</a>. From scientists and researchers to product developers and regulatory experts, we are building a new category in animal health.</p>
+      <p class="lead">At BiomEdit, we develop engineered microbial biologics to improve animal health. Located inside the laboratory facilities of the <a href="https://www.indianabiosciences.org/" target="_blank" rel="noopener noreferrer">Indiana Biosciences Research Institute</a>, our experienced team works together to advance our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup> platform</a>. From scientists and researchers to product developers and regulatory experts, we are building a new category in animal health.</p>
       <p class="lead"><strong>Our goal:</strong> better outcomes for animals, producers, and veterinarians through practical solutions.</p>
       <CTALink href="/science">Discover our science</CTALink>
     </div>
@@ -211,7 +211,7 @@ const partners = [
         <div class="logo-grid">
           {partners.map((p) => (
             p.href ? (
-              <a class={`logo-cell ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+              <a class={`logo-cell ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                 <img src={p.logo} alt={p.name} loading="lazy" />
               </a>
             ) : (

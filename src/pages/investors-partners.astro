@@ -16,14 +16,14 @@ const investors = [
   { name: 'Viking', logo: '/images/investor-partner/viking.svg', href: 'https://vikingglobal.com/' },
   { name: 'Nutreco NuFrontiers', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
   { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg', href: 'https://www.agrizero.nz/' },
-  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://uat.betagroventures.com/en' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://betagroventures.com/en' },
   { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png', href: 'https://elevateventures.com/' },
 ];
 const partnershipsGrants = [
   { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
   { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg', href: 'https://www.gatesfoundation.org/' },
   { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png', href: 'https://www.globalmethanehub.org/' },
-  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.png', href: 'https://www.bezosearthfund.org/' },
   { name: 'USDA NIFA', logo: '/images/investor-partner/usda-icon.svg', href: 'https://www.usda.gov/' },
   { name: 'NIH', logo: '/images/investor-partner/nih-icon.png', href: 'https://www.nih.gov/' },
 ];
@@ -36,9 +36,9 @@ const launchPartners = [
 // In order of emphasis, per leadership-approved copy.
 const whyBiomEditPoints = [
   { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic&trade;', paragraph: '<a href="/products">CPerf LLV*</a> is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
-  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic<sup>&reg;</sup> technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix<sup>&reg;</sup> One, approved in Brazil.' },
+  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotics<sup>&reg;</sup> technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix<sup>&reg;</sup> One, approved in Brazil.' },
   { color: 'orange', heading: 'Foundational Patents', paragraph: 'We have patents that protect the core delivery mechanism and the nanobody sequences behind CPerf LLV* and other programs.' },
-  { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener">Bezos Earth Fund</a> and the <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener">Gates Foundation</a>.' },
+  { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener noreferrer">Bezos Earth Fund</a> and the <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener noreferrer">Gates Foundation</a>.' },
   { color: 'teal', heading: 'Programmable Architecture', paragraph: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, swine, cattle, dogs, and cats, so each new product builds on proven ground instead of starting over.' },
   { color: 'navy', heading: 'Durable IP Across the Full Stack', paragraph: 'We generate protected intellectual property (IP) with every product across strain, delivery mechanism, indication, and process, compounding the platform&rsquo;s competitive advantage with each release.' },
   { color: 'orange', heading: 'A Results-Driven Team', paragraph: 'Our executive team has over 200 years of combined experience, over 450 publications, and a track record of inventing dozens of commercial animal health innovations.' },
@@ -54,7 +54,7 @@ const grants = [
   { title: '2023 Bill & Melinda Gates Foundation Grant', description: '$4.5M to advance microbiome-based methane reduction for cattle in Africa and South Asia.' },
 ];
 ---
-<FieldNotesLayout title="Investors & Partners" active="investors">
+<FieldNotesLayout title="Investors & Partners" description="BiomEdit is backed by leading investors and partners in agtech, life sciences, and sustainability advancing our animal health platform." active="investors">
   <IntroLead
     eyebrow="BiomEdit / Investors"
     heading="Backed by leaders in agtech, life sciences, and sustainability"
@@ -71,7 +71,7 @@ const grants = [
           <div class="logo-row">
             {investors.map((p) => (
               p.href ? (
-                <a class="logo-chip" href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class="logo-chip" href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
@@ -91,7 +91,7 @@ const grants = [
           <div class="logo-row">
             {partnershipsGrants.map((p) => (
               p.href ? (
-                <a class="logo-chip" href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class="logo-chip" href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
@@ -109,7 +109,7 @@ const grants = [
           <div class="logo-row">
             {launchPartners.map((p) => (
               p.href ? (
-                <a class={`logo-chip ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class={`logo-chip ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
