@@ -175,7 +175,7 @@ const flockFacts = [
 
   .problem-solution { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; padding: 0 0 4rem; }
 
-  .card-eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-navy-dark); margin: 0 0 1rem; }
+  .card-eyebrow { font-size: var(--text-h6); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-navy-dark); margin: 0 0 1rem; }
   .card-eyebrow.is-teal { color: var(--color-teal); }
 
   .problem-card {
@@ -188,6 +188,7 @@ const flockFacts = [
   }
   .problem-stat { font-size: var(--text-h3); font-weight: 700; line-height: 1; color: #FFFFFF; margin: 0 0 1rem; }
   .problem-card p { font-size: var(--text-body); line-height: 1.5; color: var(--cool-300); margin: 0 0 1rem; }
+  .problem-card .card-eyebrow { font-size: var(--text-h6); }
   .problem-card p a { color: inherit; }
   .problem-card p:last-child { margin-bottom: 0; }
 
@@ -200,7 +201,7 @@ const flockFacts = [
     flex-direction: column;
     justify-content: center;
   }
-  .solution-lead { font-size: 19px; font-weight: 500; line-height: 1.55; color: var(--text-primary); margin: 0 0 1.5rem; }
+  .solution-lead { font-size: var(--text-body); font-weight: 500; line-height: 1.55; color: var(--text-primary); margin: 0 0 1.5rem; }
   .solution-highlight, .solution-fact { display: flex; align-items: flex-start; gap: 12px; }
   .solution-highlight {
     background: var(--bg-tertiary);
