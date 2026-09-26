@@ -35,8 +35,8 @@ const launchPartners = [
 
 // In order of emphasis, per leadership-approved copy.
 const whyBiomEditPoints = [
-  { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic&trade;', paragraph: '<a href="/products">CPerf LLV*</a> is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
-  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotics<sup>&reg;</sup> technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix<sup>&reg;</sup> One, approved in Brazil.' },
+  { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic', paragraph: '<a href="/products">CPerf LLV*</a> is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
+  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics</a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotics technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix One, approved in Brazil.' },
   { color: 'orange', heading: 'Foundational Patents', paragraph: 'We have patents that protect the core delivery mechanism and the nanobody sequences behind CPerf LLV* and other programs.' },
   { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener noreferrer">Bezos Earth Fund</a> and the <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener noreferrer">Gates Foundation</a>.' },
   { color: 'teal', heading: 'Programmable Architecture', paragraph: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, swine, cattle, dogs, and cats, so each new product builds on proven ground instead of starting over.' },
@@ -131,7 +131,7 @@ const grants = [
         <img class="quote-photo quote-photo-lg" src="/images/082626_BiomEdit_083.jpg" alt="BiomEdit scientist examining a sample in the lab" />
         <img class="quote-photo quote-photo-sm" src="/images/082626_BiomEdit_081.jpg" alt="Stacked petri dishes on a lab bench" />
         <div class="quote-col">
-          <p class="quote">&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics<sup>&trade;</sup>. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;</p>
+          <p class="quote">&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;</p>
           <cite class="quote-cite">Brett Wong, Partner, Anterra Capital</cite>
         </div>
       </div>
@@ -177,10 +177,6 @@ const grants = [
     />
   </div>
 
-  <section class="footnote">
-    <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
-  </section>
-
   <ModuleBlueText
     heading="Want to learn more about BiomEdit?"
     ctaLabel="Connect with us"
@@ -192,6 +188,9 @@ const grants = [
     blendMode="overlay"
     imageOpacity={0.45}
   />
+  <section class="third-party-note">
+    <p>All third-party trademarks, service marks, trade names, trade dress, product names, and logos appearing on this page&mdash;including Anterra Capital, Viking Global Investors, Betagro Ventures, Elevate Ventures, Nutreco, AgriZeroNZ, Bill &amp; Melinda Gates Foundation, Elanco, USDA, NIH, Ginkgo Bioworks, Ferment, TechPoint, and S&amp;P Global&mdash;are the property of their respective owners. Their display on this site does not imply endorsement, sponsorship, or affiliation except as formally contracted.</p>
+  </section>
 </FieldNotesLayout>
 
 <style>
@@ -236,8 +235,8 @@ const grants = [
     .quote-photo-lg, .quote-photo-sm, .quote-col { grid-column: span 1; }
   }
 
-  .footnote { padding: 0 0 2rem; }
-  .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+  .third-party-note { padding: 2rem 0 1.5rem; }
+  .third-party-note p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; max-width: 980px; }
 
   .lockups { padding: 3.5rem 0; }
   .lockups-card {

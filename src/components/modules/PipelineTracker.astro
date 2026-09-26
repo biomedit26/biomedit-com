@@ -45,9 +45,11 @@ interface Props {
   candidates: Candidate[];
   footnote?: string;
   idPrefix?: string;
+  // Footnote marker shown after the "Our pipeline" label.
+  labelFootnote?: number;
 }
 
-const { stages, candidates, footnote, idPrefix = 'pt' } = Astro.props;
+const { stages, candidates, footnote, idPrefix = 'pt', labelFootnote } = Astro.props;
 
 const categories = [
   { key: 'infectious-disease', label: 'Infectious Disease', color: 'var(--color-teal)' },
@@ -75,7 +77,7 @@ const speciesList = [
 
   <div class="tracker-panel">
     <div class="tracker-band">
-      <p class="tracker-label">Our pipeline</p>
+      <p class="tracker-label">Our pipeline{labelFootnote && <sup>{labelFootnote}</sup>}</p>
     </div>
     <div class="tracker-top">
       <div class="filter-row">

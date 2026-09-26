@@ -17,6 +17,7 @@
 
 import '../styles/tokens.css';
 import '../styles/global.css';
+import { copyrightYear } from '../utils/copyrightYear';
 
 interface Props {
   title: string;
@@ -56,7 +57,13 @@ const nav = [
   { label: 'News', href: '/news', key: 'news', enabled: true },
 ];
 
-const year = new Date().getFullYear();
+const year = copyrightYear();
+
+// Legal: wherever the CPerf LLV* asterisk appears, its footnote must appear on
+// that same page. Detecting it from the rendered page content means new pages
+// and new news posts get the footnote automatically.
+const mainHtml = await Astro.slots.render('default');
+const hasAsterisk = mainHtml.includes('CPerf LLV*');
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -339,6 +346,10 @@ const year = new Date().getFullYear();
     }
     .footer-wordmark { height: 18px; width: auto; display: block; }
     .footer-copyright { font-size: 13px; color: var(--cool-600); }
+    .footer-legal-notice { font-size: 12px; line-height: 1.6; color: var(--cool-600); margin: 0; padding: 1.5rem 0; max-width: 980px; }
+    .footer-legal-notice a { color: var(--color-navy); text-decoration: underline; text-underline-offset: 3px; }
+    .asterisk-footnote { padding: 1.25rem 0 2rem; }
+    .asterisk-footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
   </style>
 </head>
 <body>
@@ -419,7 +430,12 @@ const year = new Date().getFullYear();
     <div class="nav-spacer"></div>
   </div>
   <main>
-    <slot />
+    <Fragment set:html={mainHtml} />
+    {hasAsterisk && (
+      <div class="asterisk-footnote">
+        <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
+      </div>
+    )}
   </main>
   <footer>
     <div class="footer-inner">
@@ -443,11 +459,12 @@ const year = new Date().getFullYear();
         </div>
       </div>
       <div class="footer-divider"></div>
+      <p class="footer-legal-notice">BiomEdit&trade;, Optavant&trade;, BiomElix&reg; and other marks referenced herein are trademarks of BiomEdit, Inc. Website content regarding company updates, personnel, investors, and R&amp;D pipelines is for general informational purposes only, is subject to change, and does not constitute investment advice or an offer to sell securities. BiomEdit, Inc. assumes no obligation to update forward-looking statements or pipeline information. All rights reserved. <a href="/legal">Legal Notice</a></p>
       <div class="footer-bottom">
         <a href="/" aria-label="BiomEdit home">
           <svg class="footer-wordmark" viewBox="0 0 164 40" aria-label="BiomEdit"><use href="#fn-biomedit-logo" xlink:href="#fn-biomedit-logo"></use></svg>
         </a>
-        <span class="footer-copyright">Copyright {year}</span>
+        <span class="footer-copyright">&copy; Copyright {year}, BiomEdit, Inc. All Rights Reserved</span>
       </div>
     </div>
   </footer>

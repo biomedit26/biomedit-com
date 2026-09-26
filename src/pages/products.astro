@@ -9,6 +9,8 @@ import ModuleDarkText from '../components/modules/ModuleDarkText.astro';
 import ModuleBlueText from '../components/modules/ModuleBlueText.astro';
 import FactList from '../components/modules/FactList.astro';
 import CTALink from '../components/CTALink.astro';
+import FootnoteList from '../components/FootnoteList.astro';
+import { footnotes } from '../data/footnotes';
 
 const evidencePoints = [
   '<strong>+76g</strong> weight gain vs. antibiotic (p = 0.025)',
@@ -30,9 +32,9 @@ const flockFacts = [
        Phase 2 addition to this section — not built yet. -->
   <IntroLead
     eyebrow="BiomEdit / Products"
-    heading="CPerf LLV* (BE-101) &mdash; The first-of-its-kind engineered bacteria biologic"
+    heading="CPerf LLV* (BE-101) &mdash; The first-of-its-kind engineered bacteria biologic<sup>1</sup>"
     paragraphs={[
-      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV (BE-101) is an engineered probiotic that protects poultry from necrotic enteritis, one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our <a href=\"/science\">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform.",
+      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV* (BE-101) is an engineered probiotic that protects poultry from necrotic enteritis (NE), one of the industry&rsquo;s most costly diseases. It is the first conditionally licensed product from our <a href=\"/science\">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform.",
     ]}
     variant="dark"
   />
@@ -47,14 +49,14 @@ const flockFacts = [
       </div>
       <div class="solution-card">
         <p class="card-eyebrow is-teal">The solution</p>
-        <p class="solution-lead">CPerf LLV* helps protect broilers from necrotic enteritis (NE) without systemic antibiotics by neutralizing Clostridium perfringens toxins, a primary driver of NE-related disease, managing mortality and productivity losses.</p>
+        <p class="solution-lead">CPerf LLV* helps manage necrotic enteritis (NE) in broilers without systemic antibiotics by targeting Clostridium perfringens toxins, helping reduce mortality and productivity losses associated with NE.<sup>2</sup></p>
         <div class="solution-highlight">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
           <p>Now available to U.S. producers under USDA conditional license.</p>
         </div>
         <div class="solution-fact">
           <span class="fact-number">1st</span>
-          <p>The first-of-its-kind engineered bacteria biologic for poultry to achieve USDA licensure.</p>
+          <p>The first-of-its-kind engineered bacteria biologic for poultry to achieve USDA conditional licensure.<sup>1</sup></p>
         </div>
       </div>
     </div>
@@ -75,13 +77,13 @@ const flockFacts = [
       'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strains during natural preening, and the strains colonize the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
       'The colonized strains produce and secrete protective nanobodies that neutralize C. perfringens toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
     ]}
-    image={{ src: '/images/CPerfLLV_Illustration4.png', alt: 'Diagram of the CPerf LLV mechanism in the gut' }}
+    image={{ src: '/images/CPerfLLV_Illustration4.png', alt: 'Diagram of the CPerf LLV* mechanism in the gut' }}
   />
 
   <Module11
     heading="The Evidence"
     paragraphs={['In a controlled 43-day trial, poultry treated with CPerf LLV*&rsquo;s engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain, with mechanistic evidence of reduced immune activation and oxidative stress.']}
-    image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by CPerf LLV' }}
+    image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by CPerf LLV*' }}
   >
     <div class="evidence-grid">
       {evidencePoints.map((point) => (
@@ -115,12 +117,12 @@ const flockFacts = [
       bare
       headingLevel="h3"
       cardLeft={{
-        heading: 'BE-105 | Obesity & Diabetes (Cats)',
+        heading: 'BE-105 | Obesity & Diabetes (Cats)<sup>3</sup>',
         paragraphs: ['Oral biologic for chronic weight management and metabolic health and first demonstration that microbial biologics can potentially deliver systemic peptide pharmacology.'],
         image: { src: '/images/reinis-bruzitis-aR0nwx0b950-unsplash.jpg', alt: 'Cat' },
       }}
       cardRight={{
-        heading: 'BE-122 | Inflammatory Bowel Disease (Dogs)',
+        heading: 'BE-122 | Inflammatory Bowel Disease (Dogs)<sup>3</sup>',
         paragraphs: ['Oral biologic to help treat inflammatory bowel disease (IBD) in dogs, offering a potential alternative or complement to chronic corticosteroid therapy.'],
         image: { src: '/images/pauline-loroy-U3aF7hgUSrk-unsplash.jpg', alt: 'Dog' },
       }}
@@ -129,12 +131,10 @@ const flockFacts = [
   </Module11>
 
   <section class="legal-disclaimer section-divider">
-    <p>The subject product is licensed conditionally by USDA for the passive immunity of healthy chicks against Clostridium perfringens. Conditional licensure permits commercialization while additional effectiveness data continue to be developed in accordance with USDA requirements. Product use is limited to the approved label and indications. The subject product is covered by one or more U.S. patents, including U.S. Patent Nos. 12,599,637 and 12,427,174. Additional U.S. and foreign patents may be pending. BiomEdit&trade; and Optavant&trade; are trademarks of BiomEdit, Inc.</p>
+    <p>The subject product is licensed conditionally by USDA for the passive immunity of healthy chicks against Clostridium perfringens. Conditional licensure permits commercialization while additional effectiveness data continue to be developed in accordance with USDA requirements. Product use is limited to the approved label and indications. The subject product is covered by one or more U.S. patents, including U.S. Patent Nos. 12,599,637 and 12,427,174. Additional U.S. and foreign patents may be pending.</p>
   </section>
 
-  <section class="footnote">
-    <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
-  </section>
+  <FootnoteList items={[footnotes[1], footnotes[2], footnotes[3]]} />
 
   <ModuleBlueText
     heading="Curious what&rsquo;s next after CPerf LLV*?"

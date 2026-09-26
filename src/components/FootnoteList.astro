@@ -1,0 +1,21 @@
+---
+// Numbered footnotes for the bottom of a page. Pass entries from
+// src/data/footnotes.ts in the order their markers appear on the page.
+import type { Footnote } from '../data/footnotes';
+
+interface Props {
+  items: Footnote[];
+}
+const { items } = Astro.props;
+---
+<div class="footnote-list">
+  {items.map((f) => (
+    <p><sup>{f.n}</sup> <span set:html={f.html} /></p>
+  ))}
+</div>
+
+<style>
+  .footnote-list { padding: 0 0 1rem; }
+  .footnote-list p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 0.5rem; }
+  .footnote-list sup { font-size: 0.85em; margin-right: 2px; }
+</style>
