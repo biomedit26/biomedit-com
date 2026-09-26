@@ -130,7 +130,7 @@ const speciesList = [
               <div class="card-detail">
                 {c.stageNote && <p class="stage-note">{c.stageNote}</p>}
                 <p class="mechanism"><strong>Mechanism:</strong> {c.mechanism}</p>
-                <p class="description">{c.description}</p>
+                <p class="description" set:html={c.description} />
                 {c.ctaLabel && c.ctaHref && <a href={c.ctaHref} class="card-detail-link">{c.ctaLabel} &rarr;</a>}
               </div>
             </details>
