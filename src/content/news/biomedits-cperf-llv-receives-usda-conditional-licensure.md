@@ -4,7 +4,7 @@ title: >-
   Conditional Licensure from USDA
 date: 2026-09-29
 category: press-release
-draft: false
+draft: true
 secondaryCategory: ''
 imageAlt: Close-up of broiler chickens in a commercial poultry flock
 lead: >-
