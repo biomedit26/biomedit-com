@@ -21,7 +21,7 @@ export const footnotes: Record<1 | 2 | 3 | 4 | 5, Footnote> = {
   },
   4: {
     n: 4,
-    html: 'BiomElix&reg; One is approved by MAPA for use in Brazil. Regulatory approvals vary by country, and product claims or availability are subject to local regulatory requirements.',
+    html: 'BiomElix&reg; One is approved as a feed ingredient by MAPA in Brazil. BiomEdit is developing the corresponding feed additive for use in Brazil. Regulator claims and approvals may vary by country, and product registrations are subject to local regulatory requirements.',
   },
   5: {
     n: 5,

@@ -63,7 +63,7 @@ const categoryColors: Record<'press-release' | 'article' | 'event' | 'in-the-new
 };
 // Homepage "Latest from BiomEdit" pulls the 3 most recent items from the
 // news page, regardless of category.
-const news = (await getCollection('news'))
+const news = (await getCollection('news', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -267,6 +267,10 @@ const partners = [
   imageOpacity={0.45}
 />
 
+<section class="third-party-note">
+  <p>All third-party trademarks, service marks, trade names, trade dress, product names, and logos appearing on this page&mdash;including Anterra Capital, Viking Global Investors, Betagro Ventures, Elevate Ventures, Nutreco, AgriZeroNZ, Bill &amp; Melinda Gates Foundation, Elanco, USDA, NIH, Ginkgo Bioworks, Ferment, TechPoint, and S&amp;P Global&mdash;are the property of their respective owners. Their display on this site does not imply endorsement, sponsorship, or affiliation except as formally contracted.</p>
+</section>
+
 <style>
   .who-we-are {
     position: relative;
@@ -452,6 +456,9 @@ const partners = [
 
   .footnote { padding: 0 40px 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+
+  .third-party-note { padding: 2rem 40px 1.5rem; }
+  .third-party-note p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; max-width: 980px; }
   .news-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; gap: 16px; flex-wrap: wrap; }
   .news-head h2 { font-size: var(--text-h5); margin: 0; }
   .news-list { display: flex; flex-direction: column; }

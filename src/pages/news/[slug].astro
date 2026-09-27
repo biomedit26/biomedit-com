@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import { getYouTubeEmbedUrl, getVideoThumbnail } from '../../utils/video';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('news');
+  const posts = await getCollection('news', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

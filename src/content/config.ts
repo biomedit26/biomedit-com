@@ -42,6 +42,11 @@ const news = defineCollection({
     title: z.string(),
     date: z.date(),
     category: z.enum(newsCategories),
+    // Embargoed/unpublished posts — set true to keep a post fully out of
+    // the site (no listing entry, no generated page, no sitemap entry)
+    // until it's ready to go live. Remove the field (or set false) and
+    // deploy to publish.
+    draft: z.boolean().optional(),
     // The Keystatic CMS's secondary-category select uses '' to represent
     // "none" (a plain select can't omit itself from frontmatter the way an
     // optional field can) — accepted here alongside undefined for
