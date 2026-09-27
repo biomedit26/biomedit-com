@@ -6,6 +6,7 @@ date: 2026-09-29
 category: press-release
 draft: true
 secondaryCategory: ''
+image: "/images/news/broiler-chickens-flock-closeup.jpg"
 imageAlt: Close-up of broiler chickens in a commercial poultry flock
 lead: >-
   Conditional licensure, achieved in just over four years, gives poultry
