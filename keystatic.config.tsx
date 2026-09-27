@@ -42,6 +42,11 @@ export default config({
           options: newsCategories,
           defaultValue: 'article',
         }),
+        draft: fields.checkbox({
+          label: 'Draft (hide from site)',
+          description: 'While checked, this post is fully excluded from the site — no listing entry, no article page, no sitemap entry. Uncheck and publish when ready to go live.',
+          defaultValue: false,
+        }),
         secondaryCategory: fields.select({
           label: 'Secondary category (optional)',
           description: 'Lets one post also surface under a second filter pill on /news — e.g. a podcast episode that’s both Videos & Podcasts and In the News.',
