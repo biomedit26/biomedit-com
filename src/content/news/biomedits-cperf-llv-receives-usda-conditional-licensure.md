@@ -1,7 +1,7 @@
 ---
 title: >-
-  BiomEdit's First-of-its-Kind Engineered Bacteria Biologic for Poultry Receives
-  Conditional Licensure from USDA
+  BiomEdit's First-of-its-Kind Engineered Bacterial Biologic for Poultry
+  Receives Conditional Licensure from USDA
 date: 2026-09-29
 category: press-release
 draft: true

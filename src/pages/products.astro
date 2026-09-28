@@ -12,19 +12,14 @@ import CTALink from '../components/CTALink.astro';
 import FootnoteList from '../components/FootnoteList.astro';
 import { footnotes } from '../data/footnotes';
 
-const evidencePoints = [
-  '<strong>+76g</strong> weight gain vs. antibiotic (p = 0.025)',
-  '<strong>+81g</strong> weight gain vs. wild-type probiotic (p = 0.017)',
-  '<strong>6- to 7-point improvement</strong> in feed conversion ratio at key time points',
-  '<strong>Increased finished weight</strong> compared with challenged controls.',
-  '<strong>Up to 48% reduction in mortality</strong> according to an earlier <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener noreferrer">clinical challenge model</a>.',
-];
-
 const flockFacts = [
-  { value: 'Performance', valueSize: 'text' as const, paragraph: 'Better feed conversion and weight gain than prophylactic antibiotics in controlled trial conditions (Baxter, N. et al, 2026).' },
-  { value: 'Compliance', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
-  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Targets <em>C. perfringens</em> toxins directly in the gut, so broilers spend less energy on immune response and more on growth." },
-  { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Improved performance, healthier birds, and reduced mortality from necrotic enteritis.' },
+  { value: 'Data', valueSize: 'text' as const, paragraph: [
+    'Demonstrated 48.7% reduction in NE-associated mortality in broiler chickens, from 13.1% in challenged controls to 6.6% in birds receiving CPerf LLV* in a pivotal study reviewed by USDA Center for Veterinary Biologics (CVB) supporting conditional licensure.',
+    'Improved broiler weight gain and feed conversion were observed in a controlled study of subclinical NE published in npj Biofilms and Microbiomes, a Nature portfolio journal, for probiotic-delivered nanobodies targeting alpha toxin and NetB of <em>C. perfringens</em> as compared with treatment groups of prophylactic antibiotics and the parent probiotic strains. Systemic factors contributing to the observed performance differences were analyzed and confirmed in situ expression of the nanobodies and provided mechanistic data (Hall, A. et al, 2026). This study was not reviewed by USDA CVB.',
+  ] },
+  { value: 'Management', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
+  { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Designed to act in the gut of the chicken and engineered against <em>C. perfringens</em> toxins, a primary driver of NE-related disease, mortality and productivity losses." },
+  { value: 'Outcomes', valueSize: 'text' as const, paragraph: 'Reasonable expectation of efficacy in terms of reduced NE-associated mortality from necrotic enteritis in a challenge trial. Effects on growth performance and feed efficiency have been observed in research studies but were not reviewed by USDA.' },
 ];
 ---
 <FieldNotesLayout title="CPerf LLV* (BE-101) — Engineered Poultry Biologic" description="CPerf LLV* (BE-101) is BiomEdit's first-of-its-kind engineered probiotic that protects poultry from necrotic enteritis." active="products">
@@ -32,9 +27,9 @@ const flockFacts = [
        Phase 2 addition to this section — not built yet. -->
   <IntroLead
     eyebrow="BiomEdit / Products"
-    heading="CPerf LLV* (BE-101) &mdash; The first-of-its-kind engineered bacteria biologic<sup>1</sup>"
+    heading="CPerf LLV* (BE-101) &mdash; The first-of-its-kind engineered bacterial biologic<sup>1</sup>"
     paragraphs={[
-      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV* (BE-101) is an engineered probiotic that protects poultry from necrotic enteritis (NE), one of the industry&rsquo;s most costly diseases caused by <em>Clostridium perfringens</em>. It is the first conditionally licensed product from our <a href=\"/science\">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform.",
+      "Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector or CPerf LLV* (BE-101) is an engineered probiotic that helps reduce mortality associated with necrotic enteritis (NE) in poultry. NE is one of the industry&rsquo;s most costly diseases caused by <em>Clostridium perfringens</em>. It is the first conditionally licensed product from our <a href=\"/science\">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform.",
     ]}
     variant="dark"
   />
@@ -49,14 +44,14 @@ const flockFacts = [
       </div>
       <div class="solution-card">
         <p class="card-eyebrow is-teal">The solution</p>
-        <p class="solution-lead">CPerf LLV* helps manage necrotic enteritis (NE) in broilers without systemic antibiotics by targeting <em>Clostridium perfringens</em> toxins, helping reduce mortality and productivity losses associated with NE.<sup>2</sup></p>
+        <p class="solution-lead">CPerf LLV* is a non-antibiotic approach engineered against <em>Clostridium perfringens</em> toxins to reduce the impact of necrotic enteritis (NE) in broiler chickens with the expected result of lower NE-associated mortality and other NE-related losses.<sup>2</sup></p>
         <div class="solution-highlight">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
-          <p>Now available to U.S. producers under USDA conditional license.</p>
+          <p>Now available to U.S. producers under <a href="/news/biomedits-cperf-llv-receives-usda-conditional-licensure">USDA conditional license</a>.</p>
         </div>
         <div class="solution-fact">
           <span class="fact-number">1st</span>
-          <p>The first-of-its-kind engineered bacteria biologic for poultry to achieve USDA conditional licensure.<sup>1</sup></p>
+          <p>The first-of-its-kind engineered bacterial biologic for poultry to achieve USDA conditional licensure.<sup>1</sup></p>
         </div>
       </div>
     </div>
@@ -74,26 +69,11 @@ const flockFacts = [
     columns="1fr 2fr"
     paragraphs={[
       'Two applications, and no daily protocol to manage.',
-      'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strains during natural preening, and the strains colonize the intestinal tract from there. A second dose is delivered through the water system at 14 days, maintaining protection through the growth cycle, with no continuous in-feed program to manage.',
-      'The colonized strains produce and secrete protective nanobodies that neutralize <em>C. perfringens</em> toxins before they damage the gut wall, so healthier guts mean birds spend energy growing instead of fighting infection.',
+      'CPerf LLV* is applied as a spray at the hatchery. Chicks ingest the strains during natural preening, and the strains colonize the intestinal tract. A second dose is delivered through the water system at 13 days, anticipated to last through the growth cycle, with no continuous in-feed program to manage.',
+      'The colonized strains produce and secrete nanobodies that were engineered against <em>C. perfringens</em> toxins before they damage the gut wall, so the product supports healthier guts allowing the birds to grow to their genetic potential.',
     ]}
     image={{ src: '/images/CPerfLLV_Illustration4.png', alt: 'Diagram of the CPerf LLV* mechanism in the gut' }}
   />
-
-  <Module11
-    heading="The Evidence"
-    paragraphs={['In a controlled 43-day trial, poultry treated with CPerf LLV*&rsquo;s engineered strains outperformed both prophylactic antibiotics and wild-type probiotics on feed conversion and weight gain, with mechanistic evidence of reduced immune activation and oxidative stress (Baxter, N. et al, 2026).']}
-    image={{ src: '/images/healthy-chicken.jpg', alt: 'Healthy broiler protected by CPerf LLV*' }}
-  >
-    <div class="evidence-grid">
-      {evidencePoints.map((point) => (
-        <div class="evidence-card">
-          <p set:html={point} />
-        </div>
-      ))}
-    </div>
-    <div class="evidence-cta"><CTALink href="https://www.sciencedirect.com/science/article/pii/S1056617126001169" target="_blank">Read the full study</CTALink></div>
-  </Module11>
 
   <!-- NEW quote, sourced from Aaron's public remarks in BiomEdit's Series B
        funding announcement (July 2025) &mdash; distinct from the homepage's
@@ -159,19 +139,6 @@ const flockFacts = [
 
   .footnote { padding: 0 0 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-
-  .evidence-grid { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-  .evidence-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1.25rem 1.75rem;
-    text-align: left;
-  }
-  .evidence-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0; }
-  .evidence-card p strong { color: var(--text-primary); }
-
-  .evidence-cta { margin-top: 2.5rem; }
 
   .problem-solution { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; padding: 0 0 4rem; }
 
