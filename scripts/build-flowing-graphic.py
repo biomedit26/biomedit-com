@@ -22,10 +22,11 @@ share the same per-element opacity values (one random draw, reused), so the
 animated hero settles into the same look the static watermark shows at rest.
 
 Animation choreography (recolored.svg only): the ~420 rects ("data blocks")
-and paths ("flowing shapes") settle in — fade + a small randomized
-translate — at randomized per-element delays/durations, so they don't pop
-in on a mechanical sweep. The 5 concentric circles then ripple in center-
-dot-first once that's mostly resolved, as a closing flourish.
+and paths ("flowing shapes") settle in — fade + a small drift in from the
+left — in a left-to-right sweep keyed to each element's x position, with
+jitter on delay/duration so it reads as a flow rather than a hard wipe. The
+5 concentric circles (right side) then ripple in center-dot-first as the
+sweep reaches them, as a closing flourish.
 
 Re-run this after the source SVG changes: `python3 scripts/build-flowing-graphic.py`
 """
@@ -93,24 +94,34 @@ OUT_STATIC.write_text(static_svg)
 OUT_BACKGROUND.write_text(static_svg)
 
 # ---------- animated (homepage hero) ----------
-# Phase 1 — data blocks + flowing shapes, shuffled and randomly staggered
-# across [0, 2.8s], each settling over 0.55-1.0s to its own resting opacity.
-phase1_source = list(zip(rects + paths, block_shape_ops))
-random.shuffle(phase1_source)
+# Phase 1 — data blocks + flowing shapes sweep in left to right: each
+# element's delay tracks its x position across the 1920-wide canvas (plus a
+# little jitter so it reads as a flow, not a mechanical wipe), and each one
+# drifts in from the left as it settles over 0.45-0.8s to its own resting
+# opacity. Whole sweep resolves in ~2.6s.
+SWEEP, JITTER, CANVAS_W = 1.4, 0.45, 1920
+
+
+def element_x(tag):
+    m = re.search(r'\bx="([-\d.]+)"', tag) or re.search(r'\bd="M\s*([-\d.]+)', tag)
+    return float(m.group(1)) if m else CANVAS_W / 2
+
+
 phase1 = []
-for tag, op in phase1_source:
-    delay = round(random.uniform(0, 2.8), 3)
-    dur = round(random.uniform(0.55, 1.0), 3)
-    dx = round(random.uniform(-16, 16), 2)
-    dy = round(random.uniform(-16, 16), 2)
+for tag, op in zip(rects + paths, block_shape_ops):
+    x_norm = min(max(element_x(tag) / CANVAS_W, 0), 1)
+    delay = round(x_norm * SWEEP + random.uniform(0, JITTER), 3)
+    dur = round(random.uniform(0.45, 0.8), 3)
+    dx = round(random.uniform(-22, -6), 2)
+    dy = round(random.uniform(-8, 8), 2)
     style = f'style="--delay:{delay}s;--dur:{dur}s;--dx:{dx}px;--dy:{dy}px;--op:{op};"'
     phase1.append(inject(tag, f'class="fg-el" {style}'))
 
-# Phase 2 — the 5 concentric circles, center dot first, rippling outward,
-# starting once phase 1 has mostly resolved.
+# Phase 2 — the 5 concentric circles (right side of the canvas), center dot
+# first, rippling outward as the left-to-right sweep arrives there.
 circles_inner_to_outer = list(zip(reversed(circles), reversed(circle_ops)))  # source is outer-ring-first
 phase2 = []
-base_delay, step = 3.0, 0.22
+base_delay, step = 1.9, 0.18
 for i, (tag, op) in enumerate(circles_inner_to_outer):
     delay = round(base_delay + i * step, 3)
     phase2.append(inject(tag, f'class="fg-ring" style="--delay:{delay}s;--op:{op};"'))

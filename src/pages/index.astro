@@ -17,9 +17,10 @@ import AnnouncementBar from '../components/AnnouncementBar.astro';
 // scripts/build-flowing-graphic.py, which recolors every element to the
 // site's flat cool-300 tone (matching the static/background variants) and
 // choreographs the animation in two phases: the ~420 data-block and
-// flowing-shape elements fade/settle in with randomized per-element delay
-// and offset (phase 1), then the 5 concentric circles ripple in from the
-// center dot outward (phase 2), after phase 1 has mostly resolved. Each
+// flowing-shape elements fade/drift in on a jittered left-to-right sweep
+// keyed to their x position (phase 1), then the 5 concentric circles on
+// the right ripple in from the center dot outward as the sweep arrives
+// (phase 2). Each
 // element uses animation-iteration-count:1 + fill-mode:forwards so it
 // plays once on load and holds its final state rather than looping.
 // Re-run the script to regenerate after changing the source SVG.
@@ -47,7 +48,7 @@ import heroSvg from '../assets/flowing-e-graphic-recolored.svg?raw';
       rawSvg={heroSvg}
       imageFit="width"
       blendMode="screen"
-      imageOpacity={0.24}
+      imageOpacity={0.204}
     >
       <div class="hero-inner">
         <p class="eyebrow">Programmable Veterinary Biologics<sup>&trade;</sup></p>
