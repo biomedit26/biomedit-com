@@ -42,6 +42,8 @@ const youtubeEmbedUrl = post.data.videoUrl ? getYouTubeEmbedUrl(post.data.videoU
 // Not a YouTube URL but still a videoUrl — treat as a direct file (e.g. a
 // self-hosted .mp4) and embed via <video> instead of an iframe.
 const directVideoUrl = post.data.videoUrl && !youtubeEmbedUrl ? post.data.videoUrl : null;
+// Captions only apply to still lead images, not video embeds.
+const imageCaption = !post.data.videoUrl && post.data.image ? post.data.imageCaption : undefined;
 
 // Approximate read time from the raw markdown word count — standard 200 wpm.
 const wordCount = post.body.trim().split(/\s+/).length;
@@ -101,7 +103,7 @@ const shareLinks = {
     </div>
   </div>
 
-  <section class={`article-lead ${youtubeEmbedUrl || directVideoUrl ? 'has-video' : ''}`}>
+  <section class={`article-lead ${youtubeEmbedUrl || directVideoUrl ? 'has-video' : ''} ${imageCaption ? 'has-caption' : ''}`}>
     <div class="article-lead-image">
       {youtubeEmbedUrl ? (
         <iframe
@@ -122,6 +124,7 @@ const shareLinks = {
       <p class="article-lead-text">{post.data.lead}</p>
     </div>
   </section>
+  {imageCaption && <p class="article-lead-caption">{imageCaption}</p>}
 
   <section class="article-body">
     <Content />
@@ -187,6 +190,14 @@ const shareLinks = {
      there's more vertical room to work with and the video reads better
      larger. */
   .article-lead.has-video { grid-template-columns: 1fr 1fr; }
+  .article-lead.has-caption { margin-bottom: 0.75rem; }
+  .article-lead-caption {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 2.5rem;
+    max-width: 720px;
+  }
   .article-lead-image img,
   .article-lead-image video { display: block; width: 100%; height: 100%; object-fit: cover; }
   /* iframes can't reliably object-fit their embedded content, so instead

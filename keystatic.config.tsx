@@ -60,6 +60,7 @@ export default config({
           publicPath: '/images/news/',
         }),
         imageAlt: fields.text({ label: 'Image alt text' }),
+        imageCaption: fields.text({ label: 'Image caption (optional — shown below the lead image)', multiline: true }),
         lead: fields.text({ label: 'Lead / summary', multiline: true, validation: { isRequired: true } }),
         source: fields.text({ label: 'Source (third-party reposts only, e.g. "Feedstuffs (Informa Markets)")' }),
         videoUrl: fields.text({ label: 'Video URL (YouTube or direct file — embeds a player when set)' }),

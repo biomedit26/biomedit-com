@@ -29,7 +29,8 @@ const notes = defineCollection({
 // Markets)") and is shown in place of the category label in the article
 // hero. `image`/`imageAlt` are optional — posts without an assigned image
 // fall back to a video-derived thumbnail (see videoUrl) or a plain
-// placeholder. `videoUrl` accepts a YouTube URL (any common format) or a
+// placeholder. `imageCaption` is optional text shown under the lead image
+// (image posts only). `videoUrl` accepts a YouTube URL (any common format) or a
 // direct video file URL; when set, the article page embeds a real player
 // instead of a text link. `metaTitle`/`metaDescription` are optional SEO
 // overrides — metaTitle feeds the <title> tag (can be tighter than the
@@ -55,6 +56,7 @@ const news = defineCollection({
     secondaryCategory: z.union([z.enum(newsCategories), z.literal('')]).optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    imageCaption: z.string().optional(),
     lead: z.string(),
     source: z.string().optional(),
     videoUrl: z.string().optional(),
