@@ -15,7 +15,7 @@ import { footnotes } from '../data/footnotes';
 const flockFacts = [
   { value: 'Data', valueSize: 'text' as const, paragraph: [
     'Demonstrated 48.7% reduction in NE-associated mortality in broiler chickens, from 13.1% in challenged controls to 6.6% in birds receiving CPerf LLV* in a pivotal study reviewed by USDA Center for Veterinary Biologics (CVB) supporting conditional licensure.',
-    'Improved broiler weight gain and feed conversion were observed in a controlled study of subclinical NE published in <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener noreferrer"><em>npj Biofilms and Microbiomes</em></a>, a Nature portfolio journal, for probiotic-delivered nanobodies targeting alpha toxin and NetB of <em>C. perfringens</em> as compared with treatment groups of prophylactic antibiotics and the parent probiotic strains. Systemic factors contributing to the observed performance differences were analyzed and confirmed <em>in situ</em> expression of the nanobodies and provided mechanistic data (<a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener noreferrer">Hall, A. et al, 2026</a>). This study was not reviewed by USDA CVB.',
+    'Improved broiler weight gain and feed conversion were observed in a controlled study of subclinical NE published in <a href="https://www.nature.com/articles/s41522-026-00916-w" target="_blank" rel="noopener noreferrer"><em>npj Biofilms and Microbiomes</em></a>, a Nature portfolio journal, for probiotic-delivered nanobodies targeting alpha toxin and NetB of <em>C. perfringens</em> as compared with treatment groups of prophylactic antibiotics and the parent probiotic strains. Systemic factors contributing to the observed performance differences were analyzed and confirmed <em>in situ</em> expression of the nanobodies and provided mechanistic data.',
   ] },
   { value: 'Management', valueSize: 'text' as const, paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' },
   { value: 'Mechanism', valueSize: 'text' as const, paragraph: "Designed to act in the gut of the chicken and engineered against <em>C. perfringens</em> toxins, a primary driver of NE-related disease, mortality and productivity losses." },
@@ -111,7 +111,7 @@ const flockFacts = [
   </Module11>
 
   <section class="legal-disclaimer section-divider">
-    <p>The subject product is licensed conditionally by USDA for the passive immunity of healthy chicks against <em>Clostridium perfringens</em>. Conditional licensure permits commercialization while additional effectiveness data continue to be developed in accordance with USDA requirements. Product use is limited to the approved label and indications. The subject product is covered by one or more U.S. patents, including U.S. Patent Nos. 12,599,637 and 12,427,174. Additional U.S. and foreign patents may be pending.</p>
+    <p>The subject product is licensed conditionally by USDA. The approved claim is: This product has shown a reasonable expectation of efficacy for passive immunity of healthy chicks against <em>Clostridium perfringens</em>. Duration of passive immunity has not been determined. The license is conditional; efficacy and potency have not been fully demonstrated. Product use is subject to federal and state regulatory requirements. The subject product is covered by one or more U.S. patents, including U.S. Patent Nos. 12,599,637 and 12,427,174. Additional U.S. and foreign patents may be pending.</p>
   </section>
 
   <FootnoteList items={[footnotes[1], footnotes[2]]} />
@@ -135,7 +135,7 @@ const flockFacts = [
   .section-divider { border-top: 1px solid var(--cool-500); }
 
   .legal-disclaimer { padding: 2rem 0 3rem; }
-  .legal-disclaimer p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+  .legal-disclaimer p { font-size: var(--text-eyebrow); line-height: 1.6; color: var(--text-secondary); margin: 0; }
 
   .footnote { padding: 0 0 2rem; }
   .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }

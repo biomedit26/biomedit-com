@@ -89,6 +89,9 @@ const cards = [cardLeft, cardRight];
   .card-image img { display: block; width: 100%; height: 220px; object-fit: cover; }
 
   .content-card h2, .content-card h3 { font-size: var(--text-h5); margin: 0 0 1.5rem; }
+  /* Footnote markers in card titles — smaller than the global 0.75em so
+     they don't read as part of the heading at this size. */
+  .content-card h2 :global(sup), .content-card h3 :global(sup) { font-size: 0.5em; }
   .content-card p { font-size: var(--text-body); line-height: 1.5; color: var(--text-secondary); margin: 0 0 1.5rem; }
   .content-card p.lead { font-weight: 500; font-size: 19px; line-height: 1.55; color: var(--text-primary); }
   .stat-row { display: flex; align-items: center; gap: 28px; }
