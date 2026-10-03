@@ -6,7 +6,6 @@ import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
 import Button from '../components/Button.astro';
-import AnnouncementBar from '../components/AnnouncementBar.astro';
 
 // Inlined (not loaded via <img src>) because Firefox and Safari don't run
 // this SVG's CSS @keyframes animations when it's referenced as an image
@@ -34,14 +33,6 @@ import AnnouncementBar from '../components/AnnouncementBar.astro';
 import heroSvg from '../assets/flowing-e-graphic-recolored.svg?raw';
 ---
 <FieldNotesLayout title="Programmable Veterinary Biologics" description="BiomEdit engineers Programmable Veterinary Biologics™ — beneficial bacteria designed to address infectious disease, chronic disease, and sustainability in animal health." active="home">
-  <AnnouncementBar
-    slot="announcement"
-    id="cperf-llv-usda-conditional-licensure"
-    message="CPerf LLV*, BiomEdit&rsquo;s first-of-its-kind engineered bacterial biologic for poultry, receives conditional licensure from USDA."
-    ctaLabel="Read more"
-    ctaHref="/news/biomedits-cperf-llv-receives-usda-conditional-licensure"
-  />
-
   <section class="hero">
     <FullBleedBand
       background="var(--cool-800)"
