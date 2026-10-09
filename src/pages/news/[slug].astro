@@ -81,6 +81,10 @@ const shareLinks = {
 <FieldNotesLayout title={metaTitle} description={metaDescription} image={heroImage ?? undefined} active="news">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <div class="article-header">
+    <a class="back-link" href="/news">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>Back to News</span>
+    </a>
     <p class="eyebrow">{eyebrow}</p>
     <h1>{post.data.title}</h1>
     <div class="article-meta">
@@ -150,6 +154,20 @@ const shareLinks = {
 
 <style>
   .article-header { padding: 3rem 0 0; }
+  /* Same treatment as the leadership profile pages' "Back to team" link. */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .back-link svg { width: 14px; height: 14px; }
+  .back-link span { text-decoration: underline; text-underline-offset: 3px; }
+  .back-link:hover { color: var(--color-navy); }
   .article-header .eyebrow {
     font-size: var(--text-eyebrow);
     font-weight: 700;
