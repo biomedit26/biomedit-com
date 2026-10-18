@@ -75,9 +75,13 @@ const hasAsterisk = mainHtml.includes('CPerf LLV*');
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-6NTB3C4JBK');
+    // Only the live site reports to GA. Netlify previews, the netlify.app
+    // address, local dev and review tools (markup.io etc.) load the same
+    // pages but send nothing, so they stay out of the analytics.
+    if (location.hostname === 'www.biomedit.com') {
+      gtag('js', new Date());
+      gtag('config', 'G-6NTB3C4JBK');
+    }
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -86,23 +90,23 @@ const hasAsterisk = mainHtml.includes('CPerf LLV*');
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <title>{title} · BiomEdit</title>
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? 'https://biomedit.com').toString()} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? 'https://www.biomedit.com').toString()} />
   {noindex && <meta name="robots" content="noindex,follow" />}
   {description && <meta name="description" content={description} />}
   <meta property="og:title" content={`${title} · BiomEdit`} />
   {description && <meta property="og:description" content={description} />}
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={new URL(image ?? '/images/BiomEdit_logo.jpg', Astro.site ?? 'https://biomedit.com').toString()} />
+  <meta property="og:image" content={new URL(image ?? '/images/BiomEdit_logo.jpg', Astro.site ?? 'https://www.biomedit.com').toString()} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={`${title} · BiomEdit`} />
   {description && <meta name="twitter:description" content={description} />}
-  <meta name="twitter:image" content={new URL(image ?? '/images/BiomEdit_logo.jpg', Astro.site ?? 'https://biomedit.com').toString()} />
+  <meta name="twitter:image" content={new URL(image ?? '/images/BiomEdit_logo.jpg', Astro.site ?? 'https://www.biomedit.com').toString()} />
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'BiomEdit',
-    url: 'https://biomedit.com',
-    logo: 'https://biomedit.com/images/BiomEdit_logo.jpg',
+    url: 'https://www.biomedit.com',
+    logo: 'https://www.biomedit.com/images/BiomEdit_logo.jpg',
     sameAs: ['https://www.linkedin.com/company/biomeditinc'],
   })} />
   <link rel="stylesheet" href="/fonts/fonts.css" />

@@ -17,9 +17,13 @@ const { title, theme = 'light' } = Astro.props;
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-6NTB3C4JBK');
+    // Only the live site reports to GA. Netlify previews, the netlify.app
+    // address, local dev and review tools (markup.io etc.) load the same
+    // pages but send nothing, so they stay out of the analytics.
+    if (location.hostname === 'www.biomedit.com') {
+      gtag('js', new Date());
+      gtag('config', 'G-6NTB3C4JBK');
+    }
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +51,6 @@ const { title, theme = 'light' } = Astro.props;
     <a href="/">BiomEdit — Starbriq workspace</a>
     <nav>
       <a href="/">Site</a>
-      <a href="/notes">Notes</a>
       <a href="/styleguide">Styleguide</a>
     </nav>
   </header>

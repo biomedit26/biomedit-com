@@ -66,6 +66,13 @@ import Button from '../components/Button.astro';
           </div>
           <Button color="amber" variant="filled">Send message</Button>
         </form>
+        <script is:inline>
+          // Marks a real submission so the thank-you page can report one
+          // generate_lead event to GA (and not count reloads or direct visits).
+          document.querySelector('form[name="contact"]')?.addEventListener('submit', () => {
+            try { sessionStorage.setItem('biomedit-contact-submitted', '1'); } catch {}
+          });
+        </script>
       </div>
     </div>
   </section>

@@ -1,0 +1,28 @@
+---
+// Branded not-found page. Built as static /404.html; for unknown addresses
+// the Netlify SSR function fetches it and returns it with a 404 status.
+// Uses the main layout so visitors get the site nav, and GA records the
+// hit (page title "Page not found"), which makes broken inbound links
+// visible in analytics instead of disappearing.
+import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
+import CTALink from '../components/CTALink.astro';
+---
+<FieldNotesLayout title="Page not found" noindex>
+  <div class="not-found">
+    <p class="overline">404</p>
+    <h1>We couldn&rsquo;t find that page.</h1>
+    <p>It may have moved when we relaunched the site. Try the homepage, or browse our latest news.</p>
+    <div class="not-found-links">
+      <CTALink href="/">Go to homepage</CTALink>
+      <CTALink href="/news/">Browse news</CTALink>
+    </div>
+  </div>
+</FieldNotesLayout>
+
+<style>
+  .not-found { padding: 5rem 0 6rem; max-width: 560px; }
+  .not-found .overline { margin: 0 0 1rem; }
+  .not-found h1 { font-size: var(--text-h3); margin: 0 0 1rem; }
+  .not-found p { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0 0 2rem; }
+  .not-found-links { display: flex; flex-wrap: wrap; gap: 24px; }
+</style>

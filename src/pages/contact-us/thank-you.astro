@@ -9,6 +9,16 @@ import CTALink from '../../components/CTALink.astro';
     <p>Someone from our team will get back to you within 1&ndash;2 business days.</p>
     <CTALink href="/">Back to home</CTALink>
   </div>
+  <script is:inline>
+    // One GA key event per actual contact form submission (the contact page
+    // sets this flag on submit). Mark generate_lead as a key event in GA4.
+    try {
+      if (sessionStorage.getItem('biomedit-contact-submitted') === '1') {
+        sessionStorage.removeItem('biomedit-contact-submitted');
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'contact' });
+      }
+    } catch {}
+  </script>
 </FieldNotesLayout>
 
 <style>
