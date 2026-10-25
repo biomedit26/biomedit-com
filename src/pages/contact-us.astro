@@ -3,7 +3,7 @@ import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import IntroLead from '../components/modules/IntroLead.astro';
 import Button from '../components/Button.astro';
 ---
-<FieldNotesLayout title="Contact Us" active="contact">
+<FieldNotesLayout title="Contact Us" description="Get in touch with BiomEdit — we're glad to hear from partners, investors, scientists, and researchers interested in our work." active="contact">
   <IntroLead
     eyebrow="BiomEdit / Contact"
     heading="Let&rsquo;s start a conversation"
@@ -66,6 +66,13 @@ import Button from '../components/Button.astro';
           </div>
           <Button color="amber" variant="filled">Send message</Button>
         </form>
+        <script is:inline>
+          // Marks a real submission so the thank-you page can report one
+          // generate_lead event to GA (and not count reloads or direct visits).
+          document.querySelector('form[name="contact"]')?.addEventListener('submit', () => {
+            try { sessionStorage.setItem('biomedit-contact-submitted', '1'); } catch {}
+          });
+        </script>
       </div>
     </div>
   </section>

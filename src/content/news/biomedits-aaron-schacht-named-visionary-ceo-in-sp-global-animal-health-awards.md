@@ -2,8 +2,8 @@
 title: "BiomEdit's Aaron Schacht Named Visionary CEO in S&P Global Animal Health Awards"
 date: 2024-01-09
 category: press-release
-image: "/images/woman-in-lab.jpg"
-imageAlt: "BiomEdit scientist working in the lab"
+image: "/images/news/Aaron-Schact-Visionary-CEO-Award-Website.jpg"
+imageAlt: "Aaron Schacht, 2023 Visionary CEO, S&P Global Animal Health Awards"
 lead: "Award marks second year BiomEdit recognized by S&P Global since previously awarded Best Start-Up in 2022."
 metaTitle: "Aaron Schacht Named Visionary CEO, S&P Global Awards"
 metaDescription: "BiomEdit CEO Aaron Schacht is recognized as 2023 Visionary CEO in the S&P Global Animal Health Awards, marking the company's second S&P Global honor."

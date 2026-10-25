@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import { getYouTubeEmbedUrl, getVideoThumbnail } from '../../utils/video';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('news');
+  const posts = await getCollection('news', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -42,12 +42,34 @@ const youtubeEmbedUrl = post.data.videoUrl ? getYouTubeEmbedUrl(post.data.videoU
 // Not a YouTube URL but still a videoUrl — treat as a direct file (e.g. a
 // self-hosted .mp4) and embed via <video> instead of an iframe.
 const directVideoUrl = post.data.videoUrl && !youtubeEmbedUrl ? post.data.videoUrl : null;
+// Captions only apply to still lead images, not video embeds.
+const imageCaption = !post.data.videoUrl && post.data.image ? post.data.imageCaption : undefined;
 
 // Approximate read time from the raw markdown word count — standard 200 wpm.
 const wordCount = post.body.trim().split(/\s+/).length;
 const readTime = Math.max(1, Math.round(wordCount / 200));
 
-const pageUrl = `https://biomedit.com/news/${post.slug}/`;
+const pageUrl = `https://www.biomedit.com/news/${post.slug}/`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: post.data.title,
+  description: metaDescription,
+  datePublished: post.data.date.toISOString(),
+  ...(heroImage && { image: [new URL(heroImage, 'https://www.biomedit.com').toString()] }),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+  author: post.data.source
+    ? { '@type': 'Organization', name: post.data.source }
+    : { '@type': 'Organization', name: 'BiomEdit', url: 'https://www.biomedit.com' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'BiomEdit',
+    url: 'https://www.biomedit.com',
+    logo: { '@type': 'ImageObject', url: 'https://www.biomedit.com/images/BiomEdit_logo.jpg' },
+  },
+};
+
 const shareText = post.data.title;
 const shareLinks = {
   twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`,
@@ -57,7 +79,12 @@ const shareLinks = {
 };
 ---
 <FieldNotesLayout title={metaTitle} description={metaDescription} image={heroImage ?? undefined} active="news">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <div class="article-header">
+    <a class="back-link" href="/news">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>Back to News</span>
+    </a>
     <p class="eyebrow">{eyebrow}</p>
     <h1>{post.data.title}</h1>
     <div class="article-meta">
@@ -80,7 +107,7 @@ const shareLinks = {
     </div>
   </div>
 
-  <section class={`article-lead ${youtubeEmbedUrl || directVideoUrl ? 'has-video' : ''}`}>
+  <section class={`article-lead ${youtubeEmbedUrl || directVideoUrl ? 'has-video' : ''} ${imageCaption ? 'has-caption' : ''}`}>
     <div class="article-lead-image">
       {youtubeEmbedUrl ? (
         <iframe
@@ -101,13 +128,21 @@ const shareLinks = {
       <p class="article-lead-text">{post.data.lead}</p>
     </div>
   </section>
+  {imageCaption && <p class="article-lead-caption">{imageCaption}</p>}
 
   <section class="article-body">
     <Content />
   </section>
 
   <section class="article-cta">
-    <FullBleedBand background="var(--navy-deep-bg)">
+    <FullBleedBand
+      background="var(--navy-deep-bg)"
+      image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg"
+      imagePosition="50% 50%"
+      zoom={1.05}
+      blendMode="overlay"
+      imageOpacity={0.45}
+    >
       <div class="article-cta-inner">
         <p class="eyebrow">Discover more</p>
         <h2>Join the conversation on LinkedIn</h2>
@@ -119,6 +154,20 @@ const shareLinks = {
 
 <style>
   .article-header { padding: 3rem 0 0; }
+  /* Same treatment as the leadership profile pages' "Back to team" link. */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .back-link svg { width: 14px; height: 14px; }
+  .back-link span { text-decoration: underline; text-underline-offset: 3px; }
+  .back-link:hover { color: var(--color-navy); }
   .article-header .eyebrow {
     font-size: var(--text-eyebrow);
     font-weight: 700;
@@ -166,6 +215,14 @@ const shareLinks = {
      there's more vertical room to work with and the video reads better
      larger. */
   .article-lead.has-video { grid-template-columns: 1fr 1fr; }
+  .article-lead.has-caption { margin-bottom: 0.75rem; }
+  .article-lead-caption {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 2.5rem;
+    max-width: 720px;
+  }
   .article-lead-image img,
   .article-lead-image video { display: block; width: 100%; height: 100%; object-fit: cover; }
   /* iframes can't reliably object-fit their embedded content, so instead

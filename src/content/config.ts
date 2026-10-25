@@ -29,7 +29,8 @@ const notes = defineCollection({
 // Markets)") and is shown in place of the category label in the article
 // hero. `image`/`imageAlt` are optional — posts without an assigned image
 // fall back to a video-derived thumbnail (see videoUrl) or a plain
-// placeholder. `videoUrl` accepts a YouTube URL (any common format) or a
+// placeholder. `imageCaption` is optional text shown under the lead image
+// (image posts only). `videoUrl` accepts a YouTube URL (any common format) or a
 // direct video file URL; when set, the article page embeds a real player
 // instead of a text link. `metaTitle`/`metaDescription` are optional SEO
 // overrides — metaTitle feeds the <title> tag (can be tighter than the
@@ -42,6 +43,11 @@ const news = defineCollection({
     title: z.string(),
     date: z.date(),
     category: z.enum(newsCategories),
+    // Embargoed/unpublished posts — set true to keep a post fully out of
+    // the site (no listing entry, no generated page, no sitemap entry)
+    // until it's ready to go live. Remove the field (or set false) and
+    // deploy to publish.
+    draft: z.boolean().optional(),
     // The Keystatic CMS's secondary-category select uses '' to represent
     // "none" (a plain select can't omit itself from frontmatter the way an
     // optional field can) — accepted here alongside undefined for
@@ -50,6 +56,7 @@ const news = defineCollection({
     secondaryCategory: z.union([z.enum(newsCategories), z.literal('')]).optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    imageCaption: z.string().optional(),
     lead: z.string(),
     source: z.string().optional(),
     videoUrl: z.string().optional(),

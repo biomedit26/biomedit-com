@@ -2,6 +2,8 @@
 title: "Bezos Fund Supports Project to Develop Rumen AI Model"
 date: 2025-10-28
 category: in-the-news
+image: "/images/cattle-grazing-by-mountains.jpg"
+imageAlt: "Cattle grazing in a mountain pasture at sunset"
 lead: "Beef Magazine covers BiomEdit and partners' nearly $2M Bezos Earth Fund award to develop the Rumen Digital Twin, an AI model for cattle methane-reduction strategies."
 source: "Beef Magazine"
 metaTitle: "Beef Magazine on BiomEdit's Bezos Earth Fund AI Grant"

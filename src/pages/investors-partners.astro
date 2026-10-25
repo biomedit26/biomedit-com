@@ -16,14 +16,14 @@ const investors = [
   { name: 'Viking', logo: '/images/investor-partner/viking.svg', href: 'https://vikingglobal.com/' },
   { name: 'Nutreco NuFrontiers', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
   { name: 'AgriZero', logo: '/images/investor-partner/agrizero.svg', href: 'https://www.agrizero.nz/' },
-  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://uat.betagroventures.com/en' },
+  { name: 'Betagro Ventures', logo: '/images/investor-partner/betagro-ventures.png', href: 'https://betagroventures.com/en' },
   { name: 'Elevate Ventures', logo: '/images/investor-partner/elevate-ventures.png', href: 'https://elevateventures.com/' },
 ];
 const partnershipsGrants = [
   { name: 'Nutreco', logo: '/images/investor-partner/nutreco.svg', href: 'https://www.nutreco.com/en/' },
   { name: 'Bill & Melinda Gates Foundation', logo: '/images/investor-partner/bill-and-melinda-gates-foundation.svg', href: 'https://www.gatesfoundation.org/' },
   { name: 'Global Methane Hub', logo: '/images/investor-partner/global-methane-hub.png', href: 'https://www.globalmethanehub.org/' },
-  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.webp' },
+  { name: 'Bezos Earth Fund', logo: '/images/investor-partner/bezos-earth-fund.png', href: 'https://www.bezosearthfund.org/' },
   { name: 'USDA NIFA', logo: '/images/investor-partner/usda-icon.svg', href: 'https://www.usda.gov/' },
   { name: 'NIH', logo: '/images/investor-partner/nih-icon.png', href: 'https://www.nih.gov/' },
 ];
@@ -35,17 +35,17 @@ const launchPartners = [
 
 // In order of emphasis, per leadership-approved copy.
 const whyBiomEditPoints = [
-  { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic&trade;', paragraph: '<a href="/products">CPerf LLV*</a> is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
-  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics<sup>&trade;</sup></a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotic<sup>&reg;</sup> technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix<sup>&reg;</sup> One, approved in Brazil.' },
+  { color: 'teal', heading: 'First-of-its-kind Programmable Veterinary Biologic', paragraph: '<a href="/products">CPerf LLV*</a> is the first engineered microbial biologic for poultry ever to achieve USDA conditional licensure.' },
+  { color: 'navy', heading: 'Our Platform', paragraph: 'Our <a href="/science">Programmable Veterinary Biologics</a> platform combines strain engineering, computational biology, and a microbial strain library. We engineer beneficial bacteria to perform specific biological functions, as demonstrated by CPerf LLV*. With the acquisition of Folium Science, the platform also includes CRISPR-based Guided Biotics&reg; technology that selectively targets specific bacterial populations within the microbiome, as demonstrated by BiomElix&reg; One, approved in Brazil.' },
   { color: 'orange', heading: 'Foundational Patents', paragraph: 'We have patents that protect the core delivery mechanism and the nanobody sequences behind CPerf LLV* and other programs.' },
-  { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener">Bezos Earth Fund</a> and the <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener">Gates Foundation</a>.' },
+  { color: 'green', heading: 'Capital Efficiency', paragraph: 'We have raised over $7M in non-dilutive capital to support sustainability-focused work, including high-profile grant support from the <a href="https://www.bezosearthfund.org/" target="_blank" rel="noopener noreferrer">Bezos Earth Fund</a> and the <a href="https://www.gatesfoundation.org/" target="_blank" rel="noopener noreferrer">Gates Foundation</a>.' },
   { color: 'teal', heading: 'Programmable Architecture', paragraph: 'We adapt the same strain engineering across payloads, targets, species, and disease areas, spanning poultry, swine, cattle, dogs, and cats, so each new product builds on proven ground instead of starting over.' },
   { color: 'navy', heading: 'Durable IP Across the Full Stack', paragraph: 'We generate protected intellectual property (IP) with every product across strain, delivery mechanism, indication, and process, compounding the platform&rsquo;s competitive advantage with each release.' },
   { color: 'orange', heading: 'A Results-Driven Team', paragraph: 'Our executive team has over 200 years of combined experience, over 450 publications, and a track record of inventing dozens of commercial animal health innovations.' },
 ];
 
 const awards = [
-  { title: '2026 Deal of the Year, TechPoint Mira Awards', description: "Recognized for BiomEdit's $18.4M Series B round, led by Elanco Animal Health." },
+  { title: '2026 Deal of the Year, TechPoint Mira Awards', description: "Recognized for BiomEdit's $18.4M Series B round, with AgriZeroNZ joining as a major investor." },
   { title: '2022 Best Start-Up in Animal Health, S&P Global Animal Health', description: "Awarded shortly after BiomEdit's founding." },
 ];
 
@@ -54,7 +54,7 @@ const grants = [
   { title: '2023 Bill & Melinda Gates Foundation Grant', description: '$4.5M to advance microbiome-based methane reduction for cattle in Africa and South Asia.' },
 ];
 ---
-<FieldNotesLayout title="Investors & Partners" active="investors">
+<FieldNotesLayout title="Investors & Partners" description="BiomEdit is backed by leading investors and partners in agtech, life sciences, and sustainability advancing our animal health platform." active="investors">
   <IntroLead
     eyebrow="BiomEdit / Investors"
     heading="Backed by leaders in agtech, life sciences, and sustainability"
@@ -71,7 +71,7 @@ const grants = [
           <div class="logo-row">
             {investors.map((p) => (
               p.href ? (
-                <a class="logo-chip" href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class="logo-chip" href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
@@ -91,7 +91,7 @@ const grants = [
           <div class="logo-row">
             {partnershipsGrants.map((p) => (
               p.href ? (
-                <a class="logo-chip" href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class="logo-chip" href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
@@ -109,7 +109,7 @@ const grants = [
           <div class="logo-row">
             {launchPartners.map((p) => (
               p.href ? (
-                <a class={`logo-chip ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener" aria-label={p.name}>
+                <a class={`logo-chip ${p.small ? 'is-small' : ''}`} href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name}>
                   <img src={p.logo} alt={p.name} loading="lazy" />
                 </a>
               ) : (
@@ -131,7 +131,7 @@ const grants = [
         <img class="quote-photo quote-photo-lg" src="/images/082626_BiomEdit_083.jpg" alt="BiomEdit scientist examining a sample in the lab" />
         <img class="quote-photo quote-photo-sm" src="/images/082626_BiomEdit_081.jpg" alt="Stacked petri dishes on a lab bench" />
         <div class="quote-col">
-          <p class="quote">&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics<sup>&trade;</sup>. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;</p>
+          <p class="quote">&ldquo;BiomEdit is creating a new category in animal health through Programmable Veterinary Biologics. Its differentiated platform brings together deep scientific expertise and the potential to change how the industry approaches disease prevention. We backed Aaron and the BiomEdit team early because they are building more than another product. They are creating an entirely new approach.&rdquo;</p>
           <cite class="quote-cite">Brett Wong, Partner, Anterra Capital</cite>
         </div>
       </div>
@@ -141,7 +141,7 @@ const grants = [
   <section class="new-category section-divider">
     <h2>A new category, built for what&rsquo;s next in animal health.</h2>
     <div class="new-category-grid">
-      <img src="/images/biomedit-new-vertical.png" alt="Scientist pipetting samples into a tube rack in the lab" />
+      <img src="/images/investors-new-category-crop.jpg" alt="BiomEdit scientist at work in the lab" />
       <div class="why-biomedit-list">
         {whyBiomEditPoints.map((point, i) => (
           <div class="why-biomedit-item" style={`--point-color:var(--color-${point.color});`}>
@@ -177,10 +177,6 @@ const grants = [
     />
   </div>
 
-  <section class="footnote">
-    <p>*Clostridium Perfringens Alpha Toxin and NetB Antibody Fragment, Live Limosilactobacillus Vector</p>
-  </section>
-
   <ModuleBlueText
     heading="Want to learn more about BiomEdit?"
     ctaLabel="Connect with us"
@@ -192,6 +188,9 @@ const grants = [
     blendMode="overlay"
     imageOpacity={0.45}
   />
+  <section class="third-party-note">
+    <p>All third-party trademarks, service marks, trade names, trade dress, product names, and logos appearing on this page&mdash;including Anterra Capital, Viking Global Investors, Betagro Ventures, Elevate Ventures, Nutreco, AgriZeroNZ, Bill &amp; Melinda Gates Foundation, Elanco, USDA, NIH, Ginkgo Bioworks, Ferment, TechPoint, and S&amp;P Global&mdash;are the property of their respective owners. Their display on this site does not imply endorsement, sponsorship, or affiliation except as formally contracted.</p>
+  </section>
 </FieldNotesLayout>
 
 <style>
@@ -236,8 +235,8 @@ const grants = [
     .quote-photo-lg, .quote-photo-sm, .quote-col { grid-column: span 1; }
   }
 
-  .footnote { padding: 0 0 2rem; }
-  .footnote p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+  .third-party-note { padding: 2rem 0 1.5rem; }
+  .third-party-note p { font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; max-width: 980px; }
 
   .lockups { padding: 3.5rem 0; }
   .lockups-card {
@@ -262,7 +261,7 @@ const grants = [
   .is-sm .logo-chip img { height: 38px; }
   .is-sm .logo-chip.is-small img { height: 19px; }
 
-  .new-category { padding: 24px 0 3.5rem; }
+  .new-category { margin-top: 24px; padding: 24px 0 3.5rem; }
   .new-category h2 { font-size: var(--text-h5); margin: 0 0 2rem; }
   .new-category-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
   .new-category-grid > img { display: block; width: 100%; height: auto; object-fit: cover; border-radius: 6px; position: sticky; top: 24px; }
@@ -301,7 +300,7 @@ const grants = [
   .awards h2 { font-size: var(--text-body); color: #FFFFFF; margin: 0 0 2.5rem; }
   .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 760px; margin: 0 auto; text-align: left; }
   .awards-cta { padding-top: 2.5rem; }
-  .awards-cta :global(.cta-link) { font-size: var(--text-body); }
+  .awards-cta :global(.cta-link) { font-size: 16px; }
 
   @media (max-width: 860px) {
     .lockups-bottom, .new-category-grid, .awards-grid { grid-template-columns: 1fr; }

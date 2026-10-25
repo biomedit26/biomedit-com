@@ -20,4 +20,4 @@ The Rumen Digital Twin builds on BiomEdit's first methane-reduction initiative: 
 
 The article also links out to video of Schacht discussing BiomEdit's use of AI to advance livestock innovation on the AgriNovus Indiana Agbioscience Podcast.
 
-*Source: Hoosier Ag Today*
+*Source: [Hoosier Ag Today](https://www.hoosieragtoday.com/2025/10/23/biomedit/)*

@@ -6,19 +6,23 @@ import FieldNotesLayout from '../layouts/FieldNotesLayout.astro';
 import FieldNotesHomeBody from '../components/FieldNotesHomeBody.astro';
 import FullBleedBand from '../components/modules/FullBleedBand.astro';
 import Button from '../components/Button.astro';
-import AnnouncementBar from '../components/AnnouncementBar.astro';
 
 // Inlined (not loaded via <img src>) because Firefox and Safari don't run
 // this SVG's CSS @keyframes animations when it's referenced as an image
 // resource — only when its markup lives directly in the page.
 //
-// flowing-e-graphic-recolored.svg is a build script's output (not a raw
-// design export) — see the git history for the generation script. It bakes
-// in: the site's palette (recolored from the source export's grays),
-// per-element settle-in keyframes staggered across the first ~22% of a
-// 3.5s timeline, the radiating-lines/concentric-circles groups fading in
-// after that, and animation-iteration-count:1 + fill-mode:forwards so it
+// flowing-e-graphic-recolored.svg is a generated file, not a raw design
+// export — built from public/images/flowing-data-graphic-0921.svg by
+// scripts/build-flowing-graphic.py, which recolors every element to the
+// site's flat cool-300 tone (matching the static/background variants) and
+// choreographs the animation in two phases: the ~420 data-block and
+// flowing-shape elements fade/drift in on a jittered left-to-right sweep
+// keyed to their x position (phase 1), then the 5 concentric circles on
+// the right ripple in from the center dot outward as the sweep arrives
+// (phase 2). Each
+// element uses animation-iteration-count:1 + fill-mode:forwards so it
 // plays once on load and holds its final state rather than looping.
+// Re-run the script to regenerate after changing the source SVG.
 //
 // Lives in src/assets (not public/) and is loaded via Vite's `?raw`
 // import rather than a manual readFileSync — a filesystem read relative
@@ -28,27 +32,19 @@ import AnnouncementBar from '../components/AnnouncementBar.astro';
 // public/ that the source file does.
 import heroSvg from '../assets/flowing-e-graphic-recolored.svg?raw';
 ---
-<FieldNotesLayout title="Home" active="home">
-  <AnnouncementBar
-    slot="announcement"
-    id="cperf-llv-launch-2026"
-    message="CPerf LLV* (BE-101) is now available to U.S. poultry producers &mdash; the first Programmable Veterinary Biologic&trade; to reach commercial launch."
-    ctaLabel="Explore CPerf LLV*"
-    ctaHref="/products"
-  />
-
+<FieldNotesLayout title="Programmable Veterinary Biologics" description="BiomEdit engineers Programmable Veterinary Biologics™ — beneficial bacteria designed to address infectious disease, chronic disease, and sustainability in animal health." active="home">
   <section class="hero">
     <FullBleedBand
       background="var(--cool-800)"
       rawSvg={heroSvg}
       imageFit="width"
       blendMode="screen"
-      imageOpacity={0.24}
+      imageOpacity={0.204}
     >
       <div class="hero-inner">
         <p class="eyebrow">Programmable Veterinary Biologics<sup>&trade;</sup></p>
         <h1>Engineering a new chapter in animal health</h1>
-        <p class="lead">BiomEdit engineers bacteria to deliver precise, targeted biologic activity. Our Programmable Veterinary Biologics<sup>&trade;</sup> platform aims to prevent and treat disease across animal species.</p>
+        <p class="lead">BiomEdit engineers bacteria to deliver precise, targeted biologic activity. Our Programmable Veterinary Biologics platform aims to prevent and treat disease across animal species.</p>
         <Button color="amber" variant="filled" href="/pipeline">
           Explore our pipeline
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>

@@ -2,6 +2,8 @@
 title: "Antibiotic Alternative Tackles Necrotic Enteritis in Broilers"
 date: 2026-02-25
 category: in-the-news
+image: "/images/white-chickens-eating-automatic-feeder.jpg"
+imageAlt: "Broiler chickens eating from an automatic feeder"
 lead: "WATTPoultry covers the npj Biofilms and Microbiomes study showing BiomEdit's engineered Lactobacillus reuteri strains outperformed antibiotics and conventional probiotics against subclinical necrotic enteritis in broilers."
 source: "WATTPoultry.com (WATT AgNet)"
 metaTitle: "WATTPoultry: Probiotic Outperforms Antibiotics for Necrotic Enteritis"

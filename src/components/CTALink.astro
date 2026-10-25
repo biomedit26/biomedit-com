@@ -12,12 +12,12 @@ interface Props {
   href: string;
   tone?: 'default' | 'onDark';
   // For external links — set target="_blank" to open in a new tab (rel
-  // defaults to "noopener" automatically whenever target is set).
+  // defaults to "noopener noreferrer" automatically whenever target is set).
   target?: string;
   rel?: string;
 }
 
-const { href, tone = 'default', target, rel = target ? 'noopener' : undefined } = Astro.props;
+const { href, tone = 'default', target, rel = target ? 'noopener noreferrer' : undefined } = Astro.props;
 ---
 <a href={href} class={`cta-link ${tone === 'onDark' ? 'is-on-dark' : ''}`} target={target} rel={rel}>
   <slot />

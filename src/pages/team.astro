@@ -22,45 +22,40 @@ const teamMembers = [
   { name: 'Casey Hooker, PhD', title: 'Research Scientist', group: 'Research', image: '/images/team-members/casey-hooker.jpg', linkedin: 'https://www.linkedin.com/in/casey-hooker-phd-218918219/' },
   { name: 'Desmond Adeniyi', title: 'Senior Scientist, Technical Development', group: 'Product Development', image: '/images/team-members/desmond-adeniyi.jpg', linkedin: 'https://www.linkedin.com/in/desmond-adeniyi-75382660/' },
   { name: 'Dharanesh Gangaiah, BVSc, MVSc, PhD', title: 'Executive Director, Head of Synthetic Biology and Bioprocess', group: 'Research', image: '/images/team-members/dharanesh-gangaiah.jpg', linkedin: 'https://www.linkedin.com/in/dharanesh-gangaiah-a00328125/' },
-  { name: 'Dwi Susanti, PhD', title: 'Senior Director, Head of Microbial Discovery and Methane Emissions Reduction Research', group: 'Research', image: '/images/team-members/dwi-susanti.jpg', linkedin: 'https://www.linkedin.com/in/dwi-susanti/' },
+  { name: 'Dwi Susanti, PhD', title: 'Senior Director, Head of Microbial Discovery and Methane Emissions Research', group: 'Research', image: '/images/team-members/dwi-susanti.jpg', linkedin: 'https://www.linkedin.com/in/dwi-susanti/' },
   { name: 'Germán Plata, PhD', title: 'Senior Director, Computational Sciences', group: 'Computational Sciences', image: '/images/team-members/german-plata.jpg', linkedin: 'https://www.linkedin.com/in/german-plata-498a2835/' },
   { name: 'Isabel Danicich', title: 'Research Associate', group: 'Research', image: '/images/team-members/isabel-danicich.jpg', linkedin: 'https://www.linkedin.com/in/isabel-danicich/' },
   { name: 'Jacob Shields, PhD', title: 'Director & Lead Scientist, AI Research', group: 'Computational Sciences', image: '/images/team-members/jacob-shields.jpg', linkedin: 'https://www.linkedin.com/in/statshields/' },
+  { name: 'John Brabham', title: 'Senior Sales Director, Southeast Region, US', group: 'Commercial', image: '/images/team-members/john-brabham.jpg', linkedin: 'https://www.linkedin.com/in/john-brabham/' },
   { name: 'Krishnakumar Vasudevan, PhD', title: 'Director & Lead Scientist, Strain Engineering', group: 'Research', image: '/images/team-members/krishnakumar-vasudevan.jpg', linkedin: 'https://www.linkedin.com/in/krishna-kumar-phd/' },
   { name: 'Kuldeep Gupta, PhD', title: 'Senior Scientist', group: 'Research', image: '/images/team-members/kuldeep-gupta.jpg', linkedin: 'https://www.linkedin.com/in/kuldeep-gupta-5643311a/' },
   { name: 'Lyvia Ebner', title: 'Director, R&D Project Management', group: 'Product Development', image: '/images/team-members/lyvia-ebner.jpg', linkedin: 'https://www.linkedin.com/in/lyvia-ferreira-ebner-msc-482b6748/' },
   { name: 'Michael Hicks', title: 'Research Scientist', group: 'Research', image: '/images/team-members/michael-hicks.jpg', linkedin: 'https://www.linkedin.com/in/michael-hicks-7a29b9195/' },
-  { name: 'Neydis Moreno Morales, PhD', title: 'Postdoctoral Scientist', group: 'Research', image: '/images/team-members/neydis-moreno-morales.jpg', linkedin: 'https://www.linkedin.com/in/neydis-morenomorales/' },
+  { name: 'Neydis Moreno Morales, PhD', title: 'Research Scientist', group: 'Research', image: '/images/team-members/neydis-moreno-morales.jpg', linkedin: 'https://www.linkedin.com/in/neydis-morenomorales/' },
   { name: 'Niel Baxter, PhD', title: 'Director, Market Analytics', group: 'Commercial', image: '/images/team-members/niel-baxter.jpg', linkedin: 'https://www.linkedin.com/in/niel-baxter-53318541/' },
   { name: 'Rhiannon Cecil, PhD', title: 'Microbiologist', group: 'Research', image: '/images/team-members/rhiannon-cecil.jpg', linkedin: 'https://www.linkedin.com/in/rhiannon-cecil-ph-d-b1962a203/' },
   { name: 'Roxanna Van Dorn', title: 'Director, Regulatory Affairs', group: 'Regulatory', image: '/images/team-members/roxanna-van-dorn.jpg', linkedin: 'https://www.linkedin.com/in/roxanna-van-dorn-rac-8115081/' },
   { name: 'Rupesh Kumar, PhD', title: 'Senior Research Scientist', group: 'Research', image: '/images/team-members/rupesh-kumar.jpg', linkedin: 'https://www.linkedin.com/in/organized-dna/' },
-  { name: 'Ryan Blue', title: 'Lab Manager', group: 'Research', image: '/images/team-members/ryan-blue.jpg', linkedin: 'https://www.linkedin.com/in/ryan-blue-8878397/' },
+  { name: 'Ryan Blue', title: 'Automation Engineer and Lab Manager', group: 'Research', image: '/images/team-members/ryan-blue.jpg', linkedin: 'https://www.linkedin.com/in/ryan-blue-8878397/' },
   { name: 'Simmi Manuja, BVSc, MVSc, MSc, PhD', title: 'Senior Director, Clinical Development', group: 'Product Development', image: '/images/team-members/simmi-manuja.jpg', linkedin: 'https://www.linkedin.com/in/simmi-manuja-950a5228/' },
   { name: 'Troy Burtchett, PhD', title: 'Research Scientist', group: 'Research', image: '/images/team-members/troy-burtchett.jpg', linkedin: 'https://www.linkedin.com/in/troyburtchett/' },
 ];
 ---
-<FieldNotesLayout title="Our Team" active="team">
+<FieldNotesLayout title="Our Team" description="Meet the scientists, engineers, and regulatory experts at BiomEdit building Programmable Veterinary Biologics™ for animal health." active="team">
   <IntroLead
     eyebrow="BiomEdit / Our Team"
     heading="Our team is building something new"
     paragraphs={['BiomEdit brings together scientists, engineers, product developers, and regulatory experts who have spent careers at the intersection of biology and commercial animal health. That combination of backgrounds is part of what makes this platform possible.']}
+    image={{ src: '/images/090325_BiomEdit-Team_1692.jpg', alt: 'The BiomEdit team' }}
     variant="dark"
-  />
-
-  <section class="team-stats">
-    <div class="team-stats-grid">
-      <div class="stats-col">
-        <StatBlock stats={teamStats} align="left" />
-      </div>
-      <div class="photo-col">
-        <img src="/images/090325_BiomEdit-Team_1692.jpg" alt="The BiomEdit team" />
-      </div>
+  >
+    <div class="intro-stats">
+      <StatBlock stats={teamStats} align="left" />
     </div>
-  </section>
+  </IntroLead>
 
   <section class="leadership section-divider">
-    <h2>Leadership</h2>
+    <h2>Executive Leadership</h2>
     <div class="leadership-grid">
       {leaders.map((leader) => (
         <div class="leader-card">
@@ -69,7 +64,7 @@ const teamMembers = [
             <h3>{leader.name}</h3>
             <p class="leader-title">{leader.title}</p>
             {leader.linkedin && (
-              <a class="leader-linkedin" href={leader.linkedin} target="_blank" rel="noopener">
+              <a class="leader-linkedin" href={leader.linkedin} target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
                 LinkedIn
               </a>
@@ -92,7 +87,7 @@ const teamMembers = [
             <h3>{member.name}</h3>
             <p class="member-title">{member.title}</p>
             {member.linkedin && (
-              <a class="member-linkedin" href={member.linkedin} target="_blank" rel="noopener">
+              <a class="member-linkedin" href={member.linkedin} target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
                 LinkedIn
               </a>
@@ -122,16 +117,14 @@ const teamMembers = [
 <style>
   .section-divider { border-top: 1px solid var(--cool-500); }
 
-  .team-stats { padding: 3.5rem 0 4rem; }
-  .team-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; }
-  .stats-col { display: flex; align-items: center; }
-  .stats-col :global(.stat-block) { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 24px; }
-  .stats-col :global(.stat) { border-right: none !important; padding: 0 !important; }
-  .photo-col img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; border-radius: 6px; }
+  .intro-stats { margin-top: 1.75rem; }
+  .intro-stats :global(.stat-block) { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 24px; max-width: 380px; }
+  .intro-stats :global(.stat) { border-right: none; padding: 0; }
+  .intro-stats :global(.stat-value) { font-size: var(--text-h5); color: #FFFFFF; margin-bottom: 0.25rem; }
+  .intro-stats :global(.stat-label) { font-size: 11px; color: var(--cool-400); }
 
   @media (max-width: 700px) {
-    .team-stats-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .photo-col img { min-height: 220px; }
+    .intro-stats :global(.stat-block) { max-width: none; }
   }
 
   .leadership { padding: 3.5rem 0 4rem; }

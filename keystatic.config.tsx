@@ -26,6 +26,14 @@ export default config({
       path: 'src/content/news/*',
       format: { contentField: 'content' },
       entryLayout: 'content',
+      // Puts a "Preview" link in the entry editor pointed at the Netlify
+      // branch deploy for the `preview` branch (set up in Netlify's
+      // Branches and deploy contexts settings). Hardcoded to that one
+      // branch rather than using Keystatic's {branch} token — Netlify
+      // doesn't serve a matching `main--biomedit.netlify.app` alias for
+      // the production branch, so a {branch}-templated URL would 404 the
+      // moment someone previews from `main` instead of `preview`.
+      previewUrl: 'https://preview--biomedit.netlify.app/news/{slug}',
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         date: fields.date({ label: 'Date', defaultValue: { kind: 'today' } }),
@@ -33,6 +41,11 @@ export default config({
           label: 'Category',
           options: newsCategories,
           defaultValue: 'article',
+        }),
+        draft: fields.checkbox({
+          label: 'Draft (hide from site)',
+          description: 'While checked, this post is fully excluded from the site — no listing entry, no article page, no sitemap entry. Uncheck and publish when ready to go live.',
+          defaultValue: false,
         }),
         secondaryCategory: fields.select({
           label: 'Secondary category (optional)',
@@ -47,6 +60,7 @@ export default config({
           publicPath: '/images/news/',
         }),
         imageAlt: fields.text({ label: 'Image alt text' }),
+        imageCaption: fields.text({ label: 'Image caption (optional — shown below the lead image)', multiline: true }),
         lead: fields.text({ label: 'Lead / summary', multiline: true, validation: { isRequired: true } }),
         source: fields.text({ label: 'Source (third-party reposts only, e.g. "Feedstuffs (Informa Markets)")' }),
         videoUrl: fields.text({ label: 'Video URL (YouTube or direct file — embeds a player when set)' }),

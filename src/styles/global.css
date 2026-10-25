@@ -1,0 +1,23 @@
+/* ===================================================================
+   Global element resets — unlike tokens.css (design tokens/custom
+   properties), this holds plain element-selector rules that need to
+   reach every <sup>/<sub> on the site, including ones inserted via
+   set:html from JS-string props (e.g. "...Biologics<sup>&trade;</sup>")
+   — Astro's component-scoped <style> blocks don't reach elements
+   injected that way, so a true global stylesheet is the only place a
+   sitewide fix like this can live.
+   =================================================================== */
+
+/* Default <sup> (used throughout body copy for &trade;/&reg; marks)
+   contributes its own line-height to the line box even though it's
+   visually offset, which reads as uneven leading between lines that do
+   vs. don't contain one. Suppressing that contribution (line-height: 0)
+   and shifting the glyph up with a relative offset instead of
+   vertical-align keeps paragraph line-height perfectly even. */
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.4em;
+}

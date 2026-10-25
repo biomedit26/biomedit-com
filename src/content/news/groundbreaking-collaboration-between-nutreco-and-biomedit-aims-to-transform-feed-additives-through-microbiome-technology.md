@@ -4,14 +4,14 @@ date: 2023-01-12
 category: press-release
 image: "/images/Nutreco-Biomedit-Announcement-Image.png"
 imageAlt: "Announcement graphic for the Nutreco and BiomEdit partnership"
-lead: "Collaboration an industry-first focusing on discovery, development, and commercialisation of next-generation ultra-specialty feed additives called Biome-actives to address livestock producers' health and sustainability challenges."
+lead: "Collaboration an industry-first focusing on discovery, development, and commercialization of next-generation ultra-specialty feed additives called Biome-actives to address livestock producers' health and sustainability challenges."
 metaTitle: "Nutreco and BiomEdit Launch Feed Additive Partnership"
 metaDescription: "Nutreco and BiomEdit announce a strategic partnership to discover and commercialize Biome-actives, novel microbiome-derived feed additives for livestock producers."
 ---
 
 Amersfoort, The Netherlands – Jan. 12, 2023 – Today, [Nutreco](http://www.nutreco.com) and [BiomEdit](http://biomedit.com) announce a ground-breaking, long-term strategic research and commercial partnership to bring livestock producers innovative and truly novel feed additives developed through microbiome technology. The partnership aligns Nutreco Exploration (NutEx) with animal health's most advanced microbiome biotech company, BiomEdit.
 
-The collaboration covers the discovery, development and commercialisation of Biome-actives developed using BiomEdit's advanced microbiome science and bioinformatics platform. These novel feed additives address the health and sustainability challenges of today's animal producers, for aquaculture, poultry, swine and cattle.
+The collaboration covers the discovery, development and commercialization of Biome-actives developed using BiomEdit's advanced microbiome science and bioinformatics platform. These novel feed additives address the health and sustainability challenges of today's animal producers, for aquaculture, poultry, swine and cattle.
 
 "Saying that microbiome science has created a buzz in the last decade is an understatement. However, practical applications of this scientific progress remain scarce," explains Nutreco's Chief Science Officer David Bravo. "Our first NutEx strategic program will focus on these Biome-actives. We share so much with BiomEdit's teams... that it was only logical to engage in this major strategic partnership."
 

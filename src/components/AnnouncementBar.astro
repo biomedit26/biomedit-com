@@ -1,14 +1,11 @@
 ---
-// Dismissible announcement bar for site-wide (or page-specific) news call-
-// outs — e.g. a product launch/regulatory milestone. Not yet wired up
-// anywhere; index.astro renders a sample CPerf LLV* launch message via
-// <AnnouncementBar slot="announcement"> so the pattern exists once real
-// approval comes through — swap the copy/href/id at that point.
+// Dismissible announcement bar, rendered on every page by FieldNotesLayout
+// (that's where its copy/href/id live).
 //
-// Dismissal is remembered per-browser via localStorage, keyed by `id`, so
-// changing `id` when the message changes (e.g. 'cperf-llv-launch-2026') is
-// what makes a new announcement reappear for someone who dismissed an
-// earlier one.
+// Dismissal is remembered with a session cookie keyed by `id`: once closed,
+// it stays hidden on every page and tab for the rest of the visit, and
+// comes back on the visitor's next browser session. Changing `id` when the
+// message changes makes a new announcement show even mid-visit.
 interface Props {
   id: string;
   message: string;
@@ -31,32 +28,22 @@ const { id, message, ctaLabel, ctaHref } = Astro.props;
 </div>
 
 <script>
-  const STORAGE_PREFIX = 'biomedit-announcement-dismissed:';
+  const COOKIE_PREFIX = 'biomedit-announcement-dismissed-';
 
   document.querySelectorAll('.announcement-bar[data-announcement-id]').forEach((bar) => {
     const id = bar.getAttribute('data-announcement-id');
     if (!id) return;
-    const key = STORAGE_PREFIX + id;
+    const name = COOKIE_PREFIX + id;
 
-    let dismissed = false;
-    try {
-      dismissed = localStorage.getItem(key) === '1';
-    } catch {
-      dismissed = false;
-    }
-
+    // No Expires/Max-Age = session cookie, cleared when the browser session ends.
+    const dismissed = document.cookie.split('; ').some((c) => c === `${name}=1`);
     if (!dismissed) {
       bar.removeAttribute('hidden');
     }
 
     bar.querySelector('.announcement-dismiss')?.addEventListener('click', () => {
       bar.setAttribute('hidden', '');
-      try {
-        localStorage.setItem(key, '1');
-      } catch {
-        // Private browsing / storage disabled — bar simply won't stay
-        // dismissed across reloads, which is an acceptable fallback.
-      }
+      document.cookie = `${name}=1; path=/; SameSite=Lax`;
     });
   });
 </script>

@@ -11,4 +11,4 @@ metaDescription: "BiomEdit CEO Aaron Schacht discusses microbiome science and sy
 
 A Thanksgiving replay of an earlier Grow Everything conversation with BiomEdit CEO Aaron Schacht on microbiome science, synthetic biology, and methane reduction in livestock. This is a rebroadcast of an earlier episode; the original air date is not separately catalogued here.
 
-*Source: Grow Everything (YouTube/Podcast)*
+*Source: [Grow Everything (YouTube/Podcast)](https://www.youtube.com/watch?v=Y8IJe6oBcxI)*
