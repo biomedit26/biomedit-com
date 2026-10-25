@@ -1,0 +1,728 @@
+---
+// /styleguide — unlisted digital style guide for anyone making web, social
+// or digital assets for BiomEdit. Everything renders from the site's own
+// tokens (src/styles/tokens.css), component CSS and components, via
+// src/data/styleguide/*. The same data generates /styleguide.md,
+// /styleguide/prompt.txt, /styleguide/tokens.json and /styleguide/tokens.css.
+// Unlisted: noindex here + X-Robots-Tag in netlify.toml, excluded from the
+// sitemap, not linked from nav/footer. Treat everything on it as public.
+import FieldNotesLayout from '../../layouts/FieldNotesLayout.astro';
+import ModuleSection from '../../components/modules/ModuleSection.astro';
+import Button from '../../components/Button.astro';
+import CTALink from '../../components/CTALink.astro';
+import Badge from '../../components/Badge.astro';
+import IntroLead from '../../components/modules/IntroLead.astro';
+import Module11 from '../../components/modules/Module11.astro';
+import Module21 from '../../components/modules/Module21.astro';
+import ModuleCards2 from '../../components/modules/ModuleCards2.astro';
+import FactList from '../../components/modules/FactList.astro';
+import EntryList from '../../components/modules/EntryList.astro';
+import FloatingCard from '../../components/modules/FloatingCard.astro';
+import ModulePlainText from '../../components/modules/ModulePlainText.astro';
+import ModuleDarkText from '../../components/modules/ModuleDarkText.astro';
+import ModuleBlueText from '../../components/modules/ModuleBlueText.astro';
+import CopyButton from '../../components/styleguide/CopyButton.astro';
+import Placeholder from '../../components/styleguide/Placeholder.astro';
+import DoDont from '../../components/styleguide/DoDont.astro';
+import {
+  brandColors, deepNavy, neutrals, semanticPairs, typeScale, contrastPairs,
+  lineHeights, fontFamily, mobileBreakpoint, hexToRgb, hex,
+} from '../../data/styleguide/tokens';
+import { componentValues as cv } from '../../data/styleguide/componentValues';
+import {
+  meta, contact, changelog, foundation, sections, voiceExamples, principles,
+  logoAssets, graphicAssets, photoExamples, templates, modules, ph, cssText,
+} from '../../data/styleguide/content';
+import { colorRole, neutralRole, stepRole } from '../../data/styleguide/outputs';
+
+const up = (s: string) => s.toUpperCase();
+const rgb = (h: string) => (hexToRgb(h) ?? []).join(', ');
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+const toc = [
+  ['introduction', 'Introduction'], ['foundation', 'Brand foundation'], ['logo', 'Logo'],
+  ['color', 'Color'], ['typography', 'Typography'], ['imagery', 'Imagery and graphics'],
+  ['components', 'UI components'], ['modules', 'Content modules'], ['templates', 'Digital templates'],
+  ['voice', 'Voice and copy'], ['principles', 'Guiding principles'],
+];
+
+// Copyable snippets that reproduce each component outside the codebase,
+// built from the same component values the page documents.
+const font = `'${fontFamily}', Arial, sans-serif`;
+const snippets = {
+  button: `<a class="be-btn" href="#">Explore our pipeline</a>
+<a class="be-btn be-btn--secondary" href="#">Connect on LinkedIn</a>
+<style>
+  .be-btn { display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 24px; border-radius: ${cv.button.radius};
+    background: ${hex('--color-amber')}; color: ${hex('--cool-900')};
+    font: 700 ${cv.button.fontSize}/1 ${font}; text-decoration: none; }
+  .be-btn:hover { opacity: 0.75; }
+  .be-btn:focus-visible { outline: 2px solid ${hex('--color-teal')}; outline-offset: 2px; }
+  /* Secondary: navy outline on white */
+  .be-btn--secondary { background: #FFFFFF; color: ${hex('--color-navy')};
+    border: 1.5px solid ${hex('--color-navy')}; padding: 14.5px 22.5px; }
+</style>`,
+  cta: `<a class="be-cta" href="#">Discover our science <span aria-hidden="true">&rarr;</span></a>
+<style>
+  .be-cta { display: inline-flex; align-items: center; gap: 6px;
+    font: 700 ${cv.ctaLink.fontSize}/1.2 ${font}; color: ${hex('--color-navy')};
+    text-decoration: none; border-bottom: 1px solid ${hex('--color-navy')}; padding-bottom: 4px; }
+  .be-cta:hover { opacity: 0.75; }
+</style>`,
+  badge: `<span class="be-tag">Press release</span>
+<style>
+  .be-tag { display: inline-flex; font: 700 ${cv.badge.fontSize}/1 ${font};
+    letter-spacing: ${cv.badge.letterSpacing}; text-transform: uppercase;
+    padding: 8px 14px; border-radius: ${cv.badge.radius};
+    color: ${hex('--color-navy')}; background: rgba(${rgb(hex('--color-navy'))}, 0.12); }
+</style>`,
+  eyebrow: `<p class="be-eyebrow">Pipeline</p>
+<h2 class="be-heading">Conditional licensure, granted 2026</h2>
+<style>
+  .be-eyebrow { font: 700 ${cssText(cv.eyebrow.fontSize).split(' ')[0]}/1.2 ${font}; letter-spacing: ${cv.eyebrow.letterSpacing};
+    text-transform: uppercase; color: ${hex('--cool-800')}; margin: 0 0 16px; }
+  .be-heading { font: 700 ${typeScale.find((s) => s.name === '--text-h3')?.desktop}px/${lineHeights.heading} ${font};
+    color: ${hex('--cool-900')}; margin: 0; }
+</style>`,
+  card: `<figure class="be-card">
+  <img src="photo.jpg" alt="Describe what is happening and why it matters">
+  <figcaption>Caption: name the assay, the site or the species.</figcaption>
+</figure>
+<style>
+  .be-card { margin: 0; padding: 20px; background: #FFFFFF;
+    border: 1px solid ${hex('--cool-200')}; border-radius: 6px; }
+  .be-card img { display: block; width: 100%; border-radius: 6px; }
+  .be-card figcaption { font: 400 12px/1.5 ${font}; color: ${hex('--cool-500')}; margin-top: 12px; }
+</style>`,
+};
+
+const labPhoto = '/images/082626_BiomEdit_039.jpg';
+const labAlt = 'BiomEdit scientists in lab coats and safety glasses working at lab equipment';
+
+const graphicBg: Record<string, string> = {
+  'flowing-data-final.svg': 'var(--cool-100)',
+  'flowing-data-white.svg': 'var(--navy-deep-bg)',
+  'flowing-data-sky.svg': 'var(--color-teal)',
+  'flowing-data-navy-teal.svg': '#FFFFFF',
+  'flowing-data-warm-to-cool.svg': '#FFFFFF',
+  'flowing-data-warm-to-cool-dark.svg': 'var(--cool-800)',
+};
+const fileName = (p: string) => p.split('/').pop() ?? '';
+---
+<FieldNotesLayout title="Digital style guide" description="BiomEdit's digital style guide: brand rules, color, type, components and AI-ready files for building digital assets." noindex>
+  <div id="sg-live" class="sg-visually-hidden" role="status" aria-live="polite"></div>
+
+  <div class="sg-header">
+    <p class="sg-eyebrow">Version {meta.version} · Updated {meta.lastUpdated}</p>
+    <h1>BiomEdit digital style guide</h1>
+    <p class="sg-lead">For anyone creating web, social or digital assets for BiomEdit, by hand or with an AI tool. Every value here comes from the live website code. Print and stationery are covered in the Brand Guidelines deck.</p>
+  </div>
+
+  <div class="sg-layout">
+    <nav class="sg-toc" aria-label="Style guide sections">
+      <details open>
+        <summary>On this page</summary>
+        <ol>{toc.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
+      </details>
+    </nav>
+
+    <div class="sg-body">
+
+      <!-- 1. Introduction -->
+      <ModuleSection>
+        <section id="introduction" class="sg-section" aria-labelledby="introduction-h">
+          <p class="sg-eyebrow">Introduction</p>
+          <h2 id="introduction-h">How to use this guide</h2>
+
+          <div class="sg-ai" id="ai">
+            <h3 id="ai-h">Using this guide with AI</h3>
+            <ul class="sg-ai-list">
+              <li>
+                <div><strong>prompt.txt</strong>: a short brief to paste into ChatGPT, Claude, Copilot or Canva before your request. Covers voice, color, type, layout and the must-nots.</div>
+                <div class="sg-ai-actions"><CopyButton src="/styleguide/prompt.txt" label="prompt.txt" visibleLabel="Copy prompt" /><a href="/styleguide/prompt.txt">View</a></div>
+              </li>
+              <li>
+                <div><strong>styleguide.md</strong>: the whole guide as one Markdown file, every rule and value in plain text. Attach or paste it when the tool accepts long context.</div>
+                <div class="sg-ai-actions"><CopyButton src="/styleguide.md" label="styleguide.md" visibleLabel="Copy guide" /><a href="/styleguide.md">View</a></div>
+              </li>
+              <li>
+                <div><strong>tokens.json</strong> and <strong>tokens.css</strong>: the design tokens for developers and design tools.</div>
+                <div class="sg-ai-actions"><a href="/styleguide/tokens.json">tokens.json</a><a href="/styleguide/tokens.css">tokens.css</a></div>
+              </li>
+            </ul>
+          </div>
+
+          <p>Each section gives the rule in words with exact values, then shows it. Anything marked <Placeholder text="[Placeholder — …]" /> is not decided yet. Leave it flagged and don&rsquo;t invent a value.</p>
+          <dl class="sg-contact">
+            <dt>Contact</dt><dd><Placeholder text={contact.name} /> · <Placeholder text={contact.email} /></dd>
+            <dt>Source files</dt><dd><Placeholder text={contact.files} /></dd>
+          </dl>
+          <h3 id="changelog">Changelog</h3>
+          <ul>{changelog.map((c) => <li><strong>{c.date}</strong>: {c.note}</li>)}</ul>
+        </section>
+      </ModuleSection>
+
+      <!-- 2. Brand foundation -->
+      <ModuleSection>
+        <section id="foundation" class="sg-section" aria-labelledby="foundation-h">
+          <p class="sg-eyebrow">Brand foundation</p>
+          <h2 id="foundation-h">Where we are headed, and how we get there</h2>
+          <p>{foundation.intro}</p>
+          <div class="sg-grid-2">
+            {foundation.items.map((i) => (
+              <div class="sg-card"><h3 class="sg-card-label">{i.label}</h3><p>{i.text}</p></div>
+            ))}
+          </div>
+          <h3 id="foundation-values">Values</h3>
+          <ol class="sg-values">
+            {foundation.values.map((x) => <li><strong>{x.name}.</strong> {x.text}</li>)}
+          </ol>
+        </section>
+      </ModuleSection>
+
+      <!-- 3. Logo -->
+      <ModuleSection>
+        <section id="logo" class="sg-section" aria-labelledby="logo-h">
+          <p class="sg-eyebrow">{sections.logo.eyebrow}</p>
+          <h2 id="logo-h">{sections.logo.title}</h2>
+          <p>{sections.logo.intro}</p>
+
+          <div class="sg-grid-2">
+            <figure class="sg-logo-tile" style="background:#FFFFFF;">
+              <img src="/styleguide/assets/biomedit-logo-colour.svg" alt="BiomEdit logo, full colour" width="246" height="60" />
+              <figcaption>Full colour, on light</figcaption>
+            </figure>
+            <figure class="sg-logo-tile" style={`background:${hex('--navy-deep-bg')};`}>
+              <img src="/styleguide/assets/biomedit-logo-white.svg" alt="BiomEdit logo, reversed in white" width="246" height="60" />
+              <figcaption class="is-dark">Reversed, on dark</figcaption>
+            </figure>
+            <div><Placeholder block text={ph('one-color logo artwork')} /></div>
+            <div><Placeholder block text={ph('E mark artwork')} /></div>
+          </div>
+
+          <h3 id="logo-files">Files</h3>
+          <div class="sg-table-wrap">
+            <table>
+              <thead><tr><th scope="col">File</th><th scope="col">When to use it</th></tr></thead>
+              <tbody>
+                {logoAssets.map((a) => (
+                  <tr>
+                    <td>{a.placeholder ? a.label : <a href={a.file} download>{a.label}</a>}</td>
+                    <td>{a.placeholder ? <Placeholder text={a.use} /> : a.use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="logo-clear-space">Clear space and minimum size</h3>
+          <div class="sg-clearspace">
+            <div class="sg-clearspace-zone"><img src="/styleguide/assets/biomedit-logo-colour.svg" alt="BiomEdit logo inside its clear-space zone" width="164" height="40" /></div>
+            <div>
+              <p>Keep at least X clear on all four sides, where X is the height of the E. <Placeholder text={ph('X to be confirmed against the master artwork')} /></p>
+              <p>Digital minimum: <strong>28px tall</strong>. Shown here at 28px:</p>
+              <img src="/styleguide/assets/biomedit-logo-colour.svg" alt="BiomEdit logo at its 28px digital minimum" height="28" width="115" />
+            </div>
+          </div>
+
+          <h3 id="logo-misuse">Misuse</h3>
+          <div class="sg-misuse">
+            {[
+              ['stretch', 'Don’t stretch or compress'],
+              ['rotate', 'Don’t rotate or angle'],
+              ['recolor', 'Don’t recolor'],
+              ['effects', 'Don’t add shadows or effects'],
+              ['busy', 'Don’t place on a busy image'],
+              ['dark', 'Don’t use full colour on dark grounds'],
+            ].map(([k, label]) => (
+              <figure class={`sg-misuse-item is-${k}`}>
+                <div class="sg-misuse-art"><img src="/styleguide/assets/biomedit-logo-colour.svg" alt={`Incorrect use: ${label.toLowerCase()}`} width="140" height="34" /></div>
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <DoDont id="logo" rules={sections.logo.rules} dos={sections.logo.dos} donts={sections.logo.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 4. Color -->
+      <ModuleSection>
+        <section id="color" class="sg-section" aria-labelledby="color-h">
+          <p class="sg-eyebrow">{sections.color.eyebrow}</p>
+          <h2 id="color-h">{sections.color.title}</h2>
+          <p>{sections.color.intro}</p>
+
+          <h3 id="color-brand">Brand and accent colors</h3>
+          <div class="sg-swatches">
+            {[...brandColors.map((c) => ({ label: cap(c.key), t: c.light, role: colorRole(c.key) })),
+              ...(deepNavy ? [{ label: 'Deep navy', t: deepNavy, role: 'Full-bleed fields only' }] : [])].map((s) => (
+              <div class="sg-swatch">
+                <div class="sg-chip" style={`background:var(${s.t.name});`}></div>
+                <div class="sg-swatch-meta">
+                  <strong>{s.label}</strong>
+                  <span class="sg-val">{up(s.t.resolved)} <CopyButton text={up(s.t.resolved)} label={up(s.t.resolved)} /></span>
+                  <span class="sg-val">RGB {rgb(s.t.resolved)}</span>
+                  <span class="sg-val"><code>{s.t.name}</code> <CopyButton text={`var(${s.t.name})`} label={s.t.name} /></span>
+                  <span class="sg-role">{s.role}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 id="color-neutrals">Neutrals</h3>
+          <div class="sg-swatches is-compact">
+            {neutrals.map((n) => (
+              <div class="sg-swatch">
+                <div class="sg-chip" style={`background:var(${n.name});`}></div>
+                <div class="sg-swatch-meta">
+                  <strong><code>{n.name}</code></strong>
+                  <span class="sg-val">{up(n.resolved)} <CopyButton text={up(n.resolved)} label={up(n.resolved)} /></span>
+                  <span class="sg-role">{neutralRole(n.name)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 id="color-themes">Light and dark themes</h3>
+          <p>Dark is not an inversion: the ramp flips and the accents change value.</p>
+          <div class="sg-table-wrap">
+            <table>
+              <thead><tr><th scope="col">Color</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+              <tbody>
+                {brandColors.map((c) => (
+                  <tr>
+                    <td>{cap(c.key)}</td>
+                    <td><span class="sg-dot" style={`background:${c.light.resolved}`}></span>{up(c.light.resolved)} <code>{c.light.name}</code></td>
+                    <td><span class="sg-dot" style={`background:${c.dark.resolved}`}></span>{up(c.dark.resolved)} <code>{c.dark.name}</code></td>
+                  </tr>
+                ))}
+                {semanticPairs.map((p) => (
+                  <tr>
+                    <td><code>{p.name}</code></td>
+                    <td><span class="sg-dot" style={`background:${p.light.resolved}`}></span>{up(p.light.resolved)}</td>
+                    <td><span class="sg-dot" style={`background:${p.dark.resolved}`}></span>{up(p.dark.resolved)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 id="color-contrast">Contrast</h3>
+          <p>Calculated from the tokens (WCAG 2.1). AA needs 4.5:1 for normal text, 3:1 for large text (24px and up, or 19px bold).</p>
+          <div class="sg-table-wrap">
+            <table>
+              <thead><tr><th scope="col">Sample</th><th scope="col">Text / background</th><th scope="col">Ratio</th><th scope="col">AA normal</th><th scope="col">AA large</th><th scope="col">Use</th></tr></thead>
+              <tbody>
+                {contrastPairs.map((p) => (
+                  <tr>
+                    <td><span class="sg-contrast-chip" style={`background:${p.bgHex};`} aria-hidden="true"><span style={`background:${p.fgHex};`}></span></span></td>
+                    <td>{p.fgHex} on {p.bgHex}</td>
+                    <td>{p.ratio}:1</td>
+                    <td><span class={`sg-pass ${p.aaNormal ? 'is-pass' : 'is-fail'}`}>{p.aaNormal ? 'Pass' : 'Fail'}</span></td>
+                    <td><span class={`sg-pass ${p.aaLarge ? 'is-pass' : 'is-fail'}`}>{p.aaLarge ? 'Pass' : 'Fail'}</span></td>
+                    <td>{p.use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <DoDont id="color" rules={sections.color.rules} dos={sections.color.dos} donts={sections.color.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 5. Typography -->
+      <ModuleSection>
+        <section id="typography" class="sg-section" aria-labelledby="typography-h">
+          <p class="sg-eyebrow">{sections.typography.eyebrow}</p>
+          <h2 id="typography-h">{sections.typography.title}</h2>
+          <p>{sections.typography.intro}</p>
+
+          <h3 id="typography-scale">The scale</h3>
+          <p>Headings {lineHeights.heading} line-height, body {lineHeights.body}. The mobile column applies under {mobileBreakpoint}px. Samples below render at the live token size.</p>
+          <div class="sg-scale">
+            {typeScale.map((s) => (
+              <div class="sg-scale-row">
+                <div class="sg-scale-meta">
+                  <code>{s.name}</code> <CopyButton text={`var(${s.name})`} label={s.name} />
+                  <span>{s.desktop}px{s.mobile && s.mobile !== s.desktop ? ` · ${s.mobile}px mobile` : ''}</span>
+                  <span class="sg-role">{stepRole(s.name)}</span>
+                </div>
+                <p class={`sg-scale-sample ${s.name === '--text-eyebrow' ? 'is-caps' : ''}`} style={`font-size:var(${s.name});${s.desktop >= 21 ? `font-weight:700;line-height:${lineHeights.heading};` : `line-height:${lineHeights.body};`}`}>
+                  {s.name === '--text-eyebrow' ? 'Programmable Veterinary Biologics' : s.desktop >= 38 ? 'Engineering animal health' : s.desktop >= 21 ? 'Conditional licensure, granted 2026' : 'Running copy sits on the body step. The base of the scale and the default.'}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <h3 id="typography-accent">The accent face</h3>
+          <blockquote class="sg-serif">The gut is not a container. It is a place where decisions get made.</blockquote>
+          <p class="sg-caption-note">PT Serif italic. One pull quote per page at most. Never in headlines, body copy, buttons, labels, tables or interface.</p>
+
+          <DoDont id="typography" rules={sections.typography.rules} dos={sections.typography.dos} donts={sections.typography.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 6. Imagery and graphics -->
+      <ModuleSection>
+        <section id="imagery" class="sg-section" aria-labelledby="imagery-h">
+          <p class="sg-eyebrow">{sections.imagery.eyebrow}</p>
+          <h2 id="imagery-h">{sections.imagery.title}</h2>
+          <p>{sections.imagery.intro}</p>
+
+          <h3 id="imagery-photography">Photography</h3>
+          <p>Two registers, both true to life: cool light for science, warm light for animals.</p>
+          <div class="sg-grid-4">
+            {photoExamples.map((p) => (
+              <figure class="sg-photo-ph">
+                <Placeholder block text={p.use} />
+                <figcaption>{p.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <h3 id="imagery-graphic">The flowing data graphic</h3>
+          <p>Reads left to right: raw data, then the engineering, then one node, the licensed product.</p>
+          <div class="sg-graphics">
+            {graphicAssets.map((g) => (
+              <figure class="sg-graphic">
+                <div class="sg-graphic-art" style={`background:${graphicBg[fileName(g.file)] ?? '#FFFFFF'};`}>
+                  <img src={g.file} alt={`Flowing data graphic, ${g.label.toLowerCase()} colorway`} width="1920" height="1080" loading="lazy" />
+                </div>
+                <figcaption>
+                  <strong>{g.label}</strong> <a href={g.file} download>Download SVG</a>
+                  <span class="sg-path"><code>{g.file}</code> <CopyButton text={`${meta.url.replace(/\/styleguide\/$/, '')}${g.file}`} label={`${fileName(g.file)} URL`} /></span>
+                  <span>{g.use}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <h3 id="imagery-borders">Image borders</h3>
+          <div class="sg-borders">
+            <figure class="sg-border is-bleed"><img src={labPhoto} alt={labAlt} loading="lazy" /><figcaption><strong>Full bleed</strong> · radius 0, no stroke. When the image meets the page or module edge.</figcaption></figure>
+            <figure class="sg-border is-inset"><img src={labPhoto} alt={labAlt} loading="lazy" /><figcaption><strong>Inset</strong> · radius 6px, no stroke, 40px clear. Inside the layout with space on all sides.</figcaption></figure>
+            <figure class="sg-border is-framed"><div class="sg-framed"><img src={labPhoto} alt={labAlt} loading="lazy" /><p>Lab work at the Indiana Biosciences Research Institute.</p></div><figcaption><strong>Framed card</strong> · radius 6px, 1px {hex('--cool-200')}, 20px padding. When the image carries a caption.</figcaption></figure>
+          </div>
+          <div class="sg-snippet">
+            <div class="sg-snippet-head"><span>Framed card, HTML/CSS</span><CopyButton text={snippets.card} label="framed card snippet" /></div>
+            <pre><code>{snippets.card}</code></pre>
+          </div>
+
+          <DoDont id="imagery" rules={sections.imagery.rules} dos={sections.imagery.dos} donts={sections.imagery.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 7. UI components -->
+      <ModuleSection>
+        <section id="components" class="sg-section" aria-labelledby="components-h">
+          <p class="sg-eyebrow">{sections.components.eyebrow}</p>
+          <h2 id="components-h">{sections.components.title}</h2>
+          <p>{sections.components.intro}</p>
+
+          <h3 id="components-buttons">Buttons</h3>
+          <p class="sg-rule">{sections.components.rules[0]}</p>
+          <div class="sg-specimen">
+            <Button color="amber" variant="filled" href="#components-buttons">Partner with us</Button>
+            <Button color="navy" variant="outline" href="#components-buttons">Connect on LinkedIn</Button>
+          </div>
+          <p class="sg-states">States: default as shown. Hover dips to 0.75 opacity. Keyboard focus shows a 2px teal outline. There is no disabled or error button state on the site; don&rsquo;t invent one.</p>
+          <div class="sg-snippet">
+            <div class="sg-snippet-head"><span>Button, HTML/CSS</span><CopyButton text={snippets.button} label="button snippet" /></div>
+            <pre><code>{snippets.button}</code></pre>
+          </div>
+
+          <h3 id="components-links">Text call to action</h3>
+          <p class="sg-rule">{sections.components.rules[2]}</p>
+          <div class="sg-specimen">
+            <CTALink href="#components-links">Discover our science</CTALink>
+          </div>
+          <div class="sg-specimen is-dark">
+            <CTALink href="#components-links" tone="onDark">Connect with us</CTALink>
+          </div>
+          <div class="sg-snippet">
+            <div class="sg-snippet-head"><span>Text call to action, HTML/CSS</span><CopyButton text={snippets.cta} label="call to action snippet" /></div>
+            <pre><code>{snippets.cta}</code></pre>
+          </div>
+
+          <h3 id="components-tags">Tags</h3>
+          <p class="sg-rule">{sections.components.rules[4]}</p>
+          <div class="sg-specimen">
+            <Badge color="navy">In the news</Badge>
+            <Badge color="teal">Press release</Badge>
+            <Badge color="orange">Videos &amp; podcasts</Badge>
+          </div>
+          <div class="sg-snippet">
+            <div class="sg-snippet-head"><span>Tag, HTML/CSS</span><CopyButton text={snippets.badge} label="tag snippet" /></div>
+            <pre><code>{snippets.badge}</code></pre>
+          </div>
+
+          <h3 id="components-headings">Eyebrow and heading</h3>
+          <p class="sg-rule">{sections.typography.rules[4]}</p>
+          <div class="sg-snippet">
+            <div class="sg-snippet-head"><span>Eyebrow and heading, HTML/CSS</span><CopyButton text={snippets.eyebrow} label="eyebrow snippet" /></div>
+            <pre><code>{snippets.eyebrow}</code></pre>
+          </div>
+
+          <DoDont id="components" rules={sections.components.rules} dos={sections.components.dos} donts={sections.components.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 8. Content modules -->
+      <ModuleSection>
+        <section id="modules" class="sg-section" aria-labelledby="modules-h">
+          <p class="sg-eyebrow">{sections.modules.eyebrow}</p>
+          <h2 id="modules-h">{sections.modules.title}</h2>
+          <p>{sections.modules.intro}</p>
+          <DoDont id="modules" rules={sections.modules.rules} dos={sections.modules.dos} donts={sections.modules.donts} />
+
+          {modules.map((m) => (
+            <div class="sg-module">
+              <h3 id={m.id}>{m.name}</h3>
+              <p>{m.summary} <strong>Rule:</strong> {m.rule} <span class="sg-role">Used on: {m.usedOn}.</span></p>
+              <div class="sg-module-frame">
+                {m.name === 'IntroLead' && <IntroLead headingLevel="h2" eyebrow="Our science" heading="Engineering a new chapter in animal health" paragraphs={['BiomEdit engineers bacteria to deliver precise, targeted biologic activity. Our Programmable Veterinary Biologics™ platform aims to prevent and treat disease across animal species.']} />}
+                {m.name === 'Module11' && <Module11 heading="One platform, applied across species" paragraphs={['Our programs target challenges in poultry, swine, cattle, dogs and cats.']} ctaLabel="Explore our pipeline" ctaHref="/pipeline" />}
+                {m.name === 'Module21' && <Module21 heading="Strain engineering" paragraphs={['Commensal bacterial strains engineered to express targeted payloads directly in the gut.']} image={{ src: labPhoto, alt: labAlt }} />}
+                {m.name === 'ModuleCards2' && <ModuleCards2 headingLevel="h3" cardLeft={{ heading: 'Infectious disease', paragraphs: ['Programs that target pathogens in the gut without systemic antibiotics.'] }} cardRight={{ heading: 'Sustainability', paragraphs: ['Programs that reduce enteric methane in dairy and beef cattle.'] }} />}
+                {m.name === 'FactList' && <FactList items={[{ value: 'Data', valueSize: 'text', paragraph: 'A short label or figure on the left, the evidence on the right.' }, { value: 'Management', valueSize: 'text', paragraph: 'Fits antibiotic-free and no-antibiotics-ever programs.' }]} />}
+                {m.name === 'EntryList' && <EntryList label="Awards" items={[{ title: '2026 Deal of the Year, TechPoint Mira Awards', description: "Recognized for BiomEdit's $18.4M Series B round." }]} />}
+                {m.name === 'FloatingCard' && <FloatingCard><h3 class="sg-fc-h">Pipeline</h3><p>A white card with a 6px radius, floating on the page field.</p></FloatingCard>}
+                {m.name === 'ModulePlainText' && <ModulePlainText quote quoteFont="serif" paragraphs={['The gut is not a container. It is a place where decisions get made.']} />}
+                {m.name === 'ModuleDarkText' && <ModuleDarkText heading="Proof in the pipeline" paragraphs={['Text sits in white on the dark band, with teal-dark for any eyebrow.']} />}
+                {m.name === 'ModuleBlueText' && <ModuleBlueText heading="Interested in what’s next for BiomEdit?" ctaLabel="Partner with us" ctaHref="/contact-us" ctaStyle="button" image="/images/jonakoh-_-NPDRGf0w1lw-unsplash.jpg" zoom={1.05} imagePosition="50% 50%" blendMode="overlay" imageOpacity={0.45} />}
+                {m.name === 'PipelineTracker' && <img class="sg-module-shot" src="/styleguide/assets/module-pipeline-tracker.png" alt="The pipeline board on the Pipeline page: focus-area filters, a species menu, six stage columns and candidate cards from Discovery to Commercial." width="2000" height="985" loading="lazy" />}
+                {m.name === 'ModuleSection and FullBleedBand' && <ModuleSection><p class="sg-module-note">Content starts after the divider and a {cssText(cv.module.gap)} gap.</p></ModuleSection>}
+              </div>
+            </div>
+          ))}
+        </section>
+      </ModuleSection>
+
+      <!-- 9. Digital templates -->
+      <ModuleSection>
+        <section id="templates" class="sg-section" aria-labelledby="templates-h">
+          <p class="sg-eyebrow">{sections.templates.eyebrow}</p>
+          <h2 id="templates-h">{sections.templates.title}</h2>
+          <p>{sections.templates.intro}</p>
+          <div class="sg-templates">
+            {templates.map((t) => {
+              const [w, h] = t.size.split('×').map((n) => parseInt(n));
+              return (
+                <div class="sg-template">
+                  <div class="sg-template-thumb">
+                    {/* Thumb box is ~1.7:1; size wide shapes by width, tall ones by height, so each keeps its true ratio. */}
+                    <div class="sg-template-shape" style={`aspect-ratio:${w} / ${h || Math.round(w / 3)};${w / (h || w / 3) > 1.7 ? 'width:100%;' : 'height:100%;'}`}></div>
+                  </div>
+                  <p class="sg-template-group">{t.group}</p>
+                  <h3 class="sg-template-name">{t.name}</h3>
+                  <p class="sg-template-size">{t.size} px</p>
+                  <p>{t.use}</p>
+                  <Placeholder text={ph(`${t.name} file`)} />
+                </div>
+              );
+            })}
+          </div>
+          <DoDont id="templates" rules={sections.templates.rules} dos={sections.templates.dos} donts={sections.templates.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 10. Voice and copy -->
+      <ModuleSection>
+        <section id="voice" class="sg-section" aria-labelledby="voice-h">
+          <p class="sg-eyebrow">{sections.voice.eyebrow}</p>
+          <h2 id="voice-h">{sections.voice.title}</h2>
+          <p>{sections.voice.intro}</p>
+          <h3 id="voice-examples">Before and after</h3>
+          <div class="sg-table-wrap">
+            <table>
+              <thead><tr><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+              <tbody>{voiceExamples.map((e) => <tr><td>{e.before}</td><td>{e.after}</td></tr>)}</tbody>
+            </table>
+          </div>
+          <DoDont id="voice" rules={sections.voice.rules} dos={sections.voice.dos} donts={sections.voice.donts} />
+        </section>
+      </ModuleSection>
+
+      <!-- 11. Guiding principles -->
+      <ModuleSection>
+        <section id="principles" class="sg-section" aria-labelledby="principles-h">
+          <p class="sg-eyebrow">Guiding principles</p>
+          <h2 id="principles-h">Six rules that resolve most decisions</h2>
+          <ol class="sg-principles">
+            {principles.map((p) => <li><h3>{p.title}</h3><p>{p.text}</p></li>)}
+          </ol>
+        </section>
+      </ModuleSection>
+    </div>
+  </div>
+
+  <script>
+    const live = document.getElementById('sg-live');
+    const announce = (msg: string) => { if (live) { live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 50); } };
+    document.addEventListener('click', async (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.sg-copy');
+      if (!btn) return;
+      const label = btn.dataset.copyLabel ?? 'text';
+      try {
+        const text = btn.dataset.copySrc ? await (await fetch(btn.dataset.copySrc)).text() : (btn.dataset.copy ?? '');
+        await navigator.clipboard.writeText(text);
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('is-done');
+        announce(`Copied ${label} to the clipboard`);
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('is-done'); }, 1600);
+      } catch {
+        announce(`Couldn't copy ${label}. Select and copy it manually.`);
+      }
+    });
+  </script>
+</FieldNotesLayout>
+
+<style>
+  .sg-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .sg-header { padding: 3rem 0 2.5rem; max-width: 760px; }
+  .sg-header h1 { font-size: var(--text-h3); line-height: 1.2; margin: 0 0 1rem; }
+  .sg-lead { font-size: var(--text-body); line-height: 1.5; }
+  .sg-eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+
+  .sg-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; align-items: start; padding-bottom: 5rem; }
+  .sg-toc { position: sticky; top: 96px; font-size: 15px; } /* clears the site nav when it slides back in */
+  .sg-toc summary { font-weight: 700; cursor: pointer; margin-bottom: 0.75rem; }
+  .sg-toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--cool-300); }
+  .sg-toc li a { display: block; padding: 6px 0 6px 14px; color: var(--text-secondary); text-decoration: none; }
+  .sg-toc li a:hover { color: var(--color-navy); }
+  .sg-toc li a:focus-visible, .sg-body a:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+
+  .sg-section { padding: 1rem 0 3.5rem; scroll-margin-top: 96px; }
+  .sg-section h2 { font-size: var(--text-h4); line-height: 1.2; margin: 0 0 1rem; }
+  .sg-section h3 { font-size: var(--text-h6); margin: 2.5rem 0 1rem; scroll-margin-top: 96px; }
+  .sg-section > p, .sg-section li, .sg-section dd { font-size: 16px; line-height: 1.5; max-width: 72ch; }
+  .sg-role { color: var(--text-secondary); font-size: 14px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }
+
+  .sg-ai { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 24px 28px; margin: 1.5rem 0 2rem; }
+  .sg-ai h3 { margin-top: 0; }
+  .sg-ai-list { list-style: none; padding: 0; margin: 0; }
+  .sg-ai-list li { display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 14px 0; border-top: 1px solid var(--cool-200); max-width: none; }
+  .sg-ai-actions { display: flex; gap: 12px; align-items: center; flex-shrink: 0; font-size: 14px; font-weight: 700; }
+  .sg-contact { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 1.5rem 0; }
+  .sg-contact dt { font-weight: 700; font-size: 16px; }
+  .sg-contact dd { margin: 0; }
+
+  .sg-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.5rem 0; }
+  .sg-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .sg-card { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 20px 24px; }
+  .sg-card p { font-size: 16px; line-height: 1.5; margin: 0; }
+  .sg-section h3.sg-card-label { font-size: var(--text-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 0.5rem; }
+  .sg-values li, .sg-principles li { margin-bottom: 1rem; }
+
+  .sg-logo-tile { margin: 0; border: 1px solid var(--cool-200); border-radius: 6px; padding: 48px 24px 16px; text-align: center; }
+  .sg-logo-tile img { display: block; margin: 0 auto 32px; max-width: 100%; height: auto; }
+  .sg-logo-tile figcaption { font-size: 14px; color: var(--text-secondary); text-align: left; }
+  .sg-logo-tile figcaption.is-dark { color: #FFFFFF; }
+  .sg-clearspace { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; }
+  .sg-clearspace-zone { background: #FFFFFF; padding: 32px; outline: 1px dashed var(--color-orange); outline-offset: -1px; border-radius: 6px; }
+  .sg-clearspace-zone img { display: block; outline: 1px dashed var(--cool-400); }
+  .sg-misuse { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 2rem; }
+  .sg-misuse-item { margin: 0; }
+  .sg-misuse-art { height: 110px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; }
+  .sg-misuse-item figcaption { font-size: 14px; margin-top: 8px; }
+  .is-stretch img { transform: scaleX(1.5); }
+  .is-rotate img { transform: rotate(-14deg); }
+  .is-recolor img { filter: hue-rotate(140deg) saturate(2); }
+  .is-effects img { filter: drop-shadow(4px 4px 3px rgba(0,0,0,.45)); }
+  .is-busy .sg-misuse-art { background: url('/images/082626_BiomEdit_039.jpg') center / cover; }
+  .is-dark .sg-misuse-art { background: var(--cool-800); }
+
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .sg-swatches.is-compact { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  .sg-swatch { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; }
+  .sg-chip { height: 72px; border-bottom: 1px solid var(--cool-200); }
+  .sg-swatch-meta { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; font-size: 14px; }
+  .sg-val { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .sg-dot { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--cool-300); vertical-align: -2px; margin-right: 8px; }
+
+  .sg-table-wrap { overflow-x: auto; margin: 1rem 0 2rem; background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; }
+  .sg-table-wrap table { min-width: 560px; }
+  .sg-table-wrap th { color: var(--text-secondary); }
+  .sg-contrast-chip { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 28px; border-radius: 4px; border: 1px solid var(--cool-200); }
+  .sg-contrast-chip span { width: 18px; height: 8px; border-radius: 2px; }
+  .sg-module-shot { display: block; width: 100%; height: auto; margin-top: 24px; border-radius: 6px; }
+  .sg-pass { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 4px; color: var(--cool-900); border: 1px solid; }
+  .sg-pass.is-pass { background: rgba(22, 163, 74, 0.12); border-color: var(--color-green); }
+  .sg-pass.is-fail { background: rgba(218, 106, 42, 0.12); border-color: var(--color-orange); }
+
+  .sg-scale { border-top: 1px solid var(--cool-200); }
+  .sg-scale-row { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--cool-200); }
+  .sg-scale-meta { display: flex; flex-direction: column; gap: 4px; font-size: 14px; align-items: flex-start; }
+  .sg-scale-sample { margin: 0; overflow-wrap: anywhere; }
+  .sg-scale-sample.is-caps { text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .sg-serif { font-family: 'PT Serif', serif; font-style: italic; font-size: var(--text-h4); line-height: 1.25; border-left: none; padding: 0; margin: 1rem 0; }
+  .sg-caption-note { font-size: 14px; color: var(--text-secondary); }
+
+  .sg-graphics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .sg-graphic { margin: 0; }
+  .sg-graphic-art { border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; }
+  .sg-graphic-art img { display: block; width: 100%; height: auto; }
+  .sg-graphic figcaption { display: flex; flex-direction: column; gap: 6px; font-size: 14px; margin-top: 10px; }
+  .sg-path { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: var(--text-secondary); }
+  .sg-photo-ph { margin: 0; }
+  .sg-photo-ph figcaption { font-size: 14px; margin-top: 8px; }
+
+  .sg-borders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; margin-bottom: 1.5rem; }
+  .sg-border { margin: 0; }
+  .sg-border img { display: block; width: 100%; height: auto; }
+  .sg-border.is-inset img { border-radius: 6px; }
+  .sg-framed { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 20px; }
+  .sg-framed img { border-radius: 6px; }
+  .sg-framed p { font-size: 12px; color: var(--cool-700); margin: 12px 0 0; }
+  .sg-border figcaption { font-size: 14px; margin-top: 10px; line-height: 1.5; }
+
+  .sg-rule { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 14px 18px; }
+  .sg-specimen { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 24px; background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; margin-bottom: 1rem; }
+  .sg-specimen.is-dark { background: var(--navy-deep-bg); border-color: var(--navy-deep-bg); }
+  .sg-specimen :global(a:focus-visible) { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+  .sg-states { font-size: 14px; color: var(--text-secondary); }
+  .sg-snippet { border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; margin: 1rem 0 1.5rem; background: #FFFFFF; }
+  .sg-snippet-head { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--cool-200); font-size: 13px; font-weight: 700; }
+  .sg-snippet pre { margin: 0; padding: 16px; overflow-x: auto; font-size: 13px; line-height: 1.5; color: var(--cool-900); background: var(--cool-100); }
+
+  .sg-module { margin-top: 3rem; }
+  .sg-module > p { font-size: 16px; line-height: 1.5; max-width: 72ch; }
+  .sg-module-frame { border: 1px solid var(--cool-300); border-radius: 6px; padding: 0 24px 24px; background: var(--bg-primary); overflow: hidden; }
+  /* Full-bleed bands normally break out to the viewport; inside the
+     preview frame, contain them to the frame instead. Style guide only. */
+  .sg-module-frame :global(.full-bleed.full-bleed) { width: auto; left: auto; right: auto; margin-left: -24px; margin-right: -24px; }
+  .sg-module-frame :global(.full-bleed-inner) { padding-left: 24px; padding-right: 24px; }
+  .sg-fc-h { margin-top: 0; }
+  .sg-module-note { font-size: 14px; color: var(--text-secondary); }
+
+  .sg-templates { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 2rem; }
+  .sg-template { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 16px; }
+  .sg-template-thumb { height: 120px; display: flex; align-items: center; justify-content: center; background: var(--cool-100); border-radius: 4px; margin-bottom: 12px; padding: 10px; }
+  .sg-template-shape { max-width: 100%; max-height: 100%; background: #FFFFFF; border: 1px solid var(--cool-300); }
+  .sg-template-group { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 4px; }
+  .sg-section h3.sg-template-name { font-size: 18px; margin: 0 0 4px; }
+  .sg-template-size { font-size: 14px; font-weight: 700; margin: 0 0 8px; }
+  .sg-template p { font-size: 14px; line-height: 1.5; }
+
+  .sg-principles { padding-left: 1.25rem; }
+  .sg-principles h3 { margin: 1.5rem 0 0.25rem; }
+
+  @media (max-width: 960px) {
+    .sg-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .sg-toc { position: static; margin-bottom: 1.5rem; }
+    .sg-toc details { border: 1px solid var(--cool-200); border-radius: 6px; background: #FFFFFF; padding: 12px 16px; }
+    .sg-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .sg-borders { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .sg-grid-2, .sg-graphics, .sg-grid-4, .sg-misuse { grid-template-columns: 1fr; }
+    .sg-ai-list li { flex-direction: column; align-items: flex-start; }
+    .sg-scale-row, .sg-clearspace { grid-template-columns: 1fr; }
+    .sg-module-frame { padding: 0 12px 12px; }
+  }
+</style>

@@ -1,3 +1,17 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Style guide is unlisted: keep it (and its generated files) out of search.
+[[headers]]
+  for = "/styleguide"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+[[headers]]
+  for = "/styleguide/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+[[headers]]
+  for = "/styleguide.md"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
