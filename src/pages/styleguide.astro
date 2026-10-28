@@ -1,0 +1,655 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="BiomEdit — Styleguide">
+<div class="sg-intro">
+  <p class="overline">Living reference</p>
+  <h1>Styleguide</h1>
+  <p>The full decided system — colors, tokens, typography, buttons, the Pipeline component, and utility text styles. Sections mirror the original working doc so nothing gets lost as it evolves here.</p>
+</div>
+
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <symbol id="biomedit-logo" viewBox="0 0 164 40">
+      <path d="M14.9516 23.8131C14.9516 23.2565 14.856 22.7124 14.6607 22.189C14.4654 21.6615 14.1953 21.2004 13.8379 20.8017C13.4847 20.4029 13.065 20.0831 12.5788 19.8339C12.0968 19.5888 11.5732 19.4642 11.0163 19.4642H2.25646V28.1288H10.7961C11.3779 28.1288 11.9181 28.0125 12.4251 27.7757C12.9279 27.5389 13.3725 27.2233 13.7465 26.8245C14.1205 26.4258 14.4156 25.9647 14.6316 25.4413C14.8477 24.9138 14.9558 24.3738 14.9558 23.8131M2.25646 9.18796V17.6283H10.1187C10.6756 17.6283 11.1992 17.5119 11.6812 17.2752C12.1633 17.0384 12.5788 16.7269 12.9196 16.3406C13.2645 15.9543 13.5304 15.5099 13.7257 15.0031C13.9211 14.5005 14.0166 13.9689 14.0166 13.4081C14.0166 12.8474 13.9252 12.2825 13.7424 11.7674C13.5595 11.2523 13.3019 10.8079 12.9694 10.4299C12.637 10.0561 12.2422 9.75286 11.7934 9.52856C11.3446 9.30426 10.846 9.19211 10.3099 9.19211H2.25646V9.18796ZM17.2081 24.1994C17.2081 25.0592 17.0377 25.8484 16.6928 26.567C16.3479 27.2856 15.8866 27.9086 15.309 28.4361C14.7272 28.9637 14.054 29.3707 13.2769 29.6615C12.504 29.9522 11.6771 30.0976 10.7961 30.0976H0V7.22327H11.0205C11.8142 7.22327 12.5331 7.39357 13.1814 7.73832C13.8255 8.08308 14.374 8.52752 14.827 9.07581C15.2799 9.6241 15.6248 10.2472 15.8742 10.945C16.1193 11.6428 16.244 12.3448 16.244 13.055C16.244 14.2139 15.9531 15.2731 15.3755 16.2285C14.7937 17.1838 13.9917 17.8982 12.957 18.3718C14.266 18.7581 15.3048 19.4766 16.0653 20.5317C16.8258 21.5826 17.2081 22.8079 17.2081 24.2035" fill="#2B3682"></path>
+      <path d="M25.328 7.22327H23.0715V30.0935H25.328V7.22327Z" fill="#2B3682"></path>
+      <path d="M33.4147 18.6584C33.4147 19.9045 33.6183 21.1007 34.0255 22.2513C34.4328 23.4019 35.0145 24.4195 35.7667 25.3126C36.5188 26.2056 37.4123 26.9117 38.4429 27.4393C39.4734 27.9668 40.6245 28.2285 41.8919 28.2285C43.1594 28.2285 44.352 27.9502 45.4034 27.3894C46.4547 26.8328 47.3482 26.1018 48.0795 25.2004C48.8109 24.2991 49.3719 23.2773 49.7708 22.1392C50.1698 21.001 50.3692 19.8422 50.3692 18.6584C50.3692 17.4123 50.1615 16.216 49.7418 15.0654C49.322 13.919 48.7361 12.9014 47.984 12.0208C47.2318 11.1402 46.3425 10.4382 45.3078 9.91071C44.2772 9.38319 43.1386 9.12151 41.8919 9.12151C40.6453 9.12151 39.4319 9.39565 38.3805 9.94394C37.3292 10.4922 36.4357 11.215 35.7043 12.1163C34.973 13.0177 34.4078 14.0395 34.013 15.1776C33.6141 16.3157 33.4188 17.4746 33.4188 18.6584M41.8961 30.2555C40.3045 30.2555 38.8501 29.9273 37.5286 29.2752C36.2072 28.6189 35.0727 27.7508 34.1294 26.6667C33.1819 25.5826 32.4547 24.3406 31.9394 22.945C31.4241 21.5493 31.1665 20.1205 31.1665 18.6625C31.1665 17.2046 31.4408 15.676 31.9893 14.2804C32.5378 12.8847 33.2941 11.6511 34.2624 10.5753C35.2306 9.50365 36.3692 8.64799 37.6782 8.01247C38.9872 7.38111 40.4084 7.06128 41.9335 7.06128C43.4586 7.06128 44.9795 7.39773 46.301 8.07478C47.6224 8.75183 48.7486 9.63656 49.6836 10.7331C50.6186 11.8297 51.3416 13.0675 51.8569 14.4548C52.3722 15.8422 52.6299 17.2544 52.6299 18.6916C52.6299 20.216 52.3556 21.6781 51.8071 23.0737C51.2585 24.4694 50.5064 25.6989 49.5506 26.7622C48.5948 27.8256 47.4604 28.6729 46.1514 29.3084C44.8424 29.9439 43.4212 30.2596 41.8961 30.2596" fill="#2B3682"></path>
+      <path d="M78.76 30.0935V11.3146L70.4115 25.8442H69.09L60.7457 11.3146V30.0935H58.4893V7.22327H60.808L69.7341 22.8785L78.7267 7.22327H81.0123V30.0935H78.76Z" fill="#2B3682"></path>
+      <path d="M129.757 18.6293C129.757 17.2544 129.561 15.9917 129.179 14.8453C128.793 13.6989 128.227 12.702 127.488 11.8671C126.748 11.028 125.838 10.3801 124.766 9.91901C123.694 9.45795 122.455 9.22534 121.059 9.22534H115.549V28.0997H121.059C122.476 28.0997 123.727 27.8588 124.816 27.377C125.9 26.8951 126.806 26.2264 127.538 25.379C128.269 24.5317 128.822 23.5348 129.196 22.3842C129.57 21.2337 129.761 19.9834 129.761 18.6334M113.292 30.1018V7.22327H121.059C122.883 7.22327 124.479 7.52233 125.846 8.12462C127.209 8.7269 128.348 9.54102 129.262 10.5711C130.176 11.6013 130.862 12.81 131.323 14.1932C131.785 15.5763 132.017 17.055 132.017 18.621C132.017 20.3614 131.76 21.9315 131.244 23.3396C130.729 24.7477 129.994 25.9481 129.038 26.945C128.082 27.9419 126.931 28.7144 125.589 29.2627C124.246 29.811 122.738 30.0852 121.059 30.0852H113.292V30.1018Z" fill="#0369B2"></path>
+      <path d="M140.2 7.22327H137.943V30.0935H140.2V7.22327Z" fill="#0369B2"></path>
+      <path d="M163.786 9.22119H155.633V30.0935H153.377V9.22119H145.224V7.22327H163.786V9.22119Z" fill="#0369B2"></path>
+      <path d="M106.656 0.000125366C106.656 0.000125366 106.656 0.0998138 106.652 0.282576C106.64 0.461185 106.581 0.718713 106.444 1.00532C106.303 1.29608 106.058 1.60345 105.738 1.91913C105.409 2.23065 104.998 2.53803 104.533 2.86202C103.585 3.48507 102.401 4.11643 101.113 4.77271C99.8078 5.42484 98.4157 6.12266 97.0194 6.81632C95.6273 7.53076 94.2352 8.27842 92.9678 9.05931C91.7004 9.84436 90.5451 10.6626 89.6683 11.5225C89.2236 11.942 88.8538 12.3781 88.5712 12.8059C88.2887 13.2296 88.1183 13.6574 88.0476 14.023C87.977 14.3885 88.0185 14.6793 88.0601 14.862C88.11 15.0489 88.1515 15.1362 88.1515 15.1362C88.1515 15.1362 88.1515 15.0323 88.1557 14.8537C88.164 14.6709 88.2263 14.4134 88.3676 14.1268C88.5089 13.8361 88.7541 13.5287 89.0741 13.213C89.4023 12.9015 89.8137 12.5941 90.2792 12.2743C91.2266 11.6512 92.4109 11.0199 93.7033 10.3636C95.0082 9.71144 96.4003 9.01362 97.7882 8.31581C99.1845 7.60137 100.572 6.85371 101.84 6.06866C103.107 5.28361 104.258 4.46534 105.139 3.60553C105.584 3.186 105.958 2.74987 106.236 2.32204C106.519 1.89836 106.689 1.47053 106.76 1.10916C106.835 0.743635 106.793 0.452877 106.752 0.265961C106.702 0.0873528 106.66 -0.00402832 106.66 -0.00402832" fill="#2B3682"></path>
+      <path d="M106.656 29.3792C106.656 29.3792 106.656 29.2795 106.652 29.0967C106.64 28.9181 106.581 28.6606 106.444 28.374C106.303 28.0832 106.058 27.7759 105.738 27.4602C105.409 27.1487 104.998 26.8371 104.533 26.5173C103.585 25.8943 102.401 25.2629 101.113 24.6066C99.8078 23.9545 98.4157 23.2567 97.0194 22.563C95.6273 21.8486 94.2352 21.1009 92.9678 20.32C91.7004 19.5308 90.5451 18.7167 89.6683 17.8569C89.2236 17.4373 88.8538 17.0012 88.5712 16.5734C88.2887 16.1497 88.1183 15.7219 88.0476 15.3564C87.977 14.9908 88.0185 14.7001 88.0601 14.5173C88.11 14.3345 88.1515 14.2432 88.1515 14.2432C88.1515 14.2432 88.1515 14.347 88.1557 14.5256C88.164 14.7084 88.2263 14.9659 88.3676 15.2525C88.5089 15.5433 88.7541 15.8506 89.0741 16.1663C89.4023 16.4778 89.8137 16.7852 90.2792 17.1051C91.2266 17.7281 92.4109 18.3595 93.7033 19.0157C95.0082 19.672 96.4003 20.3657 97.7882 21.0635C99.1845 21.7779 100.572 22.5256 101.84 23.3107C103.107 24.0999 104.258 24.914 105.139 25.7738C105.584 26.1933 105.958 26.6295 106.236 27.0573C106.519 27.481 106.689 27.9088 106.76 28.2702C106.835 28.6357 106.793 28.9264 106.752 29.1134C106.702 29.2961 106.66 29.3833 106.66 29.3833" fill="#2B3682"></path>
+      <path d="M88.1472 24.864C88.1472 24.864 88.1472 24.9637 88.1472 25.1506C88.1596 25.3292 88.2178 25.5868 88.3591 25.8734C88.5004 26.1641 88.7414 26.4715 89.0614 26.7872C89.3897 27.0987 89.8011 27.4061 90.2665 27.7301C91.2098 28.3531 92.3983 28.9845 93.6907 29.6408C94.9955 30.2929 96.3876 30.9907 97.7797 31.6844C99.176 32.3988 100.564 33.1465 101.836 33.9274C103.103 34.7124 104.254 35.5307 105.135 36.3863C105.584 36.8059 105.949 37.242 106.232 37.6698C106.515 38.0935 106.685 38.5213 106.756 38.8869C106.83 39.2524 106.789 39.5431 106.743 39.7259C106.693 39.9087 106.652 40.0001 106.652 40.0001C106.652 40.0001 106.652 39.8962 106.648 39.7176C106.635 39.539 106.577 39.2773 106.436 38.9907C106.294 38.7041 106.049 38.3926 105.733 38.0769C105.405 37.7654 104.994 37.4538 104.528 37.1382C103.581 36.5151 102.397 35.8837 101.104 35.2275C99.7993 34.5753 98.4072 33.8775 97.0151 33.1797C95.623 32.4653 94.2309 31.7176 92.9593 30.9326C91.696 30.1475 90.5408 29.3292 89.6598 28.4694C89.2152 28.0499 88.8453 27.6138 88.5627 27.1901C88.2802 26.7664 88.1056 26.3344 88.0391 25.9731C87.9643 25.6075 88.0059 25.3168 88.0516 25.1299C88.1015 24.9512 88.143 24.8599 88.143 24.8599" fill="#0369B2"></path>
+      <path d="M88.1472 24.9305C88.1472 24.9305 88.1472 24.8308 88.1472 24.648C88.1596 24.4694 88.2178 24.2119 88.3591 23.9211C88.5004 23.6345 88.7414 23.323 89.0614 23.0073C89.3897 22.6958 89.8011 22.3884 90.2665 22.0644C91.2098 21.4414 92.3983 20.81 93.6907 20.1537C94.9955 19.5016 96.3876 18.8038 97.7797 18.1101C99.176 17.3957 100.564 16.648 101.836 15.8671C103.103 15.0821 104.254 14.2638 105.135 13.404C105.584 12.9845 105.949 12.5483 106.232 12.1205C106.515 11.6968 106.685 11.269 106.756 10.9035C106.83 10.5379 106.789 10.2472 106.743 10.0644C106.693 9.88166 106.652 9.79028 106.652 9.79028C106.652 9.79028 106.652 9.89413 106.648 10.0727C106.635 10.2555 106.577 10.513 106.436 10.7996C106.294 11.0904 106.049 11.3978 105.733 11.7134C105.405 12.025 104.994 12.3365 104.528 12.6522C103.581 13.2752 102.397 13.9066 101.104 14.5629C99.7993 15.215 98.4072 15.9128 97.0151 16.6106C95.623 17.3251 94.2309 18.0727 92.9593 18.8536C91.696 19.6387 90.5408 20.457 89.6598 21.3168C89.2152 21.7363 88.8453 22.1724 88.5627 22.6003C88.2802 23.0239 88.1056 23.4518 88.0391 23.8173C87.9643 24.1828 88.0059 24.4736 88.0516 24.6605C88.1015 24.8391 88.143 24.9305 88.143 24.9305" fill="#0369B2"></path>
+    </symbol>
+  </svg>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">1</span><h2>Brand Colors</h2></div>
+      <p class="section-sub">Five colors, one family. Deep Blue and Teal are locked to the logo; Ember Orange, Green, and Amber round out the palette. Specific roles get decided as we work through actual page designs.</p>
+      <div class="color-grid">
+        <div class="swatch-row"><div class="swatch" style="background:var(--color-navy);"></div><div class="swatch-info"><div class="name">Deep Blue</div><div class="hex">#2B3682</div></div><div class="role-tag">Locked</div></div>
+        <div class="swatch-row"><div class="swatch" style="background:var(--color-teal);"></div><div class="swatch-info"><div class="name">Teal</div><div class="hex">#0369B2</div></div><div class="role-tag">Locked</div></div>
+        <div class="swatch-row"><div class="swatch" style="background:var(--color-orange);"></div><div class="swatch-info"><div class="name">Ember Orange</div><div class="hex">#DA6A2A</div></div><div class="role-tag">Confirmed</div></div>
+        <div class="swatch-row"><div class="swatch" style="background:var(--color-green);"></div><div class="swatch-info"><div class="name">Green</div><div class="hex">#16A34A</div></div><div class="role-tag">Confirmed</div></div>
+        <div class="swatch-row"><div class="swatch" style="background:var(--color-amber);"></div><div class="swatch-info"><div class="name">Amber</div><div class="hex">#F59E0B</div></div><div class="role-tag">Confirmed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">2</span><h2>Neutral Palette — Cool</h2></div>
+      <p class="section-sub">The confirmed direction. Full 100–900 ramp, subtly blue-tinted.</p>
+      <div class="ramp-strip9">
+        <div class="ramp-swatch" style="background:var(--cool-100);color:#000;">100<span class="hex-lbl">F1F3F6</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-200);color:#000;">200<span class="hex-lbl">E2E5EA</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-300);color:#000;">300<span class="hex-lbl">CBD0D9</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-400);color:#000;">400<span class="hex-lbl">AAB1BE</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-500);color:#fff;">500<span class="hex-lbl">868D9E</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-600);color:#fff;">600<span class="hex-lbl">666D7E</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-700);color:#fff;">700<span class="hex-lbl">4A5161</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-800);color:#fff;">800<span class="hex-lbl">333846</span></div>
+        <div class="ramp-swatch" style="background:var(--cool-900);color:#fff;">900<span class="hex-lbl">1C1F28</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">3</span><h2>Color Tokens — Light Theme</h2></div>
+      <p class="section-sub">Primary, secondary, and tertiary text and background, built from the cool ramp above.</p>
+      <div class="token-grid">
+        <div class="token-card">
+          <p class="sub-label" style="margin-bottom:14px;">Text</p>
+          <div class="token-swatch-row"><div class="token-chip" style="background:var(--cool-900);"></div><div><div class="token-name">Primary</div><div class="token-hex">Cool 900 — #1C1F28</div></div></div>
+          <div class="token-swatch-row"><div class="token-chip" style="background:var(--cool-700);"></div><div><div class="token-name">Secondary</div><div class="token-hex">Cool 700 — #4A5161</div></div></div>
+          <div class="token-swatch-row" style="margin-bottom:0;"><div class="token-chip" style="background:var(--cool-500);"></div><div><div class="token-name">Tertiary</div><div class="token-hex">Cool 500 — #868D9E</div></div></div>
+        </div>
+        <div class="token-card">
+          <p class="sub-label" style="margin-bottom:14px;">Background</p>
+          <div class="token-swatch-row"><div class="token-chip" style="background:#FFFFFF;"></div><div><div class="token-name">Secondary (surface)</div><div class="token-hex">White — #FFFFFF</div></div></div>
+          <div class="token-swatch-row"><div class="token-chip" style="background:var(--cool-100);"></div><div><div class="token-name">Primary (canvas)</div><div class="token-hex">Cool 100 — #F1F3F6</div></div></div>
+          <div class="token-swatch-row" style="margin-bottom:0;"><div class="token-chip" style="background:var(--cool-200);"></div><div><div class="token-name">Tertiary (recessed)</div><div class="token-hex">Cool 200 — #E2E5EA</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">4</span><h2>Color Tokens — Dark Theme</h2></div>
+      <p class="section-sub">Inverse of the light tokens, plus lightened variants of every brand and accent color for sufficient contrast against dark backgrounds. Deep Blue's dark-mode variant was adjusted to a brighter, more saturated blue — the original white-mixed tint was reading too close to lavender.</p>
+      <div class="dark-panel">
+        <h3>Programmable biologics for animal health.</h3>
+        <p class="body">A protein-engineering and fermentation platform built to move from target to field faster than legacy discovery pipelines allow.</p>
+        <div class="dark-token-grid">
+          <div class="dark-token-card" style="background:var(--cool-800);"><p class="token-name" style="color:var(--cool-100);">bg-secondary</p><p class="token-hex" style="color:var(--cool-400);">Cool 800 — #333846</p></div>
+          <div class="dark-token-card" style="background:var(--cool-700);"><p class="token-name" style="color:var(--cool-100);">bg-tertiary</p><p class="token-hex" style="color:var(--cool-300);">Cool 700 — #4A5161</p></div>
+          <div class="dark-token-card" style="background:var(--cool-900);border:1px solid var(--cool-700);"><p class="token-name" style="color:var(--cool-100);">bg-primary</p><p class="token-hex" style="color:var(--cool-400);">Cool 900 — #1C1F28</p></div>
+        </div>
+        <p class="sub-label" style="color:var(--cool-400);margin-bottom:14px;">Brand &amp; accent — dark-mode variants</p>
+        <div class="dark-accent-grid">
+          <div class="dark-accent-chip" style="background:var(--color-navy-dark);"><p class="name">Deep Blue</p><p class="hex">#5A94F2</p></div>
+          <div class="dark-accent-chip" style="background:var(--color-teal-dark);"><p class="name">Teal</p><p class="hex">#74ADD5</p></div>
+          <div class="dark-accent-chip" style="background:var(--color-orange-dark);"><p class="name">Ember Orange</p><p class="hex">#EBAD8A</p></div>
+          <div class="dark-accent-chip" style="background:var(--color-green-dark);"><p class="name">Green</p><p class="hex">#7FCC9B</p></div>
+          <div class="dark-accent-chip" style="background:var(--color-amber-dark);"><p class="name">Amber</p><p class="hex">#FACA79</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">5</span><h2>Typography — PT Sans</h2></div>
+      <p class="section-sub">Headings and body both in PT Sans. Pull quotes and captions use PT Sans Italic. Fraunces is reserved separately — see open questions.</p>
+
+      <div class="subsection">
+        <p class="sub-label">5.1 — Type scale</p>
+        <div class="scale-row"><div class="scale-meta"><span class="role">Display / H1</span>90px</div><p class="scale-sample" style="font-size:90px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">H2</span>67px</div><p class="scale-sample" style="font-size:67px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">H3</span>51px</div><p class="scale-sample" style="font-size:51px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">H4</span>38px</div><p class="scale-sample" style="font-size:38px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">H5</span>28px</div><p class="scale-sample" style="font-size:28px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">H6 / Body Large</span>21px</div><p class="scale-sample" style="font-size:21px;">Engineered biology</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">Body</span>16px</div><p class="scale-sample body-weight" style="font-size:16px;">Engineered biology for animal health.</p></div>
+        <div class="scale-row"><div class="scale-meta"><span class="role">Caption</span>12px</div><p class="scale-sample body-weight" style="font-size:12px;color:var(--text-tertiary);">Engineered biology for animal health.</p></div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">5.2 — Combo</p>
+        <div class="combo-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <p class="combo-eyebrow">Platform</p>
+          <p class="combo-h">Programmable biologics for animal health.</p>
+          <p class="combo-body">A protein-engineering and fermentation platform built to move from target to field faster than legacy discovery pipelines allow.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">5.3 — Pull quotes</p>
+        <p class="sub-desc">PT Sans Italic, confirmed. Fraunces shown alongside as the reserved alternative — open question below.</p>
+        <div class="pair-grid">
+          <div class="option-card">
+            <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+            <p class="option-name">PT Sans Italic — confirmed</p>
+            <div class="q-sample"><p>"We're building the infrastructure to design a new therapeutic every time resistance shifts."</p><cite>Sample copy for layout</cite></div>
+          </div>
+          <div class="option-card">
+            <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+            <p class="option-name">Fraunces Italic — reserved, unassigned</p>
+            <div class="q-sample fraunces"><p>"We're building the infrastructure to design a new therapeutic every time resistance shifts."</p><cite>Sample copy for layout</cite></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">5.4 — Paragraphs</p>
+        <div class="para-grid">
+          <div class="para-card"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="option-name">Lead — 19px / 500</p><p class="para-lead">A protein-engineering and fermentation platform built to move from target to field faster than legacy discovery pipelines allow.</p></div>
+          <div class="para-card"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="option-name">Standard — 16px / 400</p><p class="para-standard">BiomEdit's platform pairs computational protein design with a high-throughput fermentation pipeline, compressing the distance between target identification and a field-ready biologic.</p></div>
+        </div>
+        <div class="para-card" style="margin-top:20px;"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="option-name">Dense / small — 14px / 400</p><p class="para-dense">Every strain that enters the pipeline carries a manufacturing plan alongside its efficacy data, so promising science doesn't stall at scale-up.</p></div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">5.5 — Captions</p>
+        <div class="pair-grid">
+          <div class="option-card">
+            <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+            <p class="option-name">PT Sans Italic — confirmed</p>
+            <div class="caption-demo"><img class="caption-swatch" src="https://images.unsplash.com/photo-1748261348213-62f4c399bb72?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Technician using a pipette in a lab"><p class="caption-text">Fig. 1 — Strain engineering pipeline, generation 4.</p></div>
+          </div>
+          <div class="option-card">
+            <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+            <p class="option-name">Fraunces Italic — reserved, unassigned</p>
+            <div class="caption-demo"><img class="caption-swatch" src="https://images.unsplash.com/photo-1748261348213-62f4c399bb72?fm=jpg&amp;q=70&amp;w=800&amp;auto=format&amp;fit=crop" alt="Technician using a pipette in a lab"><p class="caption-text fraunces">Fig. 1 — Strain engineering pipeline, generation 4.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" style="margin-bottom:0;">
+        <p class="sub-label">5.6 — Eyebrows</p>
+        <div class="atom-row">
+          <div class="atom-card"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="eyebrow-demo">Platform</p></div>
+          <div class="atom-card"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="eyebrow-demo">Series C</p></div>
+          <div class="atom-card"><svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="eyebrow-demo">Case Study</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">6</span><h2>Buttons &amp; Links</h2></div>
+      <p class="section-sub">Deep Blue is designated as the link color. Filled and outline variants are shown for all five brand colors — specific usage still to be decided as we work through actual pages.</p>
+      <div class="ui-grid">
+        <div class="ui-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <div><p class="ui-card-name">Deep Blue</p><p class="ui-card-hex">#2B3682 — designated link color</p></div>
+          <button class="ui-btn-filled" style="background:var(--color-navy);">Request the deck</button>
+          <button class="ui-btn-outline" style="border:1.5px solid var(--color-navy);color:var(--color-navy);">See the platform</button>
+          <a class="ui-link" style="color:var(--color-navy);">Read the case study</a>
+        </div>
+        <div class="ui-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <div><p class="ui-card-name">Teal</p><p class="ui-card-hex">#0369B2</p></div>
+          <button class="ui-btn-filled" style="background:var(--color-teal);">Request the deck</button>
+          <button class="ui-btn-outline" style="border:1.5px solid var(--color-teal);color:var(--color-teal);">See the platform</button>
+        </div>
+        <div class="ui-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <div><p class="ui-card-name">Ember Orange</p><p class="ui-card-hex">#DA6A2A</p></div>
+          <button class="ui-btn-filled" style="background:var(--color-orange);">Request the deck</button>
+          <button class="ui-btn-outline" style="border:1.5px solid var(--color-orange);color:var(--color-orange);">See the platform</button>
+        </div>
+        <div class="ui-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <div><p class="ui-card-name">Green</p><p class="ui-card-hex">#16A34A</p></div>
+          <button class="ui-btn-filled" style="background:var(--color-green);">Request the deck</button>
+          <button class="ui-btn-outline" style="border:1.5px solid var(--color-green);color:var(--color-green);">See the platform</button>
+        </div>
+        <div class="ui-card">
+          <svg class="mini-logo" width="78" height="17" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg>
+          <div><p class="ui-card-name">Amber</p><p class="ui-card-hex">#F59E0B</p></div>
+          <button class="ui-btn-filled" style="background:var(--color-amber);">Request the deck</button>
+          <button class="ui-btn-outline" style="border:1.5px solid var(--color-amber);color:var(--color-amber);">See the platform</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">7</span><h2>Pipeline Timeline</h2></div>
+      <p class="section-sub">Cool neutrals, PT Sans, Option 1 card style (left border, no background tint). Two color variants for Sustainability below — Orange (confirmed baseline) and Green (thematically closer, for the client to weigh in on). Product codes and stage placement are illustrative.</p>
+
+      <div class="subsection">
+        <p class="sub-label">7.1 — Sustainability in Ember Orange</p>
+      <div class="pipeline-example">
+        <input class="tab-input" type="radio" name="tabs-pt" id="pt-all" checked>
+        <input class="tab-input" type="radio" name="tabs-pt" id="pt-found">
+        <input class="tab-input" type="radio" name="tabs-pt" id="pt-invest">
+        <input class="tab-input" type="radio" name="tabs-pt" id="pt-break">
+        <div class="pipeline-header">
+          <div><svg class="pipeline-logo" style="width:78px;height:17px;" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="pipeline-title">Our Pipeline</p></div>
+          <div class="pipeline-tabs">
+            <label class="pipeline-tab" for="pt-all">All</label>
+            <label class="pipeline-tab" for="pt-found">Infectious Disease</label>
+            <label class="pipeline-tab" for="pt-invest">Chronic Disease</label>
+            <label class="pipeline-tab" for="pt-break">Sustainability</label>
+          </div>
+        </div>
+        <div class="pipeline-columns">
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 1</p>
+            <p class="pipeline-stage-head">Discovery / Design</p>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-117</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-17</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>A next-generation approach to metabolic health, building on early signals from the platform's foundational research.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 2</p>
+            <p class="pipeline-stage-head">Candidate Optimization</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-07</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-102</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-106</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-105</span><span class="focus">Methane Reduction</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 3</p>
+            <p class="pipeline-stage-head">Proof of Concept</p>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 4</p>
+            <p class="pipeline-stage-head">Pivotal Studies</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-01</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-101</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 5</p>
+            <p class="pipeline-stage-head">Regulatory Approval / Launch Readiness</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-02</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 6</p>
+            <p class="pipeline-stage-head">Commercial</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="subsection" style="margin-bottom:0;">
+        <p class="sub-label">7.2 — Sustainability in Green</p>
+      <div class="pipeline-example sustain-green">
+        <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-all" checked>
+        <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-found">
+        <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-invest">
+        <input class="tab-input" type="radio" name="tabs-pt2" id="pt2-break">
+        <div class="pipeline-header">
+          <div><svg class="pipeline-logo" style="width:78px;height:17px;" viewBox="0 0 164 40"><use href="#biomedit-logo" xlink:href="#biomedit-logo"></use></svg><p class="pipeline-title">Our Pipeline</p></div>
+          <div class="pipeline-tabs">
+            <label class="pipeline-tab" for="pt2-all">All</label>
+            <label class="pipeline-tab" for="pt2-found">Infectious Disease</label>
+            <label class="pipeline-tab" for="pt2-invest">Chronic Disease</label>
+            <label class="pipeline-tab" for="pt2-break">Sustainability</label>
+          </div>
+        </div>
+        <div class="pipeline-columns">
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 1</p>
+            <p class="pipeline-stage-head">Discovery / Design</p>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-117</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Exploratory research into non-antibiotic pathways for resistant-pathogen control, building on lessons from the platform's lead antimicrobial programs.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-17</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>A next-generation approach to metabolic health, building on early signals from the platform's foundational research.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 2</p>
+            <p class="pipeline-stage-head">Candidate Optimization</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-07</span><span class="focus">AMR</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early trial data testing whether the platform's approach can reduce reliance on antibiotics for resistant-pathogen control.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-102</span><span class="focus">Metabolic Disease</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Initial trials evaluating impact on metabolic health markers tied to feed conversion efficiency in production animals.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-106</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Advancing through pivotal studies to confirm gut health outcomes at the scale required for commercial production settings.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-breakthrough"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-105</span><span class="focus">Methane Reduction</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Tuning a microbiome-based approach to enteric methane reduction in cattle, balancing emissions impact against feed efficiency.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 3</p>
+            <p class="pipeline-stage-head">Proof of Concept</p>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 4</p>
+            <p class="pipeline-stage-head">Pivotal Studies</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-01</span><span class="focus">Gut Health</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Refining strain performance to improve gut barrier integrity and nutrient absorption ahead of formal proof-of-concept trials.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+            <details class="pipeline-card cat-investigational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-101</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>The platform's most advanced candidate, progressing through final regulatory review ahead of commercial launch.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 5</p>
+            <p class="pipeline-stage-head">Regulatory Approval / Launch Readiness</p>
+            <details class="pipeline-card cat-foundational"><summary><div class="card-top-row"><span class="card-main"><span class="code">BE-02</span><span class="focus">Pathogen Protection</span></span><svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></summary><div class="card-detail"><p>Early-stage work identifying microbial candidates that can neutralize pathogen-associated toxins before symptoms take hold in the herd or flock.</p><a href="#" class="card-detail-link">Learn more &rarr;</a></div></details>
+          </div>
+          <div class="pipeline-col">
+            <p class="stage-eyebrow">Stage 6</p>
+            <p class="pipeline-stage-head">Commercial</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">8</span><h2>Utility Text Styles</h2></div>
+      <p class="section-sub">The smaller, functional text patterns already at work in the Pipeline — generalized for tables, forms, and anywhere else the site needs structured UI text rather than editorial content.</p>
+
+      <div class="subsection">
+        <p class="sub-label">8.1 — Overline / Eyebrow</p>
+        <p class="sub-desc">Same pattern as the Pipeline's stage labels. Sits above a heading or section to give it context.</p>
+        <div class="util-card">
+          <p class="util-overline">Platform Overview</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">8.2 — Table styles</p>
+        <p class="sub-desc">Header and cell text pulled directly from the Pipeline's column-header treatment.</p>
+        <div class="util-card">
+          <table class="util-table">
+            <thead>
+              <tr><th>Code</th><th>Focus</th><th>Category</th><th>Stage</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>BE-101</td><td>Pathogen Protection</td><td>Chronic Disease</td><td>Regulatory Approval</td></tr>
+              <tr><td>BE-07</td><td>AMR</td><td>Infectious Disease</td><td>Candidate Optimization</td></tr>
+              <tr><td>BE-105</td><td>Methane Reduction</td><td>Sustainability</td><td>Candidate Optimization</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">8.3 — Data label &amp; meta pairs</p>
+        <p class="sub-desc">The same bold-label-plus-muted-caption pattern as each Pipeline card's code and focus area — useful anywhere a key value needs a quiet secondary line under it.</p>
+        <div class="util-card">
+          <div class="data-pair-row">
+            <div class="data-pair"><span class="util-data-label">BE-101</span><span class="util-meta">Pathogen Protection</span></div>
+            <div class="data-pair"><span class="util-data-label">6</span><span class="util-meta">Active Programs</span></div>
+            <div class="data-pair"><span class="util-data-label">3</span><span class="util-meta">Regulatory Pathways</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">8.4 — Badges &amp; tags</p>
+        <p class="sub-desc">Same shape as the Pipeline's filter tabs, in a non-interactive form — for status flags, category tags, or table-cell labels.</p>
+        <div class="util-card">
+          <div class="badge-row">
+            <span class="util-badge" style="background:var(--bg-tertiary);color:var(--text-secondary);">Draft</span>
+            <span class="util-badge" style="background:rgba(3,105,178,0.12);color:var(--color-teal);">Infectious Disease</span>
+            <span class="util-badge" style="background:rgba(43,54,130,0.12);color:var(--color-navy);">Chronic Disease</span>
+            <span class="util-badge" style="background:rgba(218,106,42,0.12);color:var(--color-orange);">Sustainability</span>
+            <span class="util-badge" style="background:rgba(22,163,74,0.12);color:var(--color-green);">Active</span>
+            <span class="util-badge" style="background:rgba(245,158,11,0.12);color:var(--color-amber);">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <p class="sub-label">8.5 — Form styles</p>
+        <p class="sub-desc">Label, input, helper text, and an error state. No dedicated error/danger color exists in the palette yet — Amber is standing in here, worth a real decision once forms are actually being built.</p>
+        <div class="util-card">
+          <div class="form-demo">
+            <div class="form-group">
+              <label class="form-label">Work email</label>
+              <input class="form-input" type="text" placeholder="you@company.com">
+              <p class="form-helper">We'll only use this to send the deck.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company name</label>
+              <input class="form-input has-error" type="text" value="Acme">
+              <p class="form-error-text">Please enter your full company name.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label form-disabled-label">Referral code</label>
+              <input class="form-input" type="text" placeholder="Optional" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" style="margin-bottom:0;">
+        <p class="sub-label">8.6 — Meta / timestamp text</p>
+        <p class="sub-desc">Quiet, small, out of the way — publish dates, last-updated stamps, byline-style detail.</p>
+        <div class="util-card">
+          <div class="meta-row">
+            <span class="util-timestamp">Updated July 14, 2026</span>
+            <span class="util-timestamp">6 min read</span>
+            <span class="util-timestamp">BiomEdit Research Team</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:none;background:var(--bg-primary);">
+    <div class="wrap">
+      <div class="open-q">
+        <h3>Open decisions before this is final</h3>
+        <ol>
+          <li><strong>Fraunces' role.</strong> Intentionally left undecided for now — no assigned use in the system as it stands.</li>
+          <li><strong>Sustainability color.</strong> Shown both ways above — Ember Orange (7.1) or Green (7.2). Which do you want to move forward with?</li>
+          <li><strong>Dark theme scope.</strong> Tokens are defined, but still undecided whether dark mode extends to the Pipeline and content cards, or stays scoped to the marketing site's UI.</li>
+          <li><strong>Specific color roles.</strong> All five brand colors now have filled/outline button treatments, and Deep Blue is set as the link color — but which color goes where on an actual page (category tags, status indicators, CTAs, data viz, etc.) is still to be worked out as real pages get designed.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+
+    *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'PT Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+
+  .meta-bar{background:#000;color:#fff;padding:1rem 40px;font-size:13px;display:flex;justify-content:space-between;align-items:center;}
+  .meta-bar span{opacity:0.55;}
+
+  section{padding:4.5rem 40px;border-bottom:1px solid var(--border-color);background:var(--bg-primary);}
+  .wrap{max-width:1180px;margin:0 auto;}
+
+  .section-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#000;color:#fff;font-size:12px;font-weight:700;margin-right:12px;flex-shrink:0;}
+  .section-head{display:flex;align-items:center;margin-bottom:0.5rem;}
+  .section-head h2{font-size:26px;font-weight:700;margin:0;}
+  .section-sub{font-size:14px;color:var(--text-secondary);margin:0 0 2.5rem;max-width:680px;padding-left:40px;}
+
+  .subsection{margin-bottom:3.5rem;}
+  .subsection:last-child{margin-bottom:0;}
+  .sub-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--color-teal);margin:0 0 0.5rem;}
+  .sub-desc{font-size:14px;color:var(--text-secondary);margin:0 0 1.5rem;max-width:620px;}
+
+  .logo-strip{display:flex;align-items:center;gap:24px;padding:2rem 40px;border-bottom:1px solid var(--border-color);background:var(--bg-secondary);}
+  .logo-strip svg{height:28px;width:auto;}
+  .logo-strip span{font-size:13px;color:var(--text-secondary);}
+
+  /* swatches */
+  .swatch-row{display:flex;align-items:center;gap:18px;border:1px solid var(--border-color);border-radius:4px;padding:1rem 16px;background:var(--bg-secondary);}
+  .swatch{width:56px;height:56px;border-radius:4px;flex-shrink:0;}
+  .swatch-info .name{font-weight:700;font-size:14px;}
+  .swatch-info .hex{font-size:13px;color:var(--text-tertiary);}
+  .role-tag{margin-left:auto;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary);border:1px solid var(--border-color);padding:0.25rem 8px;border-radius:20px;}
+  .color-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+  /* neutral ramp */
+  .ramp-strip9{display:grid;grid-template-columns:repeat(9,1fr);border-radius:6px;overflow:hidden;border:1px solid var(--border-color);}
+  .ramp-swatch{aspect-ratio:0.9;display:flex;align-items:flex-end;padding:0.5rem 8px;font-size:10px;font-weight:500;}
+  .ramp-swatch .hex-lbl{display:block;opacity:0.7;font-size:9px;}
+
+  /* token demo cards */
+  .token-card{border:1px solid var(--border-color);border-radius:6px;padding:1.5rem 24px;}
+  .token-swatch-row{display:flex;align-items:center;gap:14px;margin-bottom:0.5rem;}
+  .token-chip{width:40px;height:40px;border-radius:4px;flex-shrink:0;border:1px solid rgba(0,0,0,0.08);}
+  .token-name{font-size:13px;font-weight:700;}
+  .token-hex{font-size:12px;color:var(--text-tertiary);}
+  .token-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+
+  /* dark theme demo panel */
+  .dark-panel{background:var(--cool-900);border-radius:8px;padding:2.5rem 40px;}
+  .dark-panel h3{color:var(--cool-100);font-size:20px;margin:0 0 0.5rem;}
+  .dark-panel p.body{color:var(--cool-300);font-size:14px;line-height:1.7;margin:0 0 1.5rem;max-width:480px;}
+  .dark-token-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:2rem;}
+  .dark-token-card{border-radius:6px;padding:1rem 18px;}
+  .dark-accent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+  .dark-accent-chip{border-radius:6px;padding:1rem 14px;}
+  .dark-accent-chip .name{font-size:12px;font-weight:700;color:var(--cool-900);}
+  .dark-accent-chip .hex{font-size:11px;color:var(--cool-700);}
+
+  /* type scale */
+  .scale-row{display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--border-color);padding:1rem 0;}
+  .scale-row:first-child{padding-top:0;}
+  .scale-meta{width:140px;flex-shrink:0;font-size:12px;color:var(--text-tertiary);line-height:1.5;}
+  .scale-meta .role{font-weight:700;color:var(--text-primary);display:block;font-size:13px;}
+  .scale-sample{color:var(--text-primary);margin:0;font-weight:700;}
+  .scale-sample.body-weight{font-weight:400;}
+
+  /* content cards */
+  .combo-card,.option-card,.para-card,.atom-card,.ui-card{border:1px solid var(--border-color);border-radius:6px;background:var(--bg-secondary);}
+  .combo-card{padding:2.5rem 36px;max-width:640px;}
+  .combo-eyebrow{font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-tertiary);margin:0 0 1rem;}
+  .combo-h{font-weight:700;font-size:34px;line-height:1.15;color:var(--text-primary);margin:0 0 1rem;}
+  .combo-body{font-size:16px;line-height:1.7;color:var(--text-primary);margin:0;}
+
+  .pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .option-card{padding:1.5rem 24px;}
+  .option-name{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);font-weight:700;margin-bottom:1rem;}
+  .q-sample{border-left:3px solid var(--color-teal);padding-left:16px;}
+  .q-sample p{font-size:19px;line-height:1.4;color:var(--text-primary);margin:0 0 0.5rem;font-style:italic;}
+  .q-sample cite{font-size:11px;color:var(--text-tertiary);font-style:normal;}
+  .q-sample.fraunces p{font-family:'Fraunces',serif;font-style:italic;font-weight:500;}
+
+  .para-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .para-card{padding:2rem 28px;}
+  .para-lead{font-weight:500;font-size:19px;line-height:1.55;color:var(--text-primary);margin:0;}
+  .para-standard{font-size:16px;line-height:1.75;color:var(--text-primary);margin:0;}
+  .para-dense{font-size:14px;line-height:1.6;color:var(--text-primary);margin:0;}
+
+  .caption-demo{display:flex;flex-direction:column;gap:0.5rem;}
+  .caption-swatch{width:100%;height:110px;border-radius:4px;object-fit:cover;display:block;}
+  .caption-text{font-size:13px;color:var(--text-primary);font-style:italic;}
+  .caption-text.fraunces{font-family:'Fraunces',serif;font-style:italic;font-weight:500;}
+
+  .atom-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .atom-card{padding:1.5rem 26px;}
+  .eyebrow-demo{font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-primary);}
+
+  .mini-logo{width:70px;height:15px;display:block;margin-bottom:1rem;flex-shrink:0;}
+
+  /* buttons/links */
+  .ui-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .ui-card{padding:2rem 28px;display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start;}
+  .ui-card-name{font-size:13px;font-weight:700;margin:0 0 -0.25rem;}
+  .ui-card-hex{font-size:12px;color:var(--text-tertiary);margin:0 0 0.5rem;}
+  .ui-btn-filled{border:none;border-radius:4px;padding:1rem 24px;font-size:14px;font-weight:700;color:#fff;cursor:default;}
+  .ui-btn-outline{background:var(--bg-secondary);border-radius:4px;padding:0.5rem 23px;font-size:14px;font-weight:700;cursor:default;}
+  .ui-link{font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+
+  /* pipeline */
+  .pipeline-example{border:1px solid var(--border-color);border-radius:8px;overflow:hidden;background:var(--bg-secondary);}
+  .pipeline-header{padding:1.5rem 24px 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--bg-tertiary);}
+  .pipeline-title{font-weight:700;font-size:17px;margin:0;color:var(--text-primary);}
+  .pipeline-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+  input.tab-input{display:none;}
+  .pipeline-tab{padding:0.5rem 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;color:var(--text-secondary);background:var(--bg-secondary);border:1px solid var(--border-color);user-select:none;}
+  .pipeline-tab[for$="-found"]{color:var(--color-teal);border-color:var(--color-teal);}
+  .pipeline-tab[for$="-invest"]{color:var(--color-navy);border-color:var(--color-navy);}
+  .pipeline-tab[for$="-break"]{color:var(--color-orange);border-color:var(--color-orange);}
+  .pipeline-columns{display:flex;gap:1px;background:var(--border-color);overflow-x:auto;}
+  .pipeline-col{background:var(--bg-tertiary);padding:1rem 14px;min-width:170px;flex:1 0 170px;display:flex;flex-direction:column;gap:0.5rem;}
+  .stage-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);margin:0;}
+  .pipeline-stage-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;color:var(--text-secondary);margin:0.25rem 0 0.25rem;line-height:1.3;min-height:28px;}
+  .pipeline-card{background:var(--bg-secondary);border-radius:6px;border-left:3px solid transparent;overflow:hidden;}
+  .pipeline-card summary{list-style:none;cursor:pointer;padding:0.5rem 12px;display:flex;flex-direction:column;gap:0.5rem;}
+  .pipeline-card summary::-webkit-details-marker{display:none;}
+  .pipeline-card summary::marker{content:"";}
+  .card-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%;}
+  .card-main{display:flex;flex-direction:column;}
+  .pipeline-card .code{font-weight:700;font-size:13px;color:var(--text-primary);display:block;}
+  .pipeline-card .focus{font-size:11px;color:var(--text-tertiary);margin-top:0.25rem;display:block;}
+  .pipeline-card .chevron{flex-shrink:0;margin-top:0.25rem;color:var(--text-tertiary);transition:transform 0.18s ease;}
+  .pipeline-card[open] .chevron{transform:rotate(180deg);}
+  .card-detail{padding:0 12px 1rem;}
+  .card-detail p{font-size:12px;line-height:1.6;color:var(--text-secondary);margin:0 0 0.5rem;}
+  .card-detail-link{font-size:12px;font-weight:700;color:var(--text-primary);text-decoration:underline;text-underline-offset:2px;}
+  .cat-foundational{border-left-color:var(--color-teal);}
+  .cat-investigational{border-left-color:var(--color-navy);}
+  .cat-breakthrough{border-left-color:var(--color-orange);}
+
+  .pipeline-example:has(#pt-found:checked) .pipeline-card:not(.cat-foundational){display:none;}
+  .pipeline-example:has(#pt-invest:checked) .pipeline-card:not(.cat-investigational){display:none;}
+  .pipeline-example:has(#pt-break:checked) .pipeline-card:not(.cat-breakthrough){display:none;}
+  .pipeline-example:has(#pt-all:checked) label[for="pt-all"]{background:#000;color:#fff;border-color:#000;}
+  .pipeline-example:has(#pt-found:checked) label[for="pt-found"]{background:var(--color-teal);color:#fff;}
+  .pipeline-example:has(#pt-invest:checked) label[for="pt-invest"]{background:var(--color-navy);color:#fff;}
+  .pipeline-example:has(#pt-break:checked) label[for="pt-break"]{background:var(--color-orange);color:#fff;}
+
+  /* second pipeline: sustainability shown in green instead of orange */
+  .sustain-green .cat-breakthrough{border-left-color:var(--color-green);}
+  .sustain-green .pipeline-tab[for$="-break"]{color:var(--color-green);border-color:var(--color-green);}
+  .pipeline-example:has(#pt2-found:checked) .pipeline-card:not(.cat-foundational){display:none;}
+  .pipeline-example:has(#pt2-invest:checked) .pipeline-card:not(.cat-investigational){display:none;}
+  .pipeline-example:has(#pt2-break:checked) .pipeline-card:not(.cat-breakthrough){display:none;}
+  .pipeline-example:has(#pt2-all:checked) label[for="pt2-all"]{background:#000;color:#fff;border-color:#000;}
+  .pipeline-example:has(#pt2-found:checked) label[for="pt2-found"]{background:var(--color-teal);color:#fff;}
+  .pipeline-example:has(#pt2-invest:checked) label[for="pt2-invest"]{background:var(--color-navy);color:#fff;}
+  .pipeline-example:has(#pt2-break:checked) label[for="pt2-break"]{background:var(--color-green);color:#fff;}
+
+  /* open questions callout */
+  .open-q{background:#FFF7E6;border:1px solid var(--color-amber);border-radius:8px;padding:2rem 32px;}
+  .open-q h3{margin:0 0 1rem;font-size:16px;color:#7A4A00;}
+  .open-q ol{margin:0;padding-left:20px;color:#7A4A00;font-size:14px;line-height:1.8;}
+
+  /* utility text styles */
+  .util-card{border:1px solid var(--border-color);border-radius:6px;padding:1.5rem 28px;background:var(--bg-secondary);}
+  .util-overline{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-tertiary);margin:0;}
+
+  .util-table{width:100%;border-collapse:collapse;}
+  .util-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-tertiary);padding:0.5rem 12px;border-bottom:1px solid var(--border-color);}
+  .util-table td{font-size:14px;color:var(--text-primary);padding:1rem 12px;border-bottom:1px solid var(--border-color);}
+  .util-table tr:last-child td{border-bottom:none;}
+
+  .data-pair-row{display:flex;gap:32px;flex-wrap:wrap;}
+  .data-pair{display:flex;flex-direction:column;gap:0.25rem;}
+  .util-data-label{font-weight:700;font-size:14px;color:var(--text-primary);}
+  .util-meta{font-size:11px;color:var(--text-tertiary);}
+
+  .badge-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .util-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:0.5rem 14px;border-radius:20px;}
+
+  .form-demo{display:flex;gap:32px;flex-wrap:wrap;}
+  .form-group{display:flex;flex-direction:column;gap:0.5rem;max-width:280px;flex:1 1 260px;}
+  .form-label{font-size:13px;font-weight:700;color:var(--text-primary);}
+  .form-input{font-family:'PT Sans',sans-serif;font-size:14px;padding:0.5rem 12px;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-secondary);color:var(--text-primary);}
+  .form-input::placeholder{color:var(--text-tertiary);}
+  .form-helper{font-size:12px;color:var(--text-tertiary);margin:0;}
+  .form-input.has-error{border-color:var(--color-amber);}
+  .form-error-text{font-size:12px;color:var(--color-amber);font-weight:600;margin:0;}
+  .form-input:disabled{opacity:0.5;cursor:not-allowed;}
+  .form-disabled-label{opacity:0.5;}
+
+  .meta-row{display:flex;gap:28px;flex-wrap:wrap;align-items:baseline;}
+  .util-timestamp{font-size:12px;color:var(--text-tertiary);}
+
+  @media (max-width:900px){
+    .color-grid,.token-grid,.pair-grid,.para-grid,.ui-grid{grid-template-columns:1fr;}
+    .dark-token-grid,.dark-accent-grid{grid-template-columns:repeat(2,1fr);}
+    .ramp-strip9{grid-template-columns:repeat(5,1fr);}
+    .scale-row{flex-direction:column;gap:0.5rem;}
+    .scale-meta{width:auto;}
+    .section-sub{padding-left:0;}
+  }
+
+  .sg-intro { max-width: 900px; margin: 0 auto; padding: 4rem 40px 0; }
+  .sg-intro .overline { margin-bottom: 1rem; }
+  .sg-intro h1 { font-size: 32px; margin: 0 0 1rem; }
+  .sg-intro p:last-child { font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 640px; }
+</style>
