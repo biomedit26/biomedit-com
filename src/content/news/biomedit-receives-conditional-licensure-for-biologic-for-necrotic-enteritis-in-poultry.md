@@ -1,0 +1,15 @@
+---
+title: "BiomEdit receives conditional licensure for biologic for necrotic enteritis in poultry"
+date: 2026-10-05
+category: in-the-news
+image: "/images/umar-kashif-V8hNNFPV27M-unsplash.jpg"
+imageAlt: "Close-up of a shaggy brown Highland cow"
+lead: "Vet-Advantage includes the USDA conditional licensure of CPerf LLV as an item in its Weekly Livestock-Equine News roundup for October 5, 2026."
+source: "Vet-Advantage (Weekly Livestock-Equine News)"
+metaTitle: "Vet-Advantage: BiomEdit Receives Conditional Licensure for CPerf LLV"
+metaDescription: "Vet-Advantage's weekly livestock news roundup reports BiomEdit's USDA conditional licensure for a necrotic enteritis biologic in poultry."
+---
+
+Vet-Advantage includes the USDA conditional licensure of CPerf LLV as an item in its Weekly Livestock-Equine News roundup for October 5, 2026.
+
+*Source: [Vet-Advantage (Weekly Livestock-Equine News)](https://vet-advantage.com/live-equine-news/weekly-livestock-equine-news-october-5-2026/)*
