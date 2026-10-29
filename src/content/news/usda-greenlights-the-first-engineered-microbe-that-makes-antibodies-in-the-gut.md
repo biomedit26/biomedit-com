@@ -4,6 +4,7 @@ date: 2026-10-22
 category: in-the-news
 draft: false
 secondaryCategory: ''
+image: /images/85gb-photo-9Ltj6ikhBPY-unsplash.jpg
 imageAlt: Two young chicks held in cupped hands
 lead: >-
   SynBioBeta analysis (by Aaron Blotnick) of the USDA conditional license for

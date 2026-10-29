@@ -6,6 +6,7 @@ date: 2026-10-06
 category: in-the-news
 draft: false
 secondaryCategory: ''
+image: /images/andrey-tikhonovskiy-0v2HLgooiZc-unsplash.jpg
 imageAlt: Close-up of three white broiler chickens
 lead: >-
   dvm360 reports the USDA conditional licensure of CPerf LLV (formerly BE-101),

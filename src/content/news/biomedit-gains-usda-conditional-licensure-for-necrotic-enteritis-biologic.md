@@ -4,6 +4,7 @@ date: 2026-10-13
 category: in-the-news
 draft: false
 secondaryCategory: ''
+image: /images/chicken-direct-blur.jpg
 imageAlt: Brown hen looking toward the camera inside a poultry house
 lead: >-
   Feed & Additive reports that USDA's Center for Veterinary Biologics granted

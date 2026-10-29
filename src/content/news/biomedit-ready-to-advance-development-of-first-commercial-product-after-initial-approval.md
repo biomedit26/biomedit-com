@@ -6,6 +6,7 @@ date: 2026-10-15
 category: in-the-news
 draft: false
 secondaryCategory: ''
+image: /images/news/inside-indiana-business-biomedit-lab.jpg
 imageAlt: >-
   A BiomEdit scientist in a lab coat and safety glasses working at a biosafety
   cabinet in the lab

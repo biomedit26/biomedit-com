@@ -6,6 +6,7 @@ date: 2026-10-05
 category: in-the-news
 draft: false
 secondaryCategory: ''
+image: /images/selective-focus-shot-of-indoors-chicken-farm-chic-2023-11-27-05-20-42-utc.png
 imageAlt: White broiler chickens inside a commercial poultry house
 lead: >-
   Vet-Advantage includes the USDA conditional licensure of CPerf LLV as an item
