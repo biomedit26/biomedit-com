@@ -32,6 +32,9 @@ interface Candidate {
   mechanism: string;
   description: string;
   stage: number; // 1-indexed, matches `stages` position
+  // Region tag shown after the name (e.g. "Brazil", "ROW") when the same
+  // product sits at different stages in different regions. Omit for US.
+  region?: string;
   // Full original stage/status text (e.g. "Candidate Optimization / In Vivo
   // Study") — shown in the expanded detail; independent of `stage`, which
   // only controls which column the card lands in.
@@ -44,12 +47,14 @@ interface Props {
   stages: Stage[];
   candidates: Candidate[];
   footnote?: string;
+  // Small key under the grid, e.g. explaining the region tags.
+  legend?: string;
   idPrefix?: string;
   // Footnote marker shown after the "Our pipeline" label.
   labelFootnote?: number;
 }
 
-const { stages, candidates, footnote, idPrefix = 'pt', labelFootnote } = Astro.props;
+const { stages, candidates, footnote, legend, idPrefix = 'pt', labelFootnote } = Astro.props;
 
 const categories = [
   { key: 'infectious-disease', label: 'Infectious Disease', color: 'var(--color-teal)' },
@@ -122,7 +127,7 @@ const speciesList = [
             <details class={`candidate-card cat-${c.category} species-${c.speciesKey}`}>
               <summary>
                 <span class="candidate-main">
-                  <span class="code">{c.id}</span>
+                  <span class="code">{c.id}{c.region && <> <span class="region">{c.region}</span></>}</span>
                   <span class="species-label">{c.species}</span>
                 </span>
                 <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -139,6 +144,7 @@ const speciesList = [
       ))}
     </div>
 
+    {legend && <p class="legend">{legend}</p>}
     {footnote && (
       <div class="footnote-block">
         <p class="footnote-label">Species Coverage</p>
@@ -164,6 +170,8 @@ const speciesList = [
 </script>
 
 <style>
+  .region { color: var(--text-primary); white-space: nowrap; }
+  .legend { font-size: 12px; line-height: 1.5; color: var(--text-secondary); margin: 0 0 0.75rem; padding: 1.25rem 1.5rem 0; }
   .filter-input { position: absolute; opacity: 0; pointer-events: none; }
 
   .tracker-panel { background: var(--cool-200); border-radius: 8px; }

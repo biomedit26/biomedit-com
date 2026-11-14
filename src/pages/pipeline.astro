@@ -13,7 +13,7 @@ const stages = [
   { eyebrow: 'Stage 1', label: 'Discovery / Design' },
   { eyebrow: 'Stage 2', label: 'Candidate Optimization' },
   { eyebrow: 'Stage 3', label: 'In Vivo Proof of Concept' },
-  { eyebrow: 'Stage 4', label: 'Pivotal Studies' },
+  { eyebrow: 'Stage 4', label: 'Pivotal Studies / Scale up' },
   { eyebrow: 'Stage 5', label: 'Regulatory Approval / Launch Readiness' },
   { eyebrow: 'Stage 6', label: 'Commercial' },
 ];
@@ -21,6 +21,9 @@ const stages = [
 // Species coverage note: the sitemap indicates humans will be added as a
 // future species — not reflected here or in the footnote below yet.
 const candidates = [
+  // Ordered as in the Throughline Pipeline Rev 1 grid: most advanced stage
+  // first. `region` marks regional variants of the same product (US cards
+  // carry no tag).
   {
     id: 'CPerf LLV*/(BE-101)',
     category: 'infectious-disease' as const,
@@ -28,40 +31,53 @@ const candidates = [
     speciesKey: 'poultry' as const,
     mechanism: 'Nanobody',
     stage: 6,
-    stageNote: 'Regulatory / Launch Readiness. Conditional USDA licensure. Commercial launch Q4 2026.',
+    stageNote: 'Commercial / Conditional USDA licensure',
     description: 'A first-in-class engineered probiotic that secretes nanobodies against <em>Clostridium perfringens</em> toxins in the broiler gut, helping reduce the impact of necrotic enteritis (NE) on broilers without antibiotics. Has been shown to reduce NE-associated mortality and other NE effects.',
     ctaLabel: 'Read more',
     ctaHref: '/products',
   },
   {
-    id: 'BEX1 (BiomElix® One)',
-    category: 'infectious-disease' as const,
-    species: 'Poultry',
-    speciesKey: 'poultry' as const,
-    mechanism: 'CRISPR-based editing (Guided Biotic)',
-    stage: 5,
-    stageNote: "Regulatory Approval / Launch Readiness. Approved by Brazil's MAPA.",
-    description: "Built on CRISPR-based technology that selectively targets harmful bacteria, including Salmonella, while preserving beneficial microbes in the poultry gut microbiome. The BiomElix&reg; One feed ingredient was approved by Brazil's Ministry of Agriculture and Livestock (MAPA) and determined as non-GMO by the Brazil Biotech authority (CTNBio). This product is part of BiomEdit's acquisition of the technology of Folium Science.",
-  },
-  {
-    id: 'BE-118',
+    id: 'BE-101',
+    region: 'Brazil & ROW',
     category: 'infectious-disease' as const,
     species: 'Poultry',
     speciesKey: 'poultry' as const,
     mechanism: 'Nanobody',
-    stage: 3,
-    stageNote: 'Candidate Optimization / In Vivo Study',
-    description: 'Probiotic vectored antibodies targeting HA antigens on the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.',
+    stage: 5,
+    stageNote: 'Regulatory Approval / Launch Readiness',
+    description: 'An engineered probiotic that secretes nanobodies against <em>Clostridium perfringens</em> toxins in the broiler gut. A non-antibiotic approach to necrotic enteritis (NE). Regulatory approval in Brazil is in progress.',
   },
   {
-    id: 'BE-119',
+    id: 'BEX1 (BiomElix® One)',
+    region: 'Brazil',
+    category: 'infectious-disease' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry' as const,
+    mechanism: 'CRISPR-based editing (Guided Biotics®)',
+    stage: 5,
+    stageNote: "Regulatory Approval / Launch Readiness. Approved by Brazil's MAPA.",
+    description: "Built on CRISPR-based technology that is designed to selectively target and remove <em>Salmonella</em> by its DNA sequence, while preserving beneficial microbes in the poultry gut microbiome. The BiomElix&reg; One feed ingredient was approved by Brazil's Ministry of Agriculture and Livestock (MAPA) and determined as non-GMO by the Brazil Biotech authority (CTNBio). This product is part of BiomEdit's acquisition of the technology of Folium Science.",
+  },
+  {
+    id: 'BEX1 (BiomElix® One)',
+    region: 'ROW',
+    category: 'infectious-disease' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry' as const,
+    mechanism: 'CRISPR-based editing (Guided Biotics®)',
+    stage: 4,
+    stageNote: 'Pivotal Studies / Scale up',
+    description: "A feed ingredient built on CRISPR-based technology that is designed to selectively target and remove <em>Salmonella</em> by its DNA sequence, while preserving beneficial microbes in the poultry gut microbiome. Regulatory strategy and planning for additional geographies is underway. This product is part of BiomEdit's acquisition of the technology of Folium Science.",
+  },
+  {
+    id: 'BE-119-S',
     category: 'infectious-disease' as const,
     species: 'Swine',
     speciesKey: 'swine' as const,
     mechanism: 'Enzyme',
     stage: 3,
-    stageNote: 'Candidate Optimization / In Vivo Study',
-    description: 'A probiotic vectored enzyme therapeutic that aims to reduce E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.',
+    stageNote: 'In Vivo Proof of Concept',
+    description: 'A probiotic vectored enzyme therapeutic being developed as a feed additive that aims to reduce E. coli-driven diarrhea in piglets and scours in calves, supporting gut health and growth without relying on antibiotics.',
   },
   {
     id: 'BE-017',
@@ -69,9 +85,29 @@ const candidates = [
     species: 'Cattle',
     speciesKey: 'cattle' as const,
     mechanism: 'Microbial Consortia',
+    stage: 3,
+    stageNote: 'In Vivo Proof of Concept',
+    description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.',
+  },
+  {
+    id: 'BE-118',
+    category: 'infectious-disease' as const,
+    species: 'Poultry',
+    speciesKey: 'poultry' as const,
+    mechanism: 'Nanobody',
     stage: 2,
     stageNote: 'Candidate Optimization',
-    description: 'A tailored microbial consortium that reshapes the rumen microbiome to lower methane emissions in dairy and beef cattle, improving productivity with potential for infrequent dosing in grazing herds.',
+    description: 'Probiotic vectored antibodies targeting HA antigens on the avian influenza (HPAI) virus, designed to reduce viral burden and shedding in poultry as a complement or alternative to conventional HPAI prevention.',
+  },
+  {
+    id: 'BE-119-D',
+    category: 'infectious-disease' as const,
+    species: 'Dogs',
+    speciesKey: 'dogs' as const,
+    mechanism: 'Enzyme',
+    stage: 2,
+    stageNote: 'Candidate Optimization',
+    description: 'A probiotic vectored enzyme therapeutic being developed as a pet supplement that aims to reduce E. coli-driven diarrhea in dogs, supporting gut health and growth without relying on antibiotics.',
   },
   {
     id: 'BE-117',
@@ -91,7 +127,7 @@ const candidates = [
     mechanism: 'Peptide',
     stage: 2,
     stageNote: 'Candidate Optimization / In Vivo Study',
-    description: 'A first-in-class engineered oral biologic that delivers a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and dog applications as future extensions.',
+    description: 'A first-in-class engineered oral biologic that is designed to deliver a sustained GLP-1 receptor agonist directly in the gut, supporting chronic weight management in cats, with obesity as the initial target and diabetes and dog applications as future extensions.',
   },
   {
     id: 'BE-122',
@@ -132,7 +168,7 @@ const candidates = [
           </div>
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
-            <p>First engineered probiotic bacterial biologic to achieve conditional licensure for poultry.</p>
+            <p>First engineered probiotic bacterial biologic to achieve conditional licensure for poultry in the United States.</p>
           </div>
           <div class="spotlight-fact">
             <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
@@ -159,6 +195,7 @@ const candidates = [
       stages={stages}
       candidates={candidates}
       footnote="Our programs target challenges in poultry, swine, cattle, dogs, and cats."
+      legend="Geography: Countries are named; ROW (Rest of World)."
       labelFootnote={3}
     />
   </section>
