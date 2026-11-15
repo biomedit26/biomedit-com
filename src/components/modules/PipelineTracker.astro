@@ -32,8 +32,8 @@ interface Candidate {
   mechanism: string;
   description: string;
   stage: number; // 1-indexed, matches `stages` position
-  // Region tag shown after the name (e.g. "Brazil", "ROW") when the same
-  // product sits at different stages in different regions. Omit for US.
+  // Region shown on its own line under the name ("US", "Brazil", "ROW"),
+  // since the same product can sit at different stages in different regions.
   region?: string;
   // Full original stage/status text (e.g. "Candidate Optimization / In Vivo
   // Study") — shown in the expanded detail; independent of `stage`, which
@@ -121,13 +121,20 @@ const speciesList = [
     </div>
 
     <div class="candidate-grid">
-      {stages.map((_, i) => (
+      {stages.map((st, i) => (
         <div class="stage-col">
+          {/* Mobile only: the stage heading travels with its cards once the
+              columns stack (the desktop header row is hidden there). */}
+          <div class="stage-col-head">
+            <p class="stage-eyebrow">{st.eyebrow}</p>
+            <p class="stage-label">{st.label}</p>
+          </div>
           {candidates.filter((c) => c.stage === i + 1).map((c) => (
             <details class={`candidate-card cat-${c.category} species-${c.speciesKey}`}>
               <summary>
                 <span class="candidate-main">
-                  <span class="code">{c.id}{c.region && <> <span class="region">{c.region}</span></>}</span>
+                  <span class="code">{c.id}</span>
+                  {c.region && <span class="region">{c.region}</span>}
                   <span class="species-label">{c.species}</span>
                 </span>
                 <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -170,7 +177,7 @@ const speciesList = [
 </script>
 
 <style>
-  .region { color: var(--text-primary); white-space: nowrap; }
+  .region { font-size: 12px; font-weight: 400; font-style: italic; color: var(--text-secondary); margin-top: 0.15rem; }
   .legend { font-size: 12px; line-height: 1.5; color: var(--text-secondary); margin: 0 0 0.75rem; padding: 1.25rem 1.5rem 0; }
   .filter-input { position: absolute; opacity: 0; pointer-events: none; }
 
@@ -242,6 +249,7 @@ const speciesList = [
     padding: 1.5rem;
   }
   .stage-col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .stage-col-head { display: none; }
   .stage-col:not(:first-child) { border-left: 1px solid var(--cool-300); padding-left: 20px; }
 
   .candidate-card {
@@ -311,8 +319,12 @@ const speciesList = [
 
   @media (max-width: 960px) {
     .filter-row { flex-direction: column; }
-    .stage-header, .candidate-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .stage-header-cell:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
+    .candidate-grid { grid-template-columns: 1fr; gap: 1rem; }
+    /* Stacked: each stage's heading sits with its own cards instead of all
+       headings first, then all cards. */
+    .stage-header { display: none; }
+    .tracker-top { padding-bottom: 0.5rem; }
+    .stage-col-head { display: block; margin-bottom: 0.25rem; }
     .stage-col:not(:first-child) { border-left: none; padding-left: 0; border-top: 1px solid var(--cool-300); padding-top: 1rem; }
     /* Stage columns are already full-width when stacked — no room to pop
        out wider, so keep expanded cards inline here. */

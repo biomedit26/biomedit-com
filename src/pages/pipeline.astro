@@ -22,10 +22,10 @@ const stages = [
 // future species — not reflected here or in the footnote below yet.
 const candidates = [
   // Ordered as in the Throughline Pipeline Rev 1 grid: most advanced stage
-  // first. `region` marks regional variants of the same product (US cards
-  // carry no tag).
+  // first. Every card carries its region (US, Brazil, ROW).
   {
     id: 'CPerf LLV*/(BE-101)',
+    region: 'US',
     category: 'infectious-disease' as const,
     species: 'Poultry',
     speciesKey: 'poultry' as const,
@@ -71,6 +71,7 @@ const candidates = [
   },
   {
     id: 'BE-119-S',
+    region: 'US',
     category: 'infectious-disease' as const,
     species: 'Swine',
     speciesKey: 'swine' as const,
@@ -81,6 +82,7 @@ const candidates = [
   },
   {
     id: 'BE-017',
+    region: 'US',
     category: 'sustainability' as const,
     species: 'Cattle',
     speciesKey: 'cattle' as const,
@@ -91,6 +93,7 @@ const candidates = [
   },
   {
     id: 'BE-118',
+    region: 'US',
     category: 'infectious-disease' as const,
     species: 'Poultry',
     speciesKey: 'poultry' as const,
@@ -101,6 +104,7 @@ const candidates = [
   },
   {
     id: 'BE-119-D',
+    region: 'US',
     category: 'infectious-disease' as const,
     species: 'Dogs',
     speciesKey: 'dogs' as const,
@@ -111,6 +115,7 @@ const candidates = [
   },
   {
     id: 'BE-117',
+    region: 'US',
     category: 'sustainability' as const,
     species: 'Cattle',
     speciesKey: 'cattle' as const,
@@ -121,6 +126,7 @@ const candidates = [
   },
   {
     id: 'BE-105',
+    region: 'US',
     category: 'chronic-disease' as const,
     species: 'Cats',
     speciesKey: 'cats' as const,
@@ -131,6 +137,7 @@ const candidates = [
   },
   {
     id: 'BE-122',
+    region: 'US',
     category: 'chronic-disease' as const,
     species: 'Dogs',
     speciesKey: 'dogs' as const,
