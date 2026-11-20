@@ -1,0 +1,141 @@
+---
+// Download area for /styleguide: kits, logos and E marks, and every
+// background graphic with its paired color. Data: src/data/styleguide/
+// kits.ts and graphics.ts.
+import { kits, kitUrl, logoFiles } from '../../data/styleguide/kits';
+import { graphics } from '../../data/styleguide/graphics';
+
+// One tile per logo artwork, with its SVG and PNG side by side.
+const base = (f: string) => f.replace(/\.(svg|png)$/, '');
+const logoTiles = logoFiles.filter((l) => l.preview).map((l) => ({
+  ...l,
+  label: l.label.replace(/ \((SVG|PNG)[^)]*\)$/, ''),
+  svg: logoFiles.find((x) => base(x.file) === base(l.file) && x.file.endsWith('.svg'))?.file,
+  png: logoFiles.find((x) => base(x.file) === base(l.file) && x.file.endsWith('.png'))?.file,
+  square: l.file.includes('square'),
+}));
+
+const filters = [
+  ['all', 'All'], ['social', 'Social sizes'], ['wide', '16:9'], ['dark', 'Dark'], ['light', 'Light'],
+];
+---
+<div class="al">
+  <h3 id="assets-kits">Download kits</h3>
+  <p>One zip for each job, with a START-HERE note inside.</p>
+  <ul class="al-kits">
+    {kits.map((k) => (
+      <li class={`al-kit ${k.id === 'social' ? 'is-featured' : ''}`}>
+        <div>
+          <strong>{k.name}</strong>
+          <p>{k.summary}</p>
+          <span class="al-for">For {k.for}</span>
+        </div>
+        <a class="al-btn" href={kitUrl(k)} download>Download zip</a>
+      </li>
+    ))}
+  </ul>
+
+  <h3 id="assets-logos">Logos and E mark</h3>
+  <p>Full colour on light grounds, white on dark. The E mark is the double-helix E from the logo: use it where the full logo would fall under 28px, and the square versions for profile pictures.</p>
+  <div class="al-logos">
+    {logoTiles.map((l) => (
+      <figure class="al-logo">
+        <div class={`al-logo-art ${l.square ? 'is-square' : ''}`} style={`background:${l.bg};`}>
+          <img src={l.svg ?? l.png} alt="" loading="lazy" />
+        </div>
+        <figcaption>
+          <strong>{l.label}</strong>
+          <span>{l.use}</span>
+          <span class="al-dl">
+            {l.png && <a href={l.png} download>PNG</a>}
+            {l.svg && <a href={l.svg} download>SVG</a>}
+          </span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <h3 id="assets-backgrounds">Background graphics</h3>
+  <p>Each graphic is made for one background color. <strong>Full-bleed PNG</strong> has the color built in: use it when in doubt. The transparent PNG and SVG must sit on the color shown.</p>
+  <div class="al-filter" role="radiogroup" aria-label="Filter background graphics">
+    {filters.map(([v, l], i) => <label><input type="radio" name="al-filter" value={v} checked={i === 0} /><span>{l}</span></label>)}
+  </div>
+  <ul class="al-grid" id="al-grid">
+    {graphics.map((g) => (
+      <li class="al-card" data-social={g.category === 'social' ? '1' : '0'} data-tone={g.tone}>
+        <div class="al-card-art" style={`background:${g.bgHex};`}>
+          <img src={g.files.thumb} alt="" width={g.size[0]} height={g.size[1]} loading="lazy" />
+        </div>
+        <div class="al-card-meta">
+          <strong>{g.label}</strong>
+          <span>{g.format ? `${g.format}, ` : ''}{g.size[0]} × {g.size[1]}</span>
+          <span><span class="al-dot" style={`background:${g.bgHex};`}></span>{g.bgHex} · {g.tone === 'dark' ? 'white text' : 'dark text'}</span>
+          <span class="al-dl">
+            <a href={g.files.fullBleed} download>Full-bleed PNG</a>
+            <a href={g.files.png} download>Transparent PNG</a>
+            <a href={g.files.svg} download>SVG</a>
+          </span>
+        </div>
+      </li>
+    ))}
+  </ul>
+  <p class="al-note">Developers: <a href="/graphics/manifest.json">manifest.json</a> lists every graphic with its pairing and file links, and the <a href="/graphics/README.md">graphics README</a> covers recoloring, tinting and fading.</p>
+</div>
+
+<script>
+  const grid = document.getElementById('al-grid');
+  document.querySelectorAll<HTMLInputElement>('input[name="al-filter"]').forEach((r) => r.addEventListener('change', () => {
+    const v = r.value;
+    grid?.querySelectorAll<HTMLElement>('.al-card').forEach((c) => {
+      const social = c.dataset.social === '1';
+      c.hidden = v === 'social' ? !social : v === 'wide' ? social : v === 'dark' || v === 'light' ? c.dataset.tone !== v : false;
+    });
+  }));
+</script>
+
+<style>
+  .al > p { font-size: 16px; line-height: 1.5; max-width: 72ch; }
+  .al-kits { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 12px; }
+  .al-kit { display: flex; justify-content: space-between; align-items: center; gap: 24px; background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; padding: 16px 20px; max-width: none; }
+  .al-kit.is-featured { border-color: var(--color-navy); }
+  .al-kit p { margin: 4px 0; font-size: 15px; line-height: 1.45; }
+  .al-for { font-size: 13px; color: var(--text-secondary); }
+  .al-btn { flex-shrink: 0; font-weight: 700; font-size: 15px; padding: 11px 18px; border-radius: 4px; border: 1.5px solid var(--color-navy); color: var(--color-navy); text-decoration: none; background: #FFFFFF; }
+  .al-kit.is-featured .al-btn { background: var(--color-amber); border-color: var(--color-amber); color: var(--cool-900); }
+  .al-btn:hover { opacity: 0.75; }
+
+  .al-logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 1rem; }
+  .al-logo { margin: 0; background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; }
+  .al-logo-art { height: 120px; display: flex; align-items: center; justify-content: center; padding: 20px; border-bottom: 1px solid var(--cool-200); }
+  .al-logo-art img { max-width: 80%; max-height: 64px; }
+  .al-logo-art.is-square { padding: 0; }
+  .al-logo-art.is-square img { max-height: 120px; max-width: none; height: 120px; }
+  .al-logo figcaption, .al-card-meta { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px 14px; font-size: 13px; line-height: 1.4; color: var(--text-secondary); }
+  .al-logo strong, .al-card-meta strong { color: var(--cool-900); font-size: 14px; }
+  .al-dl { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; font-weight: 700; }
+  .al-dl a { color: var(--color-navy); }
+
+  .al-filter { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--cool-300); border-radius: 4px; overflow: hidden; margin: 0.5rem 0 1rem; }
+  .al-filter label { position: relative; }
+  .al-filter input { position: absolute; opacity: 0; }
+  .al-filter span { display: block; padding: 7px 14px; font-size: 14px; cursor: pointer; border-left: 1px solid var(--cool-300); background: #FFFFFF; }
+  .al-filter label:first-child span { border-left: 0; }
+  .al-filter input:checked + span { background: var(--color-navy); color: #FFFFFF; font-weight: 700; }
+  .al-filter input:focus-visible + span { outline: 2px solid var(--color-teal); outline-offset: -2px; }
+  .al-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .al-card { background: #FFFFFF; border: 1px solid var(--cool-200); border-radius: 6px; overflow: hidden; max-width: none; }
+  .al-card[hidden] { display: none; }
+  .al-card-art { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--cool-200); }
+  .al-card-art img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
+  .al-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--cool-300); margin-right: 6px; vertical-align: -1px; }
+  .al-note { font-size: 14px; color: var(--text-secondary); margin-top: 1.25rem; }
+
+  @media (max-width: 960px) {
+    .al-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .al-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .al-kit { flex-direction: column; align-items: flex-start; }
+    .al-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+// Copy-to-clipboard button for the style guide. Pass `text` to copy a
+// literal value, or `src` to fetch and copy a file (e.g. prompt.txt).
+// Success/failure is announced through the page's shared live region
+// (#sg-live in the styleguide page) so screen readers hear it.
+interface Props {
+  text?: string;
+  src?: string;
+  label: string;        // what is being copied, e.g. "#2B3682" or "prompt.txt"
+  visibleLabel?: string;
+}
+const { text, src, label, visibleLabel = 'Copy' } = Astro.props;
+---
+<button type="button" class="sg-copy" data-copy={text} data-copy-src={src} data-copy-label={label} aria-label={visibleLabel === 'Copy' ? `Copy ${label}` : `${visibleLabel}: ${label}`}>
+  {visibleLabel}
+</button>
+
+<style>
+  .sg-copy {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-navy);
+    background: #FFFFFF;
+    border: 1px solid var(--cool-300);
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .sg-copy:hover { opacity: 0.75; }
+  .sg-copy:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+  .sg-copy.is-done { color: var(--color-green); border-color: var(--color-green); }
+</style>

@@ -1,0 +1,629 @@
+---
+// Post builder for /styleguide: makes a finished, on-brand social image in
+// the browser (canvas), so marketers don't need a design tool or an AI
+// image generator. Brand rules are built in rather than documented: the
+// logo version and text colors follow the background's tone, text sizes
+// come from the type scale, a photo is always split 50/50 with a solid
+// panel (never text over the photo, never photo plus graphic), and a live
+// checklist flags title case, hype words, missing marks and claim wording.
+// Nothing is uploaded: photos stay in the browser.
+import { graphics, formats, panelColors } from '../../data/styleguide/graphics';
+import { approvedLines } from '../../data/styleguide/content';
+
+const data = {
+  graphics: graphics.map((g) => ({ name: g.name, label: g.label, w: g.size[0], h: g.size[1], social: g.category === 'social', bg: g.bgHex, tone: g.tone, side: g.textSide, png: g.files.png })),
+  formats,
+  approved: approvedLines,
+  logos: {
+    full: { dark: '/styleguide/assets/biomedit-logo-white.svg', light: '/styleguide/assets/biomedit-logo-colour.svg', ratio: 164 / 40 },
+    mark: { dark: '/styleguide/assets/biomedit-mark-white.svg', light: '/styleguide/assets/biomedit-mark-colour.svg', ratio: 18.82 / 40 },
+  },
+};
+---
+<div class="pb" id="pb">
+  <script type="application/json" id="pb-data" set:html={JSON.stringify(data)} />
+  <form class="pb-controls" id="pb-form" onsubmit="return false">
+    <fieldset class="pb-step">
+      <legend><span class="pb-num">1</span>Size</legend>
+      <div class="pb-chips">
+        {formats.map((f, i) => (
+          <label class="pb-chip">
+            <input type="radio" name="format" value={f.id} checked={i === 0} />
+            <span><strong>{f.label}</strong><small>{f.w} × {f.h}</small></span>
+          </label>
+        ))}
+      </div>
+      <p class="pb-tip" id="pb-format-tip" hidden></p>
+    </fieldset>
+
+    <fieldset class="pb-step">
+      <legend><span class="pb-num">2</span>Style</legend>
+      <div class="pb-chips is-two">
+        <label class="pb-chip"><input type="radio" name="style" value="graphic" checked /><span><strong>Background graphic</strong><small>Text on a brand graphic</small></span></label>
+        <label class="pb-chip"><input type="radio" name="style" value="photo" /><span><strong>Photo and text</strong><small>50/50 split</small></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="pb-step" id="pb-graphic-opts">
+      <legend><span class="pb-num">3</span>Background</legend>
+      <div class="pb-thumbs" id="pb-thumbs">
+        {data.graphics.map((g) => (
+          <label class="pb-thumb" data-w={g.w} data-h={g.h} data-social={g.social ? '1' : undefined}>
+            <input type="radio" name="graphic" value={g.name} checked={g.name === 'biomedit-flow-duotone-deepblue-white'} />
+            <img src={`/styleguide/thumbs/${g.name}.webp`} alt="" loading="lazy" width="160" height="90" />
+            <span class="pb-thumb-label">{g.label}<em class="pb-made">Made for this size</em></span>
+          </label>
+        ))}
+      </div>
+      <div class="pb-row">
+        <div class="pb-field">
+          <span class="pb-label" id="pb-strength-l">Graphic strength</span>
+          <div class="pb-seg" role="radiogroup" aria-labelledby="pb-strength-l">
+            <label><input type="radio" name="strength" value="1" /><span>Full</span></label>
+            <label><input type="radio" name="strength" value="0.55" checked /><span>Soft</span></label>
+            <label><input type="radio" name="strength" value="0.3" /><span>Subtle</span></label>
+          </div>
+        </div>
+        <div class="pb-field">
+          <span class="pb-label" id="pb-side-l">Text position</span>
+          <div class="pb-seg" role="radiogroup" aria-labelledby="pb-side-l">
+            {['left', 'right', 'top', 'bottom'].map((s, i) => <label><input type="radio" name="side" value={s} checked={i === 0} /><span>{s[0].toUpperCase() + s.slice(1)}</span></label>)}
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="pb-step" id="pb-photo-opts" hidden>
+      <legend><span class="pb-num">3</span>Photo</legend>
+      <label class="pb-upload">
+        <input type="file" name="photo" accept="image/*" />
+        <span><strong>Choose a photo</strong> or drop one here</span>
+      </label>
+      <p class="pb-hint">Real and true to life: cool light for labs, warm light for animals. Your photo stays on your computer; nothing is uploaded.</p>
+      <div class="pb-row">
+        <div class="pb-field">
+          <span class="pb-label" id="pb-pside-l">Photo goes</span>
+          <div class="pb-seg" role="radiogroup" aria-labelledby="pb-pside-l">
+            <label><input type="radio" name="photoSide" value="first" checked /><span id="pb-pside-first">Left</span></label>
+            <label><input type="radio" name="photoSide" value="second" /><span id="pb-pside-second">Right</span></label>
+          </div>
+        </div>
+        <label class="pb-field">
+          <span class="pb-label">Photo framing</span>
+          <input type="range" name="focus" min="0" max="100" value="50" />
+        </label>
+      </div>
+      <div class="pb-field">
+        <span class="pb-label" id="pb-panel-l">Text panel color</span>
+        <div class="pb-swatches" role="radiogroup" aria-labelledby="pb-panel-l">
+          {panelColors.map((c, i) => (
+            <label class="pb-swatch" title={c.name}>
+              <input type="radio" name="panel" value={c.hex} data-tone={c.tone} checked={i === 0} />
+              <span style={`background:${c.hex}`}></span><span class="pb-sr">{c.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="pb-step">
+      <legend><span class="pb-num">4</span>Words</legend>
+      <label class="pb-field"><span class="pb-label">Eyebrow <small>optional, 1 to 3 words</small></span><input type="text" name="eyebrow" value="Our science" maxlength="40" /></label>
+      <label class="pb-field"><span class="pb-label">Headline <small>sentence case, 8 words or fewer</small></span><textarea name="headline" rows="2" maxlength="200">Engineering a new chapter in animal health</textarea></label>
+      <label class="pb-field"><span class="pb-label">Supporting line <small>optional</small></span><textarea name="sub" rows="2" maxlength="320">Our Programmable Veterinary Biologics™ platform has programs in poultry, swine, cattle, dogs and cats.</textarea></label>
+      <label class="pb-field"><span class="pb-label">Footer <small>optional, such as a link or date</small></span><input type="text" name="footer" value="biomedit.com" maxlength="60" /></label>
+      <label class="pb-field"><span class="pb-label">Footnote <small>optional</small></span><textarea name="footnote" rows="2" maxlength="300"></textarea></label>
+      <div class="pb-field">
+        <label class="pb-label" for="pb-approved">Insert approved wording</label>
+        <select id="pb-approved">
+          <option value="">Choose a line…</option>
+          <option value="licensureHeadline|headline">Licensure headline (press release)</option>
+          <option value="licensureFootnote|sub">Licensure statement</option>
+          <option value="efficacy|sub">Efficacy result</option>
+          <option value="footnote|footnote">CPerf LLV* footnote</option>
+        </select>
+      </div>
+      <p class="pb-hint">Species names such as <em>Salmonella</em> are set in italics automatically. To italicize anything else, wrap it in underscores: _like this_.</p>
+    </fieldset>
+
+    <fieldset class="pb-step">
+      <legend><span class="pb-num">5</span>Logo</legend>
+      <div class="pb-seg">
+        <label><input type="radio" name="logo" value="full" checked /><span>Full logo</span></label>
+        <label><input type="radio" name="logo" value="mark" /><span>E mark</span></label>
+        <label><input type="radio" name="logo" value="none" /><span>None</span></label>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="pb-preview">
+    <div class="pb-sticky">
+      <div class="pb-stage"><canvas id="pb-canvas" width="1200" height="627" role="img" aria-label="Preview of your post"></canvas></div>
+      <p class="pb-size" id="pb-size">1200 × 627 px PNG</p>
+      <div class="pb-actions">
+        <button type="button" class="pb-btn" id="pb-download">Download PNG</button>
+        <button type="button" class="pb-btn is-secondary" id="pb-copy">Copy image</button>
+      </div>
+      <div class="pb-checks" id="pb-checks" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface G { name: string; label: string; w: number; h: number; social: boolean; bg: string; tone: 'dark' | 'light'; side: Side; png: string }
+  interface F { id: string; label: string; w: number; h: number; tip?: string }
+  type Side = 'left' | 'right' | 'top' | 'bottom';
+  type Word = { t: string; i: boolean };
+
+  const root = document.getElementById('pb');
+  if (root) {
+    const data = JSON.parse(document.getElementById('pb-data')!.textContent!) as {
+      graphics: G[]; formats: F[]; approved: Record<string, string>;
+      logos: Record<'full' | 'mark', { dark: string; light: string; ratio: number }>;
+    };
+    const form = root.querySelector<HTMLFormElement>('#pb-form')!;
+    const canvas = root.querySelector<HTMLCanvasElement>('#pb-canvas')!;
+    const ctx = canvas.getContext('2d')!;
+    const checksEl = root.querySelector<HTMLElement>('#pb-checks')!;
+    const FONT = '"PT Sans", Arial, sans-serif';
+    const INK = '#1C1F28';
+    let photo: HTMLImageElement | null = null;
+
+    const val = (name: string) => (form.elements.namedItem(name) as RadioNodeList | HTMLInputElement).value;
+    const setRadio = (name: string, value: string) => {
+      const el = form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`);
+      if (el) el.checked = true;
+    };
+
+    // ---- images --------------------------------------------------------
+    const cache = new Map<string, Promise<HTMLImageElement>>();
+    const load = (src: string) => {
+      if (!cache.has(src)) cache.set(src, new Promise((res, rej) => {
+        const img = new Image(); img.onload = () => res(img); img.onerror = rej; img.src = src;
+      }));
+      return cache.get(src)!;
+    };
+
+    // ---- color ---------------------------------------------------------
+    const lum = (hex: string) => {
+      const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+        .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+    };
+    const contrast = (a: string, b: string) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+    /** Text colors for a ground: white on dark, ink on light; eyebrow in teal where it passes AA. */
+    const palette = (bg: string, tone: 'dark' | 'light') => {
+      const text = tone === 'dark' ? '#FFFFFF' : INK;
+      const eyebrowOptions = tone === 'dark' ? ['#74ADD5', '#FFFFFF'] : ['#0369B2', INK];
+      return { text, eyebrow: eyebrowOptions.find((c) => contrast(c, bg) >= 4.5) ?? text };
+    };
+
+    // ---- text ----------------------------------------------------------
+    const SPECIES = /\b(Clostridium perfringens|C\. perfringens|Salmonella|Escherichia coli|E\. coli)\b/g;
+    function parse(text: string): Word[][] {
+      const marked = text.includes('_') ? text : text.replace(SPECIES, '_$1_');
+      return marked.split('\n').map((para) => {
+        let italic = false;
+        return para.split(/\s+/).filter(Boolean).map((raw) => {
+          let w = raw;
+          if (w.startsWith('_')) { italic = true; w = w.slice(1); }
+          const closes = /_(\W*)$/.test(w);
+          if (closes) w = w.replace(/_(\W*)$/, '$1');
+          const word = { t: w, i: italic };
+          if (closes) italic = false;
+          return word;
+        });
+      });
+    }
+    const font = (size: number, weight: number, italic = false) => `${italic ? 'italic ' : ''}${weight} ${size}px ${FONT}`;
+
+    interface Block { lines: Word[][]; size: number; weight: number; lh: number; height: number; overflow: boolean }
+    function wrap(paras: Word[][], size: number, weight: number, maxW: number, lh: number): Block {
+      const lines: Word[][] = [];
+      let overflow = false;
+      ctx.font = font(size, weight);
+      const space = ctx.measureText(' ').width;
+      for (const para of paras) {
+        let line: Word[] = [], width = 0;
+        for (const w of para) {
+          ctx.font = font(size, weight, w.i);
+          const ww = ctx.measureText(w.t).width;
+          if (ww > maxW) overflow = true;
+          if (line.length && width + space + ww > maxW) { lines.push(line); line = [w]; width = ww; }
+          else { width += (line.length ? space : 0) + ww; line.push(w); }
+        }
+        if (line.length) lines.push(line);
+      }
+      return { lines, size, weight, lh, height: lines.length ? lines.length * size * lh : 0, overflow };
+    }
+    function drawBlock(b: Block, x: number, y: number, color: string) {
+      ctx.fillStyle = color;
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = font(b.size, b.weight);
+      const space = ctx.measureText(' ').width;
+      b.lines.forEach((line, n) => {
+        let cx = x;
+        // Baseline sits ~80% down the first line box for PT Sans.
+        const by = y + n * b.size * b.lh + b.size * (b.lh - 1) / 2 + b.size * 0.8;
+        for (const w of line) {
+          ctx.font = font(b.size, b.weight, w.i);
+          ctx.fillText(w.t, cx, by);
+          cx += ctx.measureText(w.t).width + space;
+        }
+      });
+    }
+    function drawSpaced(text: string, x: number, y: number, size: number, color: string) {
+      ctx.font = font(size, 700);
+      ctx.fillStyle = color;
+      const ls = size * 0.08;
+      let cx = x;
+      for (const ch of text) { ctx.fillText(ch, cx, y + size * 0.8); cx += ctx.measureText(ch).width + ls; }
+    }
+
+    // ---- layout helpers ----------------------------------------------
+    /** Draws img to cover rect, aligned by ax/ay (0 = start, 1 = end), optionally zoomed in further. */
+    function cover(img: HTMLImageElement, x: number, y: number, w: number, h: number, ax: number, ay: number, zoom = 1) {
+      const s = Math.max(w / img.naturalWidth, h / img.naturalHeight) * zoom;
+      const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+      ctx.save();
+      ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+      ctx.drawImage(img, x + (w - dw) * ax, y + (h - dh) * ay, dw, dh);
+      ctx.restore();
+    }
+    const sameRatio = (a: { w: number; h: number }, b: { w: number; h: number }) => Math.abs(a.w / a.h - b.w / b.h) / (b.w / b.h) < 0.03;
+    const fmt = () => data.formats.find((f) => f.id === val('format'))!;
+    const graphic = () => data.graphics.find((g) => g.name === val('graphic'))!;
+
+    // ---- form syncing --------------------------------------------------
+    function syncFormat() {
+      const f = fmt();
+      const tip = root!.querySelector<HTMLElement>('#pb-format-tip')!;
+      tip.hidden = !f.tip; tip.textContent = f.tip ?? '';
+      root!.querySelector('#pb-size')!.textContent = `${f.w} × ${f.h} px PNG`;
+      // Social crops show only at their own size, first in the list.
+      let current = graphic();
+      for (const el of root!.querySelectorAll<HTMLElement>('.pb-thumb')) {
+        const g = { w: +el.dataset.w!, h: +el.dataset.h! };
+        const match = !!el.dataset.social && sameRatio(g, f);
+        el.hidden = !!el.dataset.social && !match;
+        el.classList.toggle('is-match', match);
+        el.style.order = match ? '-1' : '0';
+      }
+      if (current.social && !sameRatio(current, f)) {
+        const pick = data.graphics.find((g) => g.social && sameRatio(g, f)) ?? data.graphics[0];
+        setRadio('graphic', pick.name);
+        current = pick;
+        syncStrength();
+      }
+      syncSide();
+      const tall = f.h > f.w;
+      root!.querySelector('#pb-pside-first')!.textContent = tall ? 'Top' : 'Left';
+      root!.querySelector('#pb-pside-second')!.textContent = tall ? 'Bottom' : 'Right';
+    }
+    /** Default text side from the graphic, adjusted to the frame's shape. */
+    function syncSide() {
+      const f = fmt();
+      let side = graphic().side;
+      if (f.h > f.w * 1.1 && (side === 'left' || side === 'right')) side = 'bottom';
+      if (f.w > f.h * 2.5 && (side === 'top' || side === 'bottom')) side = 'right';
+      if (f.id === 'li-banner') side = 'right';
+      setRadio('side', side);
+    }
+    /** The 16:9 artwork runs behind the text, so it starts softer; social crops leave space for text. */
+    function syncStrength() { setRadio('strength', graphic().social ? '1' : '0.55'); }
+    function syncStyle() {
+      const isPhoto = val('style') === 'photo';
+      root!.querySelector<HTMLElement>('#pb-graphic-opts')!.hidden = isPhoto;
+      root!.querySelector<HTMLElement>('#pb-photo-opts')!.hidden = !isPhoto;
+    }
+
+    // ---- checks --------------------------------------------------------
+    const NAMES = new Set(['BiomEdit', 'USDA', 'CPerf', 'LLV*', 'LLV', 'BiomElix®', 'BiomElix', 'Guided', 'Biotics®', 'Programmable', 'Veterinary', 'Biologics™', 'Brazil', 'MAPA', 'CVB', 'NE', 'Clostridium', 'Salmonella', 'Indiana', 'US', 'U.S.', 'I', 'BEX1', 'Limosilactobacillus']);
+    const HYPE = /\b(revolutionary|revolutioniz\w*|game[- ]chang\w*|cutting[- ]edge|groundbreaking|disruptive|world[- ]class|best[- ]in[- ]class|amazing|incredible|unprecedented|next[- ]gen\w*)\b/i;
+    function checks(fields: Record<string, string>, overflow: boolean): string[] {
+      const out: string[] = [];
+      const all = Object.values(fields).join(' ');
+      const approved = Object.values(data.approved);
+      const { headline } = fields;
+      if (!headline.trim()) out.push('Add a headline.');
+      if (headline && !approved.includes(headline.trim())) {
+        const words = headline.replace(/[_"“”‘’(),.:;?]/g, '').split(/\s+/).slice(1).filter((w) => /[a-z]/i.test(w) && !NAMES.has(w) && !/^[A-Z0-9-]{2,}$/.test(w));
+        const caps = words.filter((w) => /^[A-Z]/.test(w)).length;
+        if (words.length >= 2 && caps / words.length >= 0.6) out.push('The headline looks like Title Case. Use sentence case: capitalize only the first word and names.');
+        if (/[A-Z]{4,}/.test(headline) && headline === headline.toUpperCase()) out.push('Avoid all caps in the headline.');
+        if (headline.trim().split(/\s+/).length > 12) out.push('Long headline. Aim for 8 words or fewer; move detail to the supporting line.');
+      }
+      if (all.includes('!')) out.push('Remove exclamation points.');
+      if (/(?![©®™])\p{Extended_Pictographic}/u.test(all)) out.push('Remove emoji.'); // ™ and ® count as pictographic in Unicode
+      const hype = all.match(HYPE);
+      if (hype) out.push(`Replace "${hype[0]}" with something specific: a number, a species, a site or a stage.`);
+      if (/Programmable Veterinary Biologics(?!™)/.test(all)) out.push('Add ™: Programmable Veterinary Biologics™.');
+      if (/BiomElix(?!®)/.test(all)) out.push('Add ®: BiomElix®.');
+      if (/Guided Biotics(?!®)/.test(all)) out.push('Add ®: Guided Biotics®.');
+      if (/CPerf LLV(?!\*)/.test(all)) out.push('Add the asterisk: CPerf LLV*.');
+      if (/CPerf LLV\*/.test(fields.headline + fields.sub) && !fields.footnote.includes(data.approved.footnote)) out.push('CPerf LLV* needs its footnote. Choose "CPerf LLV* footnote" under Insert approved wording.');
+      const claimText = [fields.headline, fields.sub].filter((t) => !approved.includes(t.trim())).join(' ');
+      if (/\b(first|only|best|leading)\b/i.test(claimText)) out.push('"First", "only", "best" and "leading" are claims. Use the approved wording, or check with the brand team.');
+      if (overflow) out.push('Too much text for this size. Shorten the headline or the supporting line.');
+      if (val('style') === 'photo' && !photo) out.push('Choose a photo, or switch to a background graphic.');
+      return out;
+    }
+
+    // ---- render --------------------------------------------------------
+    let ticket = 0;
+    async function render() {
+      const my = ++ticket;
+      const f = fmt();
+      const W = f.w, H = f.h;
+      const u = Math.min(W / 1080, Math.sqrt(W * H) / 1080);
+      const m = Math.round(64 * u);
+      const safeY = f.id === 'story' ? 240 : m;
+      const isPhoto = val('style') === 'photo';
+      const fields = {
+        eyebrow: val('eyebrow').trim(), headline: val('headline').trim(), sub: val('sub').trim(),
+        footer: val('footer').trim(), footnote: val('footnote').trim(),
+      };
+
+      // Ground, tone and the text column.
+      let bg: string, tone: 'dark' | 'light';
+      let col: { x: number; w: number; top: number; bottom: number };
+      let side: Side;
+      const g = graphic();
+      const panelInput = form.querySelector<HTMLInputElement>('input[name="panel"]:checked')!;
+      const splitV = H > W; // split top/bottom on tall frames
+      const photoFirst = val('photoSide') === 'first';
+      if (isPhoto) {
+        bg = panelInput.value; tone = panelInput.dataset.tone as 'dark' | 'light';
+        if (splitV) {
+          const top = photoFirst ? H / 2 : 0;
+          col = { x: m, w: W - 2 * m, top: Math.max(top + m, photoFirst ? 0 : safeY), bottom: Math.min(top + H / 2 - m, photoFirst ? H - safeY : H) };
+          side = 'top';
+        } else {
+          const left = photoFirst ? W / 2 : 0;
+          col = { x: left + m, w: W / 2 - 2 * m, top: safeY, bottom: H - safeY };
+          side = 'left';
+        }
+      } else {
+        bg = g.bg; tone = g.tone;
+        side = val('side') as Side;
+        const wide = W / H > 1.5;
+        const colW = side === 'left' || side === 'right' ? (wide ? W * 0.5 : W * 0.58) - m : W - 2 * m;
+        col = { x: side === 'right' ? W - m - colW : m, w: colW, top: safeY, bottom: H - safeY };
+      }
+      const colors = palette(bg, tone);
+
+      // Load what we need before touching the canvas, so a slow image
+      // never leaves a half-drawn frame.
+      const logoKind = val('logo') as 'full' | 'mark' | 'none';
+      const [art, logo] = await Promise.all([
+        isPhoto ? Promise.resolve(null) : load(g.png).catch(() => null),
+        logoKind === 'none' ? Promise.resolve(null) : load(data.logos[logoKind][tone]).catch(() => null),
+        document.fonts.load(font(40, 700)), document.fonts.load(font(40, 400)), document.fonts.load(font(40, 400, true)),
+      ]);
+      if (my !== ticket) return;
+
+      canvas.width = W; canvas.height = H;
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      if (isPhoto) {
+        const focus = +val('focus') / 100;
+        const r = splitV
+          ? { x: 0, y: photoFirst ? 0 : H / 2, w: W, h: H / 2 }
+          : { x: photoFirst ? 0 : W / 2, y: 0, w: W / 2, h: H };
+        if (photo) cover(photo, r.x, r.y, r.w, r.h, splitV ? 0.5 : focus, splitV ? focus : 0.5);
+        else {
+          ctx.fillStyle = '#E2E5EA'; ctx.fillRect(r.x, r.y, r.w, r.h);
+          ctx.fillStyle = '#666D7E'; ctx.font = font(Math.round(28 * u), 700); ctx.textAlign = 'center';
+          ctx.fillText('Your photo here', r.x + r.w / 2, r.y + r.h / 2); ctx.textAlign = 'left';
+        }
+      } else if (art) {
+        // Keep the focal point away from the text.
+        const ax = side === 'left' ? 1 : side === 'right' ? 0 : g.social ? 0.5 : 0.85;
+        const ay = side === 'top' ? 1 : side === 'bottom' ? 0 : 0.5;
+        // In landscape frames the full 16:9 artwork would put the dense
+        // tile field under the text: zoom so the ribbons and target fill
+        // the frame and the tiles fall off the edge.
+        const ratio = W / H;
+        const zoom = !g.social && ratio > 1.5 && ratio < 3 && (side === 'left' || side === 'right') ? 1.6 : 1;
+        ctx.globalAlpha = +val('strength');
+        cover(art, 0, 0, W, H, ax, ay, zoom);
+        ctx.globalAlpha = 1;
+      }
+
+      // Logo at the top of the text column (top of the frame when the
+      // text sits at the bottom).
+      let top = col.top;
+      if (logo) {
+        const lh = Math.max(28, Math.round((logoKind === 'mark' ? 80 : 44) * u));
+        const lw = lh * data.logos[logoKind].ratio;
+        ctx.drawImage(logo, col.x, col.top, lw, lh);
+        top = col.top + lh + Math.round(40 * u);
+      }
+
+      // Footer and footnote pinned to the bottom of the column.
+      let bottom = col.bottom;
+      // Social images show at about half size in feeds, so small text is
+      // set larger than its web equivalent, with a legible floor.
+      const noteSize = Math.max(14, Math.round(17 * u));
+      const note = fields.footnote ? wrap(parse(fields.footnote), noteSize, 400, col.w, 1.35) : null;
+      if (note) { bottom -= note.height; drawBlock(note, col.x, bottom, colors.text); bottom -= Math.round(16 * u); }
+      const footSize = Math.max(16, Math.round(24 * u));
+      const foot = fields.footer ? wrap(parse(fields.footer), footSize, 700, col.w, 1.3) : null;
+      if (foot) { bottom -= foot.height; drawBlock(foot, col.x, bottom, colors.eyebrow); bottom -= Math.round(32 * u); }
+
+      // Fit the headline: the largest step on the type scale that fits.
+      const space = bottom - top;
+      const eyebrowSize = Math.max(14, Math.round(20 * u));
+      const maxLines = H < 450 ? 2 : 4;
+      let chosen: { head: Block; sub: Block | null; height: number } | null = null;
+      for (const step of [90, 67, 51, 38, 28, 21]) {
+        const hs = Math.round(step * u);
+        const head = wrap(parse(fields.headline), hs, 700, col.w, 1.15);
+        const subSize = Math.max(16, Math.round((step >= 51 ? 30 : 26) * u));
+        const sub = fields.sub ? wrap(parse(fields.sub), subSize, 400, col.w, 1.4) : null;
+        const height = (fields.eyebrow ? eyebrowSize * 1.2 + 20 * u : 0) + head.height + (sub ? 24 * u + sub.height : 0);
+        chosen = { head, sub, height };
+        if (!head.overflow && head.lines.length <= maxLines && height <= space && step <= (W >= H * 1.5 ? 67 : 90)) break;
+      }
+      const c = chosen!;
+      const overflow = c.height > space || c.head.overflow;
+      let y = side === 'bottom' && !isPhoto ? bottom - c.height
+        : side === 'top' && !isPhoto ? top
+        : top + Math.max(0, (space - c.height) / 2);
+      if (fields.eyebrow) { drawSpaced(fields.eyebrow.toUpperCase(), col.x, y, eyebrowSize, colors.eyebrow); y += eyebrowSize * 1.2 + 20 * u; }
+      drawBlock(c.head, col.x, y, colors.text); y += c.head.height;
+      if (c.sub) { y += 24 * u; drawBlock(c.sub, col.x, y, colors.text); }
+
+      const issues = checks(fields, overflow);
+      checksEl.innerHTML = issues.length
+        ? `<p class="pb-checks-h">Check before you post</p><ul>${issues.map((i) => `<li>${i.replace(/</g, '&lt;')}</li>`).join('')}</ul>`
+        : '<p class="pb-checks-ok">On brand. Ready to download.</p>';
+      canvas.setAttribute('aria-label', `Preview: ${fmt().label}, ${fields.headline || 'no headline yet'}`);
+    }
+
+    let queued = false;
+    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; render(); }); } };
+
+    form.addEventListener('input', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'format') syncFormat();
+      if (t.name === 'graphic') { syncSide(); syncStrength(); }
+      if (t.name === 'style') syncStyle();
+      schedule();
+    });
+    form.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'photo' && t.files?.[0]) usePhoto(t.files[0]);
+    });
+    function usePhoto(file: File) {
+      if (!file.type.startsWith('image/')) return;
+      const img = new Image();
+      img.onload = () => { photo = img; schedule(); };
+      img.src = URL.createObjectURL(file);
+    }
+    const drop = root.querySelector<HTMLElement>('.pb-upload')!;
+    drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('is-over'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('is-over'));
+    drop.addEventListener('drop', (e) => {
+      e.preventDefault(); drop.classList.remove('is-over');
+      const file = e.dataTransfer?.files?.[0];
+      if (file) usePhoto(file);
+    });
+
+    root.querySelector<HTMLSelectElement>('#pb-approved')!.addEventListener('change', (e) => {
+      const sel = e.target as HTMLSelectElement;
+      if (!sel.value) return;
+      const [key, field] = sel.value.split('|');
+      const input = form.elements.namedItem(field) as HTMLTextAreaElement;
+      input.value = data.approved[key];
+      if (data.approved[key].includes('CPerf LLV*') && field !== 'footnote') {
+        (form.elements.namedItem('footnote') as HTMLTextAreaElement).value = data.approved.footnote;
+      }
+      sel.value = '';
+      schedule();
+    });
+
+    const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+    const announce = (msg: string) => { const live = document.getElementById('sg-live'); if (live) { live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 50); } };
+    root.querySelector('#pb-download')!.addEventListener('click', async () => {
+      await render();
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `biomedit-${fmt().id}-${slug(val('headline')) || 'post'}.png`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+        announce('Downloaded the PNG');
+      }, 'image/png');
+    });
+    const copyBtn = root.querySelector<HTMLButtonElement>('#pb-copy')!;
+    if (!('ClipboardItem' in window)) copyBtn.hidden = true;
+    copyBtn.addEventListener('click', async () => {
+      await render();
+      try {
+        const blob = await new Promise<Blob>((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej()), 'image/png'));
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        copyBtn.textContent = 'Copied';
+        announce('Copied the image. Paste it into your post.');
+        setTimeout(() => { copyBtn.textContent = 'Copy image'; }, 1600);
+      } catch { announce("Couldn't copy the image. Use Download PNG instead."); }
+    });
+
+    syncFormat(); syncStyle(); schedule();
+  }
+</script>
+
+<style>
+  .pb { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 32px; align-items: start; }
+  .pb-controls { display: flex; flex-direction: column; gap: 16px; }
+  .pb-step { border: 1px solid var(--cool-200); border-radius: 6px; background: #FFFFFF; padding: 16px 20px 20px; margin: 0; min-width: 0; }
+  .pb-step[hidden] { display: none; }
+  .pb-step legend { font-weight: 700; font-size: 16px; padding: 0 6px; margin-left: -6px; display: flex; align-items: center; gap: 10px; }
+  .pb-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-navy); color: #FFFFFF; font-size: 13px; }
+  .pb-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 8px; }
+  .pb-chips.is-two { grid-template-columns: 1fr 1fr; }
+  .pb-chip input, .pb-thumb input, .pb-seg input, .pb-swatch input { position: absolute; opacity: 0; pointer-events: none; }
+  .pb-chip span { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--cool-300); border-radius: 4px; cursor: pointer; font-size: 14px; line-height: 1.3; height: 100%; box-sizing: border-box; }
+  .pb-chip small { color: var(--text-secondary); font-size: 12px; }
+  .pb-chip input:checked + span { border-color: var(--color-navy); box-shadow: inset 0 0 0 1px var(--color-navy); background: rgba(43, 54, 130, 0.05); }
+  .pb-chip input:focus-visible + span, .pb-thumb input:focus-visible + img, .pb-seg input:focus-visible + span, .pb-swatch input:focus-visible + span { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+  .pb-tip, .pb-hint { font-size: 13px; line-height: 1.45; color: var(--text-secondary); margin: 10px 0 0; }
+
+  .pb-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px; max-height: 320px; overflow-y: auto; padding: 4px 4px 8px; margin: 8px -4px 0; }
+  .pb-thumb { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+  .pb-thumb[hidden] { display: none; }
+  .pb-thumb img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; border: 1px solid var(--cool-200); display: block; }
+  .pb-thumb.is-match img { aspect-ratio: auto; max-height: 120px; object-fit: contain; background: var(--cool-100); }
+  .pb-thumb input:checked + img { outline: 3px solid var(--color-navy); outline-offset: 1px; }
+  .pb-thumb-label { font-size: 12px; line-height: 1.3; color: var(--text-secondary); }
+  .pb-made { display: none; font-style: normal; font-weight: 700; color: var(--color-teal); }
+  .pb-thumb.is-match .pb-made { display: block; }
+
+  .pb-row { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-top: 16px; }
+  .pb-field { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; min-width: 0; }
+  .pb-row .pb-field { margin-top: 0; }
+  .pb-label { font-size: 14px; font-weight: 700; }
+  .pb-label small { font-weight: 400; color: var(--text-secondary); }
+  .pb-field input[type="text"], .pb-field textarea, .pb-field select { font: 400 16px/1.4 'PT Sans', sans-serif; color: var(--cool-900); border: 1px solid var(--cool-300); border-radius: 4px; padding: 8px 10px; background: #FFFFFF; width: 100%; box-sizing: border-box; }
+  .pb-field textarea { resize: vertical; }
+  .pb-field input:focus-visible, .pb-field textarea:focus-visible, .pb-field select:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 1px; }
+  .pb-field input[type="range"] { width: 180px; accent-color: var(--color-navy); }
+  .pb-seg { display: inline-flex; border: 1px solid var(--cool-300); border-radius: 4px; overflow: hidden; width: fit-content; }
+  .pb-seg label { position: relative; }
+  .pb-seg span { display: block; padding: 7px 12px; font-size: 14px; cursor: pointer; border-left: 1px solid var(--cool-300); }
+  .pb-seg label:first-child span { border-left: 0; }
+  .pb-seg input:checked + span { background: var(--color-navy); color: #FFFFFF; font-weight: 700; }
+  .pb-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pb-swatch { position: relative; cursor: pointer; }
+  .pb-swatch span:first-of-type { display: block; width: 34px; height: 34px; border-radius: 4px; border: 1px solid var(--cool-300); }
+  .pb-swatch input:checked + span { outline: 3px solid var(--color-navy); outline-offset: 2px; }
+  .pb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .pb-upload { display: block; position: relative; border: 1.5px dashed var(--cool-400); border-radius: 6px; padding: 20px; text-align: center; cursor: pointer; margin-top: 8px; font-size: 14px; }
+  .pb-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .pb-upload.is-over, .pb-upload:focus-within { border-color: var(--color-teal); background: rgba(3, 105, 178, 0.05); }
+  .pb-upload strong { color: var(--color-navy); }
+
+  .pb-sticky { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 12px; }
+  .pb-stage { background: var(--cool-200); border-radius: 6px; padding: 16px; display: flex; justify-content: center; align-items: center; }
+  .pb-stage canvas { display: block; max-width: 100%; max-height: 64vh; width: auto; height: auto; box-shadow: 0 1px 2px rgba(28, 31, 40, 0.12); }
+  .pb-size { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  .pb-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pb-btn { font: 700 16px/1 'PT Sans', sans-serif; padding: 14px 22px; border-radius: 4px; border: 1.5px solid var(--color-amber); background: var(--color-amber); color: var(--cool-900); cursor: pointer; }
+  .pb-btn.is-secondary { background: #FFFFFF; border-color: var(--color-navy); color: var(--color-navy); }
+  .pb-btn:hover { opacity: 0.75; }
+  .pb-btn:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+  .pb-checks { font-size: 14px; line-height: 1.45; }
+  .pb-checks :global(ul) { margin: 6px 0 0; padding-left: 18px; }
+  .pb-checks :global(li) { margin-bottom: 4px; }
+  .pb-checks :global(.pb-checks-h) { font-weight: 700; margin: 0; color: #9A4A14; }
+  .pb-checks :global(.pb-checks-ok) { font-weight: 700; margin: 0; color: #15803D; }
+
+  @media (max-width: 960px) {
+    .pb { grid-template-columns: minmax(0, 1fr); }
+    .pb-preview { order: -1; }
+    .pb-sticky { position: static; }
+    .pb-stage canvas { max-height: 50vh; }
+  }
+</style>

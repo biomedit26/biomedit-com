@@ -1,0 +1,53 @@
+---
+// /styleguide/unlock — password prompt for the style guide (see
+// src/utils/styleguideGate.ts). Server-rendered so the check happens on
+// the server.
+import FieldNotesLayout from '../../layouts/FieldNotesLayout.astro';
+import { hasAccess, tryUnlock } from '../../utils/styleguideGate';
+
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'private, no-store');
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+
+if (hasAccess(Astro.cookies)) return Astro.redirect('/styleguide/');
+
+let failed = false;
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  if (tryUnlock(Astro.cookies, String(form.get('password') ?? ''), Astro.url.protocol === 'https:')) {
+    return Astro.redirect('/styleguide/', 303);
+  }
+  failed = true;
+  Astro.response.status = 401;
+}
+---
+<FieldNotesLayout title="Digital style guide" noindex>
+  <div class="gate">
+    <p class="gate-eyebrow">Digital style guide</p>
+    <h1>Enter the password</h1>
+    <p>The BiomEdit style guide and post builder are for the BiomEdit team and agency partners. Ask the brand team for the password.</p>
+    <form method="post" action="/styleguide/unlock/">
+      <label for="gate-pw">Password</label>
+      <div class="gate-row">
+        <input id="gate-pw" name="password" type="password" autocomplete="current-password" required autofocus aria-invalid={failed ? 'true' : undefined} aria-describedby={failed ? 'gate-err' : undefined} />
+        <button type="submit">Open the style guide</button>
+      </div>
+      {failed && <p id="gate-err" class="gate-err" role="alert">That password didn&rsquo;t work. Check it and try again.</p>}
+    </form>
+  </div>
+</FieldNotesLayout>
+
+<style>
+  .gate { max-width: 560px; padding: 5rem 0 7rem; }
+  .gate-eyebrow { font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cool-800); margin: 0 0 1rem; }
+  .gate h1 { font-size: var(--text-h3); line-height: 1.2; margin: 0 0 1rem; }
+  .gate p { font-size: 16px; line-height: 1.5; }
+  .gate label { display: block; font-weight: 700; font-size: 14px; margin: 1.5rem 0 6px; }
+  .gate-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .gate input { flex: 1 1 220px; font: 400 16px/1.4 'PT Sans', sans-serif; padding: 12px 14px; border: 1px solid var(--cool-400); border-radius: 4px; background: #FFFFFF; }
+  .gate input:focus-visible, .gate button:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+  .gate input[aria-invalid] { border-color: var(--color-orange); }
+  .gate button { font: 700 16px/1 'PT Sans', sans-serif; padding: 14px 22px; border-radius: 4px; border: 0; background: var(--color-amber); color: var(--cool-900); cursor: pointer; }
+  .gate button:hover { opacity: 0.75; }
+  .gate-err { color: #9A4A14; font-weight: 700; margin-top: 10px; }
+</style>

@@ -1,0 +1,31 @@
+---
+// Amber placeholder marker. The text matches what styleguide.md shows, so
+// AI tools see the same "[Placeholder — …]" flag as people do.
+interface Props { text: string; block?: boolean }
+const { text, block = false } = Astro.props;
+const Tag = block ? 'div' : 'span';
+---
+<Tag class={`sg-placeholder ${block ? 'is-block' : ''}`}>{text}</Tag>
+
+<style>
+  .sg-placeholder {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cool-900);
+    background: rgba(245, 158, 11, 0.14);
+    border: 1px solid var(--color-amber);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .sg-placeholder.is-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 120px;
+    padding: 16px;
+    border-style: dashed;
+    border-radius: 6px;
+  }
+</style>

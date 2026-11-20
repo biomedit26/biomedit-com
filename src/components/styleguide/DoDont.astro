@@ -1,0 +1,28 @@
+---
+// Rules + Do / Don't lists for a style guide section, as real text.
+interface Props { rules: string[]; dos: string[]; donts: string[]; id: string }
+const { rules, dos, donts, id } = Astro.props;
+---
+<div class="sg-rules">
+  <h3 id={`${id}-rules`}>Rules</h3>
+  <ul>{rules.map((r) => <li>{r}</li>)}</ul>
+</div>
+<div class="sg-dodont">
+  <div class="sg-do">
+    <h3 id={`${id}-do`}>Do</h3>
+    <ul>{dos.map((d) => <li>{d}</li>)}</ul>
+  </div>
+  <div class="sg-dont">
+    <h3 id={`${id}-dont`}>Don&rsquo;t</h3>
+    <ul>{donts.map((d) => <li>{d}</li>)}</ul>
+  </div>
+</div>
+
+<style>
+  .sg-rules h3, .sg-dodont h3 { font-size: var(--text-h6); margin: 0 0 0.75rem; }
+  .sg-rules ul, .sg-dodont ul { margin: 0 0 2rem; padding-left: 1.25rem; }
+  .sg-rules li, .sg-dodont li { font-size: 16px; line-height: 1.5; color: var(--text-primary); margin: 0 0 0.5rem; }
+  .sg-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .sg-do, .sg-dont { border: 1px solid var(--cool-200); border-radius: 6px; background: #FFFFFF; padding: 20px 24px 4px; }
+  @media (max-width: 700px) { .sg-dodont { grid-template-columns: 1fr; } }
+</style>
