@@ -6,7 +6,7 @@ import {
   contrastPairs, lineHeights, fontFamily, mobileBreakpoint, hexToRgb, px,
 } from './tokens';
 import {
-  meta, contact, changelog, foundation, sections, voiceExamples, principles,
+  meta, contact, foundation, sections, voiceExamples, principles,
   photoExamples, templates, modules, approvedLines,
 } from './content';
 import { graphics } from './graphics';
@@ -117,7 +117,6 @@ export function buildMarkdown(): string {
 
   out.push('## Guiding principles', '', ...principles.map((p, i) => `${i + 1}. **${p.title}.** ${p.text}`), '');
 
-  out.push('## Changelog', '', list(changelog.map((c) => `${c.date}: ${c.note}`)), '');
   return out.join('\n');
 }
 

@@ -39,7 +39,7 @@ import {
 } from '../../data/styleguide/tokens';
 import { componentValues as cv } from '../../data/styleguide/componentValues';
 import {
-  meta, contact, changelog, foundation, sections, voiceExamples, principles,
+  meta, contact, foundation, sections, voiceExamples, principles,
   photoExamples, templates, modules, ph, cssText,
 } from '../../data/styleguide/content';
 import { colorRole, neutralRole, stepRole } from '../../data/styleguide/outputs';
@@ -606,8 +606,6 @@ const labAlt = 'BiomEdit scientists in lab coats and safety glasses working at l
             <dt>Contact</dt><dd><Placeholder text={contact.name} /> · <Placeholder text={contact.email} /></dd>
             <dt>Source files</dt><dd><Placeholder text={contact.files} /></dd>
           </dl>
-          <h3 id="changelog">Changelog</h3>
-          <ul>{changelog.map((c) => <li><strong>{c.date}</strong>: {c.note}</li>)}</ul>
         </section>
       </ModuleSection>
     </div>

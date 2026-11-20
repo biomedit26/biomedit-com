@@ -49,11 +49,6 @@ export const contact = {
   files: ph('shared drive location for source files'),
 };
 
-export const changelog = [
-  { date: '2026-11-19', note: 'Added the post builder, the download kits, the E mark and square avatars, and the new background graphics library (30 graphics, including 12 social crops). The AI prompt now works with uploaded files. Replaced the six earlier flowing-data files.' },
-  { date: '2026-10-25', note: 'First version. Built from the live site code and Brand Guidelines v1.0 (October 2026). Where the deck and the site differ, this guide follows the site.' },
-];
-
 export interface Section {
   id: string;
   eyebrow: string;
